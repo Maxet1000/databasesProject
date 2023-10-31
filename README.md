@@ -10,7 +10,7 @@ In dit project wordt een gepaste database uitgebouwd voor de organisatie die het
 - Creator
 - Genre
 - Console
-
+ 
 De cijfers naast de pijlen in het schema verwijzen naar het soort relatie de entiteiten met elkaar hebben. Het cijfer geeft het minimum aantal entiteiten voor een relatie weer. Wanneer achter een cijfer “...*” staat, betekent dit “of meer”. Een voorbeeld is de relatie tussen game en developer. Deze relatie heeft een 0..* op 1..* relatie (nul of meer op een of meer). Dit betekent dat een game altijd minstens één developer heeft, maar er ook meerdere kan hebben. En een developer heeft mogelijk nul games op zijn naam staan, maar ook elk ander mogelijk aantal.
 
 # 2. Entiteiten
