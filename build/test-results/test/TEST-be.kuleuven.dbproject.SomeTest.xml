@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="be.kuleuven.dbproject.SomeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-11-14T09:50:28" hostname="LAPTOP-TMMD6I4T" time="0.012">
+<testsuite name="be.kuleuven.dbproject.SomeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-12-04T11:59:25" hostname="DESKTOP-1LNG95U" time="0.029">
   <properties/>
-  <testcase name="changeMe()" classname="be.kuleuven.dbproject.SomeTest" time="0.012"/>
+  <testcase name="changeMe()" classname="be.kuleuven.dbproject.SomeTest" time="0.029"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
