@@ -1,0 +1,10 @@
+be/kuleuven/pccustomizer/controller/BeheerHwComponentenController.java
+ be.kuleuven.pccustomizer.controller.BeheerHwComponentenController
+be/kuleuven/pccustomizer/ProjectMain.java
+ be.kuleuven.pccustomizer.ProjectMain
+be/kuleuven/pccustomizer/controller/BeheerAttachesController.java
+ be.kuleuven.pccustomizer.controller.BeheerAttachesController
+be/kuleuven/pccustomizer/controller/BeheerComputerConfigsController.java
+ be.kuleuven.pccustomizer.controller.BeheerComputerConfigsController
+be/kuleuven/pccustomizer/controller/ProjectMainController.java
+ be.kuleuven.pccustomizer.controller.ProjectMainController
