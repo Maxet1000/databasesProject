@@ -10,15 +10,15 @@ be/kuleuven/VGHF/domain/Genre.java
  be.kuleuven.VGHF.domain.Genre
 be/kuleuven/VGHF/controller/BeheerHwComponentenController.java
  be.kuleuven.VGHF.controller.BeheerHwComponentenController
-be/kuleuven/VGHF/domain/Copy.java
- be.kuleuven.VGHF.domain.Copy
+be/kuleuven/VGHF/controller/BeheerAttachesController.java
+ be.kuleuven.VGHF.controller.BeheerAttachesController
 be/kuleuven/VGHF/controller/ProjectMainController.java
  be.kuleuven.VGHF.controller.ProjectMainController
 be/kuleuven/VGHF/domain/Developer.java
  be.kuleuven.VGHF.domain.Developer
 be/kuleuven/VGHF/ProjectMain.java
  be.kuleuven.VGHF.ProjectMain
-be/kuleuven/VGHF/controller/BeheerAttachesController.java
- be.kuleuven.VGHF.controller.BeheerAttachesController
+be/kuleuven/VGHF/domain/Copy.java
+ be.kuleuven.VGHF.domain.Copy
 be/kuleuven/VGHF/domain/Game.java
  be.kuleuven.VGHF.domain.Game

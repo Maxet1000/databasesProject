@@ -31,4 +31,12 @@ public class Game {
     )
     private Set<Developer> developers;
 
+    @ManyToMany
+    @JoinTable(
+        name = "GameGenreLink",
+        joinColumns = @JoinColumn(name = "gameID"),
+        inverseJoinColumns = @JoinColumn(name = "genreID")
+    )
+    private Set<Genre> genres;
+
 }
