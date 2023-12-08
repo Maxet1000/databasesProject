@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
@@ -23,22 +24,35 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btn1" mnemonicParsing="false" prefHeight="30.0" prefWidth="350.0" text="Home" />
-            <Button fx:id="btn2" mnemonicParsing="false" prefHeight="30.0" prefWidth="350.0" text="ALL Games" GridPane.columnIndex="1" />
-            <Button fx:id="btn3" mnemonicParsing="false" prefHeight="30.0" prefWidth="350.0" text="NEW Games" GridPane.columnIndex="2" />
-            <Button fx:id="btn4" mnemonicParsing="false" prefHeight="30.0" prefWidth="350.0" text="RETRO Games" GridPane.columnIndex="3" />
-            <Button fx:id="btn5" mnemonicParsing="false" prefHeight="30.0" prefWidth="350.0" text="Info" GridPane.columnIndex="4" />
+            <Button fx:id="btnHome" mnemonicParsing="false" prefHeight="30.0" prefWidth="350.0" text="Home" />
+            <Button fx:id="btnAllGames" mnemonicParsing="false" prefHeight="30.0" prefWidth="350.0" text="ALL Games" GridPane.columnIndex="1" />
+            <Button fx:id="btnNewGames" mnemonicParsing="false" prefHeight="30.0" prefWidth="350.0" text="NEW Games" GridPane.columnIndex="2" />
+            <Button fx:id="btnRetroGames" mnemonicParsing="false" prefHeight="30.0" prefWidth="350.0" text="RETRO Games" GridPane.columnIndex="3" />
+            <Button fx:id="btnInfo" mnemonicParsing="false" prefHeight="30.0" prefWidth="350.0" text="Info" GridPane.columnIndex="4" />
          </children>
       </GridPane>
    </top>
    <center>
-      <StackPane fx:id="pane" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <StackPane fx:id="stackPane" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Text fx:id="txt1" strokeType="OUTSIDE" strokeWidth="0.0" text="Video Game History Foundation" textAlignment="CENTER" wrappingWidth="312.03125">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
+            <StackPane fx:id="paneHome" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Text fx:id="txtVGHF" strokeType="OUTSIDE" strokeWidth="0.0" text="Video Game History Foundation" textAlignment="CENTER" wrappingWidth="312.03125">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </StackPane>
+             <StackPane fx:id="paneInfo" prefHeight="200.0" prefWidth="200.0">
+                 <children>
+                     <Text fx:id="txtInfo" strokeType="OUTSIDE" strokeWidth="0.0" text="INFO" textAlignment="CENTER" wrappingWidth="312.03125">
+                         <font>
+                             <Font size="24.0" />
+                         </font>
+                     </Text>
+                 </children>
+             </StackPane>
          </children>
       </StackPane>
    </center>

@@ -16,22 +16,33 @@ import javafx.stage.Stage;
 public class ProjectMainController {
 
     @FXML
-    private Button btn1;
+    private Button btnHome;
     @FXML
-    private Button btn2;
+    private Button btnAllGames;
     @FXML
-    private Button btn3;
+    private Button btnNewGames;
     @FXML
-    private Text txt1;
+    private Button btnRetroGames;
     @FXML
-    private StackPane pane;
+    private Button btnInfo;
+    @FXML
+    private Text txtVGHF;
+    @FXML
+    private Text txtInfo;
+    @FXML
+    private StackPane paneHome;
+    @FXML
+    private StackPane paneInfo;
 
     public void initialize() {
-        btn1.setOnAction(e -> showHomeScherm("hwcomponenten"));
-        btn2.setOnAction(e -> showBeheerScherm("computerconfigs"));
-        btn3.setOnAction(e -> showBeheerScherm("attaches"));
-        pane.setAlignment(txt1, Pos.CENTER);
+        btnHome.setOnAction(e -> showHomeScherm("hwcomponenten"));
+        btnInfo.setOnAction(e -> showInfoScherm("computerconfigs"));
+        btnAllGames.setOnAction(e -> showBeheerScherm("attaches"));
+        paneHome.setAlignment(txtVGHF, Pos.CENTER);
+        paneInfo.setAlignment(txtInfo, Pos.CENTER);
+        paneInfo.setVisible(false);
     }
+
 
 
     private void showBeheerScherm(String id) {
@@ -52,6 +63,11 @@ public class ProjectMainController {
     }
 
     private void showHomeScherm(String hwcomponenten) {
-        txt1.setRotate(txt1.getRotate()+30);
+        paneInfo.setVisible(false);
+        paneHome.setVisible(true);
+    }
+    private void showInfoScherm(String computerconfigs) {
+        paneHome.setVisible(false);
+        paneInfo.setVisible(true);
     }
 }
