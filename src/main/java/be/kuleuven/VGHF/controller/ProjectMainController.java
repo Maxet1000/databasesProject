@@ -35,8 +35,8 @@ public class ProjectMainController {
     private StackPane paneInfo;
 
     public void initialize() {
-        btnHome.setOnAction(e -> showHomeScherm("hwcomponenten"));
-        btnInfo.setOnAction(e -> showInfoScherm("computerconfigs"));
+        btnHome.setOnAction(e -> showHomeScherm());
+        btnInfo.setOnAction(e -> showInfoScherm());
         btnAllGames.setOnAction(e -> showBeheerScherm("attaches"));
         paneHome.setAlignment(txtVGHF, Pos.CENTER);
         paneInfo.setAlignment(txtInfo, Pos.CENTER);
@@ -62,12 +62,18 @@ public class ProjectMainController {
         }
     }
 
-    private void showHomeScherm(String hwcomponenten) {
+    private void showHomeScherm() {
         paneInfo.setVisible(false);
         paneHome.setVisible(true);
+
+        btnHome.setUnderline(true);
+        btnInfo.setUnderline(false);
     }
-    private void showInfoScherm(String computerconfigs) {
+    private void showInfoScherm() {
         paneHome.setVisible(false);
         paneInfo.setVisible(true);
+
+        btnHome.setUnderline(false);
+        btnInfo.setUnderline(true);
     }
 }
