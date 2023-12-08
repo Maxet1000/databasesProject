@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
 Implementation-Title: project-template
 Implementation-Version: 1.0-SNAPSHOT
-Main-Class: be.kuleuven.pccustomizer.ProjectMain
+Main-Class: be.kuleuven.VGHF.ProjectMain
 

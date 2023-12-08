@@ -71,7 +71,7 @@ set CLASSPATH=%APP_HOME%\lib\project-template-1.0-SNAPSHOT.jar;%APP_HOME%\lib\ja
 
 
 @rem Execute project-template
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %PROJECT_TEMPLATE_OPTS%  -classpath "%CLASSPATH%" be.kuleuven.pccustomizer.ProjectMain %*
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %PROJECT_TEMPLATE_OPTS%  -classpath "%CLASSPATH%" be.kuleuven.VGHF.ProjectMain %*
 
 :end
 @rem End local scope for the variables with windows NT shell

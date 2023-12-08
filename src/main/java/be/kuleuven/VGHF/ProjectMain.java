@@ -1,4 +1,4 @@
-package be.kuleuven.pccustomizer;
+package be.kuleuven.VGHF;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

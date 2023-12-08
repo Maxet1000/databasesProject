@@ -29,7 +29,7 @@ test {
 group 'be.kuleuven.csa'
 version '1.0-SNAPSHOT'
 sourceCompatibility = 1.13
-mainClassName = 'be.kuleuven.pccustomizer.ProjectMain'
+mainClassName = 'be.kuleuven.VGHF.ProjectMain'
 
 jar {
     manifest {

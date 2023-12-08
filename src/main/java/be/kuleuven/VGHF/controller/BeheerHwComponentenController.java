@@ -1,4 +1,4 @@
-package be.kuleuven.pccustomizer.controller;
+package be.kuleuven.VGHF.controller;
 
 public class BeheerHwComponentenController {
 

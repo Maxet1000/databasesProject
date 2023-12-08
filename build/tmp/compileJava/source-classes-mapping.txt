@@ -1,24 +1,24 @@
-be/kuleuven/VGHF/domein/Transaction.java
- be.kuleuven.dbproject.domain.Transaction
-be/kuleuven/VGHF/domein/Console.java
- be.kuleuven.dbproject.domain.Console
-be/kuleuven/VGHF/domein/Genre.java
- be.kuleuven.dbproject.domain.Genre
-be/kuleuven/VGHF/domein/Customer.java
- be.kuleuven.dbproject.domain.Customer
+be/kuleuven/VGHF/domain/Console.java
+ be.kuleuven.VGHF.domain.Console
 be/kuleuven/VGHF/controller/BeheerComputerConfigsController.java
- be.kuleuven.pccustomizer.controller.BeheerComputerConfigsController
-be/kuleuven/VGHF/domein/Developer.java
- be.kuleuven.dbproject.domain.Developer
+ be.kuleuven.VGHF.controller.BeheerComputerConfigsController
+be/kuleuven/VGHF/domain/Transaction.java
+ be.kuleuven.VGHF.domain.Transaction
+be/kuleuven/VGHF/domain/Customer.java
+ be.kuleuven.VGHF.domain.Customer
+be/kuleuven/VGHF/domain/Genre.java
+ be.kuleuven.VGHF.domain.Genre
 be/kuleuven/VGHF/controller/BeheerHwComponentenController.java
- be.kuleuven.pccustomizer.controller.BeheerHwComponentenController
+ be.kuleuven.VGHF.controller.BeheerHwComponentenController
+be/kuleuven/VGHF/domain/Copy.java
+ be.kuleuven.VGHF.domain.Copy
 be/kuleuven/VGHF/controller/ProjectMainController.java
- be.kuleuven.pccustomizer.controller.ProjectMainController
+ be.kuleuven.VGHF.controller.ProjectMainController
+be/kuleuven/VGHF/domain/Developer.java
+ be.kuleuven.VGHF.domain.Developer
 be/kuleuven/VGHF/ProjectMain.java
- be.kuleuven.pccustomizer.ProjectMain
+ be.kuleuven.VGHF.ProjectMain
 be/kuleuven/VGHF/controller/BeheerAttachesController.java
- be.kuleuven.pccustomizer.controller.BeheerAttachesController
-be/kuleuven/VGHF/domein/Game.java
- be.kuleuven.dbproject.domain.Game
-be/kuleuven/VGHF/domein/Copy.java
- be.kuleuven.dbproject.domain.Copy
+ be.kuleuven.VGHF.controller.BeheerAttachesController
+be/kuleuven/VGHF/domain/Game.java
+ be.kuleuven.VGHF.domain.Game

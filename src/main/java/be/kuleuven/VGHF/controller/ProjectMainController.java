@@ -1,6 +1,6 @@
-package be.kuleuven.pccustomizer.controller;
+package be.kuleuven.VGHF.controller;
 
-import be.kuleuven.pccustomizer.ProjectMain;
+import be.kuleuven.VGHF.ProjectMain;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

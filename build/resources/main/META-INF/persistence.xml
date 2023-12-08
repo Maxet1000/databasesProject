@@ -5,13 +5,13 @@
         <description>Studenten JPA Test</description>
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>be.kuleuven.dbproject.tables.Console</class>
-        <class>be.kuleuven.dbproject.tables.Copy</class>
-        <class>be.kuleuven.dbproject.tables.Customer</class>
-        <class>be.kuleuven.dbproject.tables.Developer</class>
-        <class>be.kuleuven.dbproject.tables.Game</class>
-        <class>be.kuleuven.dbproject.tables.Genre</class>
-        <class>be.kuleuven.dbproject.tables.Transaction</class>
+        <class>be.kuleuven.VGHF.tables.Console</class>
+        <class>be.kuleuven.VGHF.tables.Copy</class>
+        <class>be.kuleuven.VGHF.tables.Customer</class>
+        <class>be.kuleuven.VGHF.tables.Developer</class>
+        <class>be.kuleuven.VGHF.tables.Game</class>
+        <class>be.kuleuven.VGHF.tables.Genre</class>
+        <class>be.kuleuven.VGHF.tables.Transaction</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC"/>
