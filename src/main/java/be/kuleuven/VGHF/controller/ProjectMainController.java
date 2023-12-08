@@ -1,20 +1,16 @@
 package be.kuleuven.VGHF.controller;
 
-import be.kuleuven.VGHF.ProjectMain;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
+import java.io.IOException;
 public class ProjectMainController {
 
+    @FXML
+    public StackPane pane1;
     @FXML
     private Button btnHome;
     @FXML
@@ -25,55 +21,115 @@ public class ProjectMainController {
     private Button btnRetroGames;
     @FXML
     private Button btnInfo;
-    @FXML
-    private Text txtVGHF;
-    @FXML
-    private Text txtInfo;
-    @FXML
-    private StackPane paneHome;
-    @FXML
-    private StackPane paneInfo;
 
-    public void initialize() {
-        btnHome.setOnAction(e -> showHomeScherm());
-        btnInfo.setOnAction(e -> showInfoScherm());
-        btnAllGames.setOnAction(e -> showBeheerScherm("attaches"));
-        paneHome.setAlignment(txtVGHF, Pos.CENTER);
-        paneInfo.setAlignment(txtInfo, Pos.CENTER);
-        paneInfo.setVisible(false);
+    public void initialize() throws IOException {
+        switchToHome();
+        btnHome.setOnAction(e -> {
+            try {
+                switchToHome();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        btnAllGames.setOnAction(e -> {
+            try {
+                switchToAllGames();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        btnNewGames.setOnAction(e -> {
+            try {
+                switchtoNewGames();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        btnRetroGames.setOnAction(e -> {
+            try {
+                switchtoRetroGames();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        btnInfo.setOnAction(e -> {
+            try {
+                switchToInfo();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
     }
 
-
-
-    private void showBeheerScherm(String id) {
-        var resourceName = "beheer" + id + ".fxml";
-        try {
-            var stage = new Stage();
-            var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource(resourceName));
-            var scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Admin " + id);
-            stage.initOwner(ProjectMain.getRootStage());
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.show();
-
-        } catch (Exception e) {
-            throw new RuntimeException("Kan beheerscherm " + resourceName + " niet vinden", e);
-        }
-    }
-
-    private void showHomeScherm() {
-        paneInfo.setVisible(false);
-        paneHome.setVisible(true);
-
+    public void switchToHome() throws IOException {
         btnHome.setUnderline(true);
+        btnAllGames.setUnderline(false);
+        btnNewGames.setUnderline(false);
+        btnRetroGames.setUnderline(false);
         btnInfo.setUnderline(false);
-    }
-    private void showInfoScherm() {
-        paneHome.setVisible(false);
-        paneInfo.setVisible(true);
 
-        btnHome.setUnderline(false);
-        btnInfo.setUnderline(true);
+        var pane = new FXMLLoader(getClass().getClassLoader().getResource("home.fxml"));
+        var rootLoader = (StackPane) pane.load();
+        rootLoader.autosize();
+        pane1.getChildren().setAll(rootLoader);
+        StackPane.setAlignment(rootLoader, Pos.CENTER);
     }
+
+    public void switchToAllGames() throws IOException {
+        btnHome.setUnderline(false);
+        btnAllGames.setUnderline(true);
+        btnNewGames.setUnderline(false);
+        btnRetroGames.setUnderline(false);
+        btnInfo.setUnderline(false);
+
+        var pane = new FXMLLoader(getClass().getClassLoader().getResource("allgames.fxml"));
+        var rootLoader = (StackPane) pane.load();
+        rootLoader.autosize();
+        pane1.getChildren().setAll(rootLoader);
+        StackPane.setAlignment(rootLoader, Pos.CENTER);
+    }
+
+    public void switchtoNewGames() throws IOException {
+        btnHome.setUnderline(false);
+        btnAllGames.setUnderline(false);
+        btnNewGames.setUnderline(true);
+        btnRetroGames.setUnderline(false);
+        btnInfo.setUnderline(false);
+
+        var pane = new FXMLLoader(getClass().getClassLoader().getResource("beheercomputerconfigs.fxml"));
+        var rootLoader = (StackPane) pane.load();
+        rootLoader.autosize();
+        pane1.getChildren().setAll(rootLoader);
+        StackPane.setAlignment(rootLoader, Pos.CENTER);
+    }
+
+    public void switchtoRetroGames() throws IOException {
+        btnHome.setUnderline(false);
+        btnAllGames.setUnderline(false);
+        btnNewGames.setUnderline(false);
+        btnRetroGames.setUnderline(true);
+        btnInfo.setUnderline(false);
+
+        var pane = new FXMLLoader(getClass().getClassLoader().getResource("retrogames.fxml"));
+        var rootLoader = (StackPane) pane.load();
+        rootLoader.autosize();
+        pane1.getChildren().setAll(rootLoader);
+        StackPane.setAlignment(rootLoader, Pos.CENTER);
+    }
+
+    public void switchToInfo() throws IOException {
+        btnHome.setUnderline(false);
+        btnAllGames.setUnderline(false);
+        btnNewGames.setUnderline(false);
+        btnRetroGames.setUnderline(false);
+        btnInfo.setUnderline(true);
+
+        var pane = new FXMLLoader(getClass().getClassLoader().getResource("info.fxml"));
+        var rootLoader = (StackPane) pane.load();
+        rootLoader.autosize();
+        pane1.getChildren().setAll(rootLoader);
+        StackPane.setAlignment(rootLoader, Pos.CENTER);
+    }
+
 }
+
