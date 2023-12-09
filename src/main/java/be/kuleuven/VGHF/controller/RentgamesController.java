@@ -1,12 +1,9 @@
 package be.kuleuven.VGHF.controller;
 
-
-public class NewgamesController {
+public class RentgamesController {
     
     public void initialize(){
-
-
+        
     }
-    
+
 }
- 
