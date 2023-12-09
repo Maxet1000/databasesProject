@@ -34,7 +34,7 @@ public class HomeController {
 
     public void switchToRentGames () throws IOException {
         showScherm("rentgames");
-        /* 
+        /*
         var pane = new FXMLLoader(getClass().getClassLoader().getResource("rentgames.fxml"));
         var rootLoader = (StackPane) pane.load();
         rootLoader.autosize();
@@ -49,13 +49,13 @@ public class HomeController {
             var root = (StackPane) FXMLLoader.load(getClass().getClassLoader().getResource(resourceName));
             var scene = new Scene(root);
             stage.setScene(scene);
-            stage.setTitle("Admin " + id);
+            stage.setTitle(id);
             stage.initOwner(ProjectMain.getRootStage());
             stage.initModality(Modality.WINDOW_MODAL);
             stage.show();
 
         } catch (Exception e) {
-            throw new RuntimeException("Kan beheerscherm " + resourceName + " niet vinden", e);
+            throw new RuntimeException("Kan scherm " + resourceName + " niet vinden", e);
         }
     }
 
