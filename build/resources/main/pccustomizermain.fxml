@@ -24,11 +24,11 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnHome" mnemonicParsing="false" prefHeight="30.0" prefWidth="350.0" text="Home" />
-            <Button fx:id="btnAllGames" mnemonicParsing="false" prefHeight="30.0" prefWidth="350.0" text="ALL Games" GridPane.columnIndex="1" />
-            <Button fx:id="btnNewGames" mnemonicParsing="false" prefHeight="30.0" prefWidth="350.0" text="NEW Games" GridPane.columnIndex="2" />
-            <Button fx:id="btnRetroGames" mnemonicParsing="false" prefHeight="30.0" prefWidth="350.0" text="RETRO Games" GridPane.columnIndex="3" />
-            <Button fx:id="btnInfo" mnemonicParsing="false" prefHeight="30.0" prefWidth="350.0" text="Info" GridPane.columnIndex="4" />
+            <Button fx:id="btnHome" mnemonicParsing="false" prefHeight="30.0" prefWidth="350.0" text="Home" style="-fx-base: #282A3A;" />
+            <Button fx:id="btnAllGames" mnemonicParsing="false" prefHeight="30.0" prefWidth="350.0" text="ALL Games" GridPane.columnIndex="1" style="-fx-base: #282A3A;" />
+            <Button fx:id="btnNewGames" mnemonicParsing="false" prefHeight="30.0" prefWidth="350.0" text="NEW Games" GridPane.columnIndex="2" style="-fx-base: #282A3A;" />
+            <Button fx:id="btnRetroGames" mnemonicParsing="false" prefHeight="30.0" prefWidth="350.0" text="RETRO Games" GridPane.columnIndex="3" style="-fx-base: #282A3A;" />
+            <Button fx:id="btnInfo" mnemonicParsing="false" prefHeight="30.0" prefWidth="350.0" text="Info" GridPane.columnIndex="4" style="-fx-base: #282A3A;" />
          </children>
       </GridPane>
    </top>
@@ -37,7 +37,7 @@
          <children>
             <StackPane fx:id="paneHome" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Text fx:id="txtVGHF" strokeType="OUTSIDE" strokeWidth="0.0" text="Video Game History Foundation" textAlignment="CENTER" wrappingWidth="312.03125">
+                  <Text fx:id="txtVGHF" strokeType="OUTSIDE" strokeWidth="0.0" text="Video Game History Foundation" textAlignment="CENTER" wrappingWidth="312.03125" >
                      <font>
                         <Font size="24.0" />
                      </font>
