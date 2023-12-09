@@ -27,11 +27,11 @@ public class ProjectMain extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         rootStage = stage;
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("pccustomizermain.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("background.fxml"));
 
         Scene scene = new Scene(root);
 
-        stage.setTitle("PC Customizer Administratie hoofdscherm");
+        stage.setTitle("Video Game History Foundation");
         stage.setScene(scene);
         stage.show();
     }

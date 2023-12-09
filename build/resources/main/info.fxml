@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<StackPane fx:id="pane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.VGHF.controller.InfoController">
+    <children>
+        <Text fx:id="txtInfo" strokeType="OUTSIDE" strokeWidth="0.0" text="Very cool info" textAlignment="CENTER" wrappingWidth="312.03125">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Text>
+    </children>
+</StackPane>
