@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 public class ProjectMainController {
@@ -69,7 +70,7 @@ public class ProjectMainController {
         btnInfo.setUnderline(false);
 
         var pane = new FXMLLoader(getClass().getClassLoader().getResource("home.fxml"));
-        var rootLoader = (StackPane) pane.load();
+        var rootLoader = (VBox) pane.load();
         rootLoader.autosize();
         pane1.getChildren().setAll(rootLoader);
         StackPane.setAlignment(rootLoader, Pos.CENTER);

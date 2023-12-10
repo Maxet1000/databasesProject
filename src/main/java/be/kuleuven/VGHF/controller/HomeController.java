@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -17,7 +18,7 @@ import be.kuleuven.VGHF.ProjectMain;
 public class HomeController {
 
     @FXML
-    public StackPane pane1;
+    public VBox pane1;
     @FXML
     private Button btnRent;
 
@@ -33,14 +34,13 @@ public class HomeController {
 
 
     public void switchToRentGames () throws IOException {
-        showScherm("rentgames");
-        /*
+        //showScherm("rentgames");
+
         var pane = new FXMLLoader(getClass().getClassLoader().getResource("rentgames.fxml"));
-        var rootLoader = (StackPane) pane.load();
+        var rootLoader = (VBox) pane.load();
         rootLoader.autosize();
         pane1.getChildren().setAll(rootLoader);
         StackPane.setAlignment(rootLoader, Pos.CENTER);
-        */
     }
     private void showScherm(String id) {
         var resourceName = id + ".fxml";
