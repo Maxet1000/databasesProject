@@ -16,4 +16,20 @@ public class Console {
     // Kan ook direct zelf-referentieel via hibernate, nu moet er een functie voor bijgemaakt worden
     @Column
     private int compatibleConsolID;
+
+    public Console() {}
+    
+    public Console(String consoleName, int compatibleConsolID) {
+        this.consoleName = consoleName;
+        this.compatibleConsolID = compatibleConsolID;
+    }
+
+    public String getConsoleName() {
+        return this.consoleName;
+    }
+
+    public int getCompatibleConsolID() {
+        return this.compatibleConsolID;
+    }
+
 }

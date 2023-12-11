@@ -2,6 +2,8 @@ package be.kuleuven.VGHF.domain;
 
 import javax.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Genre {
     
@@ -12,5 +14,8 @@ public class Genre {
 
     @Column(nullable = false)
     private String genreName;
+
+    @ManyToMany(mappedBy = "genres")
+    private List<Game> games;   
 
 }
