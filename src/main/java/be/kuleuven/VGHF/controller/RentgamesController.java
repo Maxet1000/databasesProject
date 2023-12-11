@@ -23,6 +23,7 @@ public class RentgamesController {
 
 
         // TODO verwijderen en "echte data" toevoegen!
+        
         int colIndex = 0;
         for(var colName : new String[]{"Roepnaam", "Categorie", "Prijs", "Stock"}) {
             TableColumn<ObservableList<String>, String> col = new TableColumn<>(colName);
