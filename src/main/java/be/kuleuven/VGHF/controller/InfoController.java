@@ -1,8 +1,7 @@
 package be.kuleuven.VGHF.controller;
 
-public class BeheerHwComponentenController {
+public class InfoController {
 
     public void initialize() {
-
     }
 }

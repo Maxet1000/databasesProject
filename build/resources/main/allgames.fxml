@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
+<StackPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="be.kuleuven.VGHF.controller.AllgamesController" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FAF1E6;">
+    <children>
+        <Text fx:id="txtAllGames" strokeType="OUTSIDE" strokeWidth="0.0" text="All Gaymes" textAlignment="CENTER" wrappingWidth="312.03125">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Text>
+    </children>
+</StackPane>
