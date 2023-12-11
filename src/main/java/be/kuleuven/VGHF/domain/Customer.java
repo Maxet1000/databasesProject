@@ -1,6 +1,8 @@
 package be.kuleuven.VGHF.domain;
 
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,5 +27,17 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer")
     private List<Transaction> transactions;
+
+    public Customer(){}
+
+    public Customer(int customerID, String customerName, String email, int balance) {
+        this.customerID = customerID;
+        this.customerName = customerName;
+        this.email = email;
+        this.balance = balance;
+        copies = new ArrayList<>();
+        transactions = new ArrayList<>();
+    }
+    
 
 }

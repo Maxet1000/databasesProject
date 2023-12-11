@@ -26,10 +26,6 @@ public class Transaction {
 
     //getters and setters
 
-    public int maxisgay(){
-        return 1;
-    }
-
     public int getTransactionID() {
         return this.transactionID;
     }

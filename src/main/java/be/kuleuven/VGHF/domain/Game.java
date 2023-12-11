@@ -1,7 +1,7 @@
 package be.kuleuven.VGHF.domain;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 public class Game {
@@ -21,7 +21,7 @@ public class Game {
         joinColumns = @JoinColumn(name = "gameID"),
         inverseJoinColumns = @JoinColumn(name = "consoleID")
     )
-    private Set<Console> consoles;
+    private List<Console> consoles;
 
     @ManyToMany
     @JoinTable(
@@ -29,7 +29,7 @@ public class Game {
         joinColumns = @JoinColumn(name = "gameID"),
         inverseJoinColumns = @JoinColumn(name = "developerID")
     )
-    private Set<Developer> developers;
+    private List<Developer> developers;
 
     @ManyToMany
     @JoinTable(
@@ -37,6 +37,6 @@ public class Game {
         joinColumns = @JoinColumn(name = "gameID"),
         inverseJoinColumns = @JoinColumn(name = "genreID")
     )
-    private Set<Genre> genres;
+    private List<Genre> genres;
 
 }
