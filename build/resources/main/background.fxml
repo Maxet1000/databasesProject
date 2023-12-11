@@ -29,15 +29,15 @@
                <font>
                   <Font size="18.0" />
                </font></Button>
-            <Button fx:id="btnAllGames" mnemonicParsing="false" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="ALL Games" textAlignment="CENTER" textFill="#fdfaf6" GridPane.columnIndex="1">
+            <Button fx:id="btnGameDb" mnemonicParsing="false" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="Game Database" textAlignment="CENTER" textFill="#fdfaf6" GridPane.columnIndex="1">
                <font>
                   <Font size="18.0" />
                </font></Button>
-            <Button fx:id="btnNewGames" mnemonicParsing="false" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="NEW Games" textAlignment="CENTER" textFill="#fdfaf6" GridPane.columnIndex="2">
+            <Button fx:id="btnCustomerPage" mnemonicParsing="false" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="Customer Information" textAlignment="CENTER" textFill="#fdfaf6" GridPane.columnIndex="2">
                <font>
                   <Font size="18.0" />
                </font></Button>
-            <Button fx:id="btnRetroGames" mnemonicParsing="false" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="RETRO Games" textAlignment="CENTER" textFill="#fdfaf6" GridPane.columnIndex="3">
+            <Button fx:id="btnDeveloperPage" mnemonicParsing="false" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="Developer Information" textAlignment="CENTER" textFill="#fdfaf6" GridPane.columnIndex="3">
                <font>
                   <Font size="18.0" />
                </font></Button>

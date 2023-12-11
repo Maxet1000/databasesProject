@@ -15,11 +15,11 @@ public class ProjectMainController {
     @FXML
     private Button btnHome;
     @FXML
-    private Button btnAllGames;
+    private Button btnGameDb;
     @FXML
-    private Button btnNewGames;
+    private Button btnCustomerPage;
     @FXML
-    private Button btnRetroGames;
+    private Button btnDeveloperPage;
     @FXML
     private Button btnInfo;
 
@@ -32,23 +32,23 @@ public class ProjectMainController {
                 throw new RuntimeException(ex);
             }
         });
-        btnAllGames.setOnAction(e -> {
+        btnGameDb.setOnAction(e -> {
             try {
-                switchToId("allgames");
+                switchToId("gamedb");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
-        btnNewGames.setOnAction(e -> {
+        btnCustomerPage.setOnAction(e -> {
             try {
-                switchToId("newgames");
+                switchToId("customerpage");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
-        btnRetroGames.setOnAction(e -> {
+        btnDeveloperPage.setOnAction(e -> {
             try {
-                switchToId("retrogames");
+                switchToId("developerpage");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
@@ -65,23 +65,23 @@ public class ProjectMainController {
     public void switchToId (String id) throws IOException {
         
         btnHome.setUnderline(false);
-        btnAllGames.setUnderline(false);
-        btnNewGames.setUnderline(false);
-        btnRetroGames.setUnderline(false);
+        btnGameDb.setUnderline(false);
+        btnCustomerPage.setUnderline(false);
+        btnDeveloperPage.setUnderline(false);
         btnInfo.setUnderline(false);
         
         switch(id){
             case "home":
                 btnHome.setUnderline(true);
             break;
-            case "allgames":
-                btnAllGames.setUnderline(true);
+            case "gamedb":
+                btnGameDb.setUnderline(true);
             break;
-            case "newgames":
-                btnNewGames.setUnderline(true);
+            case "customerpage":
+                btnCustomerPage.setUnderline(true);
             break;
-            case "retrogames":
-                btnRetroGames.setUnderline(true);
+            case "developerpage":
+                btnDeveloperPage.setUnderline(true);
             break;
             case "info":
                 btnInfo.setUnderline(true);
