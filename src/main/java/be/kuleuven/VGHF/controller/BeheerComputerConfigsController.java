@@ -42,7 +42,8 @@ public class BeheerComputerConfigsController {
         tblConfigs.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         tblConfigs.getColumns().clear();
 
-        // TODO verwijderen en "echte data" toevoegen!
+        //functie schrijven die alle copy's (!!! DIE EEN RENTPRICE HEBBEN !!!)in de lijst zet: naam, developer, releasedate, console, genre, rentPrice   
+
         int colIndex = 0;
         for(var colName : new String[]{"Roepnaam", "Categorie", "Prijs", "Stock"}) {
             TableColumn<ObservableList<String>, String> col = new TableColumn<>(colName);
