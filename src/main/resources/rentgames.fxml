@@ -6,14 +6,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.VGHF.controller.RentgamesController">
+<VBox prefHeight="2000.0" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.VGHF.controller.RentgamesController">
    <children>
       <HBox prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
              <Text fx:id="txtRentgames" strokeType="OUTSIDE" strokeWidth="0.0" text="Filters hier?" wrappingWidth="150" />
-             <VBox HBox.hgrow="ALWAYS" prefHeight="600">
+             <VBox prefHeight="800.0" HBox.hgrow="ALWAYS">
                  <children>
-                     <TableView fx:id="tblRent" prefHeight="600" prefWidth="200">
+                     <TableView fx:id="tblRent" prefHeight="2000.0" prefWidth="200">
                          <columns>
                              <TableColumn prefWidth="75.0" text="C1" />
                              <TableColumn prefWidth="75.0" text="C2" />
