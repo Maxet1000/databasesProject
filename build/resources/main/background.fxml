@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Text?>
 
 <?import javafx.scene.layout.Pane?>
-<BorderPane minHeight="200.0" minWidth="400.0" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.VGHF.controller.ProjectMainController">
+<BorderPane minHeight="200.0" minWidth="400.0" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="be.kuleuven.VGHF.controller.ProjectMainController">
    <top>
       <GridPane prefWidth="500.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -29,15 +29,15 @@
                <font>
                   <Font size="18.0" />
                </font></Button>
-            <Button fx:id="btnAllGames" mnemonicParsing="false" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="ALL Games" textAlignment="CENTER" textFill="#fdfaf6" GridPane.columnIndex="1">
+            <Button fx:id="btnGameDb" mnemonicParsing="false" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="Game Database" textAlignment="CENTER" textFill="#fdfaf6" GridPane.columnIndex="1">
                <font>
                   <Font size="18.0" />
                </font></Button>
-            <Button fx:id="btnNewGames" mnemonicParsing="false" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="NEW Games" textAlignment="CENTER" textFill="#fdfaf6" GridPane.columnIndex="2">
+            <Button fx:id="btnCustomerPage" mnemonicParsing="false" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="Customer Information" textAlignment="CENTER" textFill="#fdfaf6" GridPane.columnIndex="2">
                <font>
                   <Font size="18.0" />
                </font></Button>
-            <Button fx:id="btnRetroGames" mnemonicParsing="false" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="RETRO Games" textAlignment="CENTER" textFill="#fdfaf6" GridPane.columnIndex="3">
+            <Button fx:id="btnDeveloperPage" mnemonicParsing="false" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="Developer Information" textAlignment="CENTER" textFill="#fdfaf6" GridPane.columnIndex="3">
                <font>
                   <Font size="18.0" />
                </font></Button>

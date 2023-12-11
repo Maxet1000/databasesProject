@@ -25,6 +25,9 @@ public class Copy {
     private Customer customer;
 
     @Column
+    private int purchasePrice;
+
+    @Column
     private int rentPrice;
 
     @Column
@@ -38,5 +41,19 @@ public class Copy {
 
     @OneToMany(mappedBy = "copy")
     private List<Transaction> transactions;
+
+    public Copy(){}
+
+    public Copy(int purchasePrice, int rentPrice, int availability, String dateOfReturn, String warehouse) {
+        this.purchasePrice = purchasePrice;
+        this.rentPrice = rentPrice;
+        this.availability = availability;
+        this.dateOfReturn = dateOfReturn;
+        this.warehouse = warehouse;
+        //transactions = new ArrayList<>();
+    }
+
+    
+    
 
 }

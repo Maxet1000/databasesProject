@@ -15,122 +15,88 @@ public class ProjectMainController {
     @FXML
     private Button btnHome;
     @FXML
-    private Button btnAllGames;
+    private Button btnGameDb;
     @FXML
-    private Button btnNewGames;
+    private Button btnCustomerPage;
     @FXML
-    private Button btnRetroGames;
+    private Button btnDeveloperPage;
     @FXML
     private Button btnInfo;
 
     public void initialize() throws IOException {
-        switchToHome();
+        switchToId("home");
         btnHome.setOnAction(e -> {
             try {
-                switchToHome();
+                switchToId("home");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
-        btnAllGames.setOnAction(e -> {
+        btnGameDb.setOnAction(e -> {
             try {
-                switchToAllGames();
+                switchToId("gamedb");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
-        btnNewGames.setOnAction(e -> {
+        btnCustomerPage.setOnAction(e -> {
             try {
-                switchtoNewGames();
+                switchToId("customerpage");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
-        btnRetroGames.setOnAction(e -> {
+        btnDeveloperPage.setOnAction(e -> {
             try {
-                switchtoRetroGames();
+                switchToId("developerpage");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
         btnInfo.setOnAction(e -> {
             try {
-                switchToInfo();
+                switchToId("info");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
     }
-
-    public void switchToHome() throws IOException {
-        btnHome.setUnderline(true);
-        btnAllGames.setUnderline(false);
-        btnNewGames.setUnderline(false);
-        btnRetroGames.setUnderline(false);
+    
+    public void switchToId (String id) throws IOException {
+        
+        btnHome.setUnderline(false);
+        btnGameDb.setUnderline(false);
+        btnCustomerPage.setUnderline(false);
+        btnDeveloperPage.setUnderline(false);
         btnInfo.setUnderline(false);
+        
+        switch(id){
+            case "home":
+                btnHome.setUnderline(true);
+            break;
+            case "gamedb":
+                btnGameDb.setUnderline(true);
+            break;
+            case "customerpage":
+                btnCustomerPage.setUnderline(true);
+            break;
+            case "developerpage":
+                btnDeveloperPage.setUnderline(true);
+            break;
+            case "info":
+                btnInfo.setUnderline(true);
+            break;
 
-        var pane = new FXMLLoader(getClass().getClassLoader().getResource("home.fxml"));
+
+        }    
+        
+
+        //switch to pane
+        var pane = new FXMLLoader(getClass().getClassLoader().getResource(id + ".fxml"));
         var rootLoader = (VBox) pane.load();
         rootLoader.autosize();
         pane1.getChildren().setAll(rootLoader);
-        StackPane.setAlignment(rootLoader, Pos.CENTER);
+        rootLoader.setAlignment(Pos.CENTER);
     }
-
-    public void switchToAllGames() throws IOException {
-        btnHome.setUnderline(false);
-        btnAllGames.setUnderline(true);
-        btnNewGames.setUnderline(false);
-        btnRetroGames.setUnderline(false);
-        btnInfo.setUnderline(false);
-
-        var pane = new FXMLLoader(getClass().getClassLoader().getResource("allgames.fxml"));
-        var rootLoader = (StackPane) pane.load();
-        rootLoader.autosize();
-        pane1.getChildren().setAll(rootLoader);
-        StackPane.setAlignment(rootLoader, Pos.CENTER);
-    }
-
-    public void switchtoNewGames() throws IOException {
-        btnHome.setUnderline(false);
-        btnAllGames.setUnderline(false);
-        btnNewGames.setUnderline(true);
-        btnRetroGames.setUnderline(false);
-        btnInfo.setUnderline(false);
-
-        var pane = new FXMLLoader(getClass().getClassLoader().getResource("newgames.fxml"));
-        var rootLoader = (StackPane) pane.load();
-        rootLoader.autosize();
-        pane1.getChildren().setAll(rootLoader);
-        StackPane.setAlignment(rootLoader, Pos.CENTER);
-    }
-
-    public void switchtoRetroGames() throws IOException {
-        btnHome.setUnderline(false);
-        btnAllGames.setUnderline(false);
-        btnNewGames.setUnderline(false);
-        btnRetroGames.setUnderline(true);
-        btnInfo.setUnderline(false);
-
-        var pane = new FXMLLoader(getClass().getClassLoader().getResource("retrogames.fxml"));
-        var rootLoader = (StackPane) pane.load();
-        rootLoader.autosize();
-        pane1.getChildren().setAll(rootLoader);
-        StackPane.setAlignment(rootLoader, Pos.CENTER);
-    }
-
-    public void switchToInfo() throws IOException {
-        btnHome.setUnderline(false);
-        btnAllGames.setUnderline(false);
-        btnNewGames.setUnderline(false);
-        btnRetroGames.setUnderline(false);
-        btnInfo.setUnderline(true);
-
-        var pane = new FXMLLoader(getClass().getClassLoader().getResource("info.fxml"));
-        var rootLoader = (StackPane) pane.load();
-        rootLoader.autosize();
-        pane1.getChildren().setAll(rootLoader);
-        StackPane.setAlignment(rootLoader, Pos.CENTER);
-    }
-
 }
 
