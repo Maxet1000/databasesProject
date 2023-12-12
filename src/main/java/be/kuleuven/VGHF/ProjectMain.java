@@ -45,14 +45,16 @@ public class ProjectMain extends Application {
     public static void main(String[] args) {
         var sessionFactory = Persistence.createEntityManagerFactory("be.kuleuven.VGHF.domain");
         var entityManager = sessionFactory.createEntityManager();
-        System.out.println("test:");
         database = new HibernateManager(entityManager);
-        List<Console> allConsoles = database.getAllConsoles();
-        System.out.println(allConsoles);
+
+        DbContentScript.scriptMain();
+
         launch();
     }
     
     public static HibernateManager getDatabase(){
         return database;
     }
+
+    
 }

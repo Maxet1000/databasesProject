@@ -60,10 +60,6 @@ public class Copy {
         return this.copyID;
     }
 
-    public void setCopyID(int copyID) {
-        this.copyID = copyID;
-    }
-
     public Game getGame() {
         return this.game;
     }

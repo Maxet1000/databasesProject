@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 public class HibernateManager {
     
     private final EntityManager entityManager;
@@ -85,43 +88,43 @@ public class HibernateManager {
     public void saveNewConsole(Console console) {
         entityManager.getTransaction().begin();
         entityManager.persist(console);
-        entityManager.getTransaction().begin();
+        entityManager.getTransaction().commit();
     }
 
     public void saveNewCopy(Copy copy) {
         entityManager.getTransaction().begin();
         entityManager.persist(copy);
-        entityManager.getTransaction().begin();
+        entityManager.getTransaction().commit();
     }
 
     public void saveNewCustomer(Customer customer) {
         entityManager.getTransaction().begin();
         entityManager.persist(customer);
-        entityManager.getTransaction().begin();
+        entityManager.getTransaction().commit();
     }
 
     public void saveNewDeveloper(Developer developer) {
         entityManager.getTransaction().begin();
         entityManager.persist(developer);
-        entityManager.getTransaction().begin();
+        entityManager.getTransaction().commit();
     }
 
     public void saveNewGame(Game game) {
         entityManager.getTransaction().begin();
         entityManager.persist(game);
-        entityManager.getTransaction().begin();
+        entityManager.getTransaction().commit();
     }
 
     public void saveNewGenre(Genre genre) {
         entityManager.getTransaction().begin();
         entityManager.persist(genre);
-        entityManager.getTransaction().begin();
+        entityManager.getTransaction().commit();
     }
 
     public void saveNewMonetaryTransaction(MonetaryTransaction monetaryTransaction) {
         entityManager.getTransaction().begin();
         entityManager.persist(monetaryTransaction);
-        entityManager.getTransaction().begin();
+        entityManager.getTransaction().commit();
     }
     
     public void updateConsole(Console console) {

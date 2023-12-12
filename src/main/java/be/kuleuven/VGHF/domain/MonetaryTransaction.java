@@ -31,10 +31,6 @@ public class MonetaryTransaction {
         return this.monetaryTransactionID;
     }
 
-    public void setMonetaryTransactionID(int monetaryTransactionID) {
-        this.monetaryTransactionID = monetaryTransactionID;
-    }
-
     public int getRevenue() {
         return this.revenue;
     }
