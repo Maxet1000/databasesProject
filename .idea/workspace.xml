@@ -5,26 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0423dc92-1095-410d-9cb3-fa62df87abe6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/javaCompile/javaCompile.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/controller/CustomerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/controller/CustomerLoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/controller/DeveloperLoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/customerloginpage.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developerloginpage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.1.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.1.1/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.1.1/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.1.1/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.1.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.1.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.1.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.1.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.1.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/domain/Console.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/domain/Console.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/domain/Copy.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/domain/Copy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/domain/Developer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/domain/Developer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/domain/Genre.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/domain/Genre.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/domain/Transaction.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/domain/Transaction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/domain/Console.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/domain/Console.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/domain/Copy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/domain/Copy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/domain/Developer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/domain/Developer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/domain/Genre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/domain/Genre.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/domain/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/domain/Transaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/controller/NewgamesController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/controller/ProjectMainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/controller/ProjectMainController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/controller/RetrogamesController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/background.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/background.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/customerpage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/customerpage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/developerpage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/developerpage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/HomeController.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ProjectMainController.class.uniqueId0" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ProjectMainController.class.uniqueId0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/controller/NewgamesController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/controller/ProjectMainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/controller/ProjectMainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/controller/RetrogamesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/controller/DeveloperController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/background.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/background.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/customerpage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/customerpage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/developerpage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/developerpage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/home.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +46,14 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="FxmlFile" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -47,13 +66,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/maxem/Documenten/db-project/databasesProject"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/maxem/Documenten/db-project/databasesProject&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

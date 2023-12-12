@@ -1,27 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="2000.0" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.VGHF.controller.RentgamesController">
+<VBox prefHeight="2000.0" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="be.kuleuven.VGHF.controller.RentgamesController">
    <children>
-      <HBox prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+      <AnchorPane minHeight="5.0" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+      <HBox prefHeight="2000.0" prefWidth="200.0">
          <children>
-             <Text fx:id="txtRentgames" strokeType="OUTSIDE" strokeWidth="0.0" text="Filters hier?" wrappingWidth="150" />
-             <VBox prefHeight="800.0" HBox.hgrow="ALWAYS">
-                 <children>
+            <AnchorPane minWidth="5.0" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <VBox prefHeight="2000.0" prefWidth="100.0">
+               <children>
+                  <Button fx:id="btnAddFilter" minWidth="120.0" mnemonicParsing="false" stylesheets="@styles.css" text="Add Filter">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Button>
+                  <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" />
+                  <Button fx:id="btnRemoveFilter" minWidth="120.0" mnemonicParsing="false" stylesheets="@styles.css" text="Remove Filter">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Button>
+                   <Text fx:id="txtRentgames" strokeType="OUTSIDE" strokeWidth="0.0" text="Filters hier?" wrappingWidth="120.0" />
+               </children>
+            </VBox>
+            <AnchorPane maxWidth="5.0" minWidth="5.0" prefWidth="5.0" />
+            <VBox prefHeight="200.0" prefWidth="2000.0">
+               <children>
+                  <Button fx:id="btnAddGameToCart" minHeight="50.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="5000.0" stylesheets="@styles.css" text="Add game to cart" />
+                  <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" />
                      <TableView fx:id="tblRent" prefHeight="2000.0" prefWidth="200">
                          <columns>
                              <TableColumn prefWidth="75.0" text="C1" />
                              <TableColumn prefWidth="75.0" text="C2" />
                          </columns>
                      </TableView>
-                 </children>
-             </VBox>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Winkelkar hier??" wrappingWidth="150" />
+               </children>
+            </VBox>
+            <AnchorPane maxWidth="5.0" minWidth="5.0" prefWidth="5.0" />
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Button fx:id="btnRentGames" minWidth="120.0" mnemonicParsing="false" stylesheets="@styles.css" text="Rent Games" />
+                  <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" />
+                  <Button fx:id="btnRemoveFromCart" minWidth="120.0" mnemonicParsing="false" stylesheets="@styles.css" text="Remove from cart" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Winkelkar hier??" wrappingWidth="120.0" />
+               </children>
+            </VBox>
+            <AnchorPane minWidth="5.0" prefHeight="200.0" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
    </children>

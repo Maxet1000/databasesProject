@@ -52,7 +52,7 @@ public class Copy {
         this.availability = availability;
         this.dateOfReturn = dateOfReturn;
         this.warehouse = warehouse;
-        transactions = new ArrayList<>();
+        //transactions = new ArrayList<>();
     }
 
 

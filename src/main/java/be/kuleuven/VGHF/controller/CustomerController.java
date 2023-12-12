@@ -1,5 +1,6 @@
 package be.kuleuven.VGHF.controller;
-public class RetrogamesController {
+
+public class CustomerController {
 
     public void initialize() {
 

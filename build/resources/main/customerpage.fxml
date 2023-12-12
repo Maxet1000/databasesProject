@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+
+<VBox style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml'" fx:controller="be.kuleuven.VGHF.controller.CustomerController">
+   <children>
+      <Text fx:id="txt" strokeType="OUTSIDE" strokeWidth="0.0" text="Hier kan een customer dan al zijn aankopen bekijken en shiii" />
+      <HBox prefHeight="400.0" prefWidth="600.0" />
+   </children>
+</VBox>

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="2000.0" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="be.kuleuven.VGHF.controller.RentgamesController">
+<VBox prefHeight="2000.0" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="be.kuleuven.VGHF.controller.BuygamesController">
    <children>
       <AnchorPane minHeight="5.0" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
       <HBox prefHeight="2000.0" prefWidth="200.0">
@@ -28,7 +28,7 @@
                         <Insets />
                      </VBox.margin>
                   </Button>
-                   <Text fx:id="txtRentgames" strokeType="OUTSIDE" strokeWidth="0.0" text="Filters hier?" wrappingWidth="120.0" />
+                   <Text fx:id="txtBuygames" strokeType="OUTSIDE" strokeWidth="0.0" text="Filters hier?" wrappingWidth="120.0" />
                </children>
             </VBox>
             <AnchorPane maxWidth="5.0" minWidth="5.0" prefWidth="5.0" />
@@ -36,7 +36,7 @@
                <children>
                   <Button fx:id="btnAddGameToCart" minHeight="50.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="5000.0" stylesheets="@styles.css" text="Add game to cart" />
                   <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" />
-                     <TableView fx:id="tblRent" prefHeight="2000.0" prefWidth="200">
+                     <TableView fx:id="tblBuy" prefHeight="2000.0" prefWidth="200">
                          <columns>
                              <TableColumn prefWidth="75.0" text="C1" />
                              <TableColumn prefWidth="75.0" text="C2" />
@@ -47,7 +47,7 @@
             <AnchorPane maxWidth="5.0" minWidth="5.0" prefWidth="5.0" />
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button fx:id="btnRentGames" minWidth="120.0" mnemonicParsing="false" stylesheets="@styles.css" text="Rent Games" />
+                  <Button fx:id="btnBuyGames" minWidth="120.0" mnemonicParsing="false" stylesheets="@styles.css" text="Buy Games" />
                   <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" />
                   <Button fx:id="btnRemoveFromCart" minWidth="120.0" mnemonicParsing="false" stylesheets="@styles.css" text="Remove from cart" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Winkelkar hier??" wrappingWidth="120.0" />
