@@ -1,8 +1,7 @@
 package be.kuleuven.VGHF.domain;
 
 import javax.persistence.*;
-
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class Genre {
@@ -16,6 +15,38 @@ public class Genre {
     private String genreName;
 
     @ManyToMany(mappedBy = "genres")
-    private List<Game> games;   
+    private List<Game> games;  
+    
+    public Genre() {}
+
+    public Genre(String genreName) {
+        this.genreName = genreName;
+    }
+    
+
+    public int getGenreID() {
+        return this.genreID;
+    }
+
+    public void setGenreID(int genreID) {
+        this.genreID = genreID;
+    }
+
+    public String getGenreName() {
+        return this.genreName;
+    }
+
+    public void setGenreName(String genreName) {
+        this.genreName = genreName;
+    }
+
+    public List<Game> getGames() {
+        return this.games;
+    }
+
+    public void setGames(List<Game> games) {
+        this.games = games;
+    }
+
 
 }

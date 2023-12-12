@@ -1,31 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="D:/UHasselt/Databases_Oefeningen/project/VGHF.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="0"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2943"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,7:mainConsole"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Copy" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="53"/><column index="2" value="57"/><column index="3" value="71"/><column index="4" value="83"/><column index="6" value="68"/><column index="7" value="77"/><column index="8" value="97"/><column index="9" value="80"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE Game (
-	[gameID] INTEGER NOT NULL UNIQUE,
-	[title]	TEXT NOT NULL,
-	[publisher]	TEXT NOT NULL,
-	[consoleID]	INTEGER NOT NULL,
-	[releaseDate]	DATE NOT NULL,
-	[genreID]	INTEGER NOT NULL,
-	[developerID]	INTEGER NOT NULL,
-	FOREIGN KEY ([developerID]) REFERENCES &quot;Developer&quot; ([developerID])
-	FOREIGN KEY ([genreID]) REFERENCES &quot;Genre&quot; ([genreID])
-	FOREIGN KEY ([consoleID]) REFERENCES &quot;Console&quot; ([consoleID])
-	PRIMARY KEY(&quot;gameID&quot; AUTOINCREMENT)
-);
-
-CREATE TABLE Copy (
-	[copyID]	INTEGER NOT NULL UNIQUE,
-	[gameID]	INTEGER NOT NULL,
-	[consoleID]	INTEGER NOT NULL,
-	[customerID]	INTEGER,
-	[purchasePrice]	INTEGER,
-	[rentPrice]	INTEGER,
-	[availability]	INTEGER,
-	[dateOfReturn]	DATE,
-	[warehouse]	TEXT NOT NULL,
-	FOREIGN KEY ([gameID]) REFERENCES &quot;Game&quot; ([gameID])
-	FOREIGN KEY ([consoleID]) REFERENCES &quot;Console&quot; ([consoleID])
-	FOREIGN KEY ([customerID]) REFERENCES &quot;Customer&quot; ([customerID])
-	PRIMARY KEY(&quot;copyID&quot; AUTOINCREMENT)
-);
-
-</sql><current_tab id="0"/></tab_sql></sqlb_project>
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/maxem/Documenten/db-project/databasesProject/VGHF.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="0"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="150"/><column_width id="3" width="3468"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,7:mainConsole"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Console" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="113"/><column index="2" value="215"/><column index="3" value="146"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE &quot;Transaction&quot; (
+	&quot;transactionID&quot;	INTEGER NOT NULL UNIQUE,
+	&quot;copyID&quot;	INTEGER NOT NULL,
+	&quot;customerID&quot;	INTEGER NOT NULL,
+	&quot;revenue&quot;	INTEGER NOT NULL,
+	&quot;transactionType&quot;	TEXT NOT NULL,
+	FOREIGN KEY(&quot;customerID&quot;) REFERENCES &quot;Customer&quot;(&quot;customerID&quot;),
+	FOREIGN KEY(&quot;copyID&quot;) REFERENCES &quot;Copy&quot;(&quot;copyID&quot;),
+	PRIMARY KEY(&quot;transactionID&quot; AUTOINCREMENT)
+);</sql><current_tab id="0"/></tab_sql></sqlb_project>
