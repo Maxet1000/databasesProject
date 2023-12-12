@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 public class ProjectMain extends Application {
 
     private static Stage rootStage;
+    public static HibernateManager database;
 
     public static Stage getRootStage() {
         return rootStage;
@@ -45,9 +46,13 @@ public class ProjectMain extends Application {
         var sessionFactory = Persistence.createEntityManagerFactory("be.kuleuven.VGHF.domain");
         var entityManager = sessionFactory.createEntityManager();
         System.out.println("test:");
-        var database = new HibernateManager(entityManager);
+        database = new HibernateManager(entityManager);
         List<Console> allConsoles = database.getAllConsoles();
         System.out.println(allConsoles);
         launch();
+    }
+    
+    public static HibernateManager getDatabase(){
+        return database;
     }
 }

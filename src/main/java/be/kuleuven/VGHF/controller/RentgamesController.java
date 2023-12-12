@@ -1,5 +1,7 @@
 package be.kuleuven.VGHF.controller;
 
+import be.kuleuven.VGHF.ProjectMain;
+import be.kuleuven.VGHF.domain.HibernateManager;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +23,10 @@ public class RentgamesController {
         tblRent.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         tblRent.getColumns().clear();
 
+        var x = ProjectMain.getDatabase().getAllCopies();
+        x.get(0);
+
+        System.out.println();
 
         // TODO verwijderen en "echte data" toevoegen!
         int colIndex = 0;

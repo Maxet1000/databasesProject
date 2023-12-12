@@ -24,7 +24,7 @@ public class BuygamesController {
         tblBuy.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         tblBuy.getColumns().clear();
 
-
+        
         // TODO verwijderen en "echte data" toevoegen!
         int colIndex = 0;
         for(var colName : new String[]{"Roepnaam", "Categorie", "Prijs", "Stock"}) {
