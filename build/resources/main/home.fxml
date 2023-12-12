@@ -10,7 +10,7 @@
 
 <VBox fx:id="pane1" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.VGHF.controller.HomeController">
     <children>
-        <Text fx:id="txtVGHF" strokeType="OUTSIDE" strokeWidth="0.0" text="Video Game History Foundation" textAlignment="CENTER" wrappingWidth="-Infinity">
+        <Text fx:id="txtVGHF" strokeType="OUTSIDE" strokeWidth="0.0" text="Video Game History Foundation" textAlignment="CENTER" wrappingWidth="400.0">
             <font>
                 <Font size="24.0" />
             </font>
