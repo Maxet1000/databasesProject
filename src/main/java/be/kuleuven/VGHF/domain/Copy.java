@@ -1,7 +1,9 @@
 package be.kuleuven.VGHF.domain;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.*;
+
+
 
 
 @Entity
@@ -40,7 +42,7 @@ public class Copy {
     private String warehouse;
 
     @OneToMany(mappedBy = "copy")
-    private List<Transaction> transactions;
+    private List<MonetaryTransaction> transactions;
 
     public Copy(){}
 
@@ -52,6 +54,88 @@ public class Copy {
         this.warehouse = warehouse;
         transactions = new ArrayList<>();
     }
+
+
+    public int getCopyID() {
+        return this.copyID;
+    }
+
+    public void setCopyID(int copyID) {
+        this.copyID = copyID;
+    }
+
+    public Game getGame() {
+        return this.game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public Console getConsole() {
+        return this.console;
+    }
+
+    public void setConsole(Console console) {
+        this.console = console;
+    }
+
+    public Customer getCustomer() {
+        return this.customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public int getPurchasePrice() {
+        return this.purchasePrice;
+    }
+
+    public void setPurchasePrice(int purchasePrice) {
+        this.purchasePrice = purchasePrice;
+    }
+
+    public int getRentPrice() {
+        return this.rentPrice;
+    }
+
+    public void setRentPrice(int rentPrice) {
+        this.rentPrice = rentPrice;
+    }
+
+    public int getAvailability() {
+        return this.availability;
+    }
+
+    public void setAvailability(int availability) {
+        this.availability = availability;
+    }
+
+    public String getDateOfReturn() {
+        return this.dateOfReturn;
+    }
+
+    public void setDateOfReturn(String dateOfReturn) {
+        this.dateOfReturn = dateOfReturn;
+    }
+
+    public String getWarehouse() {
+        return this.warehouse;
+    }
+
+    public void setWarehouse(String warehouse) {
+        this.warehouse = warehouse;
+    }
+
+    public List<MonetaryTransaction> getTransactions() {
+        return this.transactions;
+    }
+
+    public void setTransactions(List<MonetaryTransaction> transactions) {
+        this.transactions = transactions;
+    }
+
 
     
     

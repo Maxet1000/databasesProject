@@ -1,17 +1,16 @@
 <persistence version="2.1"
              xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-    <persistence-unit name="be.kuleuven.studenthibernate.domain">
-        <description>Studenten JPA Test</description>
+    <persistence-unit name="be.kuleuven.VGHF.domain">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>be.kuleuven.VGHF.tables.Console</class>
-        <class>be.kuleuven.VGHF.tables.Copy</class>
-        <class>be.kuleuven.VGHF.tables.Customer</class>
-        <class>be.kuleuven.VGHF.tables.Developer</class>
-        <class>be.kuleuven.VGHF.tables.Game</class>
-        <class>be.kuleuven.VGHF.tables.Genre</class>
-        <class>be.kuleuven.VGHF.tables.Transaction</class>
+        <class>be.kuleuven.VGHF.domain.Console</class>
+        <class>be.kuleuven.VGHF.domain.Copy</class>
+        <class>be.kuleuven.VGHF.domain.Customer</class>
+        <class>be.kuleuven.VGHF.domain.Developer</class>
+        <class>be.kuleuven.VGHF.domain.Game</class>
+        <class>be.kuleuven.VGHF.domain.Genre</class>
+        <class>be.kuleuven.VGHF.domain.MonetaryTransaction</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC"/>

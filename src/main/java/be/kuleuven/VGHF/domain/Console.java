@@ -1,6 +1,7 @@
 package be.kuleuven.VGHF.domain;
 
 import javax.persistence.*;
+import java.util.*;
 
 @Entity
 public class Console {
@@ -18,6 +19,10 @@ public class Console {
     private int compatibleConsolID;
 
     public Console() {}
+
+    public Console(String consoleName) {
+        this.consoleName = consoleName;
+    }
     
     public Console(String consoleName, int compatibleConsolID) {
         this.consoleName = consoleName;
