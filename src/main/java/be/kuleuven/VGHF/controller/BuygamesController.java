@@ -8,18 +8,21 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-public class RentgamesController {
+
+
+public class BuygamesController {
+
     
     @FXML
-    private TableView tblRent;
+    private TableView tblBuy;
 
     public void initialize(){
         initTable();
     }
 
     public void initTable(){
-        tblRent.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        tblRent.getColumns().clear();
+        tblBuy.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        tblBuy.getColumns().clear();
 
 
         // TODO verwijderen en "echte data" toevoegen!
@@ -28,14 +31,14 @@ public class RentgamesController {
             TableColumn<ObservableList<String>, String> col = new TableColumn<>(colName);
             final int finalColIndex = colIndex;
             col.setCellValueFactory(f -> new ReadOnlyObjectWrapper<>(f.getValue().get(finalColIndex)));
-            tblRent.getColumns().add(col);
+            tblBuy.getColumns().add(col);
             colIndex++;
         }
 
 
         for(int i = 0; i < 10; i++) {
 
-            tblRent.getItems().add(FXCollections.observableArrayList("Budget PCke " + i, "Budget type 1", i*10 + "", i * 33 + ""));
+            tblBuy.getItems().add(FXCollections.observableArrayList("Budget PCke " + i, "Budget type 1", i*10 + "", i * 33 + ""));
         }
     }
 }

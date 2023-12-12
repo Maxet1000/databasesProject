@@ -21,11 +21,20 @@ public class HomeController {
     public VBox pane1;
     @FXML
     private Button btnRent;
+    @FXML
+    private Button btnBuy;
 
     public void initialize() throws IOException {
         btnRent.setOnAction(e -> {
             try {
-                switchToRentGames();
+                switchToRentOrBuy("rent");
+            } catch (IOException ex) {
+                throw new RuntimeException (ex);
+            }
+        });
+        btnBuy.setOnAction(e -> {
+            try {
+                switchToRentOrBuy("buy");
             } catch (IOException ex) {
                 throw new RuntimeException (ex);
             }
@@ -33,15 +42,17 @@ public class HomeController {
     }
 
 
-    public void switchToRentGames () throws IOException {
+    public void switchToRentOrBuy (String RentOrBuy) throws IOException {
         //showScherm("rentgames");
+        //showScherm("buygames");
 
-        var pane = new FXMLLoader(getClass().getClassLoader().getResource("rentgames.fxml"));
+        var pane = new FXMLLoader(getClass().getClassLoader().getResource(RentOrBuy + "games.fxml"));
         var rootLoader = (VBox) pane.load();
         rootLoader.autosize();
         pane1.getChildren().setAll(rootLoader);
         StackPane.setAlignment(rootLoader, Pos.CENTER);
     }
+
     private void showScherm(String id) {
         var resourceName = id + ".fxml";
         try {

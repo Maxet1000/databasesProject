@@ -41,14 +41,14 @@ public class ProjectMainController {
         });
         btnCustomerPage.setOnAction(e -> {
             try {
-                switchToId("customerpage");
+                switchToId("customerloginpage");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
         btnDeveloperPage.setOnAction(e -> {
             try {
-                switchToId("developerpage");
+                switchToId("developerloginpage");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
@@ -77,19 +77,17 @@ public class ProjectMainController {
             case "gamedb":
                 btnGameDb.setUnderline(true);
             break;
-            case "customerpage":
+            case "customerloginpage":
                 btnCustomerPage.setUnderline(true);
             break;
-            case "developerpage":
+            case "developerloginpage":
                 btnDeveloperPage.setUnderline(true);
             break;
             case "info":
                 btnInfo.setUnderline(true);
             break;
 
-
         }    
-        
 
         //switch to pane
         var pane = new FXMLLoader(getClass().getClassLoader().getResource(id + ".fxml"));
