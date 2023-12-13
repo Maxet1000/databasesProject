@@ -47,7 +47,7 @@ public class ProjectMain extends Application {
         var entityManager = sessionFactory.createEntityManager();
         database = new HibernateManager(entityManager);
 
-        DbContentScript.scriptMain();
+        //DbContentScript.scriptMain();
         List<MonetaryTransaction> testlist = database.getMonetaryTransactionsByCustomerID(5);
         System.out.println(testlist);
         launch();
