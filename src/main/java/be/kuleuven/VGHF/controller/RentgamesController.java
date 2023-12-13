@@ -79,7 +79,6 @@ public class RentgamesController extends Controller{
 
 
     //TODO voor RentGamesFromCart
-        //database laten updaten
         //customerID toevoegen mbv het inloggen van de customer
         //checken voor balance
     public void RentGamesFromCart(){
