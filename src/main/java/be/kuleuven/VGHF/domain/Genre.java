@@ -5,12 +5,8 @@ import java.util.*;
 
 @Entity
 public class Genre {
-    
-    @Column(nullable = false)
-    @Id
-    @GeneratedValue
-    private int genreID;
 
+    @Id
     @Column(nullable = false)
     private String genreName;
 
@@ -21,11 +17,6 @@ public class Genre {
 
     public Genre(String genreName) {
         this.genreName = genreName;
-    }
-    
-
-    public int getGenreID() {
-        return this.genreID;
     }
 
     public String getGenreName() {

@@ -6,11 +6,7 @@ import java.util.*;
 @Entity
 public class Game {
     
-    @Column(nullable = false)
     @Id
-    @GeneratedValue
-    private int gameID;
-
     @Column(nullable = false)
     private String title;
 
@@ -23,26 +19,29 @@ public class Game {
     @ManyToMany
     @JoinTable(
         name = "GameConsoleLink",
-        joinColumns = @JoinColumn(name = "gameID"),
-        inverseJoinColumns = @JoinColumn(name = "consoleID")
+        joinColumns = @JoinColumn(name = "title"),
+        inverseJoinColumns = @JoinColumn(name = "consoleName")
     )
     private List<Console> consoles;
 
     @ManyToMany
     @JoinTable(
         name = "GameDeveloperLink",
-        joinColumns = @JoinColumn(name = "gameID"),
-        inverseJoinColumns = @JoinColumn(name = "developerID")
+        joinColumns = @JoinColumn(name = "title"),
+        inverseJoinColumns = @JoinColumn(name = "developerName")
     )
     private List<Developer> developers;
 
     @ManyToMany
     @JoinTable(
         name = "GameGenreLink",
-        joinColumns = @JoinColumn(name = "gameID"),
-        inverseJoinColumns = @JoinColumn(name = "genreID")
+        joinColumns = @JoinColumn(name = "title"),
+        inverseJoinColumns = @JoinColumn(name = "genreName")
     )
     private List<Genre> genres;
+
+    @OneToMany(mappedBy = "game")
+    private List<Copy> copies;
 
     public Game() {}
 
@@ -53,11 +52,6 @@ public class Game {
         this.consoles = consoles;
         this.developers = developers;
         this.genres = genres;
-    }
-
-
-    public int getGameID() {
-        return this.gameID;
     }
 
     public String getTitle() {

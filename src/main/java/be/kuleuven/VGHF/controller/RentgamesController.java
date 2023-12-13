@@ -55,14 +55,40 @@ public class RentgamesController {
     
     public void AddGameToCart(){
         
-        var selectedItem =  tblRent.getSelectionModel().getSelectedItem();
+        List selectedItem =  (List) tblRent.getSelectionModel().getSelectedItem();
 
         System.out.println(selectedItem);
-        /* 
+         
         for (int i = 0; i < 1; i++){
+            int x = (int) selectedItem.get(selectedItem.size()-1);
+            var copy = ProjectMain.getDatabase().getCopyById(x);
+            var gameName = copy.getGame().getTitle();
+            var copyId = copy.getCopyID();
             
-        }*/
+                String developers = "";
+                for (int j = 0; j < copy.getGame().getDevelopers().size(); j++) {
+                    developers = developers+ copy.getGame().getDevelopers().get(j).getDeveloperName();
+                    if (j+1 != copy.getGame().getDevelopers().size()) {
+                        developers = developers + ", ";
+                    }
+                }
+                String consoles = "";
+                for (int j = 0; j < copy.getGame().getConsoles().size(); j++) {
+                    consoles = consoles+ copy.getGame().getConsoles().get(j).getConsoleName();
+                    if (j+1 != copy.getGame().getConsoles().size()) {
+                        consoles = consoles + ", ";
+                    }
+                }
+                String genres = "";
+                for (int j = 0; j < copy.getGame().getGenres().size(); j++) {
+                    genres = genres+ copy.getGame().getGenres().get(j).getGenreName();
+                    if (j+1 != copy.getGame().getGenres().size()) {
+                        genres = genres + ", ";
+                    }
+                }
 
+            tblCart.getItems().add(FXCollections.observableArrayList(gameName, developers, consoles, genres, copyId));
+        }
     }
 
     public void initTableCart(){
@@ -70,11 +96,14 @@ public class RentgamesController {
         tblCart.getColumns().clear();
 
         int colIndex = 0;
-        for(var colName : new String[]{"Game", "Developer", "Console", "Genre"}) {
+        for(var colName : new String[]{"Game", "Developer", "Console", "Genre", "Id"}) {
             TableColumn<ObservableList<String>, String> col = new TableColumn<>(colName);
             final int finalColIndex = colIndex;
             col.setCellValueFactory(f -> new ReadOnlyObjectWrapper<>(f.getValue().get(finalColIndex)));
             tblCart.getColumns().add(col);
+            if(colName == "Id"){
+                col.setVisible(false);
+            }
             colIndex++;
         }
     }
@@ -97,11 +126,12 @@ public class RentgamesController {
             colIndex++;
         }
 
+        System.out.println(listOfCopies);
 
         for(int i = 0; i < listOfCopies.size(); i++) {
             if(listOfCopies.get(i).getAvailability() == Availability.AVAILABLE){
                 var gameCopyName = listOfCopies.get(i).getGame().getTitle();
-                var copyId = listOfCopies.get(i).getCopyID() + "";
+                var copyId = listOfCopies.get(i).getCopyID();
 
                 String developers = "";
                 for (int j = 0; j < listOfCopies.get(i).getGame().getDevelopers().size(); j++) {

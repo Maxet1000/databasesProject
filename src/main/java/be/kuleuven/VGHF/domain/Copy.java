@@ -6,9 +6,6 @@ import be.kuleuven.VGHF.enums.Availability;
 
 import java.util.*;
 
-
-
-
 @Entity
 public class Copy {
 
@@ -18,16 +15,19 @@ public class Copy {
     private int copyID;
 
     @ManyToOne(fetch = FetchType.LAZY) 
-    @JoinColumn(name = "gameID", nullable = false)
+    @JoinColumn(name = "title", nullable = false)
     private Game game;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "consoleID", nullable = false)
+    @JoinColumn(name = "consoleName", nullable = false)
     private Console console;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customerID")
     private Customer customer;
+    
+    @OneToMany(mappedBy = "copy")
+    private List<MonetaryTransaction> transactions;
 
     @Column
     private int purchasePrice;
@@ -44,9 +44,6 @@ public class Copy {
     
     @Column(nullable = false)
     private String warehouse;
-
-    @OneToMany(mappedBy = "copy")
-    private List<MonetaryTransaction> transactions;
 
     public Copy(){}
 
