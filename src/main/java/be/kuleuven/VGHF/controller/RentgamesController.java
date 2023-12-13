@@ -13,10 +13,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
+import java.util.List;
+
 
 public class RentgamesController {
     
@@ -26,16 +29,21 @@ public class RentgamesController {
     private Button btnAddGameToCart;
     @FXML
     public VBox pane1;
+    @FXML
+    private VBox filtersBox;
 
     public void initialize(){
         initTable();
 
+        List listOfDevelopers = getAllDevelopers();
+        for (int i=0; i<listOfDevelopers.size(); i++ ) {
+            CheckBox checkBox = new CheckBox();
+            checkBox.setText(listOfDevelopers.get(i).toString());
+            filtersBox.getChildren().add(checkBox);
+        }
+
         btnAddGameToCart.setOnAction(e -> {
-            try {
                 AddGameToCart();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
         });
     }
     
@@ -88,5 +96,15 @@ public class RentgamesController {
             }
         }
         
+    }
+
+    public List getAllDevelopers() {
+
+        tblRent.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        tblRent.getColumns().clear();
+
+
+        var listOfDevelopers = ProjectMain.getDatabase().getAllDevelopers();
+        return listOfDevelopers;
     }
 }

@@ -9,13 +9,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="2000.0" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="be.kuleuven.VGHF.controller.RentgamesController">
+<VBox prefHeight="2000.0" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.VGHF.controller.RentgamesController">
    <children>
       <AnchorPane minHeight="5.0" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
       <HBox prefHeight="2000.0" prefWidth="200.0">
          <children>
             <AnchorPane minWidth="5.0" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <VBox prefHeight="2000.0" prefWidth="100.0">
+            <VBox maxWidth="1900.0" prefHeight="2000.0" prefWidth="2000.0">
                <children>
                   <Button fx:id="btnAddFilter" minWidth="120.0" mnemonicParsing="false" stylesheets="@styles.css" text="Add Filter">
                      <VBox.margin>
@@ -28,6 +28,7 @@
                         <Insets />
                      </VBox.margin>
                   </Button>
+                  <VBox fx:id="filtersBox" maxWidth="300.0" prefHeight="200.0" prefWidth="300.0" />
                    <Text fx:id="txtRentgames" strokeType="OUTSIDE" strokeWidth="0.0" text="Filters hier?" wrappingWidth="120.0" />
                </children>
             </VBox>
@@ -50,6 +51,12 @@
                   <Button fx:id="btnRentGames" minWidth="120.0" mnemonicParsing="false" stylesheets="@styles.css" text="Rent Games" />
                   <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" />
                   <Button fx:id="btnRemoveFromCart" minWidth="120.0" mnemonicParsing="false" stylesheets="@styles.css" text="Remove from cart" />
+                  <TableView fx:id="tblCart" prefHeight="2000.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                  </TableView>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Winkelkar hier??" wrappingWidth="120.0" />
                </children>
             </VBox>
