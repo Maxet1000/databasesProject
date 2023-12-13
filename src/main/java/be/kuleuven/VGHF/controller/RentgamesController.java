@@ -61,13 +61,30 @@ public class RentgamesController {
 
 
         for(int i = 0; i < listOfCopies.size(); i++) {
-                var gameCopyName = listOfCopies.get(i).getGame().getTitle();
-                /* 
-                var gameDeveloperName = listOfCopies.get(i).getGame().getDevelopers().get(1).getDeveloperName();
-                var gameConsoleName = listOfCopies.get(i).getGame().getConsoles();
-                var gameGenreName = listOfCopies.get(i).getGame().getGenres();
-                */
-                tblRent.getItems().add(FXCollections.observableArrayList(gameCopyName, "gameDeveloperName", "gameConsoleName", "gameGenreName"));
+            var gameCopyName = listOfCopies.get(i).getGame().getTitle();
+
+            String developers = "";
+            for (int j = 0; j < listOfCopies.get(i).getGame().getDevelopers().size(); j++) {
+                developers = developers+ listOfCopies.get(i).getGame().getDevelopers().get(j).getDeveloperName();
+                if (j+1 != listOfCopies.get(i).getGame().getDevelopers().size()) {
+                    developers = developers + ", ";
+                }
+            }
+            String consoles = "";
+            for (int j = 0; j < listOfCopies.get(i).getGame().getConsoles().size(); j++) {
+                consoles = consoles+ listOfCopies.get(i).getGame().getConsoles().get(j).getConsoleName();
+                if (j+1 != listOfCopies.get(i).getGame().getConsoles().size()) {
+                    consoles = consoles + ", ";
+                }
+            }
+            String genres = "";
+            for (int j = 0; j < listOfCopies.get(i).getGame().getGenres().size(); j++) {
+                genres = genres+ listOfCopies.get(i).getGame().getGenres().get(j).getGenreName();
+                if (j+1 != listOfCopies.get(i).getGame().getGenres().size()) {
+                    genres = genres + ", ";
+                }
+            }
+            tblRent.getItems().add(FXCollections.observableArrayList(gameCopyName, developers, consoles, genres));
         }
         
     }
