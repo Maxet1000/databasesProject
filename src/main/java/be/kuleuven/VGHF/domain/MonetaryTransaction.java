@@ -38,11 +38,6 @@ public class MonetaryTransaction {
         this.time = time;
     }
 
-    // public enum TransactionType {
-    //     SALE,
-    //     RENTAL
-    // }
-
     public int getMonetaryTransactionID() {
         return this.monetaryTransactionID;
     }

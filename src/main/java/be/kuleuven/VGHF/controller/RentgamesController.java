@@ -79,6 +79,7 @@ public class RentgamesController {
             colIndex++;
         }
 
+        System.out.println(listOfCopies);
 
         for(int i = 0; i < listOfCopies.size(); i++) {
             var gameCopyName = listOfCopies.get(i).getGame().getTitle();

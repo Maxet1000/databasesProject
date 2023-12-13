@@ -6,12 +6,8 @@ import java.util.*;
 
 @Entity
 public class Developer {
-    
-    @Column(nullable = false)
-    @Id
-    @GeneratedValue
-    private int developerID;
 
+    @Id
     @Column(nullable = false)
     private String developerName;
 
@@ -22,11 +18,6 @@ public class Developer {
 
     public Developer(String developerName) {
         this.developerName = developerName;
-    }
-    
-
-    public int getDeveloperID() {
-        return this.developerID;
     }
 
     public String getDeveloperName() {
