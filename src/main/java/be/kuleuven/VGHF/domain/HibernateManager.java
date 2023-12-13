@@ -2,8 +2,8 @@ package be.kuleuven.VGHF.domain;
 
 import java.util.Collections;
 import java.util.List;
-
 import javax.persistence.EntityManager;
+import javax.persistence.*;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
