@@ -1,8 +1,6 @@
 package be.kuleuven.VGHF.controller;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +32,7 @@ public class RentgamesController extends Controller{
     private Button btnAddGameToCart;
     @FXML
     private Button btnAddFilter;
+    @FXML Button btnRemoveFilters;
     @FXML
     public VBox pane1;
     @FXML
@@ -59,15 +58,18 @@ public class RentgamesController extends Controller{
         initTableCart();
         initFilters();
         btnAddGameToCart.setOnAction(e -> {
-                AddGameToCart();
+                addGameToCart();
         });
-        btnAddFilter.setOnAction((e -> {
-                ActivateFilters();
-        }));
+        btnAddFilter.setOnAction(e -> {
+            activateFilters();
+        });
+        btnRemoveFilters.setOnAction(e -> {
+            removeFilters();
+        });
     }
 
 
-    public void AddGameToCart(){
+    public void addGameToCart(){
         
         List selectedItem =  (List) tblRent.getSelectionModel().getSelectedItem();
 
@@ -105,12 +107,30 @@ public class RentgamesController extends Controller{
         }
     }
 
-    private void ActivateFilters() { // HIER MOET JE ZIJN MAX!!!!!!!!!!
+    private void activateFilters() {
         var listOfFilteredCopies = ProjectMain.getDatabase().getAllCopies();
-        listOfFilteredCopies = filter(listOfFilteredCopies, toBeFilteredDevelopers);
-        listOfFilteredCopies = filter(listOfFilteredCopies, toBeFilteredConsoles);
-        listOfFilteredCopies = filter(listOfFilteredCopies, toBeFilteredGenres);
+        if(toBeFilteredDevelopers.isEmpty()){
+            initTable(listOfFilteredCopies);
+        } else {
+            listOfFilteredCopies = filterDevelopers(listOfFilteredCopies, toBeFilteredDevelopers);
+        }
+        if(toBeFilteredConsoles.isEmpty()) {
+            initTable(listOfFilteredCopies);
+        } else {
+            listOfFilteredCopies = filterConsoles(listOfFilteredCopies, toBeFilteredConsoles);
+        }
+        if (toBeFilteredGenres.isEmpty()) {
+        } else {
+            listOfFilteredCopies = filterGenres(listOfFilteredCopies, toBeFilteredGenres);
+        }
         initTable(listOfFilteredCopies);
+    }
+
+    public void removeFilters() {
+        filtersTreeView.getRoot().getChildren().clear();
+        initFilters();
+        var listOfCopies = ProjectMain.getDatabase().getAllCopies();
+        initTable(listOfCopies);
     }
     public void initTableCart(){
         tblCart.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -130,6 +150,7 @@ public class RentgamesController extends Controller{
     }
 
     public void initTable(List<Copy> listOfCopies){
+        tblRent.getItems().clear();
         tblRent.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         tblRent.getColumns().clear();
 
