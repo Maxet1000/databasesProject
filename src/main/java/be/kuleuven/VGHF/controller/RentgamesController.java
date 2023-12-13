@@ -60,9 +60,9 @@ public class RentgamesController {
         }
 
 
-        for(int i = 0; i < 10; i++) {
+        for(int i = 0; i < ListOfCopies.size(); i++) {
 
-            tblRent.getItems().add(FXCollections.observableArrayList(ListOfCopies.get(i).getGame(), ListOfCopies.get(i).getGame().getDevelopers(), ListOfCopies.get(i).getConsole(), ListOfCopies.get(i).getGame().getGenres()));
+            tblRent.getItems().add(FXCollections.observableArrayList(ListOfCopies.get(i).getGame().getTitle().toString()));
         }
         
     }
