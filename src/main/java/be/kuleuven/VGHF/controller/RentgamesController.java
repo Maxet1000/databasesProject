@@ -24,7 +24,7 @@ public class RentgamesController {
         tblRent.getColumns().clear();
 
         
-        var ListOfCopies = ProjectMain.getDatabase().getAllCopies();
+        var listOfCopies = ProjectMain.getDatabase().getAllCopies();
         
         /*
         int colIndex = 0;
@@ -42,8 +42,8 @@ public class RentgamesController {
             tblRent.getItems().add(FXCollections.observableArrayList("Budget PCke " + i, "Budget type 1", i*10 + "", i * 33 + ""));
         }
         
-        for (int i = 0; i < ListOfCopies.size(); i++){
-            var game = ListOfCopies.get(i).getGame();
+        for (int i = 0; i < listOfCopies.size(); i++){
+            var game = listOfCopies.get(i).getGame();
 
         }*/
         
@@ -59,10 +59,12 @@ public class RentgamesController {
             colIndex++;
         }
 
+        System.out.println(listOfCopies);
 
-        for(int i = 0; i < ListOfCopies.size(); i++) {
+        for(int i = 0; i < listOfCopies.size(); i++) {
 
-            tblRent.getItems().add(FXCollections.observableArrayList(ListOfCopies.get(i).getGame().getTitle().toString()));
+            tblRent.getItems().add(FXCollections.observableArrayList(listOfCopies.get(i).getGame().getTitle().toString(), "iets","iets","iest"));
+            
         }
         
     }

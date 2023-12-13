@@ -185,6 +185,6 @@ public class HibernateManager {
         }
     }
 
-
+    //public Lis
 
 }
