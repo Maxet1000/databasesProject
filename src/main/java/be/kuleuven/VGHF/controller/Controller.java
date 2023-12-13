@@ -10,12 +10,12 @@ public class Controller {
     List<Copy> lijstOmOpTeFilteren = new ArrayList<Copy>();
 
 
-    public <S,T> List<S> filter(List<S> original, List<T> filter) {
-        for(S element : original) {
+    public <S,T> List<S> filter(List<S> listToFilter, List<T> filter) {
+        for(S element : listToFilter) {
             if (!filter.contains(element)) {
-                original.remove(element);
+                listToFilter.remove(element);
             }
         }
-        return original;
+        return listToFilter;
     }
 }

@@ -25,7 +25,7 @@ import javafx.scene.layout.VBox;
 import java.util.List;
 
 
-public class RentgamesController {
+public class RentgamesController extends Controller{
     
     @FXML
     private TableView tblRent;
