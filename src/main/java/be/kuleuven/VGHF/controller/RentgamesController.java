@@ -23,14 +23,35 @@ public class RentgamesController {
         tblRent.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         tblRent.getColumns().clear();
 
-        var x = ProjectMain.getDatabase().getAllCopies();
-        x.get(0);
-
-        System.out.println();
-
-        // TODO verwijderen en "echte data" toevoegen!
+        
+        var ListOfCopies = ProjectMain.getDatabase().getAllCopies();
+        
+        /*
         int colIndex = 0;
-        for(var colName : new String[]{"Roepnaam", "Categorie", "Prijs", "Stock"}) {
+        //var colName = new String[]{"Game", "Developer", "Console"};
+        for (var colName : new String[]{"Game", "Developer", "Console"}){
+            TableColumn<ObservableList<String>, String> col = new TableColumn<>(colName);
+            final int finalColIndex = colIndex;
+            col.setCellValueFactory(f -> new ReadOnlyObjectWrapper<>(f.getValue().get(finalColIndex)));
+            tblRent.getColumns().add(col);
+            colIndex++;
+        }
+
+        for(int i = 0; i < 10; i++) {
+
+            tblRent.getItems().add(FXCollections.observableArrayList("Budget PCke " + i, "Budget type 1", i*10 + "", i * 33 + ""));
+        }
+        
+        for (int i = 0; i < ListOfCopies.size(); i++){
+            var game = ListOfCopies.get(i).getGame();
+
+        }*/
+        
+
+
+        
+        int colIndex = 0;
+        for(var colName : new String[]{"Game", "Developer", "Console", "Genre"}) {
             TableColumn<ObservableList<String>, String> col = new TableColumn<>(colName);
             final int finalColIndex = colIndex;
             col.setCellValueFactory(f -> new ReadOnlyObjectWrapper<>(f.getValue().get(finalColIndex)));
@@ -41,7 +62,8 @@ public class RentgamesController {
 
         for(int i = 0; i < 10; i++) {
 
-            tblRent.getItems().add(FXCollections.observableArrayList("Budget PCke " + i, "Budget type 1", i*10 + "", i * 33 + ""));
+            tblRent.getItems().add(FXCollections.observableArrayList(ListOfCopies.get(i).getGame(), ListOfCopies.get(i).getGame().getDevelopers(), ListOfCopies.get(i).getConsole(), ListOfCopies.get(i).getGame().getGenres()));
         }
+        
     }
 }
