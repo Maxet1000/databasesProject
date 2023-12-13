@@ -82,25 +82,27 @@ public class RentgamesController extends Controller{
 
     //TODO voor RentGamesFromCart
         //database laten updaten
-        //customerID toevoegen
+        //customerID toevoegen mbv het inloggen van de customer
         //checken voor balance
     public void RentGamesFromCart(){
         var datalist = tblCart.getItems();
-        System.err.println(datalist);
+        System.out.println(datalist);
         int i = 0;
         while (i != datalist.size()){
             List data = (List) datalist.get(i);
-            System.err.println(data);
+            System.out.println(data);
             int copyId = (int) data.get(data.size()-1);
             var copy = ProjectMain.getDatabase().getCopyById(copyId);
             copy.setAvailability(Availability.RENTED);
+            System.out.println(copy.getAvailability());
             copy.setDateOfReturn(TwoWeeksLonger());
             ProjectMain.getDatabase().updateCopy(copy);
             i++;
         }
         datalist.clear();
-        /*var listOfCopies = ProjectMain.getDatabase().getAllCopies();
-        initTable(listOfCopies);*/
+
+        var listOfCopies = ProjectMain.getDatabase().getAllCopies();
+        initTable(listOfCopies);
     }
 
     public String TwoWeeksLonger(){

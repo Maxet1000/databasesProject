@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -188,7 +189,9 @@ public class HibernateManager {
     
     public void updateCopy(Copy copy) {
         try {
+            entityManager.getTransaction().begin();
             entityManager.merge(copy);
+            entityManager.getTransaction().commit();
         } catch (Exception exception) {
             exception.printStackTrace();
         }
