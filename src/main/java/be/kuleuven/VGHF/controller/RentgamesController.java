@@ -1,6 +1,7 @@
 package be.kuleuven.VGHF.controller;
 
 import be.kuleuven.VGHF.ProjectMain;
+import be.kuleuven.VGHF.domain.Developer;
 import be.kuleuven.VGHF.domain.HibernateManager;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
@@ -26,7 +27,8 @@ public class RentgamesController {
         List listOfDevelopers = getAllDevelopers();
         for (int i=0; i<listOfDevelopers.size(); i++ ) {
             CheckBox checkBox = new CheckBox();
-            checkBox.setText(listOfDevelopers.get(i).toString());
+            Developer developer = (Developer) listOfDevelopers.get(i);
+            checkBox.setText(developer.getDeveloperName());
             filtersBox.getChildren().add(checkBox);
         }
     }
@@ -102,12 +104,6 @@ public class RentgamesController {
     }
 
     public List getAllDevelopers() {
-
-        tblRent.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        tblRent.getColumns().clear();
-
-
-        var listOfDevelopers = ProjectMain.getDatabase().getAllDevelopers();
-        return listOfDevelopers;
+        return ProjectMain.getDatabase().getAllDevelopers();
     }
 }

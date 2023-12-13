@@ -51,6 +51,12 @@
                   <Button fx:id="btnRentGames" minWidth="120.0" mnemonicParsing="false" stylesheets="@styles.css" text="Rent Games" />
                   <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" />
                   <Button fx:id="btnRemoveFromCart" minWidth="120.0" mnemonicParsing="false" stylesheets="@styles.css" text="Remove from cart" />
+                  <TableView fx:id="tblCart" prefHeight="2000.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                  </TableView>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Winkelkar hier??" wrappingWidth="120.0" />
                </children>
             </VBox>
