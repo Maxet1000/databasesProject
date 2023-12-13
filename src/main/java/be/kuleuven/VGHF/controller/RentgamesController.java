@@ -1,16 +1,15 @@
 package be.kuleuven.VGHF.controller;
 
 import be.kuleuven.VGHF.ProjectMain;
+import be.kuleuven.VGHF.domain.Console;
 import be.kuleuven.VGHF.domain.Developer;
-import be.kuleuven.VGHF.domain.HibernateManager;
+import be.kuleuven.VGHF.domain.Genre;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTreeCell;
 import javafx.scene.layout.VBox;
 
 import java.util.List;
@@ -21,16 +20,47 @@ public class RentgamesController {
     private TableView tblRent;
     @FXML
     private VBox filtersBox;
+    @FXML
+    private TreeView<String> filtersTreeView;
 
     public void initialize(){
         initTable();
-        List listOfDevelopers = getAllDevelopers();
+        List<Developer> listOfDevelopers = getAllDevelopers();
+        List<Console> listOfConsoles = getAllConsoles();
+        List<Genre> listOfGenres = getAllGenres();
+        TreeItem<String> developersTreeItem = new CheckBoxTreeItem<>("Developers");
+        TreeItem<String> consolesTreeItem = new CheckBoxTreeItem<>("Consoles");
+        TreeItem<String> genresTreeItem = new CheckBoxTreeItem<>("Genres");
+
+        developersTreeItem.setExpanded(true);
+        consolesTreeItem.setExpanded(true);
+        genresTreeItem.setExpanded(true);
+        filtersTreeView.setCellFactory(CheckBoxTreeCell.forTreeView());
+
         for (int i=0; i<listOfDevelopers.size(); i++ ) {
-            CheckBox checkBox = new CheckBox();
-            Developer developer = (Developer) listOfDevelopers.get(i);
-            checkBox.setText(developer.getDeveloperName());
-            filtersBox.getChildren().add(checkBox);
+            Developer developer = listOfDevelopers.get(i);
+            CheckBoxTreeItem<String> checkBoxTreeItem = new CheckBoxTreeItem<>(developer.getDeveloperName());
+            developersTreeItem.getChildren().add(checkBoxTreeItem);
         }
+
+        for (int i=0; i<listOfConsoles.size(); i++ ) {
+            Console console = listOfConsoles.get(i);
+            CheckBoxTreeItem<String> checkBoxTreeItem = new CheckBoxTreeItem<>(console.getConsoleName());
+            consolesTreeItem.getChildren().add(checkBoxTreeItem);
+        }
+
+        for (int i=0; i<listOfGenres.size(); i++ ) {
+            Genre genre = listOfGenres.get(i);
+            CheckBoxTreeItem<String> checkBoxTreeItem = new CheckBoxTreeItem<>(genre.getGenreName());
+            genresTreeItem.getChildren().add(checkBoxTreeItem);
+        }
+
+        TreeItem<String> tree = new TreeItem<>();
+        tree.getChildren().add(consolesTreeItem);
+        tree.getChildren().add(developersTreeItem);
+        tree.getChildren().add(genresTreeItem);
+        filtersTreeView.setRoot(tree);
+        filtersTreeView.setShowRoot(false);
     }
 
     public void initTable(){
@@ -39,31 +69,7 @@ public class RentgamesController {
 
         
         var listOfCopies = ProjectMain.getDatabase().getAllCopies();
-        
-        /*
-        int colIndex = 0;
-        //var colName = new String[]{"Game", "Developer", "Console"};
-        for (var colName : new String[]{"Game", "Developer", "Console"}){
-            TableColumn<ObservableList<String>, String> col = new TableColumn<>(colName);
-            final int finalColIndex = colIndex;
-            col.setCellValueFactory(f -> new ReadOnlyObjectWrapper<>(f.getValue().get(finalColIndex)));
-            tblRent.getColumns().add(col);
-            colIndex++;
-        }
 
-        for(int i = 0; i < 10; i++) {
-
-            tblRent.getItems().add(FXCollections.observableArrayList("Budget PCke " + i, "Budget type 1", i*10 + "", i * 33 + ""));
-        }
-        
-        for (int i = 0; i < ListOfCopies.size(); i++){
-            var game = ListOfCopies.get(i).getGame();
-
-        }*/
-        
-
-
-        
         int colIndex = 0;
         for(var colName : new String[]{"Game", "Developer", "Console", "Genre"}) {
             TableColumn<ObservableList<String>, String> col = new TableColumn<>(colName);
@@ -103,7 +109,15 @@ public class RentgamesController {
         
     }
 
-    public List getAllDevelopers() {
+    public List<Developer> getAllDevelopers() {
         return ProjectMain.getDatabase().getAllDevelopers();
+    }
+
+    private List<Console> getAllConsoles() {
+        return ProjectMain.getDatabase().getAllConsoles();
+    }
+
+    private List<Genre> getAllGenres() {
+        return ProjectMain.getDatabase().getAllGenres();
     }
 }
