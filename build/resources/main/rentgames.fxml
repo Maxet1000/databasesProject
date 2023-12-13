@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
 
 <VBox prefHeight="2000.0" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.VGHF.controller.RentgamesController">
    <children>
@@ -25,7 +24,7 @@
                      </VBox.margin>
                   </Button>
                   <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" />
-                  <Button fx:id="btnRemoveFilter" minWidth="120.0" mnemonicParsing="false" prefWidth="500.0" stylesheets="@styles.css" text="Remove Filter">
+                  <Button fx:id="btnRemoveFilters" minWidth="120.0" mnemonicParsing="false" prefWidth="500.0" stylesheets="@styles.css" text="Remove Filters">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
@@ -60,7 +59,6 @@
                       <TableColumn prefWidth="75.0" text="C2" />
                     </columns>
                   </TableView>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Winkelkar hier??" wrappingWidth="120.0" />
                </children>
             </VBox>
             <AnchorPane minWidth="5.0" prefHeight="200.0" HBox.hgrow="ALWAYS" />

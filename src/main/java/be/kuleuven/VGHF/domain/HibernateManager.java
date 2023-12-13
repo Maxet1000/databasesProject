@@ -188,7 +188,9 @@ public class HibernateManager {
     
     public void updateCopy(Copy copy) {
         try {
+            entityManager.getTransaction().begin();
             entityManager.merge(copy);
+            entityManager.getTransaction().commit();
         } catch (Exception exception) {
             exception.printStackTrace();
         }
