@@ -261,6 +261,17 @@ public class HibernateManager {
         }
     }
 
-    //public Lis
+    public Copy getCopyById(int copyID) {
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(Copy.class);
+            var root = query.from(Copy.class);
+            query.where(criteriaBuilder.equal(root.get("copyID"), copyID));
+            return entityManager.createQuery(query).getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }
