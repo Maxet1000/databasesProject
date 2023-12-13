@@ -3,12 +3,14 @@ package be.kuleuven.VGHF.controller;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.internal.util.MarkerObject;
 
 import be.kuleuven.VGHF.ProjectMain;
 import be.kuleuven.VGHF.domain.Console;
+import be.kuleuven.VGHF.domain.Copy;
 import be.kuleuven.VGHF.domain.Developer;
 import be.kuleuven.VGHF.domain.Genre;
 import be.kuleuven.VGHF.enums.Availability;
@@ -22,13 +24,14 @@ import javafx.scene.control.cell.CheckBoxTreeCell;
 import javafx.scene.layout.VBox;
 import java.util.List;
 
-
-public class RentgamesController {
+public class RentgamesController extends Controller{
     
     @FXML
     private TableView tblRent;
     @FXML
     private Button btnAddGameToCart;
+    @FXML
+    private Button btnAddFilter;
     @FXML
     public VBox pane1;
     @FXML
@@ -38,50 +41,30 @@ public class RentgamesController {
     @FXML
     private TableView tblCart;
 
+    private ArrayList<Developer> toBeFilteredDevelopers;
+    private ArrayList<Console> toBeFilteredConsoles;
+    private ArrayList<Genre> toBeFilteredGenres;
+
+    public RentgamesController() {
+        toBeFilteredDevelopers = new ArrayList<>();
+        toBeFilteredConsoles = new ArrayList<>();
+        toBeFilteredGenres = new ArrayList<>();
+    }
+
     public void initialize(){
-        initTable();
+        var listOfCopies = ProjectMain.getDatabase().getAllCopies();
+        initTable(listOfCopies);
         initTableCart();
-        List<Developer> listOfDevelopers = getAllDevelopers();
-        List<Console> listOfConsoles = getAllConsoles();
-        List<Genre> listOfGenres = getAllGenres();
-        TreeItem<String> developersTreeItem = new CheckBoxTreeItem<>("Developers");
-        TreeItem<String> consolesTreeItem = new CheckBoxTreeItem<>("Consoles");
-        TreeItem<String> genresTreeItem = new CheckBoxTreeItem<>("Genres");
-
-        developersTreeItem.setExpanded(true);
-        consolesTreeItem.setExpanded(true);
-        genresTreeItem.setExpanded(true);
-        filtersTreeView.setCellFactory(CheckBoxTreeCell.forTreeView());
-
-        for (int i=0; i<listOfDevelopers.size(); i++ ) {
-            Developer developer = listOfDevelopers.get(i);
-            CheckBoxTreeItem<String> checkBoxTreeItem = new CheckBoxTreeItem<>(developer.getDeveloperName());
-            developersTreeItem.getChildren().add(checkBoxTreeItem);
-        }
-
-        for (int i=0; i<listOfConsoles.size(); i++ ) {
-            Console console = listOfConsoles.get(i);
-            CheckBoxTreeItem<String> checkBoxTreeItem = new CheckBoxTreeItem<>(console.getConsoleName());
-            consolesTreeItem.getChildren().add(checkBoxTreeItem);
-        }
-
-        for (int i=0; i<listOfGenres.size(); i++ ) {
-            Genre genre = listOfGenres.get(i);
-            CheckBoxTreeItem<String> checkBoxTreeItem = new CheckBoxTreeItem<>(genre.getGenreName());
-            genresTreeItem.getChildren().add(checkBoxTreeItem);
-        }
-
-        TreeItem<String> tree = new TreeItem<>();
-        tree.getChildren().add(consolesTreeItem);
-        tree.getChildren().add(developersTreeItem);
-        tree.getChildren().add(genresTreeItem);
-        filtersTreeView.setRoot(tree);
-        filtersTreeView.setShowRoot(false);
+        initFilters();
         btnAddGameToCart.setOnAction(e -> {
                 AddGameToCart();
         });
+        btnAddFilter.setOnAction((e -> {
+                ActivateFilters();
+        }));
     }
-    
+
+
     public void AddGameToCart(){
         
         List selectedItem =  (List) tblRent.getSelectionModel().getSelectedItem();
@@ -123,9 +106,9 @@ public class RentgamesController {
                 for (List item : items) {
                     if (item.get(item.size()-1).equals(copyId)) {
                         Alert alert = new Alert(Alert.AlertType.WARNING);
-                        alert.setTitle("Warning Dialog");
+                        alert.setTitle("Warning");
                         alert.setHeaderText(null);
-                        alert.setContentText("The value already exists in the TableView.");
+                        alert.setContentText("This copy is already in your cart");
                         alert.showAndWait();
                         doubleCopy = true; 
                     }
@@ -137,6 +120,13 @@ public class RentgamesController {
         }
     }
 
+    private void ActivateFilters() { // HIER MOET JE ZIJN MAX!!!!!!!!!!
+        var listOfFilteredCopies = ProjectMain.getDatabase().getAllCopies();
+        listOfFilteredCopies = filter(listOfFilteredCopies, toBeFilteredDevelopers);
+        listOfFilteredCopies = filter(listOfFilteredCopies, toBeFilteredConsoles);
+        listOfFilteredCopies = filter(listOfFilteredCopies, toBeFilteredGenres);
+        initTable(listOfFilteredCopies);
+    }
     public void initTableCart(){
         tblCart.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         tblCart.getColumns().clear();
@@ -154,11 +144,10 @@ public class RentgamesController {
         }
     }
 
-    public void initTable(){
+    public void initTable(List<Copy> listOfCopies){
         tblRent.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         tblRent.getColumns().clear();
 
-        var listOfCopies = ProjectMain.getDatabase().getAllCopies();
         int colIndex = 0;
         for(var colName : new String[]{"Game", "Developer", "Console", "Genre", "Id"}) {
             TableColumn<ObservableList<String>, String> col = new TableColumn<>(colName);
@@ -203,6 +192,70 @@ public class RentgamesController {
             }
         }
         
+    }
+
+    public void initFilters() {
+        List<Developer> listOfDevelopers = getAllDevelopers();
+        List<Console> listOfConsoles = getAllConsoles();
+        List<Genre> listOfGenres = getAllGenres();
+        TreeItem<String> developersTreeItem = new CheckBoxTreeItem<>("Developers");
+        TreeItem<String> consolesTreeItem = new CheckBoxTreeItem<>("Consoles");
+        TreeItem<String> genresTreeItem = new CheckBoxTreeItem<>("Genres");
+
+        developersTreeItem.setExpanded(true);
+        consolesTreeItem.setExpanded(true);
+        genresTreeItem.setExpanded(true);
+        filtersTreeView.setCellFactory(CheckBoxTreeCell.forTreeView());
+
+        for (int i=0; i<listOfDevelopers.size(); i++ ) {
+            Developer developer = listOfDevelopers.get(i);
+            CheckBoxTreeItem<String> checkBoxTreeItem = new CheckBoxTreeItem<>(developer.getDeveloperName());
+            developersTreeItem.getChildren().add(checkBoxTreeItem);
+            checkBoxTreeItem.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                System.out.println(checkBoxTreeItem.getValue() + " selection state: " + newVal);
+                if (newVal) {
+                    toBeFilteredDevelopers.add(developer);
+                } else {
+                    toBeFilteredDevelopers.remove(developer);
+                }
+            });
+        }
+
+        for (int i=0; i<listOfConsoles.size(); i++ ) {
+            Console console = listOfConsoles.get(i);
+            CheckBoxTreeItem<String> checkBoxTreeItem = new CheckBoxTreeItem<>(console.getConsoleName());
+            consolesTreeItem.getChildren().add(checkBoxTreeItem);
+            checkBoxTreeItem.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                System.out.println(checkBoxTreeItem.getValue() + " selection state: " + newVal);
+                if (newVal) {
+                    toBeFilteredConsoles.add(console);
+                } else {
+                    toBeFilteredConsoles.remove(console);
+                }
+            });
+        }
+
+        for (int i=0; i<listOfGenres.size(); i++ ) {
+            Genre genre = listOfGenres.get(i);
+            CheckBoxTreeItem<String> checkBoxTreeItem = new CheckBoxTreeItem<>(genre.getGenreName());
+            genresTreeItem.getChildren().add(checkBoxTreeItem);
+            checkBoxTreeItem.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                System.out.println(checkBoxTreeItem.getValue() + " selection state: " + newVal);
+                if (newVal) {
+                    toBeFilteredGenres.add(genre);
+                } else {
+                    toBeFilteredGenres.remove(genre);
+                }
+            });
+        }
+
+        TreeItem<String> tree = new TreeItem<>();
+        tree.getChildren().add(developersTreeItem);
+        tree.getChildren().add(consolesTreeItem);
+        tree.getChildren().add(genresTreeItem);
+        filtersTreeView.setRoot(tree);
+        filtersTreeView.setShowRoot(false);
+
     }
 
     public List<Developer> getAllDevelopers() {
