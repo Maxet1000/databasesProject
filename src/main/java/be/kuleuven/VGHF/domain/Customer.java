@@ -30,22 +30,14 @@ public class Customer {
 
     public Customer(){}
 
-    public Customer(int customerID, String customerName, String email, int balance) {
-        this.customerID = customerID;
+    public Customer(String customerName, String email, int balance) {
         this.customerName = customerName;
         this.email = email;
         this.balance = balance;
-        copies = new ArrayList<>();
-        transactions = new ArrayList<>();
     }
-    
 
     public int getCustomerID() {
         return this.customerID;
-    }
-
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
     }
 
     public String getCustomerName() {

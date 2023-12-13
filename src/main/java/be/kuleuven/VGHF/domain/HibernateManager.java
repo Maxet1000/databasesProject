@@ -1,8 +1,14 @@
 package be.kuleuven.VGHF.domain;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import javafx.print.Collation;
 
 public class HibernateManager {
     
@@ -85,43 +91,43 @@ public class HibernateManager {
     public void saveNewConsole(Console console) {
         entityManager.getTransaction().begin();
         entityManager.persist(console);
-        entityManager.getTransaction().begin();
+        entityManager.getTransaction().commit();
     }
 
     public void saveNewCopy(Copy copy) {
         entityManager.getTransaction().begin();
         entityManager.persist(copy);
-        entityManager.getTransaction().begin();
+        entityManager.getTransaction().commit();
     }
 
     public void saveNewCustomer(Customer customer) {
         entityManager.getTransaction().begin();
         entityManager.persist(customer);
-        entityManager.getTransaction().begin();
+        entityManager.getTransaction().commit();
     }
 
     public void saveNewDeveloper(Developer developer) {
         entityManager.getTransaction().begin();
         entityManager.persist(developer);
-        entityManager.getTransaction().begin();
+        entityManager.getTransaction().commit();
     }
 
     public void saveNewGame(Game game) {
         entityManager.getTransaction().begin();
         entityManager.persist(game);
-        entityManager.getTransaction().begin();
+        entityManager.getTransaction().commit();
     }
 
     public void saveNewGenre(Genre genre) {
         entityManager.getTransaction().begin();
         entityManager.persist(genre);
-        entityManager.getTransaction().begin();
+        entityManager.getTransaction().commit();
     }
 
     public void saveNewMonetaryTransaction(MonetaryTransaction monetaryTransaction) {
         entityManager.getTransaction().begin();
         entityManager.persist(monetaryTransaction);
-        entityManager.getTransaction().begin();
+        entityManager.getTransaction().commit();
     }
     
     public void updateConsole(Console console) {
@@ -153,23 +159,32 @@ public class HibernateManager {
     }
 
     public List<Game> getGamesByTitle(String title) {
-        var criteriaBuilder = entityManager.getCriteriaBuilder();
-        var query = criteriaBuilder.createQuery(Game.class);
-        var root = query.from(Game.class);
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(Game.class);
+            var root = query.from(Game.class);
 
-        query.where(criteriaBuilder.equal(root.get("title"), title));
-        return entityManager.createQuery(query).getResultList();
+            query.where(criteriaBuilder.equal(root.get("title"), title));
+            return entityManager.createQuery(query).getResultList();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return Collections.emptyList();
+        }
     }  
 
     public List<MonetaryTransaction> getMonetaryTransactionsByCustomerID(int customerID) {
-        var criteriaBuilder = entityManager.getCriteriaBuilder();
-        var query = criteriaBuilder.createQuery(MonetaryTransaction.class);
-        var root = query.from(MonetaryTransaction.class);
-
-        query.where(criteriaBuilder.equal(root.get("customerID"), customerID));
-        return entityManager.createQuery(query).getResultList();
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(MonetaryTransaction.class);
+            var root = query.from(MonetaryTransaction.class);
+            query.where(criteriaBuilder.equal(root.get("customer"), customerID));
+            return entityManager.createQuery(query).getResultList();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
-    
+
 
 }

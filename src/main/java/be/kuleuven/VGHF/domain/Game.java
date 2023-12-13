@@ -18,7 +18,7 @@ public class Game {
     private String publisher;
 
     @Column(nullable = false)
-    private String releaseDeate;
+    private String releaseDate;
 
     @ManyToMany
     @JoinTable(
@@ -44,14 +44,20 @@ public class Game {
     )
     private List<Genre> genres;
 
+    public Game() {}
+
+    public Game(String title, String publisher, String releaseDate, List<Console> consoles, List<Developer> developers, List<Genre> genres) {
+        this.title = title;
+        this.publisher = publisher;
+        this.releaseDate = releaseDate;
+        this.consoles = consoles;
+        this.developers = developers;
+        this.genres = genres;
+    }
 
 
     public int getGameID() {
         return this.gameID;
-    }
-
-    public void setGameID(int gameID) {
-        this.gameID = gameID;
     }
 
     public String getTitle() {
@@ -70,12 +76,12 @@ public class Game {
         this.publisher = publisher;
     }
 
-    public String getReleaseDeate() {
-        return this.releaseDeate;
+    public String getReleaseDate() {
+        return this.releaseDate;
     }
 
-    public void setReleaseDeate(String releaseDeate) {
-        this.releaseDeate = releaseDeate;
+    public void setReleaseDate(String releaseDeate) {
+        this.releaseDate = releaseDeate;
     }
 
     public List<Console> getConsoles() {

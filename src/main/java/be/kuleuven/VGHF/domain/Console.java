@@ -14,9 +14,13 @@ public class Console {
     @Column(nullable = false)
     private String consoleName;
 
-    // Kan ook direct zelf-referentieel via hibernate, nu moet er een functie voor bijgemaakt worden
-    @Column
-    private int compatibleConsolID;
+    @ManyToMany
+    @JoinTable(
+        name = "compatibleConsoles",
+        joinColumns = @JoinColumn(name = "consoleID"),
+        inverseJoinColumns = @JoinColumn(name = "compatibleConsoleID")
+    )
+    private List<Console> compatibleConsoles;
 
     public Console() {}
 
@@ -24,17 +28,17 @@ public class Console {
         this.consoleName = consoleName;
     }
     
-    public Console(String consoleName, int compatibleConsolID) {
+    public Console(String consoleName, List<Console> compatibleConsoles) {
         this.consoleName = consoleName;
-        this.compatibleConsolID = compatibleConsolID;
+        this.compatibleConsoles = compatibleConsoles;
     }
 
     public String getConsoleName() {
         return this.consoleName;
     }
 
-    public int getCompatibleConsolID() {
-        return this.compatibleConsolID;
+    public List<Console> getCompatibleConsoles() {
+        return this.compatibleConsoles;
     }
 
 }

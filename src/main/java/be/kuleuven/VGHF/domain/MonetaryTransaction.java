@@ -2,6 +2,7 @@ package be.kuleuven.VGHF.domain;
 
 import javax.persistence.*;
 import java.util.*;
+import be.kuleuven.VGHF.enums.*;
 
 @Entity
 public class MonetaryTransaction {
@@ -15,7 +16,11 @@ public class MonetaryTransaction {
     private int revenue;
 
     @Column(nullable = false)
-    private String monetaryTransactionType;
+    private String time;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TransactionType monetaryTransactionType;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customerID")
@@ -25,14 +30,21 @@ public class MonetaryTransaction {
     @JoinColumn(name = "copyID")
     private Copy copy;
 
-    //getters and setters
+    public MonetaryTransaction(TransactionType monetaryTransactionType, int revenue, Customer customer, Copy copy, String time) {
+        this.monetaryTransactionType = monetaryTransactionType;
+        this.revenue = revenue;
+        this.customer = customer;
+        this.copy = copy;
+        this.time = time;
+    }
+
+    // public enum TransactionType {
+    //     SALE,
+    //     RENTAL
+    // }
 
     public int getMonetaryTransactionID() {
         return this.monetaryTransactionID;
-    }
-
-    public void setMonetaryTransactionID(int monetaryTransactionID) {
-        this.monetaryTransactionID = monetaryTransactionID;
     }
 
     public int getRevenue() {
@@ -43,11 +55,11 @@ public class MonetaryTransaction {
         this.revenue = revenue;
     }
 
-    public String getMonetaryTransactionType() {
+    public TransactionType getMonetaryTransactionType() {
         return this.monetaryTransactionType;
     }
 
-    public void setMonetaryTransactionType(String monetaryTransactionType) {
+    public void setMonetaryTransactionType(TransactionType monetaryTransactionType) {
         this.monetaryTransactionType = monetaryTransactionType;
     }
 
