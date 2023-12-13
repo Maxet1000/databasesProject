@@ -2,6 +2,7 @@ package be.kuleuven.VGHF.controller;
 
 import be.kuleuven.VGHF.ProjectMain;
 import be.kuleuven.VGHF.domain.HibernateManager;
+import be.kuleuven.VGHF.enums.Availability;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -61,13 +62,15 @@ public class RentgamesController {
 
 
         for(int i = 0; i < listOfCopies.size(); i++) {
-                var gameCopyName = listOfCopies.get(i).getGame().getTitle();
-                /* 
-                var gameDeveloperName = listOfCopies.get(i).getGame().getDevelopers().get(1).getDeveloperName();
-                var gameConsoleName = listOfCopies.get(i).getGame().getConsoles();
-                var gameGenreName = listOfCopies.get(i).getGame().getGenres();
-                */
-                tblRent.getItems().add(FXCollections.observableArrayList(gameCopyName, "gameDeveloperName", "gameConsoleName", "gameGenreName"));
+                if(listOfCopies.get(i).getAvailability() == Availability.AVAILABLE){
+                    var gameCopyName = listOfCopies.get(i).getGame().getTitle();
+                    /* 
+                    var gameDeveloperName = listOfCopies.get(i).getGame().getDevelopers().get(1).getDeveloperName();
+                    var gameConsoleName = listOfCopies.get(i).getGame().getConsoles();
+                     var gameGenreName = listOfCopies.get(i).getGame().getGenres();
+                    */
+                    tblRent.getItems().add(FXCollections.observableArrayList(gameCopyName, "gameDeveloperName", "gameConsoleName", "gameGenreName"));
+                }
         }
         
     }
