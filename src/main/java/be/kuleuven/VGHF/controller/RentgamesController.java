@@ -6,6 +6,9 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import be.kuleuven.VGHF.ProjectMain;
+import be.kuleuven.VGHF.domain.Copy;
+import be.kuleuven.VGHF.domain.Developer;
+import be.kuleuven.VGHF.domain.Game;
 import be.kuleuven.VGHF.domain.HibernateManager;
 import be.kuleuven.VGHF.enums.Availability;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -31,14 +34,17 @@ public class RentgamesController {
     public VBox pane1;
     @FXML
     private VBox filtersBox;
+    @FXML
+    private TableView tblCart;
 
     public void initialize(){
         initTable();
-
+        initTableCart();
         List listOfDevelopers = getAllDevelopers();
         for (int i=0; i<listOfDevelopers.size(); i++ ) {
             CheckBox checkBox = new CheckBox();
-            checkBox.setText(listOfDevelopers.get(i).toString());
+            Developer developer = (Developer) listOfDevelopers.get(i);
+            checkBox.setText(developer.getDeveloperName());
             filtersBox.getChildren().add(checkBox);
         }
 
@@ -48,7 +54,29 @@ public class RentgamesController {
     }
     
     public void AddGameToCart(){
-        var x = tblRent.getSelectionModel().getSelectedItem();
+        
+        var selectedItem =  tblRent.getSelectionModel().getSelectedItem();
+
+        System.out.println(selectedItem);
+        /* 
+        for (int i = 0; i < 1; i++){
+            
+        }*/
+
+    }
+
+    public void initTableCart(){
+        tblCart.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        tblCart.getColumns().clear();
+
+        int colIndex = 0;
+        for(var colName : new String[]{"Game", "Developer", "Console", "Genre"}) {
+            TableColumn<ObservableList<String>, String> col = new TableColumn<>(colName);
+            final int finalColIndex = colIndex;
+            col.setCellValueFactory(f -> new ReadOnlyObjectWrapper<>(f.getValue().get(finalColIndex)));
+            tblCart.getColumns().add(col);
+            colIndex++;
+        }
     }
 
     public void initTable(){
@@ -58,11 +86,14 @@ public class RentgamesController {
         var listOfCopies = ProjectMain.getDatabase().getAllCopies();
         
         int colIndex = 0;
-        for(var colName : new String[]{"Game", "Developer", "Console", "Genre"}) {
+        for(var colName : new String[]{"Game", "Developer", "Console", "Genre", "Id"}) {
             TableColumn<ObservableList<String>, String> col = new TableColumn<>(colName);
             final int finalColIndex = colIndex;
             col.setCellValueFactory(f -> new ReadOnlyObjectWrapper<>(f.getValue().get(finalColIndex)));
             tblRent.getColumns().add(col);
+            if(colName == "Id"){
+                col.setVisible(false);
+            }
             colIndex++;
         }
 
@@ -70,6 +101,7 @@ public class RentgamesController {
         for(int i = 0; i < listOfCopies.size(); i++) {
             if(listOfCopies.get(i).getAvailability() == Availability.AVAILABLE){
                 var gameCopyName = listOfCopies.get(i).getGame().getTitle();
+                var copyId = listOfCopies.get(i).getCopyID() + "";
 
                 String developers = "";
                 for (int j = 0; j < listOfCopies.get(i).getGame().getDevelopers().size(); j++) {
@@ -92,19 +124,13 @@ public class RentgamesController {
                         genres = genres + ", ";
                     }
                 }
-                tblRent.getItems().add(FXCollections.observableArrayList(gameCopyName, developers, consoles, genres));
+                tblRent.getItems().add(FXCollections.observableArrayList(gameCopyName, developers, consoles, genres, copyId));
             }
         }
         
     }
 
     public List getAllDevelopers() {
-
-        tblRent.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        tblRent.getColumns().clear();
-
-
-        var listOfDevelopers = ProjectMain.getDatabase().getAllDevelopers();
-        return listOfDevelopers;
+        return ProjectMain.getDatabase().getAllDevelopers();
     }
 }
