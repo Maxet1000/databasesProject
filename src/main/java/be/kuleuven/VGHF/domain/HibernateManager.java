@@ -1,11 +1,14 @@
 package be.kuleuven.VGHF.domain;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import javafx.print.Collation;
 
 public class HibernateManager {
     
@@ -156,23 +159,32 @@ public class HibernateManager {
     }
 
     public List<Game> getGamesByTitle(String title) {
-        var criteriaBuilder = entityManager.getCriteriaBuilder();
-        var query = criteriaBuilder.createQuery(Game.class);
-        var root = query.from(Game.class);
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(Game.class);
+            var root = query.from(Game.class);
 
-        query.where(criteriaBuilder.equal(root.get("title"), title));
-        return entityManager.createQuery(query).getResultList();
+            query.where(criteriaBuilder.equal(root.get("title"), title));
+            return entityManager.createQuery(query).getResultList();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return Collections.emptyList();
+        }
     }  
 
     public List<MonetaryTransaction> getMonetaryTransactionsByCustomerID(int customerID) {
-        var criteriaBuilder = entityManager.getCriteriaBuilder();
-        var query = criteriaBuilder.createQuery(MonetaryTransaction.class);
-        var root = query.from(MonetaryTransaction.class);
-
-        query.where(criteriaBuilder.equal(root.get("customerID"), customerID));
-        return entityManager.createQuery(query).getResultList();
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(MonetaryTransaction.class);
+            var root = query.from(MonetaryTransaction.class);
+            query.where(criteriaBuilder.equal(root.get("customer"), customerID));
+            return entityManager.createQuery(query).getResultList();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
-    
+
 
 }
