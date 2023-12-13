@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.internal.util.MarkerObject;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import be.kuleuven.VGHF.ProjectMain;
 import be.kuleuven.VGHF.domain.Console;
 import be.kuleuven.VGHF.domain.Copy;
@@ -22,6 +23,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTreeCell;
 import javafx.scene.layout.VBox;
+import net.bytebuddy.asm.Advice.AllArguments;
+
 import java.util.List;
 
 public class RentgamesController extends Controller{
@@ -40,6 +43,10 @@ public class RentgamesController extends Controller{
     private TreeView<String> filtersTreeView;
     @FXML
     private TableView tblCart;
+    @FXML
+    private Button btnRemoveFromCart;
+    @FXML
+    private Button btnRentGames;
 
     private ArrayList<Developer> toBeFilteredDevelopers;
     private ArrayList<Console> toBeFilteredConsoles;
@@ -62,8 +69,50 @@ public class RentgamesController extends Controller{
         btnAddFilter.setOnAction((e -> {
                 ActivateFilters();
         }));
+        btnRemoveFromCart.setOnAction(e -> {
+                RemoveGameFromCart();
+        });
+        btnRentGames.setOnAction(e -> {
+                RentGamesFromCart();
+        });
     }
 
+
+    //TODO voor RentGamesFromCart
+        //database laten updaten
+        //customerID toevoegen
+        //checken voor balance
+    public void RentGamesFromCart(){
+        var datalist = tblCart.getItems();
+        System.err.println(datalist);
+        int i = 0;
+        while (i != datalist.size()){
+            List data = (List) datalist.get(i);
+            System.err.println(data);
+            int copyId = (int) data.get(data.size()-1);
+            var copy = ProjectMain.getDatabase().getCopyById(copyId);
+            copy.setAvailability(Availability.RENTED);
+            copy.setDateOfReturn(TwoWeeksLonger());
+            ProjectMain.getDatabase().updateCopy(copy);
+            i++;
+        }
+        datalist.clear();
+        /*var listOfCopies = ProjectMain.getDatabase().getAllCopies();
+        initTable(listOfCopies);*/
+    }
+
+    public String TwoWeeksLonger(){
+        LocalDate currentDate = LocalDate.now();
+        LocalDate futureDate = currentDate.plusWeeks(2);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return futureDate.format(formatter);
+    }
+
+    public void RemoveGameFromCart(){
+        var selectedItem = tblCart.getSelectionModel().getSelectedItem();
+        var data = tblCart.getItems();
+        data.remove(selectedItem);
+    }
 
     public void AddGameToCart(){
         
