@@ -6,21 +6,23 @@ import java.util.*;
 @Entity
 public class Console {
 
-    @Column(nullable = false)
     @Id
-    @GeneratedValue
-    private int consoleID;
-
     @Column(nullable = false)
     private String consoleName;
 
     @ManyToMany
     @JoinTable(
         name = "compatibleConsoles",
-        joinColumns = @JoinColumn(name = "consoleID"),
-        inverseJoinColumns = @JoinColumn(name = "compatibleConsoleID")
+        joinColumns = @JoinColumn(name = "consoleName"),
+        inverseJoinColumns = @JoinColumn(name = "compatibleConsoleName")
     )
     private List<Console> compatibleConsoles;
+
+    @ManyToMany(mappedBy = "consoles")
+    private List<Game> games;  
+
+    @OneToMany(mappedBy = "console")
+    private List<Copy> copies;
 
     public Console() {}
 

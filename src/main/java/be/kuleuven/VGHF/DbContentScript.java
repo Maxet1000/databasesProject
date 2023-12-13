@@ -60,6 +60,7 @@ public class DbContentScript {
         Developer naughtyDog = new Developer("Naughty Dog");
         Developer bioware = new Developer("Bioware");
         Developer idSoftware = new Developer("id Software");
+        Developer gameFreak = new Developer("GameFreak");
 
         database.saveNewDeveloper(nintendo);
         database.saveNewDeveloper(sonyInteractiveEntertainment);
@@ -77,6 +78,7 @@ public class DbContentScript {
         database.saveNewDeveloper(naughtyDog);
         database.saveNewDeveloper(bioware);
         database.saveNewDeveloper(idSoftware);
+        database.saveNewDeveloper(gameFreak);
 
         Console playstation5 = new Console("PlayStation 5");
         Console playstation4 = new Console("PlayStation 4", Arrays.asList(playstation5));
@@ -90,6 +92,7 @@ public class DbContentScript {
         Console wii = new Console("Wii");
         Console nintendoSwitch = new Console("Nintendo Switch");
         Console nintendo3DS = new Console("Nintendo 3DS");
+        Console nintenoDS = new Console("Nintendo DS");
         Console atari2600 = new Console("Atari 2600");
         Console pc = new Console("PC");
         Console nes = new Console("Nintendo Entertainment System (NES)");
@@ -106,6 +109,7 @@ public class DbContentScript {
         database.saveNewConsole(wii);
         database.saveNewConsole(nintendoSwitch);
         database.saveNewConsole(nintendo3DS);
+        database.saveNewConsole(nintenoDS);
         database.saveNewConsole(atari2600);
         database.saveNewConsole(pc);
         database.saveNewConsole(nes);
@@ -114,11 +118,13 @@ public class DbContentScript {
         Game theWitcher3 = new Game("The Witcher 3: Wild Hunt", "CD Projekt", "2015-05-19", Arrays.asList(playstation4, xboxOne, pc), Arrays.asList(cdProjekt), Arrays.asList(rpg));
         Game superMarioBros = new Game("Super Mario Bros.", "Nintendo", "1985-09-13", Arrays.asList(nes), Arrays.asList(nintendo), Arrays.asList(platformer));
         Game minecraft = new Game("Minecraft", "Mojang", "2011-11-18", Arrays.asList(pc, xboxOne, playstation4, nintendoSwitch), Arrays.asList(microsoftStudios), Arrays.asList(sandbox, survival));
+        Game pokemonPlatinum = new Game("Pokémon Platinum", "Nintendo", "2008-09-13", Arrays.asList(nintenoDS, nintendo3DS), Arrays.asList(nintendo, gameFreak), Arrays.asList(rpg));
     
         database.saveNewGame(doom);
         database.saveNewGame(theWitcher3);
         database.saveNewGame(superMarioBros);
         database.saveNewGame(minecraft);
+        database.saveNewGame(pokemonPlatinum);
     
         Customer dries = new Customer("Dries Ruttens", "dries.ruttens@student.uhasselt.be", 10);
         Customer bjorn = new Customer("Bjorn Spauwen", "bjorn.spauwen@student.uhasselt.be", 20);
@@ -169,12 +175,18 @@ public class DbContentScript {
                                      .availability(Availability.AVAILABLE)
                                      .warehouse("Diepenbeek")
                                      .build();
+        Copy pokemonPatinumCopy1 = builder.game(pokemonPlatinum)
+                                          .console(nintenoDS)
+                                          .availability(Availability.AVAILABLE)
+                                          .warehouse("Genk")
+                                          .build();
 
         database.saveNewCopy(doomCopy1);
         database.saveNewCopy(witcherCopy1);
         database.saveNewCopy(marioCopy1);
         database.saveNewCopy(minecraftCopy1);
         database.saveNewCopy(minecraftCopy2);
+        database.saveNewCopy(pokemonPatinumCopy1);
 
         MonetaryTransaction transaction1 = new MonetaryTransaction(TransactionType.SALE, 60, jan, witcherCopy1, "2022-05-12");
         MonetaryTransaction transaction2 = new MonetaryTransaction(TransactionType.RENTAL, 9, bjorn, minecraftCopy2, "2023-12-12");
