@@ -24,7 +24,7 @@ public class RentgamesController {
         tblRent.getColumns().clear();
 
         
-        var ListOfCopies = ProjectMain.getDatabase().getAllCopies();
+        var listOfCopies = ProjectMain.getDatabase().getAllCopies();
         
         /*
         int colIndex = 0;
@@ -60,9 +60,14 @@ public class RentgamesController {
         }
 
 
-        for(int i = 0; i < ListOfCopies.size(); i++) {
-
-            tblRent.getItems().add(FXCollections.observableArrayList(ListOfCopies.get(i).getGame().getTitle().toString()));
+        for(int i = 0; i < listOfCopies.size(); i++) {
+                var gameCopyName = listOfCopies.get(i).getGame().getTitle();
+                /* 
+                var gameDeveloperName = listOfCopies.get(i).getGame().getDevelopers().get(1).getDeveloperName();
+                var gameConsoleName = listOfCopies.get(i).getGame().getConsoles();
+                var gameGenreName = listOfCopies.get(i).getGame().getGenres();
+                */
+                tblRent.getItems().add(FXCollections.observableArrayList(gameCopyName, "gameDeveloperName", "gameConsoleName", "gameGenreName"));
         }
         
     }
