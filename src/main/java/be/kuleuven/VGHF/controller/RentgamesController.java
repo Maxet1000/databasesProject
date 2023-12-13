@@ -102,6 +102,7 @@ public class RentgamesController extends Controller{
 
         var listOfCopies = ProjectMain.getDatabase().getAllCopies();
         initTable(listOfCopies);
+        activateFilters();
     }
 
     public String TwoWeeksLonger(){
