@@ -62,9 +62,13 @@ public class RentgamesController {
         System.out.println(listOfCopies);
 
         for(int i = 0; i < listOfCopies.size(); i++) {
-
-            tblRent.getItems().add(FXCollections.observableArrayList(listOfCopies.get(i).getGame().getTitle().toString(), "iets","iets","iest"));
-            
+                var gameCopyName = listOfCopies.get(i).getGame().getTitle();
+                /* 
+                var gameDeveloperName = listOfCopies.get(i).getGame().getDevelopers().get(1).getDeveloperName();
+                var gameConsoleName = listOfCopies.get(i).getGame().getConsoles();
+                var gameGenreName = listOfCopies.get(i).getGame().getGenres();
+                */
+                tblRent.getItems().add(FXCollections.observableArrayList(gameCopyName, "gameDeveloperName", "gameConsoleName", "gameGenreName"));
         }
         
     }

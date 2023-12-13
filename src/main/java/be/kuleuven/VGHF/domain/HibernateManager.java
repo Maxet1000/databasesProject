@@ -87,48 +87,97 @@ public class HibernateManager {
     
         return entityManager.createQuery(query).getResultList();
     }    
-
     public void saveNewConsole(Console console) {
-        entityManager.getTransaction().begin();
-        entityManager.persist(console);
-        entityManager.getTransaction().commit();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(console);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
     }
-
+    
     public void saveNewCopy(Copy copy) {
-        entityManager.getTransaction().begin();
-        entityManager.persist(copy);
-        entityManager.getTransaction().commit();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(copy);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
     }
-
+    
     public void saveNewCustomer(Customer customer) {
-        entityManager.getTransaction().begin();
-        entityManager.persist(customer);
-        entityManager.getTransaction().commit();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(customer);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
     }
-
+    
     public void saveNewDeveloper(Developer developer) {
-        entityManager.getTransaction().begin();
-        entityManager.persist(developer);
-        entityManager.getTransaction().commit();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(developer);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
     }
-
+    
     public void saveNewGame(Game game) {
-        entityManager.getTransaction().begin();
-        entityManager.persist(game);
-        entityManager.getTransaction().commit();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(game);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
     }
-
+    
     public void saveNewGenre(Genre genre) {
-        entityManager.getTransaction().begin();
-        entityManager.persist(genre);
-        entityManager.getTransaction().commit();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(genre);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
     }
-
+    
     public void saveNewMonetaryTransaction(MonetaryTransaction monetaryTransaction) {
-        entityManager.getTransaction().begin();
-        entityManager.persist(monetaryTransaction);
-        entityManager.getTransaction().commit();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(monetaryTransaction);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
     }
+    
     
     public void updateConsole(Console console) {
         entityManager.merge(console);
