@@ -35,10 +35,6 @@ public class RentgamesController extends Controller{
     private Button btnAddFilter;
     @FXML Button btnRemoveFilters;
     @FXML
-    public VBox pane1;
-    @FXML
-    private VBox filtersBox;
-    @FXML
     private TreeView<String> filtersTreeView;
     @FXML
     private TableView tblCart;
@@ -57,13 +53,13 @@ public class RentgamesController extends Controller{
         toBeFilteredGenres = new ArrayList<>();
     }
 
-    public void initialize(){
+    public void initialize() {
         var listOfCopies = ProjectMain.getDatabase().getAllCopies();
         initTable(listOfCopies);
         initTableCart();
         initFilters();
         btnAddGameToCart.setOnAction(e -> {
-                addGameToCart();
+            addGameToCart();
         });
         btnAddFilter.setOnAction(e -> {
             activateFilters();
@@ -72,10 +68,10 @@ public class RentgamesController extends Controller{
             removeFilters();
         });
         btnRemoveFromCart.setOnAction(e -> {
-                RemoveGameFromCart();
+            RemoveGameFromCart();
         });
         btnRentGames.setOnAction(e -> {
-                RentGamesFromCart();
+            RentGamesFromCart();
         });
     }
 
