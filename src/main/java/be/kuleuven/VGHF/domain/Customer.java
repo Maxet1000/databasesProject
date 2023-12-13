@@ -20,6 +20,10 @@ public class Customer {
     private String email;
 
     @Column(nullable = false)
+    @Convert(converter = PasswordConverter.class)
+    private String password;
+
+    @Column(nullable = false)
     private int balance;
 
     @OneToMany(mappedBy = "customer")
@@ -30,9 +34,10 @@ public class Customer {
 
     public Customer(){}
 
-    public Customer(String customerName, String email, int balance) {
+    public Customer(String customerName, String email, String password, int balance) {
         this.customerName = customerName;
         this.email = email;
+        this.password = password;
         this.balance = balance;
     }
 

@@ -194,10 +194,14 @@ public class RentgamesController extends Controller{
 
     public void removeFilters() {
         filtersTreeView.getRoot().getChildren().clear();
+        toBeFilteredConsoles.clear();
+        toBeFilteredDevelopers.clear();
+        toBeFilteredGenres.clear();
         initFilters();
         var listOfCopies = ProjectMain.getDatabase().getAllCopies();
         initTable(listOfCopies);
     }
+
     public void initTableCart(){
         tblCart.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         tblCart.getColumns().clear();
