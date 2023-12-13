@@ -5,11 +5,9 @@ import java.util.*;
 import org.hibernate.annotations.Generated;
 import org.hibernate.mapping.List;
 
-import be.kuleuven.VGHF.domain.Console;
-import be.kuleuven.VGHF.domain.Developer;
-import be.kuleuven.VGHF.domain.Game;
-import be.kuleuven.VGHF.domain.Genre;
-import be.kuleuven.VGHF.domain.HibernateManager;
+import be.kuleuven.VGHF.domain.*;
+import be.kuleuven.VGHF.domain.Copy.CopyBuilder;
+import be.kuleuven.VGHF.enums.*;
 
 public class DbContentScript {
 
@@ -122,6 +120,67 @@ public class DbContentScript {
         database.saveNewGame(superMarioBros);
         database.saveNewGame(minecraft);
     
+        Customer dries = new Customer("Dries Ruttens", "dries.ruttens@student.uhasselt.be", 10);
+        Customer bjorn = new Customer("Bjorn Spauwen", "bjorn.spauwen@student.uhasselt.be", 20);
+        Customer max = new Customer("Max-émile Meylaerts", "max-emile.meylaerts@student.uhasselt.be", 30);
+        Customer mauro = new Customer("Mauro Vranckx", "mauro.vranckx@student.uhasselt.be", 0);
+        Customer eddy = new Customer("Edmond Tsampanis", "edmond.tsampanis@student.uhasselt.be", 40);
+        Customer jan = new Customer("Jan Alleman", "jan.alleman@fancycustomemail.com", -5);
+
+        database.saveNewCustomer(dries);
+        database.saveNewCustomer(bjorn);
+        database.saveNewCustomer(max);
+        database.saveNewCustomer(mauro);
+        database.saveNewCustomer(eddy);
+        database.saveNewCustomer(jan);
+
+        CopyBuilder builder = new CopyBuilder();
+        Copy doomCopy1 = builder.game(doom)
+                                .console(pc)
+                                .availability(Availability.AVAILABLE)
+                                .warehouse("Genk")
+                                .build();
+
+        Copy witcherCopy1 = builder.game(theWitcher3)
+                                   .console(playstation4)
+                                   .availability(Availability.SOLD)
+                                   .warehouse("Hasselt")
+                                   .purchasePrice(70)
+                                   .build();
+
+        Copy marioCopy1 = builder.game(superMarioBros)
+                                 .console(nes)
+                                 .availability(Availability.BROKEN)
+                                 .warehouse("Los Angeles")
+                                 .build();
+
+        Copy minecraftCopy1 = builder.game(minecraft)
+                                     .console(pc)
+                                     .availability(Availability.RENTED)
+                                     .warehouse("Tokyo")
+                                     .customer(bjorn)
+                                     .purchasePrice(20)
+                                     .rentPrice(3)
+                                     .dateOfReturn("2024-01-12")
+                                     .build();
+
+        Copy minecraftCopy2 = builder.game(minecraft)
+                                     .console(playstation5)
+                                     .availability(Availability.AVAILABLE)
+                                     .warehouse("Diepenbeek")
+                                     .build();
+
+        database.saveNewCopy(doomCopy1);
+        database.saveNewCopy(witcherCopy1);
+        database.saveNewCopy(marioCopy1);
+        database.saveNewCopy(minecraftCopy1);
+        database.saveNewCopy(minecraftCopy2);
+
+        MonetaryTransaction transaction1 = new MonetaryTransaction(TransactionType.SALE, 60, jan, witcherCopy1, "2022-05-12");
+        MonetaryTransaction transaction2 = new MonetaryTransaction(TransactionType.RENTAL, 9, bjorn, minecraftCopy2, "2023-12-12");
+
+        database.saveNewMonetaryTransaction(transaction1);
+        database.saveNewMonetaryTransaction(transaction2);
     }
 
 }

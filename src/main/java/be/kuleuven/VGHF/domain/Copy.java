@@ -1,6 +1,9 @@
 package be.kuleuven.VGHF.domain;
 
 import javax.persistence.*;
+
+import be.kuleuven.VGHF.enums.Availability;
+
 import java.util.*;
 
 
@@ -32,8 +35,9 @@ public class Copy {
     @Column
     private int rentPrice;
 
-    @Column
-    private int availability;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Availability availability;
 
     @Column
     private String dateOfReturn;
@@ -46,15 +50,71 @@ public class Copy {
 
     public Copy(){}
 
-    public Copy(int purchasePrice, int rentPrice, int availability, String dateOfReturn, String warehouse) {
-        this.purchasePrice = purchasePrice;
-        this.rentPrice = rentPrice;
-        this.availability = availability;
-        this.dateOfReturn = dateOfReturn;
-        this.warehouse = warehouse;
-        //transactions = new ArrayList<>();
+    private Copy(CopyBuilder builder) {
+        this.game = builder.game;
+        this.console = builder.console;
+        this.availability = builder.availability;
+        this.warehouse = builder.warehouse;
+        this.customer = builder.customer;
+        this.purchasePrice = builder.purchasePrice;
+        this.rentPrice = builder.rentPrice;
+        this.dateOfReturn = builder.dateOfReturn;
     }
 
+    public static class CopyBuilder {
+        private Game game;
+        private Console console;
+        private Availability availability;
+        private String warehouse;
+        private Customer customer;
+        private int purchasePrice;
+        private int rentPrice;
+        private String dateOfReturn;
+
+        public CopyBuilder game(Game game) {
+            this.game = game;
+            return this;
+        }
+    
+        public CopyBuilder console(Console console) {
+            this.console = console;
+            return this;
+        }
+    
+        public CopyBuilder availability(Availability availability) {
+            this.availability = availability;
+            return this;
+        }
+    
+        public CopyBuilder warehouse(String warehouse) {
+            this.warehouse = warehouse;
+            return this;
+        }
+
+        public CopyBuilder customer(Customer customer) {
+            this.customer = customer;
+            return this;
+        }
+
+        public CopyBuilder purchasePrice(int purchasePrice) {
+            this.purchasePrice = purchasePrice;
+            return this;
+        }
+    
+        public CopyBuilder rentPrice(int rentPrice) {
+            this.rentPrice = rentPrice;
+            return this;
+        }
+    
+        public CopyBuilder dateOfReturn(String dateOfReturn) {
+            this.dateOfReturn = dateOfReturn;
+            return this;
+        }
+        
+        public Copy build() {
+            return new Copy(this);
+        }
+    }
 
     public int getCopyID() {
         return this.copyID;
@@ -100,11 +160,11 @@ public class Copy {
         this.rentPrice = rentPrice;
     }
 
-    public int getAvailability() {
+    public Availability getAvailability() {
         return this.availability;
     }
 
-    public void setAvailability(int availability) {
+    public void setAvailability(Availability availability) {
         this.availability = availability;
     }
 
