@@ -36,7 +36,12 @@
             <AnchorPane maxWidth="5.0" minWidth="5.0" prefWidth="5.0" />
             <VBox prefHeight="200.0" prefWidth="2000.0">
                <children>
-                  <Button fx:id="btnAddGameToCart" minHeight="55.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="5000.0" stylesheets="@styles.css" text="Add game to cart" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btnAddGameToCart" minHeight="55.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="123.0" stylesheets="@styles.css" text="Add game to rent" />
+                        <Button fx:id="btnAddGameToBuy" mnemonicParsing="false" prefHeight="55.0" prefWidth="139.0" text="Add game to buy" />
+                     </children>
+                  </HBox>
                   <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" />
                      <TableView fx:id="tblRent" prefHeight="2000.0" prefWidth="200">
                          <columns>
