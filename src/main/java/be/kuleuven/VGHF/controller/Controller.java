@@ -16,12 +16,15 @@ public class Controller {
     public <S,T,U> List<S> filter(List<S> listToFilter, List<T> filter) {
         ArrayList<S> filteredList = new ArrayList<>();
         for(S element : listToFilter) {
-            
-            if (filter.contains(element)) {
-                filteredList.add( element);
+            if (filter instanceof Console) {
+                for (T filterelem : filter) {
+                    if (((Console) console).getGames().contains(element)) {
+                        filteredList.add(element);
+                    }
+                }
             }
         }
-
+    
         return filteredList;
     }
 
