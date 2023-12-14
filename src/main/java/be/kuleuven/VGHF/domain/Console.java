@@ -3,8 +3,9 @@ package be.kuleuven.VGHF.domain;
 import javax.persistence.*;
 import java.util.*;
 
+
 @Entity
-public class Console implements FilterInterface{
+public class Console  {
 
     @Id
     @Column(nullable = false)

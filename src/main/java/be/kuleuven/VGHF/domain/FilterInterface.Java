@@ -1,7 +1,9 @@
-import java.util.*;
+package be.kuleuven.VGHF.domain;
 
 public interface FilterInterface {
-    List<Copy> getCopies();
-
-    List<Game> getGames();
+        
+        List<Copy> getCopies();
+    
+        List<Game> getGames();
+    
 }
