@@ -190,6 +190,9 @@ public class RentgamesController extends Controller{
 
     public void removeFilters() {
         filtersTreeView.getRoot().getChildren().clear();
+        toBeFilteredDevelopers.clear();
+        toBeFilteredConsoles.clear();
+        toBeFilteredGenres.clear();
         initFilters();
         var listOfCopies = ProjectMain.getDatabase().getAllCopies();
         initTable(listOfCopies);

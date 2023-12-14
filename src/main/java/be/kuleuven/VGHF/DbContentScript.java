@@ -126,12 +126,12 @@ public class DbContentScript {
         database.saveNewGame(minecraft);
         database.saveNewGame(pokemonPlatinum);
     
-        Customer dries = new Customer("Dries Ruttens", "dries.ruttens@student.uhasselt.be", 10);
-        Customer bjorn = new Customer("Bjorn Spauwen", "bjorn.spauwen@student.uhasselt.be", 20);
-        Customer max = new Customer("Max-émile Meylaerts", "max-emile.meylaerts@student.uhasselt.be", 30);
-        Customer mauro = new Customer("Mauro Vranckx", "mauro.vranckx@student.uhasselt.be", 0);
-        Customer eddy = new Customer("Edmond Tsampanis", "edmond.tsampanis@student.uhasselt.be", 40);
-        Customer jan = new Customer("Jan Alleman", "jan.alleman@fancycustomemail.com", -5);
+        Customer dries = new Customer("Dries Ruttens", "dries.ruttens@student.uhasselt.be", "wachtwoord", 10);
+        Customer bjorn = new Customer("Bjorn Spauwen", "bjorn.spauwen@student.uhasselt.be", "password", 20);
+        Customer max = new Customer("Max-émile Meylaerts", "max-emile.meylaerts@student.uhasselt.be", "12345", 30);
+        Customer mauro = new Customer("Mauro Vranckx", "mauro.vranckx@student.uhasselt.be", "azerty", 0);
+        Customer eddy = new Customer("Edmond Tsampanis", "edmond.tsampanis@student.uhasselt.be", "StrongPass123!", 40);
+        Customer jan = new Customer("Jan Alleman", "jan.alleman@fancycustomemail.com", "mijnverjaardag1999",-5);
 
         database.saveNewCustomer(dries);
         database.saveNewCustomer(bjorn);
