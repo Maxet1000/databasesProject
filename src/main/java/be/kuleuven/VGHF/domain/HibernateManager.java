@@ -180,7 +180,9 @@ public class HibernateManager {
     
     public void updateConsole(Console console) {
         try {
+            entityManager.getTransaction().begin();
             entityManager.merge(console);
+            entityManager.getTransaction().commit();
         } catch (Exception exception) {
             exception.printStackTrace();
         }
@@ -198,7 +200,9 @@ public class HibernateManager {
     
     public void updateCustomer(Customer customer) {
         try {
+            entityManager.getTransaction().begin();
             entityManager.merge(customer);
+            entityManager.getTransaction().commit();
         } catch (Exception exception) {
             exception.printStackTrace();
         }
@@ -206,7 +210,9 @@ public class HibernateManager {
     
     public void updateDeveloper(Developer developer) {
         try {
+            entityManager.getTransaction().begin();
             entityManager.merge(developer);
+            entityManager.getTransaction().commit();
         } catch (Exception exception) {
             exception.printStackTrace();
         }
@@ -214,7 +220,9 @@ public class HibernateManager {
     
     public void updateGame(Game game) {
         try {
+            entityManager.getTransaction().begin();
             entityManager.merge(game);
+            entityManager.getTransaction().commit();
         } catch (Exception exception) {
             exception.printStackTrace();
         }
@@ -222,7 +230,9 @@ public class HibernateManager {
     
     public void updateGenre(Genre genre) {
         try {
+            entityManager.getTransaction().begin();
             entityManager.merge(genre);
+            entityManager.getTransaction().commit();
         } catch (Exception exception) {
             exception.printStackTrace();
         }
@@ -230,7 +240,9 @@ public class HibernateManager {
     
     public void updateMonetaryTransaction(MonetaryTransaction monetaryTransaction) {
         try {
+            entityManager.getTransaction().begin();
             entityManager.merge(monetaryTransaction);
+            entityManager.getTransaction().commit();
         } catch (Exception exception) {
             exception.printStackTrace();
         }

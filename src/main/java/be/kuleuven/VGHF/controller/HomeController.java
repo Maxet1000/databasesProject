@@ -20,21 +20,12 @@ public class HomeController {
     @FXML
     public VBox pane1;
     @FXML
-    private Button btnRent;
-    @FXML
-    private Button btnBuy;
+    private Button btnRentOrBuy;
 
     public void initialize() throws IOException {
-        btnRent.setOnAction(e -> {
+        btnRentOrBuy.setOnAction(e -> {
             try {
                 switchToRentOrBuy("rent");
-            } catch (IOException ex) {
-                throw new RuntimeException (ex);
-            }
-        });
-        btnBuy.setOnAction(e -> {
-            try {
-                switchToRentOrBuy("buy");
             } catch (IOException ex) {
                 throw new RuntimeException (ex);
             }
