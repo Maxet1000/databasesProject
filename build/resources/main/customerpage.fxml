@@ -27,6 +27,7 @@
                      </children>
                   </AnchorPane>
                   <Button fx:id="btnAddBalance" maxWidth="200.0" minWidth="100.0" mnemonicParsing="false" prefWidth="100.0" stylesheets="@styles.css" text="Add to Balance" />
+                  <Button fx:id="btnLogOut" alignment="BOTTOM_CENTER" mnemonicParsing="false" stylesheets="@styles.css" text="Log Out" />
                </children>
             </VBox>
             <AnchorPane maxWidth="5.0" minWidth="5.0" prefHeight="200.0" prefWidth="5.0" />

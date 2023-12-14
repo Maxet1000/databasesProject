@@ -3,8 +3,9 @@ package be.kuleuven.VGHF.domain;
 import javax.persistence.*;
 import java.util.*;
 
+
 @Entity
-public class Console {
+public class Console  {
 
     @Id
     @Column(nullable = false)
@@ -41,6 +42,10 @@ public class Console {
 
     public List<Console> getCompatibleConsoles() {
         return this.compatibleConsoles;
+    }
+
+    public List<Game> getGames() {
+        return this.games;
     }
 
 }

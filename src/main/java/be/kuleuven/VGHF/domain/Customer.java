@@ -61,6 +61,10 @@ public class Customer {
         this.email = email;
     }
 
+    public String getPassword() {
+        return this.password;
+    }
+
     public int getBalance() {
         return this.balance;
     }
