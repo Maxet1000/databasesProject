@@ -160,7 +160,43 @@ public class RentgamesController extends Controller{
         var datalist = table.getItems();
         System.out.println(datalist);
         int i = 0;
-        while (i != datalist.size()){
+        int j = 0;
+        boolean faultyGame = false;
+        while (j != datalist.size()){
+            List data = (List) datalist.get(j);
+            System.out.println(data);
+            int copyId = (int) data.get(data.size()-1);
+            var copy = ProjectMain.getDatabase().getCopyById(copyId);
+            if(table == tblCart && copy.getAvailability() == Availability.AVAILABLE){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("congratulations");
+                alert.setHeaderText(null);
+                alert.setContentText("Games are now rented");
+                alert.show();
+            }else if(table == tblCart){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("congratulations");
+                alert.setHeaderText(null);
+                alert.setContentText("Games cannot be rented");
+                alert.show();
+            }
+            if(table == tblBuyCart && copy.getAvailability() == Availability.AVAILABLE && copy.getPurchasePrice() > 0){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("congratulations");
+                alert.setHeaderText(null);
+                alert.setContentText("Games are now yours, hopefully worth the money <3");
+                alert.show();
+            }else if(table == tblBuyCart){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Game not for sale!");
+                alert.show();
+                faultyGame = true;
+            }
+            j++;
+        }
+        while (i != datalist.size() && faultyGame != true){
             List data = (List) datalist.get(i);
             System.out.println(data);
             int copyId = (int) data.get(data.size()-1);
@@ -187,6 +223,7 @@ public class RentgamesController extends Controller{
     }
 
     public void removeGameFromCart(TableView table){
+        //zit bug in die de grijze geselecteerde ook verwijderd wanneer een andere element geselecteerd is in een andere lijst
         var selectedItem = table.getSelectionModel().getSelectedItem();
         var data = table.getItems();
         data.remove(selectedItem);
@@ -350,9 +387,10 @@ public class RentgamesController extends Controller{
                         developers = developers + ", ";
                     }
                 }
+                //de console word nu naar de copy verwezen maar is nog geen compatible lijst toegevoegd
                 String consoles = "";
                 for (int j = 0; j < listOfCopies.get(i).getGame().getConsoles().size(); j++) {
-                    consoles = consoles+ listOfCopies.get(i).getGame().getConsoles().get(j).getConsoleName();
+                    consoles = consoles+ listOfCopies.get(i).getConsole().getConsoleName();
                     if (j+1 != listOfCopies.get(i).getGame().getConsoles().size()) {
                         consoles = consoles + ", ";
                     }
