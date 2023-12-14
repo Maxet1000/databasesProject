@@ -1,8 +1,23 @@
 package be.kuleuven.VGHF.controller;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+
 public class CustomerController {
 
-    public void initialize() {
+    @FXML
+    private Button btnAddBalance;
+    @FXML
+    private Button btnExtendReturnDate;
 
+    public void initialize() {
+        initTable();
+        btnAddBalance.setOnAction(e -> {
+
+        });
+    }
+    
+    public void initTable(){
+        
     }
 }

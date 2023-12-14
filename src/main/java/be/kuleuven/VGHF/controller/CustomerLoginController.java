@@ -4,9 +4,13 @@ package be.kuleuven.VGHF.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 
@@ -17,19 +21,34 @@ public class CustomerLoginController {
     private Button btnLogin;
     @FXML
     private VBox parentPane;
+    @FXML
+    private PasswordField txtPassword;
+    @FXML
+    private TextField txtEmail;
 
     public void initialize(){
         btnLogin.setOnAction(e -> {
             try {
                 switchNextScreen();
             } catch (IOException ex) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning");
+                alert.setHeaderText(null);
+                alert.setContentText("Username or password incorrect");
+                alert.showAndWait();
                 throw new RuntimeException(ex);
             }
         });
     }
 
     private void switchNextScreen() throws IOException {
-
+        if (txtEmail == null || txtPassword == null){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning");
+                alert.setHeaderText(null);
+                alert.setContentText("Username or password not filled");
+                alert.showAndWait();    
+        }
         var pane = new FXMLLoader(getClass().getClassLoader().getResource("customerpage.fxml"));
         var rootLoader = (VBox) pane.load();
         rootLoader.autosize();
