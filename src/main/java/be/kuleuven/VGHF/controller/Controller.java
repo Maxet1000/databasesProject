@@ -16,18 +16,15 @@ public class Controller {
     public <S,T,U> List<S> filter(List<S> listToFilter, List<T> filter) {
         ArrayList<S> filteredList = new ArrayList<>();
         for(S element : listToFilter) {
+            
             if (filter.contains(element)) {
                 filteredList.add( element);
             }
         }
-        /*for (Iterator<S> iterator = listToFilter.iterator(); iterator.hasNext();){
-            var element = iterator.next();
-            if(!filter.contains(element)) {
-                listToFilter.remove(element);
-            }
-        }*/
+
         return filteredList;
     }
+
     public ArrayList<Copy> filterDevelopers(List<Copy> listToFilter, List<Developer> developersFilter) {
         ArrayList<Copy> filteredList = new ArrayList<>();
         for(Copy element : listToFilter) {
