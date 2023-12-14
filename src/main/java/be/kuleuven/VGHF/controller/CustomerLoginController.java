@@ -14,7 +14,9 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 
+import be.kuleuven.VGHF.DataCommunicationModel;
 import be.kuleuven.VGHF.ProjectMain;
+import be.kuleuven.VGHF.domain.Customer;
 
 
 public class CustomerLoginController {
@@ -28,6 +30,12 @@ public class CustomerLoginController {
     @FXML
     private TextField txtEmail;
 
+    private Customer user;
+
+    public CustomerLoginController(){
+        this.user = user;
+    }
+    
     public void initialize(){
         btnLogin.setOnAction(e -> {
             try {
@@ -47,7 +55,10 @@ public class CustomerLoginController {
         var user = ProjectMain.getDatabase().getUserByEmail(txtEmail.getText());
         System.out.println(txtEmail.getText());
         if(txtEmail.getText().equals("UwU")){
-            
+            //test om te kijken of  DataCommunicationModel werkt
+            user = ProjectMain.getDatabase().getAllCustomers().get(6);
+            var test = new DataCommunicationModel();
+            test.setUser(user);
             //zelfde als laatste else
             var pane = new FXMLLoader(getClass().getClassLoader().getResource("customerpage.fxml"));
             var rootLoader = (VBox) pane.load();
@@ -84,6 +95,5 @@ public class CustomerLoginController {
             rootLoader.setAlignment(Pos.CENTER);
         }
     }
-
 }
  

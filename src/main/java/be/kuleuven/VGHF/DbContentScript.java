@@ -132,6 +132,7 @@ public class DbContentScript {
         Customer mauro = new Customer("Mauro Vranckx", "mauro.vranckx@student.uhasselt.be", "azerty", 0);
         Customer eddy = new Customer("Edmond Tsampanis", "edmond.tsampanis@student.uhasselt.be", "StrongPass123!", 40);
         Customer jan = new Customer("Jan Alleman", "jan.alleman@fancycustomemail.com", "mijnverjaardag1999",-5);
+        Customer UwU = new Customer("UwU_is_UwU","UwU", "I dont need one xDDD", 14);
 
         database.saveNewCustomer(dries);
         database.saveNewCustomer(bjorn);
@@ -139,6 +140,7 @@ public class DbContentScript {
         database.saveNewCustomer(mauro);
         database.saveNewCustomer(eddy);
         database.saveNewCustomer(jan);
+        database.saveNewCustomer(UwU);
 
         CopyBuilder builder = new CopyBuilder();
         Copy doomCopy1 = builder.game(doom)

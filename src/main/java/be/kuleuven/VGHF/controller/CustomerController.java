@@ -1,5 +1,6 @@
 package be.kuleuven.VGHF.controller;
 
+import be.kuleuven.VGHF.DataCommunicationModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
@@ -18,6 +19,8 @@ public class CustomerController {
     }
     
     public void initTable(){
-        
+        DataCommunicationModel loggedInUser = new DataCommunicationModel();
+        var x = loggedInUser.getUser();
+        System.out.println(x);
     }
 }
