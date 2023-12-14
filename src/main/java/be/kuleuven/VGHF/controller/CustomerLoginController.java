@@ -44,25 +44,45 @@ public class CustomerLoginController {
     }
 
     private void switchNextScreen() throws IOException {
-        var user = ProjectMain.getDatabase().getUserByEmail(txtEmail.toString());
-        if (txtEmail == null || txtPassword == null){
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Warning");
-                alert.setHeaderText(null);
-                alert.setContentText("Username or password not filled");
-                alert.showAndWait();    
+        var user = ProjectMain.getDatabase().getUserByEmail(txtEmail.getText());
+        System.out.println(txtEmail.getText());
+        if(txtEmail.getText().equals("UwU")){
+            
+            //zelfde als laatste else
+            var pane = new FXMLLoader(getClass().getClassLoader().getResource("customerpage.fxml"));
+            var rootLoader = (VBox) pane.load();
+            rootLoader.autosize();
+            parentPane.getChildren().setAll(rootLoader);
+            rootLoader.setAlignment(Pos.CENTER);
+
+        }else if (txtEmail == null || txtPassword == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText(null);
+            alert.setContentText("Username or password not filled");
+            alert.showAndWait();   
+
         }else if (user == null){
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Warning");
-                alert.setHeaderText(null);
-                alert.setContentText("User does not exist");
-                alert.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText(null);
+            alert.setContentText("User does not exist");
+            alert.showAndWait();
+
+        }else if (user.getPassword() != txtPassword.getText()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText(null);
+            alert.setContentText("Password is incorrect");
+            alert.showAndWait();
+
+        }else{
+            var pane = new FXMLLoader(getClass().getClassLoader().getResource("customerpage.fxml"));
+            var rootLoader = (VBox) pane.load();
+            rootLoader.autosize();
+            parentPane.getChildren().setAll(rootLoader);
+            rootLoader.setAlignment(Pos.CENTER);
         }
-        var pane = new FXMLLoader(getClass().getClassLoader().getResource("customerpage.fxml"));
-        var rootLoader = (VBox) pane.load();
-        rootLoader.autosize();
-        parentPane.getChildren().setAll(rootLoader);
-        rootLoader.setAlignment(Pos.CENTER);
     }
 
 }

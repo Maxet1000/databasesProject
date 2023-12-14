@@ -296,7 +296,7 @@ public class HibernateManager {
             query.where(criteriaBuilder.equal(root.get("email"), email));
             return entityManager.createQuery(query).getSingleResult();
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return null;
         }       
     }

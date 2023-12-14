@@ -10,13 +10,13 @@
 
 <VBox fx:id="parentPane" maxHeight="2000.0" maxWidth="2000.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="be.kuleuven.VGHF.controller.CustomerLoginController">
    <children>
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter e-mail for login" textAlignment="CENTER" wrappingWidth="312.03125">
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter email address here please" textAlignment="CENTER" wrappingWidth="312.03125">
             <font>
                 <Font size="24.0" />
             </font>
         </Text>
       <AnchorPane prefHeight="150.0" prefWidth="200.0" />
-      <TextField maxWidth="300.0" minWidth="50.0" prefWidth="200.0" promptText="Enter e-mail" />
+      <TextField fx:id="txtEmail" maxWidth="300.0" minWidth="50.0" prefWidth="200.0" promptText="Enter email address" />
       <AnchorPane maxHeight="20.0" prefHeight="20.0">
          <children>
             <PasswordField fx:id="txtPassword" layoutX="-1.0" layoutY="-2.0" prefHeight="25.0" prefWidth="300.0" promptText="put your weak ass password here" />
