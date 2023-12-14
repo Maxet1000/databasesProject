@@ -14,6 +14,8 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 
+import be.kuleuven.VGHF.ProjectMain;
+
 
 public class CustomerLoginController {
 
@@ -42,12 +44,19 @@ public class CustomerLoginController {
     }
 
     private void switchNextScreen() throws IOException {
+        var user = ProjectMain.getDatabase().getUserByEmail(txtEmail.toString());
         if (txtEmail == null || txtPassword == null){
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning");
                 alert.setHeaderText(null);
                 alert.setContentText("Username or password not filled");
                 alert.showAndWait();    
+        }else if (user == null){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning");
+                alert.setHeaderText(null);
+                alert.setContentText("User does not exist");
+                alert.showAndWait();
         }
         var pane = new FXMLLoader(getClass().getClassLoader().getResource("customerpage.fxml"));
         var rootLoader = (VBox) pane.load();

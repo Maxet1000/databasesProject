@@ -288,4 +288,17 @@ public class HibernateManager {
         }
     }
 
+    public Customer getUserByEmail(String email) {
+         try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(Customer.class);
+            var root = query.from(Customer.class);
+            query.where(criteriaBuilder.equal(root.get("email"), email));
+            return entityManager.createQuery(query).getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }       
+    }
+
 }
