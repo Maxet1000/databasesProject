@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
-public class DeveloperLoginController {
+public class DeveloperLoginController extends Controller{
 
     @FXML
     private Button btnLogin;

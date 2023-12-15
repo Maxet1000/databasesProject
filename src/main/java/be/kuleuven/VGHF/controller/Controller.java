@@ -2,16 +2,13 @@ package be.kuleuven.VGHF.controller;
 
 import java.util.*;
 
-import be.kuleuven.VGHF.domain.Console;
-import be.kuleuven.VGHF.domain.Copy;
-import be.kuleuven.VGHF.domain.Developer;
-import be.kuleuven.VGHF.domain.Genre;
+import be.kuleuven.VGHF.DataCommunicationModel;
+import be.kuleuven.VGHF.domain.*;
 
 
-public class Controller {
+public class Controller{
 
-    List<Copy> lijstOmOpTeFilteren = new ArrayList<Copy>();
-
+    public DataCommunicationModel data;
 
     // public <S,T,U> List<S> filter(List<S> listToFilter, List<T> filter) {
     //     ArrayList<S> filteredList = new ArrayList<>();
@@ -69,5 +66,13 @@ public class Controller {
         filteredList.clear();
         filteredList.addAll(set);
         return filteredList;
+    }
+
+    public void setModel(DataCommunicationModel data) {
+        this.data = data;
+    }
+
+    public DataCommunicationModel getModel(){
+        return data;
     }
 }

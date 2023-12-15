@@ -1,6 +1,6 @@
 package be.kuleuven.VGHF.controller;
 
-public class InfoController {
+public class InfoController extends Controller{
 
     public void initialize() {
     }

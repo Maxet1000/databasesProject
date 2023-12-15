@@ -1,6 +1,10 @@
 package be.kuleuven.VGHF.controller;
 
 import java.util.*;
+
+import be.kuleuven.VGHF.DataCommunicationModel;
+import be.kuleuven.VGHF.ProjectMain;
+import be.kuleuven.VGHF.domain.Customer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -23,8 +27,15 @@ public class ProjectMainController {
     private Button btnDeveloperPage;
     @FXML
     private Button btnInfo;
+    private DataCommunicationModel data;
+    
+
+    public ProjectMainController(){
+    }
 
     public void initialize() throws IOException {
+        data = new DataCommunicationModel();
+        data.setUser(ProjectMain.getDatabase().getAllCustomers().get(5));
         switchToId("home");
         btnHome.setOnAction(e -> {
             try {
@@ -93,6 +104,11 @@ public class ProjectMainController {
         //switch to pane
         var pane = new FXMLLoader(getClass().getClassLoader().getResource(id + ".fxml"));
         var rootLoader = (VBox) pane.load();
+
+        var controller = pane.<Controller>getController();
+        controller.setModel(data);
+
+        System.out.println("Yah " + pane.<Controller>getController().getModel().getUser().getCustomerName());
         rootLoader.autosize();
         pane1.getChildren().setAll(rootLoader);
         rootLoader.setAlignment(Pos.CENTER);

@@ -34,7 +34,6 @@ public class ProjectMain extends Application {
     public void start(Stage stage) throws Exception {
         rootStage = stage;
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("background.fxml"));
-
         Scene scene = new Scene(root);
 
         stage.setTitle("Video Game History Foundation");

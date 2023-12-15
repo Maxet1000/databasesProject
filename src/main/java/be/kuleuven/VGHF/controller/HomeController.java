@@ -15,7 +15,7 @@ import java.io.IOException;
 
 import be.kuleuven.VGHF.ProjectMain;
 
-public class HomeController {
+public class HomeController extends Controller{
 
     @FXML
     public VBox pane1;
@@ -39,6 +39,10 @@ public class HomeController {
 
         var pane = new FXMLLoader(getClass().getClassLoader().getResource(RentOrBuy + "games.fxml"));
         var rootLoader = (VBox) pane.load();
+
+        var controller = pane.<Controller>getController();
+        controller.setModel(data);
+
         rootLoader.autosize();
         pane1.getChildren().setAll(rootLoader);
         StackPane.setAlignment(rootLoader, Pos.CENTER);

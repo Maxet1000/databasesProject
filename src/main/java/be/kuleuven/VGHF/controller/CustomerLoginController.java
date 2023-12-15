@@ -14,10 +14,12 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 
+import be.kuleuven.VGHF.DataCommunicationModel;
 import be.kuleuven.VGHF.ProjectMain;
+import be.kuleuven.VGHF.domain.Customer;
 
 
-public class CustomerLoginController {
+public class CustomerLoginController extends Controller{
 
     @FXML
     private Button btnLogin;
@@ -27,6 +29,7 @@ public class CustomerLoginController {
     private PasswordField txtPassword;
     @FXML
     private TextField txtEmail;
+
 
     public void initialize(){
         btnLogin.setOnAction(e -> {
@@ -46,11 +49,18 @@ public class CustomerLoginController {
     private void switchNextScreen() throws IOException {
         var user = ProjectMain.getDatabase().getUserByEmail(txtEmail.getText());
         System.out.println(txtEmail.getText());
+        System.out.println("BBBBBBBBBBBBBBBBBBBBB "+data.getUser().getCustomerName());
         if(txtEmail.getText().equals("UwU")){
-            
+            //test om te kijken of  DataCommunicationModel werkt
+
             //zelfde als laatste else
             var pane = new FXMLLoader(getClass().getClassLoader().getResource("customerpage.fxml"));
             var rootLoader = (VBox) pane.load();
+
+            var controller = pane.<CustomerController>getController();
+            System.out.println("DDDDDDDDDDDDDDDDDDDDDDDDDD "+data.getUser().getCustomerName());
+            controller.setModel(data);
+
             rootLoader.autosize();
             parentPane.getChildren().setAll(rootLoader);
             rootLoader.setAlignment(Pos.CENTER);
@@ -79,11 +89,14 @@ public class CustomerLoginController {
         }else{
             var pane = new FXMLLoader(getClass().getClassLoader().getResource("customerpage.fxml"));
             var rootLoader = (VBox) pane.load();
+
+            var controller = pane.<Controller>getController();
+            controller.setModel(data);
+
             rootLoader.autosize();
             parentPane.getChildren().setAll(rootLoader);
             rootLoader.setAlignment(Pos.CENTER);
         }
     }
-
 }
  
