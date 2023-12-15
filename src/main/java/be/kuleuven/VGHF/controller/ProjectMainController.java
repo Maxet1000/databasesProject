@@ -1,6 +1,10 @@
 package be.kuleuven.VGHF.controller;
 
 import java.util.*;
+
+import be.kuleuven.VGHF.DataCommunicationModel;
+import be.kuleuven.VGHF.ProjectMain;
+import be.kuleuven.VGHF.domain.Customer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -23,47 +27,58 @@ public class ProjectMainController {
     private Button btnDeveloperPage;
     @FXML
     private Button btnInfo;
+    private DataCommunicationModel data;
+    
+
+    public ProjectMainController(){
+    }
 
     public void initialize() throws IOException {
-        switchToId("home");
+        data = new DataCommunicationModel();
+        var homeController = new HomeController();
+        switchToId("home", homeController);
         btnHome.setOnAction(e -> {
             try {
-                switchToId("home");
+                switchToId("home", homeController);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
         btnGameDb.setOnAction(e -> {
             try {
-                switchToId("gamedb");
+                var gameDbController = new GameDbController();
+                switchToId("gamedb", gameDbController);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
         btnCustomerPage.setOnAction(e -> {
             try {
-                switchToId("customerloginpage");
+                var loginController = new CustomerLoginController(data);
+                switchToId("customerloginpage", loginController);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
         btnDeveloperPage.setOnAction(e -> {
             try {
-                switchToId("developerloginpage");
+                var developerController = new DeveloperController();
+                switchToId("developerloginpage", developerController);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
         btnInfo.setOnAction(e -> {
             try {
-                switchToId("info");
+                var infoController = new InfoController();
+                switchToId("info", infoController);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
     }
     
-    public void switchToId (String id) throws IOException {
+    public void switchToId (String id, Controller controller) throws IOException {
         
         btnHome.setUnderline(false);
         btnGameDb.setUnderline(false);
@@ -92,6 +107,7 @@ public class ProjectMainController {
 
         //switch to pane
         var pane = new FXMLLoader(getClass().getClassLoader().getResource(id + ".fxml"));
+        pane.setController(controller);
         var rootLoader = (VBox) pane.load();
         rootLoader.autosize();
         pane1.getChildren().setAll(rootLoader);

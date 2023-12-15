@@ -17,7 +17,7 @@ public class DataCommunicationModel {
     
 
     //getters and setters
-    
+
     public Customer getUser() {
         return this.user;
     }

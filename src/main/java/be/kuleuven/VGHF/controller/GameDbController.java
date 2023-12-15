@@ -1,3 +1,3 @@
 package be.kuleuven.VGHF.controller;
-public class GameDbController {
+public class GameDbController extends Controller{
 }

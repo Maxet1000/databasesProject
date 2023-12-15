@@ -10,7 +10,7 @@ import javafx.scene.control.TableView;
 
 
 
-public class BuygamesController {
+public class BuygamesController extends Controller{
 
     
     @FXML

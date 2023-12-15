@@ -19,7 +19,7 @@ import be.kuleuven.VGHF.ProjectMain;
 import be.kuleuven.VGHF.domain.Customer;
 
 
-public class CustomerLoginController {
+public class CustomerLoginController extends Controller{
 
     @FXML
     private Button btnLogin;
@@ -29,13 +29,14 @@ public class CustomerLoginController {
     private PasswordField txtPassword;
     @FXML
     private TextField txtEmail;
+    private DataCommunicationModel data;
 
-    private Customer user;
 
-    public CustomerLoginController(){
-        this.user = user;
+
+    public CustomerLoginController(DataCommunicationModel data) {
+        this.data = data;
     }
-    
+
     public void initialize(){
         btnLogin.setOnAction(e -> {
             try {
@@ -56,9 +57,7 @@ public class CustomerLoginController {
         System.out.println(txtEmail.getText());
         if(txtEmail.getText().equals("UwU")){
             //test om te kijken of  DataCommunicationModel werkt
-            user = ProjectMain.getDatabase().getAllCustomers().get(6);
-            var test = new DataCommunicationModel();
-            test.setUser(user);
+
             //zelfde als laatste else
             var pane = new FXMLLoader(getClass().getClassLoader().getResource("customerpage.fxml"));
             var rootLoader = (VBox) pane.load();

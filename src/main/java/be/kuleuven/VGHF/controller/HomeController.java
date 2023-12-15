@@ -15,7 +15,7 @@ import java.io.IOException;
 
 import be.kuleuven.VGHF.ProjectMain;
 
-public class HomeController {
+public class HomeController extends Controller{
 
     @FXML
     public VBox pane1;

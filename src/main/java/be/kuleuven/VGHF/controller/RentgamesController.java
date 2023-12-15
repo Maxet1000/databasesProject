@@ -7,6 +7,8 @@ import java.util.List;
 import org.hibernate.internal.util.MarkerObject;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import be.kuleuven.VGHF.DataCommunicationModel;
 import be.kuleuven.VGHF.ProjectMain;
 import be.kuleuven.VGHF.domain.Console;
 import be.kuleuven.VGHF.domain.Copy;
@@ -55,6 +57,7 @@ public class RentgamesController extends Controller{
     private ArrayList<Console> toBeFilteredConsoles;
     private ArrayList<Genre> toBeFilteredGenres;
 
+
     public RentgamesController() {
         toBeFilteredDevelopers = new ArrayList<>();
         toBeFilteredConsoles = new ArrayList<>();
@@ -63,6 +66,7 @@ public class RentgamesController extends Controller{
 
     public void initialize(){
         var listOfCopies = ProjectMain.getDatabase().getAllCopies();
+        System.out.println(listOfCopies);
         initTable(listOfCopies);
         initTableCart();
         initFilters();

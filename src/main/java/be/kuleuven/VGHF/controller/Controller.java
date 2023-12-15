@@ -8,7 +8,7 @@ import be.kuleuven.VGHF.domain.Developer;
 import be.kuleuven.VGHF.domain.Genre;
 
 
-public class Controller {
+public class Controller{
 
     List<Copy> lijstOmOpTeFilteren = new ArrayList<Copy>();
 
