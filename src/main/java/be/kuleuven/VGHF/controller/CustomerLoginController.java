@@ -39,7 +39,7 @@ public class CustomerLoginController extends Controller{
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning");
                 alert.setHeaderText(null);
-                alert.setContentText("Username or password incorrect");
+                alert.setContentText("Something went terribly wrong");
                 alert.showAndWait();
                 throw new RuntimeException(ex);
             }
@@ -48,26 +48,19 @@ public class CustomerLoginController extends Controller{
 
     private void switchNextScreen() throws IOException {
         var user = ProjectMain.getDatabase().getUserByEmail(txtEmail.getText());
-        System.out.println(txtEmail.getText());
-        System.out.println("BBBBBBBBBBBBBBBBBBBBB "+data.getUser().getCustomerName());
-        System.out.println(user.getPassword().toString());
-        System.out.println(txtPassword.getText().toString());
         if(txtEmail.getText().equals("UwU")){
-            //test om te kijken of  DataCommunicationModel werkt
-            
             //zelfde als laatste else
             var pane = new FXMLLoader(getClass().getClassLoader().getResource("customerpage.fxml"));
             var rootLoader = (VBox) pane.load();
 
             var controller = pane.<CustomerController>getController();
-            System.out.println("DDDDDDDDDDDDDDDDDDDDDDDDDD "+data.getUser().getCustomerName());
             controller.setModel(data);
 
             rootLoader.autosize();
             parentPane.getChildren().setAll(rootLoader);
             rootLoader.setAlignment(Pos.CENTER);
 
-        }else if (txtEmail == null || txtPassword == null){
+        }else if (txtEmail.getText().toString().trim().isEmpty() || txtPassword.getText().toString().trim().isEmpty()){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
             alert.setHeaderText(null);
@@ -81,7 +74,7 @@ public class CustomerLoginController extends Controller{
             alert.setContentText("User does not exist");
             alert.showAndWait();
 
-        }else if (!user.getPassword().toString().equals(txtPassword.getText().toString())){
+        }else if (!user.getPassword().toString().trim().equals(txtPassword.getText().toString().trim())){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
             alert.setHeaderText(null);
