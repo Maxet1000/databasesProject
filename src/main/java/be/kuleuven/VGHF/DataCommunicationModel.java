@@ -25,5 +25,4 @@ public class DataCommunicationModel {
     public void setUser(Customer user) {
         this.user = user;
     }
-
 }

@@ -57,7 +57,7 @@ public class CustomerLoginController extends Controller{
         System.out.println(txtEmail.getText());
         if(txtEmail.getText().equals("UwU")){
             //test om te kijken of  DataCommunicationModel werkt
-
+            
             //zelfde als laatste else
             var pane = new FXMLLoader(getClass().getClassLoader().getResource("customerpage.fxml"));
             var rootLoader = (VBox) pane.load();
@@ -87,6 +87,7 @@ public class CustomerLoginController extends Controller{
             alert.showAndWait();
 
         }else{
+            
             var pane = new FXMLLoader(getClass().getClassLoader().getResource("customerpage.fxml"));
             var rootLoader = (VBox) pane.load();
             rootLoader.autosize();

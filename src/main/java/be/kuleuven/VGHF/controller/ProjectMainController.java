@@ -36,49 +36,45 @@ public class ProjectMainController {
     public void initialize() throws IOException {
         data = new DataCommunicationModel();
         var homeController = new HomeController();
-        switchToId("home", homeController);
+        switchToId("home");
         btnHome.setOnAction(e -> {
             try {
-                switchToId("home", homeController);
+                switchToId("home");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
         btnGameDb.setOnAction(e -> {
             try {
-                var gameDbController = new GameDbController();
-                switchToId("gamedb", gameDbController);
+                switchToId("gamedb");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
         btnCustomerPage.setOnAction(e -> {
             try {
-                var loginController = new CustomerLoginController(data);
-                switchToId("customerloginpage", loginController);
+                switchToId("customerloginpage");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
         btnDeveloperPage.setOnAction(e -> {
             try {
-                var developerController = new DeveloperController();
-                switchToId("developerloginpage", developerController);
+                switchToId("developerloginpage");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
         btnInfo.setOnAction(e -> {
             try {
-                var infoController = new InfoController();
-                switchToId("info", infoController);
+                switchToId("info");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
     }
     
-    public void switchToId (String id, Controller controller) throws IOException {
+    public void switchToId (String id) throws IOException {
         
         btnHome.setUnderline(false);
         btnGameDb.setUnderline(false);
@@ -107,7 +103,7 @@ public class ProjectMainController {
 
         //switch to pane
         var pane = new FXMLLoader(getClass().getClassLoader().getResource(id + ".fxml"));
-        pane.setController(controller);
+        var cont = pane.getController();
         var rootLoader = (VBox) pane.load();
         rootLoader.autosize();
         pane1.getChildren().setAll(rootLoader);
