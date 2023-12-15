@@ -39,6 +39,10 @@ public class HomeController extends Controller{
 
         var pane = new FXMLLoader(getClass().getClassLoader().getResource(RentOrBuy + "games.fxml"));
         var rootLoader = (VBox) pane.load();
+
+        var controller = pane.<Controller>getController();
+        controller.setModel(data);
+
         rootLoader.autosize();
         pane1.getChildren().setAll(rootLoader);
         StackPane.setAlignment(rootLoader, Pos.CENTER);

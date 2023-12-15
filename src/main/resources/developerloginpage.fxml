@@ -9,7 +9,7 @@
 
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.Font?>
-<VBox fx:id="parentPane" maxHeight="2000.0" maxWidth="2000.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+<VBox fx:id="parentPane" maxHeight="2000.0" maxWidth="2000.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="be.kuleuven.VGHF.controller.DeveloperLoginController">
     <children>
         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter DevID for login" textAlignment="CENTER" wrappingWidth="312.03125">
             <font>

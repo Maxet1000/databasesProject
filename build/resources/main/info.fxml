@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="pane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" >
+<VBox fx:id="pane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="be.kuleuven.VGHF.controller.InfoController">
     <children>
         <Text fx:id="txtInfo" strokeType="OUTSIDE" strokeWidth="0.0" text="Very cool info" textAlignment="CENTER" wrappingWidth="312.03125">
             <font>

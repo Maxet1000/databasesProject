@@ -4,6 +4,7 @@ package be.kuleuven.VGHF.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.application.Platform;
 import org.hibernate.internal.util.MarkerObject;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -93,6 +94,8 @@ public class RentgamesController extends Controller{
     }
 
     public void addGameToBuyCart(){
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        System.out.println(data.getUser().getCustomerName());
         
         List selectedItem =  (List) tblRent.getSelectionModel().getSelectedItem();
 
@@ -487,4 +490,5 @@ public class RentgamesController extends Controller{
     private List<Genre> getAllGenres() {
         return ProjectMain.getDatabase().getAllGenres();
     }
+
 }

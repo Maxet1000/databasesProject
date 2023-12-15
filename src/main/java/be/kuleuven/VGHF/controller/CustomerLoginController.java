@@ -29,13 +29,7 @@ public class CustomerLoginController extends Controller{
     private PasswordField txtPassword;
     @FXML
     private TextField txtEmail;
-    private DataCommunicationModel data;
 
-
-
-    public CustomerLoginController(DataCommunicationModel data) {
-        this.data = data;
-    }
 
     public void initialize(){
         btnLogin.setOnAction(e -> {
@@ -55,12 +49,20 @@ public class CustomerLoginController extends Controller{
     private void switchNextScreen() throws IOException {
         var user = ProjectMain.getDatabase().getUserByEmail(txtEmail.getText());
         System.out.println(txtEmail.getText());
+        System.out.println("BBBBBBBBBBBBBBBBBBBBB "+data.getUser().getCustomerName());
+        System.out.println(user.getPassword().toString());
+        System.out.println(txtPassword.getText().toString());
         if(txtEmail.getText().equals("UwU")){
             //test om te kijken of  DataCommunicationModel werkt
             
             //zelfde als laatste else
             var pane = new FXMLLoader(getClass().getClassLoader().getResource("customerpage.fxml"));
             var rootLoader = (VBox) pane.load();
+
+            var controller = pane.<CustomerController>getController();
+            System.out.println("DDDDDDDDDDDDDDDDDDDDDDDDDD "+data.getUser().getCustomerName());
+            controller.setModel(data);
+
             rootLoader.autosize();
             parentPane.getChildren().setAll(rootLoader);
             rootLoader.setAlignment(Pos.CENTER);
@@ -79,21 +81,23 @@ public class CustomerLoginController extends Controller{
             alert.setContentText("User does not exist");
             alert.showAndWait();
 
-        }else if (user.getPassword() != txtPassword.getText()){
+        }else if (!user.getPassword().toString().equals(txtPassword.getText().toString())){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
             alert.setHeaderText(null);
             alert.setContentText("Password is incorrect");
             alert.showAndWait();
-
         }else{
             
             var pane = new FXMLLoader(getClass().getClassLoader().getResource("customerpage.fxml"));
             var rootLoader = (VBox) pane.load();
+
+            var controller = pane.<Controller>getController();
+            controller.setModel(data);
+
             rootLoader.autosize();
             parentPane.getChildren().setAll(rootLoader);
             rootLoader.setAlignment(Pos.CENTER);
         }
     }
 }
- 

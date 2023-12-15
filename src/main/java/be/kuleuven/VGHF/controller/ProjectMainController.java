@@ -4,7 +4,6 @@ import java.util.*;
 
 import be.kuleuven.VGHF.DataCommunicationModel;
 import be.kuleuven.VGHF.ProjectMain;
-import be.kuleuven.VGHF.domain.Customer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -35,10 +34,12 @@ public class ProjectMainController {
 
     public void initialize() throws IOException {
         data = new DataCommunicationModel();
-        var homeController = new HomeController();
+        data.setUser(ProjectMain.getDatabase().getAllCustomers().get(5));
+
         switchToId("home");
         btnHome.setOnAction(e -> {
             try {
+                switchToId("home");
                 switchToId("home");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
@@ -47,12 +48,14 @@ public class ProjectMainController {
         btnGameDb.setOnAction(e -> {
             try {
                 switchToId("gamedb");
+                switchToId("gamedb");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
         btnCustomerPage.setOnAction(e -> {
             try {
+                switchToId("customerloginpage");
                 switchToId("customerloginpage");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
@@ -61,12 +64,14 @@ public class ProjectMainController {
         btnDeveloperPage.setOnAction(e -> {
             try {
                 switchToId("developerloginpage");
+                switchToId("developerloginpage");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
         btnInfo.setOnAction(e -> {
             try {
+                switchToId("info");
                 switchToId("info");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
@@ -105,6 +110,11 @@ public class ProjectMainController {
         var pane = new FXMLLoader(getClass().getClassLoader().getResource(id + ".fxml"));
         var cont = pane.getController();
         var rootLoader = (VBox) pane.load();
+
+        var controller = pane.<Controller>getController();
+        controller.setModel(data);
+
+        System.out.println("Yah " + pane.<Controller>getController().getModel().getUser().getCustomerName());
         rootLoader.autosize();
         pane1.getChildren().setAll(rootLoader);
         rootLoader.setAlignment(Pos.CENTER);

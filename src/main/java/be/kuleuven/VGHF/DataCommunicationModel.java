@@ -6,7 +6,8 @@ import be.kuleuven.VGHF.domain.Customer;
 
 public class DataCommunicationModel {
 
-    private Customer user;
+    public Customer user;
+    public boolean loggedIn = false;
 
     public DataCommunicationModel() {
     }
@@ -24,5 +25,12 @@ public class DataCommunicationModel {
 
     public void setUser(Customer user) {
         this.user = user;
+        loggedIn = true;
     }
+    
+    public void logOut() {
+        loggedIn = false;
+        this.user = null;
+    }
+
 }

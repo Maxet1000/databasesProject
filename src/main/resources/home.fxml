@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="pane1" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+<VBox fx:id="pane1" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="be.kuleuven.VGHF.controller.HomeController">
     <children>
         <Text fx:id="txtVGHF" strokeType="OUTSIDE" strokeWidth="0.0" text="Video Game History Foundation" textAlignment="CENTER" wrappingWidth="400.0">
             <font>
@@ -16,12 +16,13 @@
             </font>
         </Text>
       <Pane prefHeight="200.0" prefWidth="200.0" />
-      <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+      <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <AnchorPane prefHeight="168.0" prefWidth="800.0" />
-            <Button fx:id="btnRentOrBuy" alignment="CENTER" minWidth="100.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" stylesheets="@styles.css" text="Rent Games" textAlignment="CENTER" textFill="#fdfaf6" />
-            <AnchorPane minWidth="80.0" prefHeight="168.0" prefWidth="80.0" />
-            <AnchorPane prefHeight="168.0" prefWidth="800.0" />
+            <AnchorPane prefWidth="2000.0" />
+            <Button fx:id="btnRentOrBuy" alignment="CENTER" minWidth="100.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" stylesheets="@styles.css" text="Visit Shop" textAlignment="CENTER" textFill="#fdfaf6" />
+            <AnchorPane prefWidth="2000.0" />
+            <Button fx:id="btnLogin" alignment="CENTER" minWidth="100.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" stylesheets="@styles.css" text="Log in" textAlignment="CENTER" textFill="#fdfaf6" />
+            <AnchorPane prefWidth="2000.0" />
          </children>
       </HBox>
     </children>
