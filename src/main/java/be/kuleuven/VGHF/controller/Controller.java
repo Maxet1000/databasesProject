@@ -10,20 +10,25 @@ public class Controller{
 
     public DataCommunicationModel data;
 
-    // public <S,T,U> List<S> filter(List<S> listToFilter, List<T> filter) {
-    //     ArrayList<S> filteredList = new ArrayList<>();
-    //     for(S element : listToFilter) {
-    //         if (filter instanceof Console) {
-    //             for (T filterelem : filter) {
-    //                 if (((Console) console).getGames().contains(element)) {
-    //                     filteredList.add(element);
-    //                 }
-    //             }
-    //         }
-    //     }
     
-    //     return filteredList;
-    // }
+    public <S,T> List<S> filter(List<S> listToFilter, List<T> filter) {
+        List<S> listAfterFilter = new ArrayList<>();
+        for (S element : listToFilter) {
+        for (T elementOfFilter: filter){
+                if (element instanceof Game) {
+                    if (((InterfaceForFilters) elementOfFilter).getGames().contains(element)) {
+                        listAfterFilter.add(element);
+                    }
+                }
+                else {
+                    if (((InterfaceForFilters) elementOfFilter).getCopies().contains(element)) {
+                        listAfterFilter.add(element);
+                    }
+                }
+            }
+        }
+        return listAfterFilter;
+    }
 
     public ArrayList<Copy> filterDevelopers(List<Copy> listToFilter, List<Developer> developersFilter) {
         ArrayList<Copy> filteredList = new ArrayList<>();
@@ -39,6 +44,7 @@ public class Controller{
         filteredList.addAll(set);
         return filteredList;
     }
+    
     public ArrayList<Copy> filterConsoles(List<Copy> listToFilter, List<Console> consolesFilter) {
         ArrayList<Copy> filteredList = new ArrayList<>();
         for(Copy element : listToFilter) {

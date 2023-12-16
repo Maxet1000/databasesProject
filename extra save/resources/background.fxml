@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane minHeight="200.0" minWidth="400.0" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="be.kuleuven.VGHF.controller.ProjectMainController">
+   <top>
+      <GridPane prefWidth="500.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="btnHome" mnemonicParsing="false" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="Home" textAlignment="CENTER" textFill="#fdfaf6" underline="true">
+               <font>
+                  <Font size="18.0" />
+               </font></Button>
+            <Button fx:id="btnGameDb" mnemonicParsing="false" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="Game Database" textAlignment="CENTER" textFill="#fdfaf6" GridPane.columnIndex="1">
+               <font>
+                  <Font size="18.0" />
+               </font></Button>
+            <Button fx:id="btnCustomerPage" mnemonicParsing="false" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="Customer Information" textAlignment="CENTER" textFill="#fdfaf6" GridPane.columnIndex="2">
+               <font>
+                  <Font size="18.0" />
+               </font></Button>
+            <Button fx:id="btnDeveloperPage" mnemonicParsing="false" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="Developer Information" textAlignment="CENTER" textFill="#fdfaf6" GridPane.columnIndex="3">
+               <font>
+                  <Font size="18.0" />
+               </font></Button>
+            <Button fx:id="btnInfo" mnemonicParsing="false" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="Info" textAlignment="CENTER" textFill="#fdfaf6" GridPane.columnIndex="4">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font></Button>
+         </children>
+      </GridPane>
+   </top>
+   <center>
+      <StackPane fx:id="pane1" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>

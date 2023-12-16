@@ -164,14 +164,12 @@ public class RentgamesController extends Controller{
         //checken voor balance
     public void rentAndBuyGamesFromCart(TableView table){
         var datalist = table.getItems();
-        System.out.println(datalist);
-        int i = 0;
+                int i = 0;
         int j = 0;
         boolean faultyGame = false;
         while (j != datalist.size()){
             List data = (List) datalist.get(j);
-            System.out.println(data);
-            int copyId = (int) data.get(data.size()-1);
+                        int copyId = (int) data.get(data.size()-1);
             var copy = ProjectMain.getDatabase().getCopyById(copyId);
             if(table == tblCart && copy.getAvailability() == Availability.AVAILABLE){
                 Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -204,12 +202,10 @@ public class RentgamesController extends Controller{
         }
         while (i != datalist.size() && faultyGame != true){
             List data = (List) datalist.get(i);
-            System.out.println(data);
-            int copyId = (int) data.get(data.size()-1);
+                        int copyId = (int) data.get(data.size()-1);
             var copy = ProjectMain.getDatabase().getCopyById(copyId);
             copy.setAvailability(Availability.RENTED);
-            System.out.println(copy.getAvailability());
-            copy.setDateOfReturn(twoWeeksLonger());
+                        copy.setDateOfReturn(twoWeeksLonger());
             ProjectMain.getDatabase().updateCopy(copy);
             i++;
         }
@@ -309,16 +305,16 @@ public class RentgamesController extends Controller{
         if(toBeFilteredDevelopers.isEmpty()){
             initTable(listOfFilteredCopies);
         } else {
-            listOfFilteredCopies = filterDevelopers(listOfFilteredCopies, toBeFilteredDevelopers);
+            listOfFilteredCopies = filter(listOfFilteredCopies, toBeFilteredDevelopers);
         }
         if(toBeFilteredConsoles.isEmpty()) {
             initTable(listOfFilteredCopies);
         } else {
-            listOfFilteredCopies = filterConsoles(listOfFilteredCopies, toBeFilteredConsoles);
+            listOfFilteredCopies = filter(listOfFilteredCopies, toBeFilteredConsoles);
         }
         if (toBeFilteredGenres.isEmpty()) {
         } else {
-            listOfFilteredCopies = filterGenres(listOfFilteredCopies, toBeFilteredGenres);
+            listOfFilteredCopies = filter(listOfFilteredCopies, toBeFilteredGenres);
         }
         initTable(listOfFilteredCopies);
     }
