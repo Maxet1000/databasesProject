@@ -45,11 +45,11 @@ public class CustomerController extends Controller{
 
             var process = new ProcessBuilder();
              if(isWindows()) {
-                process.command("cmd.exe", "/c", "start " + path.toRealPath().toString());
+                 process.command("cmd.exe", "/c", "start " + path.toRealPath());
             } else if(isMac()) {
-                process.command("open", path.toRealPath().toString());
+                 process.command("open", path.toRealPath().toString());
             } else {
-                throw new RuntimeException("Ik ken uw OS niet jong");
+                 throw new RuntimeException("Ik ken uw OS niet jong");
             }
 
             process.start();

@@ -31,6 +31,7 @@ public class CustomerLoginController extends Controller{
     private TextField txtEmail;
 
 
+
     public void initialize(){
         btnLogin.setOnAction(e -> {
             try {
@@ -46,6 +47,7 @@ public class CustomerLoginController extends Controller{
         });
     }
 
+// TODO model data veranderen na een juiste login
     private void switchNextScreen() throws IOException {
         var user = ProjectMain.getDatabase().getUserByEmail(txtEmail.getText());
         if(txtEmail.getText().equals("UwU")){

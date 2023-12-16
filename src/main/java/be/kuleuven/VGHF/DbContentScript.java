@@ -129,7 +129,7 @@ public class DbContentScript {
         Customer dries = new Customer("Dries Ruttens", "dries.ruttens@student.uhasselt.be", "wachtwoord", 10);
         Customer bjorn = new Customer("Bjorn Spauwen", "bjorn.spauwen@student.uhasselt.be", "password", 20);
         Customer max = new Customer("Max-émile Meylaerts", "max-emile.meylaerts@student.uhasselt.be", "12345", 30);
-        Customer mauro = new Customer("Mauro Vranckx", "mauro.vranckx@student.uhasselt.be", "azerty", 0);
+        Customer mauro = new Customer("Mauro Vranckx", "mauro.vranckx@student.uhasselt.be", "isuckdick69420", 0);
         Customer eddy = new Customer("Edmond Tsampanis", "edmond.tsampanis@student.uhasselt.be", "StrongPass123!", 40);
         Customer jan = new Customer("Jan Alleman", "jan.alleman@fancycustomemail.com", "mijnverjaardag1999",-5);
         Customer UwU = new Customer("UwU_is_UwU","UwU", "I dont need one xDDD", 14);
@@ -147,19 +147,24 @@ public class DbContentScript {
                                 .console(pc)
                                 .availability(Availability.AVAILABLE)
                                 .warehouse("Genk")
+                                .purchasePrice(30)
+                                .purchasePrice(6)
                                 .build();
 
         Copy witcherCopy1 = builder.game(theWitcher3)
                                    .console(playstation4)
-                                   .availability(Availability.SOLD)
+                                   .availability(Availability.AVAILABLE)
                                    .warehouse("Hasselt")
                                    .purchasePrice(70)
+                                   .rentPrice(4)
                                    .build();
 
         Copy marioCopy1 = builder.game(superMarioBros)
                                  .console(nes)
-                                 .availability(Availability.BROKEN)
+                                 .availability(Availability.AVAILABLE)
                                  .warehouse("Los Angeles")
+                                 .purchasePrice(65)
+                                 .rentPrice(8)
                                  .build();
 
         Copy minecraftCopy1 = builder.game(minecraft)
@@ -176,11 +181,22 @@ public class DbContentScript {
                                      .console(playstation5)
                                      .availability(Availability.AVAILABLE)
                                      .warehouse("Diepenbeek")
+                                     .purchasePrice(20)
+                                     .rentPrice(3)
                                      .build();
         Copy pokemonPatinumCopy1 = builder.game(pokemonPlatinum)
                                           .console(nintenoDS)
                                           .availability(Availability.AVAILABLE)
                                           .warehouse("Genk")
+                                          .purchasePrice(35)
+                                          .rentPrice(6)
+                                          .build();
+        Copy pokemonPatinumCopy2 = builder.game(pokemonPlatinum)
+                                          .console(nintenoDS)
+                                          .availability(Availability.AVAILABLE)
+                                          .warehouse("Genk")
+                                          .purchasePrice(35)
+                                          .rentPrice(6)
                                           .build();
 
 
@@ -190,6 +206,7 @@ public class DbContentScript {
         database.saveNewCopy(minecraftCopy1);
         database.saveNewCopy(minecraftCopy2);
         database.saveNewCopy(pokemonPatinumCopy1);
+        database.saveNewCopy(pokemonPatinumCopy2);
 
         MonetaryTransaction transaction1 = new MonetaryTransaction(TransactionType.SALE, 60, jan, witcherCopy1, "2022-05-12");
         MonetaryTransaction transaction2 = new MonetaryTransaction(TransactionType.RENTAL, 9, bjorn, minecraftCopy2, "2023-12-12");

@@ -4,12 +4,9 @@ package be.kuleuven.VGHF.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.application.Platform;
-import org.hibernate.internal.util.MarkerObject;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import be.kuleuven.VGHF.DataCommunicationModel;
 import be.kuleuven.VGHF.ProjectMain;
 import be.kuleuven.VGHF.domain.Console;
 import be.kuleuven.VGHF.domain.Copy;
@@ -17,16 +14,12 @@ import be.kuleuven.VGHF.domain.Developer;
 import be.kuleuven.VGHF.domain.Genre;
 import be.kuleuven.VGHF.enums.Availability;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTreeCell;
 import javafx.scene.layout.VBox;
-import net.bytebuddy.asm.Advice.AllArguments;
-
-import java.util.List;
 
 public class RentgamesController extends Controller{
     
@@ -44,7 +37,7 @@ public class RentgamesController extends Controller{
     @FXML
     private TreeView<String> filtersTreeView;
     @FXML
-    private TableView tblCart;
+    private TableView tblRentCart;
     @FXML
     private Button btnRemoveFromCart;
     @FXML
@@ -72,7 +65,7 @@ public class RentgamesController extends Controller{
         initTableCart();
         initFilters();
         btnAddGameToCart.setOnAction(e -> {
-            addGameToCart();
+            addGameToRentCart();
         });
         btnAddFilter.setOnAction(e -> {
             activateFilters();
@@ -81,11 +74,11 @@ public class RentgamesController extends Controller{
             removeFilters();
         });
         btnRemoveFromCart.setOnAction(e -> {
-            removeGameFromCart(tblCart);
+            removeGameFromCart(tblRentCart);
             removeGameFromCart(tblBuyCart);
         });
         btnRentGames.setOnAction(e -> {
-            rentAndBuyGamesFromCart(tblCart);
+            rentAndBuyGamesFromCart(tblRentCart);
             rentAndBuyGamesFromCart(tblBuyCart);
         });
         btnAddGameToBuy.setOnAction(e -> {
@@ -93,71 +86,6 @@ public class RentgamesController extends Controller{
         });
     }
 
-    public void addGameToBuyCart(){
-        try {
-                    List selectedItem =  (List) tblRent.getSelectionModel().getSelectedItem();
-         
-        int x = (int) selectedItem.get(selectedItem.size()-1);
-        var copy = ProjectMain.getDatabase().getCopyById(x);
-        var gameName = copy.getGame().getTitle();           
-        var copyId = copy.getCopyID();
-        boolean doubleCopy = false;
-    
-            String developers = "";
-            for (int j = 0; j < copy.getGame().getDevelopers().size(); j++) {
-                developers = developers+ copy.getGame().getDevelopers().get(j).getDeveloperName();
-                if (j+1 != copy.getGame().getDevelopers().size()) {
-                    developers = developers + ", ";
-                }
-            }
-            String consoles = "";
-            for (int j = 0; j < copy.getGame().getConsoles().size(); j++) {
-                consoles = consoles+ copy.getGame().getConsoles().get(j).getConsoleName();
-                if (j+1 != copy.getGame().getConsoles().size()) {
-                    consoles = consoles + ", ";
-                }
-            }
-            String genres = "";
-            for (int j = 0; j < copy.getGame().getGenres().size(); j++) {
-                genres = genres+ copy.getGame().getGenres().get(j).getGenreName();
-                if (j+1 != copy.getGame().getGenres().size()) {
-                    genres = genres + ", ";
-                }
-            }
-        
-            ObservableList<List> items = tblBuyCart.getItems();
-            for (List item : items) {
-                if (item.get(item.size()-1).equals(copyId)) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Warning");
-                    alert.setHeaderText(null);
-                    alert.setContentText("This copy is already in your cart");
-                    alert.showAndWait();
-                    doubleCopy = true; 
-                }
-            }
-            ObservableList<List> items1 = tblCart.getItems();
-            for (List item : items1) {
-                if (item.get(item.size()-1).equals(copyId)) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Warning");
-                    alert.setHeaderText(null);
-                    alert.setContentText("This copy is already in your cart");
-                    alert.showAndWait();
-                    doubleCopy = true; 
-                }
-            }
-
-        if (!doubleCopy){
-            tblBuyCart.getItems().add(FXCollections.observableArrayList(gameName, developers, consoles, genres, copyId));
-        }else {
-            doubleCopy = false;
-        }
-        } catch (Exception e) {
-            System.out.println("No game selected");
-        }
-
-    }
 
     //TODO voor RentGamesFromCart
         //customerID toevoegen mbv het inloggen van de customer
@@ -173,13 +101,13 @@ public class RentgamesController extends Controller{
             System.out.println(data);
             int copyId = (int) data.get(data.size()-1);
             var copy = ProjectMain.getDatabase().getCopyById(copyId);
-            if(table == tblCart && copy.getAvailability() == Availability.AVAILABLE){
+            if(table == tblRentCart && copy.getAvailability() == Availability.AVAILABLE){
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("congratulations");
                 alert.setHeaderText(null);
                 alert.setContentText("Games are now rented");
                 alert.show();
-            }else if(table == tblCart){
+            }else if(table == tblRentCart){
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("congratulations");
                 alert.setHeaderText(null);
@@ -235,7 +163,7 @@ public class RentgamesController extends Controller{
         data.remove(selectedItem);
     }
 
-    public void addGameToCart(){
+    public void addGameToRentCart(){
         try {
                     List selectedItem =  (List) tblRent.getSelectionModel().getSelectedItem();
 
@@ -271,8 +199,9 @@ public class RentgamesController extends Controller{
                         genres = genres + ", ";
                     }
                 }
+                 String rentPrice = "" + copy.getRentPrice();
             
-                ObservableList<List> items = tblCart.getItems();
+                ObservableList<List> items = tblRentCart.getItems();
                 for (List item : items) {
                     if (item.get(item.size()-1).equals(copyId)) {
                         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -295,13 +224,80 @@ public class RentgamesController extends Controller{
                 }
             }
         if (!doubleCopy){
-            tblCart.getItems().add(FXCollections.observableArrayList(gameName, developers, consoles, genres, copyId));
+            tblRentCart.getItems().add(FXCollections.observableArrayList(gameName, developers, consoles, genres, rentPrice, copyId));
         }else {
             doubleCopy = false;
         }
         } catch (Exception e) {
             System.out.println("No game selected");
         }
+    }
+
+    public void addGameToBuyCart(){
+        try {
+            List selectedItem =  (List) tblRent.getSelectionModel().getSelectedItem();
+
+            int x = (int) selectedItem.get(selectedItem.size()-1);
+            var copy = ProjectMain.getDatabase().getCopyById(x);
+            var gameName = copy.getGame().getTitle();
+            var copyId = copy.getCopyID();
+            boolean doubleCopy = false;
+
+            String developers = "";
+            for (int j = 0; j < copy.getGame().getDevelopers().size(); j++) {
+                developers = developers+ copy.getGame().getDevelopers().get(j).getDeveloperName();
+                if (j+1 != copy.getGame().getDevelopers().size()) {
+                    developers = developers + ", ";
+                }
+            }
+            String consoles = "";
+            for (int j = 0; j < copy.getGame().getConsoles().size(); j++) {
+                consoles = consoles+ copy.getGame().getConsoles().get(j).getConsoleName();
+                if (j+1 != copy.getGame().getConsoles().size()) {
+                    consoles = consoles + ", ";
+                }
+            }
+            String genres = "";
+            for (int j = 0; j < copy.getGame().getGenres().size(); j++) {
+                genres = genres+ copy.getGame().getGenres().get(j).getGenreName();
+                if (j+1 != copy.getGame().getGenres().size()) {
+                    genres = genres + ", ";
+                }
+            }
+            String purchasePrice = "" + copy.getPurchasePrice();
+
+            ObservableList<List> items = tblBuyCart.getItems();
+            for (List item : items) {
+                if (item.get(item.size()-1).equals(copyId)) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning");
+                    alert.setHeaderText(null);
+                    alert.setContentText("This copy is already in your cart");
+                    alert.showAndWait();
+                    doubleCopy = true;
+                }
+            }
+            ObservableList<List> items1 = tblRentCart.getItems();
+            for (List item : items1) {
+                if (item.get(item.size()-1).equals(copyId)) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning");
+                    alert.setHeaderText(null);
+                    alert.setContentText("This copy is already in your cart");
+                    alert.showAndWait();
+                    doubleCopy = true;
+                }
+            }
+
+            if (!doubleCopy){
+                tblBuyCart.getItems().add(FXCollections.observableArrayList(gameName, developers, consoles, genres, purchasePrice, copyId));
+            }else {
+                doubleCopy = false;
+            }
+        } catch (Exception e) {
+            System.out.println("No game selected");
+        }
+
     }
 
     private void activateFilters() {
@@ -334,15 +330,15 @@ public class RentgamesController extends Controller{
     }
 
     public void initTableCart(){
-        tblCart.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        tblCart.getColumns().clear();
+        tblRentCart.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        tblRentCart.getColumns().clear();
 
         int colIndex = 0;
-        for(var colName : new String[]{"Game", "Developer", "Console", "Genre", "Id"}) {
+        for(var colName : new String[]{"Game", "Developer", "Console", "Genre", "Rent Price", "Id"}) {
             TableColumn<ObservableList<String>, String> col = new TableColumn<>(colName);
             final int finalColIndex = colIndex;
             col.setCellValueFactory(f -> new ReadOnlyObjectWrapper<>(f.getValue().get(finalColIndex)));
-            tblCart.getColumns().add(col);
+            tblRentCart.getColumns().add(col);
             if(colName == "Id"){
                 col.setVisible(false);
             }
@@ -353,7 +349,7 @@ public class RentgamesController extends Controller{
         tblBuyCart.getColumns().clear();
 
         int colIndex1 = 0;
-        for(var colName : new String[]{"Game", "Developer", "Console", "Genre", "Id"}) {
+        for(var colName : new String[]{"Game", "Developer", "Console", "Genre", "Purchase Price", "Id"}) {
             TableColumn<ObservableList<String>, String> col = new TableColumn<>(colName);
             final int finalColIndex = colIndex1;
             col.setCellValueFactory(f -> new ReadOnlyObjectWrapper<>(f.getValue().get(finalColIndex)));
@@ -371,7 +367,7 @@ public class RentgamesController extends Controller{
         tblRent.getColumns().clear();
 
         int colIndex = 0;
-        for(var colName : new String[]{"Game", "Developer", "Console", "Genre", "Id"}) {
+        for(var colName : new String[]{"Game", "Developer", "Console", "Genre", "Rent Price", "Purchaseprice", "Id"}) {
             TableColumn<ObservableList<String>, String> col = new TableColumn<>(colName);
             final int finalColIndex = colIndex;
             col.setCellValueFactory(f -> new ReadOnlyObjectWrapper<>(f.getValue().get(finalColIndex)));
@@ -396,14 +392,8 @@ public class RentgamesController extends Controller{
                         developers = developers + ", ";
                     }
                 }
-                //de console word nu naar de copy verwezen maar is nog geen compatible lijst toegevoegd
-                String consoles = "";
-                for (int j = 0; j < listOfCopies.get(i).getGame().getConsoles().size(); j++) {
-                    consoles = consoles+ listOfCopies.get(i).getConsole().getConsoleName();
-                    if (j+1 != listOfCopies.get(i).getGame().getConsoles().size()) {
-                        consoles = consoles + ", ";
-                    }
-                }
+                String console = listOfCopies.get(i).getConsole().getConsoleName();
+
                 String genres = "";
                 for (int j = 0; j < listOfCopies.get(i).getGame().getGenres().size(); j++) {
                     genres = genres+ listOfCopies.get(i).getGame().getGenres().get(j).getGenreName();
@@ -411,7 +401,10 @@ public class RentgamesController extends Controller{
                         genres = genres + ", ";
                     }
                 }
-                tblRent.getItems().add(FXCollections.observableArrayList(gameCopyName, developers, consoles, genres, copyId));
+
+                String rentPrice = "" + listOfCopies.get(i).getRentPrice();
+                String purchasePrice = "" + listOfCopies.get(i).getPurchasePrice();
+                tblRent.getItems().add(FXCollections.observableArrayList(gameCopyName, developers, console, genres, rentPrice, purchasePrice, copyId));
             }
         }
         

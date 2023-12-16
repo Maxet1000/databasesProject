@@ -21,6 +21,8 @@ public class HomeController extends Controller{
     public VBox pane1;
     @FXML
     private Button btnRentOrBuy;
+    @FXML
+    private Button btnLogin;
 
     public void initialize() throws IOException {
         btnRentOrBuy.setOnAction(e -> {
@@ -29,6 +31,9 @@ public class HomeController extends Controller{
             } catch (IOException ex) {
                 throw new RuntimeException (ex);
             }
+        });
+        btnLogin.setOnAction(e -> {
+            showScherm("customerloginpage");
         });
     }
 
@@ -48,21 +53,26 @@ public class HomeController extends Controller{
         StackPane.setAlignment(rootLoader, Pos.CENTER);
     }
 
-    private void showScherm(String id) {
-        var resourceName = id + ".fxml";
-        try {
-            var stage = new Stage();
-            var root = (StackPane) FXMLLoader.load(getClass().getClassLoader().getResource(resourceName));
-            var scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle(id);
-            stage.initOwner(ProjectMain.getRootStage());
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.show();
+        private void showScherm(String id) {
+            var resourceName = id + ".fxml";
+            try {
+                var stage = new Stage();
+                var pane = new FXMLLoader(getClass().getClassLoader().getResource(resourceName));
+                var root = (VBox) pane.load();
 
-        } catch (Exception e) {
-            throw new RuntimeException("Kan scherm " + resourceName + " niet vinden", e);
+                var controller = pane.<CustomerLoginController>getController();
+                controller.setModel(data);
+
+                var scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle(id);
+                root.setAlignment(Pos.CENTER);
+                stage.initOwner(ProjectMain.getRootStage());
+                stage.initModality(Modality.WINDOW_MODAL);
+                stage.show();
+
+            } catch (Exception e) {
+                throw new RuntimeException("Kan scherm " + resourceName + " niet vinden", e);
+            }
         }
-    }
-
 }

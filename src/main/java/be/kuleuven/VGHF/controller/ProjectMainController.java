@@ -108,7 +108,6 @@ public class ProjectMainController {
 
         //switch to pane
         var pane = new FXMLLoader(getClass().getClassLoader().getResource(id + ".fxml"));
-        var cont = pane.getController();
         var rootLoader = (VBox) pane.load();
 
         var controller = pane.<Controller>getController();
