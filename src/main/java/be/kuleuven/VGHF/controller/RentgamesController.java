@@ -94,12 +94,8 @@ public class RentgamesController extends Controller{
     }
 
     public void addGameToBuyCart(){
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-        System.out.println(data.getUser().getCustomerName());
-        
-        List selectedItem =  (List) tblRent.getSelectionModel().getSelectedItem();
-
-        System.out.println(selectedItem);
+        try {
+                    List selectedItem =  (List) tblRent.getSelectionModel().getSelectedItem();
          
         int x = (int) selectedItem.get(selectedItem.size()-1);
         var copy = ProjectMain.getDatabase().getCopyById(x);
@@ -157,8 +153,11 @@ public class RentgamesController extends Controller{
         }else {
             doubleCopy = false;
         }
-    }
+        } catch (Exception e) {
+            System.out.println("No game selected");
+        }
 
+    }
 
     //TODO voor RentGamesFromCart
         //customerID toevoegen mbv het inloggen van de customer
@@ -237,8 +236,8 @@ public class RentgamesController extends Controller{
     }
 
     public void addGameToCart(){
-        
-        List selectedItem =  (List) tblRent.getSelectionModel().getSelectedItem();
+        try {
+                    List selectedItem =  (List) tblRent.getSelectionModel().getSelectedItem();
 
         System.out.println(selectedItem);
          
@@ -299,6 +298,9 @@ public class RentgamesController extends Controller{
             tblCart.getItems().add(FXCollections.observableArrayList(gameName, developers, consoles, genres, copyId));
         }else {
             doubleCopy = false;
+        }
+        } catch (Exception e) {
+            System.out.println("No game selected");
         }
     }
 
