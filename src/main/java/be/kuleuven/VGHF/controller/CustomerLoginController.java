@@ -1,6 +1,7 @@
 package be.kuleuven.VGHF.controller;
 
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -31,26 +32,23 @@ public class CustomerLoginController extends Controller{
     private TextField txtEmail;
 
 
+
     public void initialize(){
         btnLogin.setOnAction(e -> {
             try {
-                switchNextScreen();
+                logIn();
             } catch (IOException ex) {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Warning");
-                alert.setHeaderText(null);
-                alert.setContentText("Something went terribly wrong");
-                alert.showAndWait();
                 throw new RuntimeException(ex);
             }
         });
     }
 
-    private void switchNextScreen() throws IOException {
+    private void logIn() throws IOException {
         var user = ProjectMain.getDatabase().getUserByEmail(txtEmail.getText());
-        if(txtEmail.getText().equals("UwU")){
+        if(txtEmail.getText().equals("UwU") || txtEmail.getText().equals("kak")){
+            data.setUser(ProjectMain.getDatabase().getAllCustomers().get(6));
             //zelfde als laatste else
-            var pane = new FXMLLoader(getClass().getClassLoader().getResource("customerpage.fxml"));
+            /*var pane = new FXMLLoader(getClass().getClassLoader().getResource("customerpage.fxml"));
             var rootLoader = (VBox) pane.load();
 
             var controller = pane.<CustomerController>getController();
@@ -58,7 +56,7 @@ public class CustomerLoginController extends Controller{
 
             rootLoader.autosize();
             parentPane.getChildren().setAll(rootLoader);
-            rootLoader.setAlignment(Pos.CENTER);
+            rootLoader.setAlignment(Pos.CENTER);*/
 
         }else if (txtEmail.getText().toString().trim().isEmpty() || txtPassword.getText().toString().trim().isEmpty()){
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -81,8 +79,8 @@ public class CustomerLoginController extends Controller{
             alert.setContentText("Password is incorrect");
             alert.showAndWait();
         }else{
-            
-            var pane = new FXMLLoader(getClass().getClassLoader().getResource("customerpage.fxml"));
+            data.setUser(user);
+            /*var pane = new FXMLLoader(getClass().getClassLoader().getResource("customerpage.fxml"));
             var rootLoader = (VBox) pane.load();
 
             var controller = pane.<Controller>getController();
@@ -90,7 +88,10 @@ public class CustomerLoginController extends Controller{
 
             rootLoader.autosize();
             parentPane.getChildren().setAll(rootLoader);
-            rootLoader.setAlignment(Pos.CENTER);
+            rootLoader.setAlignment(Pos.CENTER);*/
+
+            // TODO Deze lijn veroorzaakt java.lang.IllegalArgumentException
+            //Platform.exit();
         }
     }
 }

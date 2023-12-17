@@ -140,7 +140,7 @@ public class DbContentScript {
         Customer dries = new Customer("Dries Ruttens", "dries.ruttens@student.uhasselt.be", "wachtwoord", 10);
         Customer bjorn = new Customer("Bjorn Spauwen", "bjorn.spauwen@student.uhasselt.be", "password", 20);
         Customer max = new Customer("Max-émile Meylaerts", "max-emile.meylaerts@student.uhasselt.be", "12345", 30);
-        Customer mauro = new Customer("Mauro Vranckx", "mauro.vranckx@student.uhasselt.be", "azerty", 0);
+        Customer mauro = new Customer("Mauro Vranckx", "mauro.vranckx@student.uhasselt.be", "isuckdick69420", 0);
         Customer eddy = new Customer("Edmond Tsampanis", "edmond.tsampanis@student.uhasselt.be", "StrongPass123!", 40);
         Customer jan = new Customer("Jan Alleman", "jan.alleman@fancycustomemail.com", "mijnverjaardag1999",-5);
         Customer customer1 = new Customer("John Doe", "john.doe@email.com", "password123", 1000);
@@ -159,19 +159,24 @@ public class DbContentScript {
                                 .console(pc)
                                 .availability(Availability.AVAILABLE)
                                 .warehouse("Genk")
+                                .purchasePrice(30)
+                                .purchasePrice(6)
                                 .build();
 
         Copy witcherCopy1 = builder.game(theWitcher3)
                                    .console(playstation4)
-                                   .availability(Availability.SOLD)
+                                   .availability(Availability.AVAILABLE)
                                    .warehouse("Hasselt")
                                    .purchasePrice(70)
+                                   .rentPrice(4)
                                    .build();
 
         Copy marioCopy1 = builder.game(superMarioBros)
                                  .console(nes)
-                                 .availability(Availability.BROKEN)
+                                 .availability(Availability.AVAILABLE)
                                  .warehouse("Los Angeles")
+                                 .purchasePrice(65)
+                                 .rentPrice(8)
                                  .build();
 
         Copy minecraftCopy1 = builder.game(minecraft)
@@ -188,11 +193,22 @@ public class DbContentScript {
                                      .console(playstation5)
                                      .availability(Availability.AVAILABLE)
                                      .warehouse("Diepenbeek")
+                                     .purchasePrice(20)
+                                     .rentPrice(3)
                                      .build();
         Copy pokemonPatinumCopy1 = builder.game(pokemonPlatinum)
                                           .console(nintenoDS)
                                           .availability(Availability.AVAILABLE)
                                           .warehouse("Genk")
+                                          .purchasePrice(35)
+                                          .rentPrice(6)
+                                          .build();
+        Copy pokemonPlatinumCopy2 = builder.game(pokemonPlatinum)
+                                          .console(nintenoDS)
+                                          .availability(Availability.AVAILABLE)
+                                          .warehouse("Genk")
+                                          .purchasePrice(35)
+                                          .rentPrice(6)
                                           .build();
         Copy metalGearSolidCopy1 = builder.game(metalGearSolid)
                                           .console(playstation1)
@@ -317,12 +333,6 @@ public class DbContentScript {
                                             .console(nintendoSwitch)
                                             .availability(Availability.AVAILABLE)
                                             .warehouse("Kyoto")
-                                            .build();
-
-        Copy pokemonPlatinumCopy2 = builder.game(pokemonPlatinum)
-                                            .console(nintenoDS)
-                                            .availability(Availability.AVAILABLE)
-                                            .warehouse("Tokyo")
                                             .build();
         
         Copy finalFantasyIXCopy1 = builder.game(finalFantasyIX)
@@ -467,8 +477,6 @@ public class DbContentScript {
         theElderScrollsVSkyrim.setCopies(Arrays.asList(theElderScrollsVSkyrimCopy1));
         finalFantasyX.setCopies(Arrays.asList(finalFantasyXCopy1));
         donkeyKong.setCopies(Arrays.asList(donkeyKongCopy1, donkeyKongCopy2));
-
-
 
         action.setGames(Arrays.asList(metalGearSolid, haloCombatEvolved, pacman, spaceInvaders, donkeyKong, pong, galaga, zeldaBreathOfTheWild, darkSouls, grandTheftAutoV, theLastOfUs, assassinsCreedOrigins, uncharted4AThiefsEnd, pacman, theLegendOfZelda, metroid));
         adventure.setGames(Arrays.asList(theWitcher3, zeldaBreathOfTheWild, theLastOfUs, uncharted4AThiefsEnd, metroid, theLegendOfZelda));
