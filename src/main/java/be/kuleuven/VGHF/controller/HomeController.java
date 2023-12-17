@@ -1,5 +1,6 @@
 package be.kuleuven.VGHF.controller;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -33,7 +34,7 @@ public class HomeController extends Controller{
             }
         });
         btnLogin.setOnAction(e -> {
-            showScherm("customerloginpage");
+            login();
         });
     }
 
@@ -53,7 +54,12 @@ public class HomeController extends Controller{
         StackPane.setAlignment(rootLoader, Pos.CENTER);
     }
 
-        private void showScherm(String id) {
+    private void login() {
+        showLoginScherm();
+        System.out.println("SWAG " + data.getUser().getCustomerName());
+    }
+
+        private void showSchermLogin(String id) {
             var resourceName = id + ".fxml";
             try {
                 var stage = new Stage();
@@ -69,7 +75,7 @@ public class HomeController extends Controller{
                 root.setAlignment(Pos.CENTER);
                 stage.initOwner(ProjectMain.getRootStage());
                 stage.initModality(Modality.WINDOW_MODAL);
-                stage.show();
+                stage.showAndWait();
 
             } catch (Exception e) {
                 throw new RuntimeException("Kan scherm " + resourceName + " niet vinden", e);

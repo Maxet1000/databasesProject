@@ -13,6 +13,7 @@ import be.kuleuven.VGHF.domain.Copy;
 import be.kuleuven.VGHF.domain.Developer;
 import be.kuleuven.VGHF.domain.Genre;
 import be.kuleuven.VGHF.enums.Availability;
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTreeCell;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class RentgamesController extends Controller{
     
@@ -46,7 +48,10 @@ public class RentgamesController extends Controller{
     private Button btnAddGameToBuy;
     @FXML
     private TableView tblBuyCart;
-
+    @FXML
+    private Text txtBalance;
+    @FXML
+    private Text txtUser;
     private ArrayList<Developer> toBeFilteredDevelopers;
     private ArrayList<Console> toBeFilteredConsoles;
     private ArrayList<Genre> toBeFilteredGenres;
@@ -84,6 +89,10 @@ public class RentgamesController extends Controller{
         btnAddGameToBuy.setOnAction(e -> {
             addGameToBuyCart();
         });
+        Platform.runLater(() -> {
+            txtBalance.setText("" + data.getUser().getBalance());
+            txtUser.setText("Logged in as: " + data.getUser().getCustomerName());
+        });
     }
 
 
@@ -92,14 +101,12 @@ public class RentgamesController extends Controller{
         //checken voor balance
     public void rentAndBuyGamesFromCart(TableView table){
         var datalist = table.getItems();
-        System.out.println(datalist);
-        int i = 0;
+                int i = 0;
         int j = 0;
         boolean faultyGame = false;
         while (j != datalist.size()){
             List data = (List) datalist.get(j);
-            System.out.println(data);
-            int copyId = (int) data.get(data.size()-1);
+                        int copyId = (int) data.get(data.size()-1);
             var copy = ProjectMain.getDatabase().getCopyById(copyId);
             if(table == tblRentCart && copy.getAvailability() == Availability.AVAILABLE){
                 Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -132,12 +139,10 @@ public class RentgamesController extends Controller{
         }
         while (i != datalist.size() && faultyGame != true){
             List data = (List) datalist.get(i);
-            System.out.println(data);
-            int copyId = (int) data.get(data.size()-1);
+                        int copyId = (int) data.get(data.size()-1);
             var copy = ProjectMain.getDatabase().getCopyById(copyId);
             copy.setAvailability(Availability.RENTED);
-            System.out.println(copy.getAvailability());
-            copy.setDateOfReturn(twoWeeksLonger());
+                        copy.setDateOfReturn(twoWeeksLonger());
             ProjectMain.getDatabase().updateCopy(copy);
             i++;
         }
@@ -305,16 +310,16 @@ public class RentgamesController extends Controller{
         if(toBeFilteredDevelopers.isEmpty()){
             initTable(listOfFilteredCopies);
         } else {
-            listOfFilteredCopies = filterDevelopers(listOfFilteredCopies, toBeFilteredDevelopers);
+            listOfFilteredCopies = filter(listOfFilteredCopies, toBeFilteredDevelopers);
         }
         if(toBeFilteredConsoles.isEmpty()) {
             initTable(listOfFilteredCopies);
         } else {
-            listOfFilteredCopies = filterConsoles(listOfFilteredCopies, toBeFilteredConsoles);
+            listOfFilteredCopies = filter(listOfFilteredCopies, toBeFilteredConsoles);
         }
         if (toBeFilteredGenres.isEmpty()) {
         } else {
-            listOfFilteredCopies = filterGenres(listOfFilteredCopies, toBeFilteredGenres);
+            listOfFilteredCopies = filter(listOfFilteredCopies, toBeFilteredGenres);
         }
         initTable(listOfFilteredCopies);
     }

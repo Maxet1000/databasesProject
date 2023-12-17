@@ -84,6 +84,11 @@
                         <Text fx:id="txtBalance" layoutX="94.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="69" />
                      </children>
                   </AnchorPane>
+                  <AnchorPane maxHeight="50.0" minHeight="50.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #064420; -fx-border-width: 2;">
+                     <children>
+                        <Text fx:id="txtUser" layoutX="2.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="200.0" />
+                     </children>
+                  </AnchorPane>
                </children>
             </VBox>
             <AnchorPane minWidth="5.0" prefHeight="200.0" HBox.hgrow="ALWAYS" />

@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -21,6 +22,10 @@ public class CustomerController extends Controller{
 
     @FXML
     private Button btnAddBalance;
+    @FXML
+    private Text txtBalance;
+    @FXML
+    private Text txtUser;
 
 
     public void initialize() {
@@ -29,6 +34,10 @@ public class CustomerController extends Controller{
         });
         Platform.runLater(() -> {
             initTable();
+        });
+        Platform.runLater(() -> {
+            txtBalance.setText("" + data.getUser().getBalance());
+            txtUser.setText("Logged in as: " + data.getUser().getCustomerName());
         });
     }
     

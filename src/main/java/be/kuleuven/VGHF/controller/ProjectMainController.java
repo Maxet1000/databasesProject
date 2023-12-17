@@ -34,7 +34,6 @@ public class ProjectMainController {
 
     public void initialize() throws IOException {
         data = new DataCommunicationModel();
-        data.setUser(ProjectMain.getDatabase().getAllCustomers().get(5));
 
         switchToId("home");
         btnHome.setOnAction(e -> {
@@ -55,8 +54,11 @@ public class ProjectMainController {
         });
         btnCustomerPage.setOnAction(e -> {
             try {
-                switchToId("customerloginpage");
-                switchToId("customerloginpage");
+                if (data.loggedIn) {
+                    switchToId("customerpage");
+                } else {
+                    switchToId("precustomerpage");
+                }
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
@@ -94,7 +96,8 @@ public class ProjectMainController {
             case "gamedb":
                 btnGameDb.setUnderline(true);
             break;
-            case "customerloginpage":
+            case "precustomerpage":
+            case "customerpage":
                 btnCustomerPage.setUnderline(true);
             break;
             case "developerloginpage":
@@ -113,7 +116,7 @@ public class ProjectMainController {
         var controller = pane.<Controller>getController();
         controller.setModel(data);
 
-        System.out.println("Yah " + pane.<Controller>getController().getModel().getUser().getCustomerName());
+        //System.out.println("Yah " + pane.<Controller>getController().getModel().getUser().getCustomerName());
         rootLoader.autosize();
         pane1.getChildren().setAll(rootLoader);
         rootLoader.setAlignment(Pos.CENTER);
