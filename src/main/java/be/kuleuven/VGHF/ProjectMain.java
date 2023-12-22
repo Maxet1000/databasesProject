@@ -55,7 +55,4 @@ public class ProjectMain extends Application {
     public static HibernateManager getDatabase(){
         return database;
     }
-    
-    //mauro is minder goed dan max, bjorn en dries
-
 }
