@@ -5,14 +5,14 @@ import java.util.*;
 
 
 @Entity
-public class Developer {
+public class Developer implements InterfaceForFilters {
 
     @Id
     @Column(nullable = false)
     private String developerName;
 
-    @ManyToMany(mappedBy = "developers")
-    private List<Game> games;   
+    @ManyToMany(mappedBy = "developers", fetch = FetchType.EAGER)
+    private List<Game> games = new ArrayList<>();
 
     public Developer (){}
 
@@ -28,6 +28,7 @@ public class Developer {
         this.developerName = developerNameString;
     }
 
+    @Override
     public List<Game> getGames() {
         return this.games;
     }
@@ -36,5 +37,8 @@ public class Developer {
         this.games = games;
     }
 
+    public void addGame(Game game) {
+        this.games.add(game);
+    }
 
 }

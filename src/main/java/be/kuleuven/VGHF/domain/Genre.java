@@ -4,14 +4,14 @@ import javax.persistence.*;
 import java.util.*;
 
 @Entity
-public class Genre {
+public class Genre implements InterfaceForFilters {
 
     @Id
     @Column(nullable = false)
     private String genreName;
 
     @ManyToMany(mappedBy = "genres")
-    private List<Game> games;  
+    private List<Game> games = new ArrayList<>();
     
     public Genre() {}
 
@@ -27,6 +27,7 @@ public class Genre {
         this.genreName = genreName;
     }
 
+    @Override
     public List<Game> getGames() {
         return this.games;
     }
@@ -35,5 +36,6 @@ public class Genre {
         this.games = games;
     }
 
+    
 
 }

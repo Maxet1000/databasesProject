@@ -16,7 +16,7 @@ public class Game {
     @Column(nullable = false)
     private String releaseDate;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
         name = "GameConsoleLink",
         joinColumns = @JoinColumn(name = "title"),
@@ -30,7 +30,7 @@ public class Game {
         joinColumns = @JoinColumn(name = "title"),
         inverseJoinColumns = @JoinColumn(name = "developerName")
     )
-    private List<Developer> developers;
+    private List<Developer> developers = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
@@ -41,7 +41,7 @@ public class Game {
     private List<Genre> genres;
 
     @OneToMany(mappedBy = "game")
-    private List<Copy> copies;
+    private List<Copy> copies = new ArrayList<>();
 
     public Game() {}
 
@@ -100,6 +100,22 @@ public class Game {
 
     public void setGenres(List<Genre> genres) {
         this.genres = genres;
+    }
+
+    public List<Copy> getCopies() {
+        return this.copies;
+    }
+
+    public void setCopies(List<Copy> copies) {
+        this.copies = copies;
+    }
+
+    public void addDeveloper(Developer developer) {
+        this.developers.add(developer);
+    }
+
+    public void addCopy(Copy copy) {
+        this.copies.add(copy);
     }
 
 }

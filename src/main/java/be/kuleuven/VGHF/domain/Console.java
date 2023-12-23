@@ -1,11 +1,13 @@
 package be.kuleuven.VGHF.domain;
 
 import javax.persistence.*;
+
+
 import java.util.*;
 
 
 @Entity
-public class Console  {
+public class Console implements InterfaceForFilters {
 
     @Id
     @Column(nullable = false)
@@ -19,11 +21,11 @@ public class Console  {
     )
     private List<Console> compatibleConsoles;
 
-    @ManyToMany(mappedBy = "consoles")
-    private List<Game> games;  
+    @ManyToMany(mappedBy = "consoles", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Game> games = new ArrayList<>();
 
     @OneToMany(mappedBy = "console")
-    private List<Copy> copies;
+    private List<Copy> copies = new ArrayList<>();
 
     public Console() {}
 
@@ -44,8 +46,22 @@ public class Console  {
         return this.compatibleConsoles;
     }
 
+    @Override
     public List<Game> getGames() {
         return this.games;
+    }
+
+    public void setGames(List<Game> games){
+        this.games = games;
+    }
+
+    @Override
+    public List<Copy> getCopies() {
+        return this.copies;
+    }
+
+    public void setCopies(List<Copy> copies){
+        this.copies = copies;
     }
 
 }

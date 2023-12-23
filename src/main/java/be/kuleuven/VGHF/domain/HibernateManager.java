@@ -2,7 +2,7 @@ package be.kuleuven.VGHF.domain;
 
 import java.util.Collections;
 import java.util.List;
-import javax.persistence.EntityManager;
+
 import javax.persistence.*;
 
 import org.hibernate.Session;
@@ -12,10 +12,20 @@ import javafx.print.Collation;
 
 public class HibernateManager {
     
-    private final EntityManager entityManager;
+    private EntityManager entityManager;
+    private EntityManagerFactory sessionFactory;
 
-    public HibernateManager(EntityManager entityManager) {
+    public HibernateManager(EntityManager entityManager, EntityManagerFactory sessionFactory) {
         this.entityManager = entityManager;
+        this.sessionFactory = sessionFactory;
+    }
+
+    // In geval van nood
+    public void clearCloseAndResetEntityManager() {
+        entityManager.clear();
+        entityManager.close();
+        var newEntityManager = sessionFactory.createEntityManager();
+        this.entityManager = newEntityManager;
     }
 
     public List<Console> getAllConsoles() {
@@ -128,9 +138,7 @@ public class HibernateManager {
     
     public void saveNewDeveloper(Developer developer) {
         try {
-            entityManager.getTransaction().begin();
             entityManager.persist(developer);
-            entityManager.getTransaction().commit();
         } catch (Exception exception) {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();

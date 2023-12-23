@@ -2,6 +2,8 @@ package be.kuleuven.VGHF;
 
 import javax.persistence.Persistence;
 
+import org.hibernate.SessionFactory;
+
 import java.util.*;
 
 import be.kuleuven.VGHF.domain.*;
@@ -44,7 +46,7 @@ public class ProjectMain extends Application {
     public static void main(String[] args) {
         var sessionFactory = Persistence.createEntityManagerFactory("be.kuleuven.VGHF.domain");
         var entityManager = sessionFactory.createEntityManager();
-        database = new HibernateManager(entityManager);
+        database = new HibernateManager(entityManager, sessionFactory);
 
         DbContentScript.scriptMain();
         List<MonetaryTransaction> testlist = database.getMonetaryTransactionsByCustomerID(5);
@@ -55,4 +57,5 @@ public class ProjectMain extends Application {
     public static HibernateManager getDatabase(){
         return database;
     }
+    
 }
