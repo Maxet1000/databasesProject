@@ -99,6 +99,7 @@ public class ShopController extends Controller{
     //TODO voor RentGamesFromCart
         //customerID toevoegen mbv het inloggen van de customer
         //checken voor balance
+        //rollback
     public void rentAndBuyGamesFromCart(TableView table){
         var datalist = table.getItems();
                 int i = 0;
@@ -106,7 +107,7 @@ public class ShopController extends Controller{
         boolean faultyGame = false;
         while (j != datalist.size()){
             List data = (List) datalist.get(j);
-                        int copyId = (int) data.get(data.size()-1);
+            int copyId = (int) data.get(data.size()-1);
             var copy = ProjectMain.getDatabase().getCopyById(copyId);
             if(table == tblRentCart && copy.getAvailability() == Availability.AVAILABLE){
                 Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -137,15 +138,22 @@ public class ShopController extends Controller{
             }
             j++;
         }
+
+        var copyListNow = data.getUser().getCopies();
+        if (copyListNow == null) {
+            copyListNow = new ArrayList<>();
+        }
         while (i != datalist.size() && faultyGame != true){
-            List data = (List) datalist.get(i);
-                        int copyId = (int) data.get(data.size()-1);
+            List datacopy = (List) datalist.get(i);
+            int copyId = (int) datacopy.get(datacopy.size()-1);
             var copy = ProjectMain.getDatabase().getCopyById(copyId);
             copy.setAvailability(Availability.RENTED);
-                        copy.setDateOfReturn(twoWeeksLonger());
+            copy.setDateOfReturn(twoWeeksLonger());
             ProjectMain.getDatabase().updateCopy(copy);
+            copyListNow.add(copy);
             i++;
         }
+        data.getUser().setCopies(copyListNow);
         datalist.clear();
 
         

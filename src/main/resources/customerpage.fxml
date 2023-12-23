@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -48,12 +47,7 @@
                         <Text fill="WHITE" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Copies currently in rent" />
                      </children>
                   </StackPane>
-                  <TableView prefHeight="2000.0" prefWidth="200.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
-                    </columns>
-                  </TableView>
+                  <TableView fx:id="tblRentedGames" prefHeight="2000.0" prefWidth="200.0" />
                </children>
             </VBox>
             <AnchorPane maxWidth="5.0" minWidth="5.0" prefWidth="5.0" />
@@ -61,7 +55,7 @@
                <children>
                   <Button fx:id="btnExtendReturnDate" minWidth="100.0" mnemonicParsing="false" prefWidth="100.0" stylesheets="@styles.css" text="Extend&#10;return date" textFill="WHITE" />
                   <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" />
-                  <Button minWidth="100.0" mnemonicParsing="false" stylesheets="@styles.css" text="Extend return&#10;date of all" />
+                  <Button fx:id="btnExtendAllReturnDate" minWidth="100.0" mnemonicParsing="false" stylesheets="@styles.css" text="Extend return&#10;date of all" />
                </children></VBox>
             <AnchorPane maxWidth="5.0" minWidth="5.0" prefHeight="200.0" prefWidth="5.0" />
          </children></HBox>
