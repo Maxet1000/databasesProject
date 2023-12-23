@@ -36,7 +36,8 @@ public class ShopController extends Controller{
     private Button btnAddGameToCart;
     @FXML
     private Button btnAddFilter;
-    @FXML Button btnRemoveFilters;
+    @FXML
+    private Button btnRemoveFilters;
     @FXML
     public VBox pane1;
     @FXML
@@ -121,7 +122,7 @@ public class ShopController extends Controller{
                 balance = balance - copy.getPurchasePrice();
                 copy.setAvailability(Availability.SOLD);
                 copy.setDateOfReturn(twoWeeksLonger());
-                ProjectMain.database.updateCopy(copy);
+                ProjectMain.database.updateObject(copy);
                 copyFromUser.add(copy);
                 data.getUser().setBalance(balance);
 
@@ -131,7 +132,7 @@ public class ShopController extends Controller{
                 balance = balance - copy.getRentPrice(); 
                 copy.setAvailability(Availability.RENTED);
                 copy.setDateOfReturn(twoWeeksLonger());
-                ProjectMain.database.updateCopy(copy);
+                ProjectMain.database.updateObject(copy);
                 copyFromUser.add(copy);
                 data.getUser().setBalance(balance);
 
@@ -147,27 +148,8 @@ public class ShopController extends Controller{
             itemCounter++;
         }
 
-<<<<<<< HEAD
         //refresh balance
         txtBalance.setText("" + data.getUser().getBalance());
-=======
-        var copyListNow = data.getUser().getCopies();
-        if (copyListNow == null) {
-            copyListNow = new ArrayList<>();
-        }
-        while (i != datalist.size() && faultyGame != true){
-            List datacopy = (List) datalist.get(i);
-            int copyId = (int) datacopy.get(datacopy.size()-1);
-            var copy = ProjectMain.getDatabase().getCopyById(copyId);
-            copy.setAvailability(Availability.RENTED);
-            copy.setDateOfReturn(twoWeeksLonger());
-            ProjectMain.getDatabase().updateObject(copy);
-            copyListNow.add(copy);
-            i++;
-        }
-        data.getUser().setCopies(copyListNow);
-        datalist.clear();
->>>>>>> 1433f232f5fb5e9b418ffaf88b348eea82a4a94b
 
         //refresh de gehuurde en verkochte games van de user
         data.getUser().setCopies(copyFromUser);
@@ -412,7 +394,7 @@ public class ShopController extends Controller{
         System.out.println(listOfCopies);
 
         for(int i = 0; i < listOfCopies.size(); i++) {
-            if(listOfCopies.get(i).getAvailability() == Availability.AVAILABLE){
+            if(listOfCopies.get(i).getAvailability() == Availability.AVAILABLE && (listOfCopies.get(i).getPurchasePrice() != 0 || listOfCopies.get(i).getRentPrice() != 0)){
                 var gameCopyName = listOfCopies.get(i).getGame().getTitle();
                 var copyId = listOfCopies.get(i).getCopyID();
 
@@ -435,10 +417,17 @@ public class ShopController extends Controller{
 
                 String rentPrice = "" + listOfCopies.get(i).getRentPrice();
                 String purchasePrice = "" + listOfCopies.get(i).getPurchasePrice();
+                if(rentPrice.equals("0")){
+                    rentPrice = "Not available";
+                }
+                if(purchasePrice.equals("0")){
+                    purchasePrice = "Not for sale";
+                }
                 tblRent.getItems().add(FXCollections.observableArrayList(gameCopyName, developers, console, genres, rentPrice, purchasePrice, copyId));
             }
         }
-        
+        System.out.println(""+ProjectMain.getDatabase().getCopyById(36).getPurchasePrice());
+
     }
 
     public void initFilters() {
