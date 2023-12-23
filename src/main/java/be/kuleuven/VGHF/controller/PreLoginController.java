@@ -31,18 +31,4 @@ public class PreLoginController extends Controller {
         showLoginScherm();
         switchScreen("customer");
     }
-    private void switchToId(String id) throws IOException {
-
-        //switch to pane
-        var pane = new FXMLLoader(getClass().getClassLoader().getResource(id + ".fxml"));
-        var rootLoader = (VBox) pane.load();
-
-        var controller = pane.<Controller>getController();
-        controller.setModel(data);
-
-        //System.out.println("Yah " + pane.<Controller>getController().getModel().getUser().getCustomerName());
-        rootLoader.autosize();
-        parentPane.getChildren().setAll(rootLoader);
-        rootLoader.setAlignment(Pos.CENTER);
-    }
 }

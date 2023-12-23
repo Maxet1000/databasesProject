@@ -16,8 +16,6 @@ import java.io.IOException;
 public class ProjectMainController extends Controller{
 
     @FXML
-    public StackPane pane1;
-    @FXML
     private Button btnHome;
     @FXML
     private Button btnGameDb;
@@ -111,17 +109,6 @@ public class ProjectMainController extends Controller{
 
         }    
         switchScreen(id);
-                //switch to pane
-                /*var pane = new FXMLLoader(getClass().getClassLoader().getResource(id + ".fxml"));
-                var rootLoader = (VBox) pane.load();
-
-                var controller = pane.<Controller>getController();
-                controller.setModel(data);
-
-                //System.out.println("Yah " + pane.<Controller>getController().getModel().getUser().getCustomerName());
-                rootLoader.autosize();
-                pane1.getChildren().setAll(rootLoader);
-                rootLoader.setAlignment(Pos.CENTER);*/
     }
 
 }
