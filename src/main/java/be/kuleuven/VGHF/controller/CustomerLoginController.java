@@ -1,23 +1,16 @@
 package be.kuleuven.VGHF.controller;
 
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
 import java.io.IOException;
 
-import be.kuleuven.VGHF.DataCommunicationModel;
 import be.kuleuven.VGHF.ProjectMain;
-import be.kuleuven.VGHF.domain.Customer;
 import javafx.stage.Stage;
 
 
@@ -79,14 +72,13 @@ public class CustomerLoginController extends Controller{
         }else {
             data.setUser(user);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Correct");
+            alert.setTitle("Succes!");
             alert.setHeaderText(null);
             alert.setContentText("You are now logged in");
             alert.showAndWait();
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.close();
 
-            // TODO Dit werkt niet om de window automatisch te sluiten?
         }
     }
 }

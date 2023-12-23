@@ -26,9 +26,27 @@ public class PreLoginController extends Controller {
                 throw new RuntimeException(ex);
             }
         });
+        btnSignup.setOnAction(e -> {
+            try {
+                signUp();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
     }
+
+    private void signUp() throws IOException {
+        showSignUpScherm();
+        System.out.println("ayhah "+ data.getUser().getCustomerName());
+        if (data.loggedIn) {
+            switchScreen("customer");
+        }
+    }
+
     private void login() throws IOException {
         showLoginScherm();
-        switchScreen("customer");
+        if (data.loggedIn) {
+            switchScreen("customer");
+        }
     }
 }

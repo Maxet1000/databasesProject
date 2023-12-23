@@ -87,13 +87,14 @@ public class Controller{
         filteredList.addAll(set);
         return filteredList;
     }
+
     public void showLoginScherm() {
         try {
             var stage = new Stage();
             var pane = new FXMLLoader(getClass().getClassLoader().getResource("customerloginpage.fxml"));
             var root = (VBox) pane.load();
 
-            var controller = pane.<CustomerLoginController>getController();
+            var controller = pane.<Controller>getController();
             controller.setModel(data);
 
             var scene = new Scene(root);
@@ -107,6 +108,26 @@ public class Controller{
 
         } catch (Exception e) {
             throw new RuntimeException("Kan scherm customerloginpage.fxml niet vinden", e);
+        }
+    }public void showSignUpScherm() {
+        try {
+            var stage = new Stage();
+            var pane = new FXMLLoader(getClass().getClassLoader().getResource("newuserpage.fxml"));
+            var root = (VBox) pane.load();
+
+            var controller = pane.<Controller>getController();
+            controller.setModel(data);
+
+            var scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("signuppage");
+            root.setAlignment(Pos.CENTER);
+            stage.initOwner(ProjectMain.getRootStage());
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.showAndWait();
+
+        } catch (Exception e) {
+            throw new RuntimeException("Kan scherm newuserpage.fxml niet vinden", e);
         }
     }
 
