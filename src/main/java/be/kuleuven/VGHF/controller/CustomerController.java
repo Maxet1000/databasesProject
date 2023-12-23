@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -44,6 +45,7 @@ public class CustomerController extends Controller{
     private Button btnExtendReturnDate;
     @FXML
     private Button btnExtendAllReturnDate;
+    private int extendPrice = 15;
 
     public void initialize() {
         btnAddBalance.setOnAction(e -> {
@@ -72,33 +74,61 @@ public class CustomerController extends Controller{
     }
     private void extendAllReturnDate(){
         var rentedCopies = data.getUser().getCopies();
-
-        for(int i = 0; i < rentedCopies.size(); i++){
-        int copyID = (int) rentedCopies.get(i).getCopyID();
-        var copy = ProjectMain.getDatabase().getCopyById(copyID);
-        String inputDate = copy.getDateOfReturn();
-        String newReturnDate = addTwoWeeks(inputDate);
-        System.out.println(newReturnDate);
-        System.out.println("Hello i am daddy and i like girls fatty");
-        copy.setDateOfReturn(newReturnDate);
-        initTable();
-        fillTable();
+        int aantalRentedCopies = rentedCopies.size();
+        int balance = data.getUser().getBalance();
+        int newExtendPrice = extendPrice * aantalRentedCopies;
+        int newBalance = balance - newExtendPrice;
+        if(newBalance >= 0){
+            for(int i = 0; i < aantalRentedCopies; i++){
+                int copyID = (int) rentedCopies.get(i).getCopyID();
+                var copy = ProjectMain.getDatabase().getCopyById(copyID);
+                String inputDate = copy.getDateOfReturn();
+                String newReturnDate = addTwoWeeks(inputDate);
+                copy.setDateOfReturn(newReturnDate);
+                initTable();
+                fillTable();
+                data.getUser().setBalance(newBalance);
+                copy.setDateOfReturn(newReturnDate);
+                txtBalance.setText(newBalance + "");
+            }
+        }else{
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Not enough balance plz load more money before extending the return date!");
+                alert.show();
         }
     }
-    //TODO
-    //  geld van balance afdoen
-    //  checken of genoeg geld
+
     private void extendSelectedReturnDate(){
-        List selectedGame = (List) tblRentedGames.getSelectionModel().getSelectedItem();
-        int copyID = (int) selectedGame.get(selectedGame.size()-1);
-        var copy = ProjectMain.getDatabase().getCopyById(copyID);
-        String inputDate = copy.getDateOfReturn();
-        String newReturnDate = addTwoWeeks(inputDate);
-        System.out.println(newReturnDate);
-        System.out.println("Hello i am daddy and i like girls fatty");
-        copy.setDateOfReturn(newReturnDate);
+        try {
+            List selectedGame = (List) tblRentedGames.getSelectionModel().getSelectedItem();
+            int copyID = (int) selectedGame.get(selectedGame.size()-1);
+            var copy = ProjectMain.getDatabase().getCopyById(copyID);
+            String inputDate = copy.getDateOfReturn();
+            String newReturnDate = addTwoWeeks(inputDate);
+            //eerst checken of de customer nog genoeg geld heeft om te kunnen verlengen
+            //15 euro om game te verlengen
+            int balance = data.getUser().getBalance();
+            if(balance > extendPrice){
+                int newBalance = balance - extendPrice;
+                data.getUser().setBalance(newBalance);
+                copy.setDateOfReturn(newReturnDate);
+                txtBalance.setText(newBalance + "");
+            }else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Not enough balance plz load more money before extending the return date!");
+                alert.show();
+            }
+
         initTable();
         fillTable();
+        } catch (Exception e) {
+            System.err.println("no game selected");
+        }
+
     }
         
     public String addTwoWeeks(String inputDate) {
