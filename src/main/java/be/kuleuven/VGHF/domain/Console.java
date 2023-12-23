@@ -64,4 +64,8 @@ public class Console implements InterfaceForFilters {
         this.copies = copies;
     }
 
+    public void addGame(Game game) {
+        this.games.add(game);
+    }
+
 }

@@ -20,6 +20,11 @@ public class HibernateManager {
         this.sessionFactory = sessionFactory;
     }
 
+    //for testing
+    public EntityManager getEntityManager() {
+        return this.entityManager;
+    }
+
     // In geval van nood
     public void clearCloseAndResetEntityManager() {
         entityManager.clear();
@@ -97,178 +102,188 @@ public class HibernateManager {
     
         return entityManager.createQuery(query).getResultList();
     }    
-    public void saveNewConsole(Console console) {
+
+    public <T> void saveNewObject(T object) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.persist(console);
+            entityManager.persist(object);
             entityManager.getTransaction().commit();
         } catch (Exception exception) {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
             }
-            exception.printStackTrace();
-        }
-    }
-    
-    public void saveNewCopy(Copy copy) {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.persist(copy);
-            entityManager.getTransaction().commit();
-        } catch (Exception exception) {
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
-            exception.printStackTrace();
-        }
-    }
-    
-    public void saveNewCustomer(Customer customer) {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.persist(customer);
-            entityManager.getTransaction().commit();
-        } catch (Exception exception) {
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
-            exception.printStackTrace();
-        }
-    }
-    
-    public void saveNewDeveloper(Developer developer) {
-        try {
-            entityManager.persist(developer);
-        } catch (Exception exception) {
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
-            exception.printStackTrace();
-        }
-    }
-    
-    public void saveNewGame(Game game) {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.persist(game);
-            entityManager.getTransaction().commit();
-        } catch (Exception exception) {
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
-            exception.printStackTrace();
-        }
-    }
-    
-    public void saveNewGenre(Genre genre) {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.persist(genre);
-            entityManager.getTransaction().commit();
-        } catch (Exception exception) {
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
-            exception.printStackTrace();
-        }
-    }
-    
-    public void saveNewMonetaryTransaction(MonetaryTransaction monetaryTransaction) {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.persist(monetaryTransaction);
-            entityManager.getTransaction().commit();
-        } catch (Exception exception) {
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
-            exception.printStackTrace();
-        }
-    }
-    
-    public void updateConsole(Console console) {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.merge(console);
-            entityManager.getTransaction().commit();
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-    }
-    
-    public void updateCopy(Copy copy) {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.merge(copy);
-            entityManager.getTransaction().commit();
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-    }
-    
-    public void updateCustomer(Customer customer) {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.merge(customer);
-            entityManager.getTransaction().commit();
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-    }
-    
-    public void updateDeveloper(Developer developer) {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.merge(developer);
-            entityManager.getTransaction().commit();
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-    }
-    
-    public void updateGame(Game game) {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.merge(game);
-            entityManager.getTransaction().commit();
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-    }
-    
-    public void updateGenre(Genre genre) {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.merge(genre);
-            entityManager.getTransaction().commit();
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-    }
-    
-    public void updateMonetaryTransaction(MonetaryTransaction monetaryTransaction) {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.merge(monetaryTransaction);
-            entityManager.getTransaction().commit();
-        } catch (Exception exception) {
             exception.printStackTrace();
         }
     }
 
-    public List<Game> getGamesByTitle(String title) {
+    // public void saveNewConsole(Console console) {
+    //     try {
+    //         entityManager.getTransaction().begin();
+    //         entityManager.persist(console);
+    //         entityManager.getTransaction().commit();
+    //     } catch (Exception exception) {
+    //         if (entityManager.getTransaction().isActive()) {
+    //             entityManager.getTransaction().rollback();
+    //         }
+    //         exception.printStackTrace();
+    //     }
+    // }
+    
+    // public void saveNewCopy(Copy copy) {
+    //     try {
+    //         entityManager.getTransaction().begin();
+    //         entityManager.persist(copy);
+    //         entityManager.getTransaction().commit();
+    //     } catch (Exception exception) {
+    //         if (entityManager.getTransaction().isActive()) {
+    //             entityManager.getTransaction().rollback();
+    //         }
+    //         exception.printStackTrace();
+    //     }
+    // }
+    
+    // public void saveNewCustomer(Customer customer) {
+    //     try {
+    //         entityManager.getTransaction().begin();
+    //         entityManager.persist(customer);
+    //         entityManager.getTransaction().commit();
+    //     } catch (Exception exception) {
+    //         if (entityManager.getTransaction().isActive()) {
+    //             entityManager.getTransaction().rollback();
+    //         }
+    //         exception.printStackTrace();
+    //     }
+    // }
+    
+    // public void saveNewDeveloper(Developer developer) {
+    //     try {
+    //         entityManager.persist(developer);
+    //     } catch (Exception exception) {
+    //         if (entityManager.getTransaction().isActive()) {
+    //             entityManager.getTransaction().rollback();
+    //         }
+    //         exception.printStackTrace();
+    //     }
+    // }
+    
+    // public void saveNewGame(Game game) {
+    //     try {
+    //         entityManager.getTransaction().begin();
+    //         entityManager.persist(game);
+    //         entityManager.getTransaction().commit();
+    //     } catch (Exception exception) {
+    //         if (entityManager.getTransaction().isActive()) {
+    //             entityManager.getTransaction().rollback();
+    //         }
+    //         exception.printStackTrace();
+    //     }
+    // }
+    
+    // public void saveNewGenre(Genre genre) {
+    //     try {
+    //         entityManager.getTransaction().begin();
+    //         entityManager.persist(genre);
+    //         entityManager.getTransaction().commit();
+    //     } catch (Exception exception) {
+    //         if (entityManager.getTransaction().isActive()) {
+    //             entityManager.getTransaction().rollback();
+    //         }
+    //         exception.printStackTrace();
+    //     }
+    // }
+    
+    // public void saveNewMonetaryTransaction(MonetaryTransaction monetaryTransaction) {
+    //     try {
+    //         entityManager.getTransaction().begin();
+    //         entityManager.persist(monetaryTransaction);
+    //         entityManager.getTransaction().commit();
+    //     } catch (Exception exception) {
+    //         if (entityManager.getTransaction().isActive()) {
+    //             entityManager.getTransaction().rollback();
+    //         }
+    //         exception.printStackTrace();
+    //     }
+    // }
+    
+    public <T> void updateObject(T object) {
         try {
-            var criteriaBuilder = entityManager.getCriteriaBuilder();
-            var query = criteriaBuilder.createQuery(Game.class);
-            var root = query.from(Game.class);
-
-            query.where(criteriaBuilder.equal(root.get("title"), title));
-            return entityManager.createQuery(query).getResultList();
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            return Collections.emptyList();
+            entityManager.getTransaction().begin();
+            entityManager.merge(object);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    }  
+    }
+
+    // public void updateConsole(Console console) {
+    //     try {
+    //         entityManager.getTransaction().begin();
+    //         entityManager.merge(console);
+    //         entityManager.getTransaction().commit();
+    //     } catch (Exception exception) {
+    //         exception.printStackTrace();
+    //     }
+    // }
+    
+    // public void updateCopy(Copy copy) {
+    //     try {
+    //         entityManager.getTransaction().begin();
+    //         entityManager.merge(copy);
+    //         entityManager.getTransaction().commit();
+    //     } catch (Exception exception) {
+    //         exception.printStackTrace();
+    //     }
+    // }
+    
+    // public void updateCustomer(Customer customer) {
+    //     try {
+    //         entityManager.getTransaction().begin();
+    //         entityManager.merge(customer);
+    //         entityManager.getTransaction().commit();
+    //     } catch (Exception exception) {
+    //         exception.printStackTrace();
+    //     }
+    // }
+    
+    // public void updateDeveloper(Developer developer) {
+    //     try {
+    //         entityManager.getTransaction().begin();
+    //         entityManager.merge(developer);
+    //         entityManager.getTransaction().commit();
+    //     } catch (Exception exception) {
+    //         exception.printStackTrace();
+    //     }
+    // }
+    
+    // public void updateGame(Game game) {
+    //     try {
+    //         entityManager.getTransaction().begin();
+    //         entityManager.merge(game);
+    //         entityManager.getTransaction().commit();
+    //     } catch (Exception exception) {
+    //         exception.printStackTrace();
+    //     }
+    // }
+    
+    // public void updateGenre(Genre genre) {
+    //     try {
+    //         entityManager.getTransaction().begin();
+    //         entityManager.merge(genre);
+    //         entityManager.getTransaction().commit();
+    //     } catch (Exception exception) {
+    //         exception.printStackTrace();
+    //     }
+    // }
+    
+    // public void updateMonetaryTransaction(MonetaryTransaction monetaryTransaction) {
+    //     try {
+    //         entityManager.getTransaction().begin();
+    //         entityManager.merge(monetaryTransaction);
+    //         entityManager.getTransaction().commit();
+    //     } catch (Exception exception) {
+    //         exception.printStackTrace();
+    //     }
+    // }
 
     public List<MonetaryTransaction> getMonetaryTransactionsByCustomerID(int customerID) {
         try {
@@ -296,6 +311,20 @@ public class HibernateManager {
         }
     }
 
+    public Game getGameByTitle(String title) {
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(Game.class);
+            var root = query.from(Game.class);
+
+            query.where(criteriaBuilder.equal(root.get("title"), title));
+            return entityManager.createQuery(query).getSingleResult();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return null;
+        }
+    }  
+
     public Customer getUserByEmail(String email) {
          try {
             var criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -304,9 +333,22 @@ public class HibernateManager {
             query.where(criteriaBuilder.equal(root.get("email"), email));
             return entityManager.createQuery(query).getSingleResult();
         } catch (Exception e) {
-            //e.printStackTrace();
+            e.printStackTrace();
             return null;
-        }       
+        } 
+    }
+
+        public Developer getdeveloperByName(String developerName) {
+         try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(Developer.class);
+            var root = query.from(Developer.class);
+            query.where(criteriaBuilder.equal(root.get("developerName"), developerName));
+            return entityManager.createQuery(query).getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } 
     }
 
 }

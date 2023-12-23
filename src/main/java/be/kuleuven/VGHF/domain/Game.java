@@ -11,9 +11,6 @@ public class Game {
     private String title;
 
     @Column(nullable = false)
-    private String publisher;
-
-    @Column(nullable = false)
     private String releaseDate;
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -24,7 +21,7 @@ public class Game {
     )
     private List<Console> consoles;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
         name = "GameDeveloperLink",
         joinColumns = @JoinColumn(name = "title"),
@@ -32,7 +29,7 @@ public class Game {
     )
     private List<Developer> developers = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
         name = "GameGenreLink",
         joinColumns = @JoinColumn(name = "title"),
@@ -45,9 +42,8 @@ public class Game {
 
     public Game() {}
 
-    public Game(String title, String publisher, String releaseDate, List<Console> consoles, List<Developer> developers, List<Genre> genres) {
+    public Game(String title, String releaseDate, List<Console> consoles, List<Developer> developers, List<Genre> genres) {
         this.title = title;
-        this.publisher = publisher;
         this.releaseDate = releaseDate;
         this.consoles = consoles;
         this.developers = developers;
@@ -60,14 +56,6 @@ public class Game {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getPublisher() {
-        return this.publisher;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
     }
 
     public String getReleaseDate() {
