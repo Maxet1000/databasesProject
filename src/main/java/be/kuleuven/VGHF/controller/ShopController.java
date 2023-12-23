@@ -23,7 +23,7 @@ import javafx.scene.control.cell.CheckBoxTreeCell;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class RentgamesController extends Controller{
+public class ShopController extends Controller{
     
     @FXML
     private TableView tblRent;
@@ -57,7 +57,7 @@ public class RentgamesController extends Controller{
     private ArrayList<Genre> toBeFilteredGenres;
 
 
-    public RentgamesController() {
+    public ShopController() {
         toBeFilteredDevelopers = new ArrayList<>();
         toBeFilteredConsoles = new ArrayList<>();
         toBeFilteredGenres = new ArrayList<>();

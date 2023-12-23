@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
-public class PreCustomerController extends Controller {
+public class PreLoginController extends Controller {
 
     @FXML
     public Button btnSignup;
