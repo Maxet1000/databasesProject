@@ -21,6 +21,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -32,6 +33,8 @@ public class CustomerController extends Controller{
     @FXML
     private Button btnAddBalance;
     @FXML
+    private Button btnLogOut;
+    @FXML
     private Text txtBalance;
     @FXML
     private Text txtUser;
@@ -41,7 +44,6 @@ public class CustomerController extends Controller{
     private Button btnExtendReturnDate;
     @FXML
     private Button btnExtendAllReturnDate;
-
 
     public void initialize() {
         btnAddBalance.setOnAction(e -> {
@@ -53,6 +55,14 @@ public class CustomerController extends Controller{
         btnExtendAllReturnDate.setOnAction(e -> {
             extendAllReturnDate();
         });
+        btnLogOut.setOnAction((e -> {
+            data.logOut();
+            try {
+                switchScreen("prelogin");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }));
         Platform.runLater(() -> {
             initTable();
             fillTable();
