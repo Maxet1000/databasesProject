@@ -158,6 +158,7 @@ public class DbContentScript {
                                 .purchasePrice(6)
                                 .build();
 
+        builder = new CopyBuilder();
         Copy witcherCopy1 = builder.game(theWitcher3)
                                    .console(playstation4)
                                    .availability(Availability.AVAILABLE)
@@ -166,6 +167,7 @@ public class DbContentScript {
                                    .rentPrice(4)
                                    .build();
 
+        builder = new CopyBuilder();
         Copy marioCopy1 = builder.game(superMarioBros)
                                  .console(nes)
                                  .availability(Availability.AVAILABLE)
@@ -174,6 +176,7 @@ public class DbContentScript {
                                  .rentPrice(8)
                                  .build();
 
+        builder = new CopyBuilder();
         Copy minecraftCopy1 = builder.game(minecraft)
                                      .console(pc)
                                      .availability(Availability.RENTED)
@@ -183,7 +186,8 @@ public class DbContentScript {
                                      .rentPrice(3)
                                      .dateOfReturn("2024-01-12")
                                      .build();
-
+                                     
+        builder = new CopyBuilder();
         Copy minecraftCopy2 = builder.game(minecraft)
                                      .console(playstation5)
                                      .availability(Availability.AVAILABLE)
@@ -191,6 +195,8 @@ public class DbContentScript {
                                      .purchasePrice(20)
                                      .rentPrice(3)
                                      .build();
+
+        builder = new CopyBuilder();
         Copy pokemonPatinumCopy1 = builder.game(pokemonPlatinum)
                                           .console(nintenoDS)
                                           .availability(Availability.AVAILABLE)
@@ -198,6 +204,8 @@ public class DbContentScript {
                                           .purchasePrice(35)
                                           .rentPrice(6)
                                           .build();
+
+        builder = new CopyBuilder();
         Copy pokemonPlatinumCopy2 = builder.game(pokemonPlatinum)
                                           .console(nintenoDS)
                                           .availability(Availability.AVAILABLE)
@@ -205,12 +213,15 @@ public class DbContentScript {
                                           .purchasePrice(35)
                                           .rentPrice(6)
                                           .build();
+
+        builder = new CopyBuilder();
         Copy metalGearSolidCopy1 = builder.game(metalGearSolid)
                                           .console(playstation1)
                                           .availability(Availability.AVAILABLE)
                                           .warehouse("Brussels")
                                           .build();
         
+        builder = new CopyBuilder();
         Copy finalFantasyVIICopy1 = builder.game(finalFantasyVII)
                                              .console(pc)
                                              .availability(Availability.SOLD)
@@ -218,12 +229,14 @@ public class DbContentScript {
                                              .purchasePrice(50)
                                              .build();
         
+        builder = new CopyBuilder();
         Copy haloCombatEvolvedCopy1 = builder.game(haloCombatEvolved)
                                                .console(xbox)
                                                .availability(Availability.BROKEN)
                                                .warehouse("Ghent")
                                                .build();
         
+        builder = new CopyBuilder();
         Copy zeldaBreathOfTheWildCopy1 = builder.game(zeldaBreathOfTheWild)
                                                   .console(nintendoSwitch)
                                                   .availability(Availability.RENTED)
@@ -232,13 +245,15 @@ public class DbContentScript {
                                                   .rentPrice(5)
                                                   .dateOfReturn("2024-01-15")
                                                   .build();
-        
+                                    
+        builder = new CopyBuilder();        
         Copy darkSoulsCopy1 = builder.game(darkSouls)
                                       .console(playstation3)
                                       .availability(Availability.AVAILABLE)
                                       .warehouse("Tokyo")
                                       .build();
         
+        builder = new CopyBuilder();                                      
         Copy grandTheftAutoVCopy1 = builder.game(grandTheftAutoV)
                                         .console(xboxOne)
                                         .availability(Availability.RENTED)
@@ -247,36 +262,43 @@ public class DbContentScript {
                                         .rentPrice(8)
                                         .dateOfReturn("2024-01-20")
                                         .build();
-        
+
+        builder = new CopyBuilder();        
         Copy theLastOfUsCopy1 = builder.game(theLastOfUs)
                                       .console(playstation4)
                                       .availability(Availability.AVAILABLE)
                                       .warehouse("Los Angeles")
                                       .build();
-        
+
+        builder = new CopyBuilder();        
         Copy worldOfWarcraftCopy1 = builder.game(worldOfWarcraft)
                                          .console(pc)
                                          .availability(Availability.AVAILABLE)
                                          .warehouse("Blizzard")
                                          .build();
-        
+
+        builder = new CopyBuilder();        
         Copy marioKart8DeluxeCopy1 = builder.game(marioKart8Deluxe)
                                            .console(nintendoSwitch)
                                            .availability(Availability.AVAILABLE)
                                            .warehouse("Kyoto")
                                            .build();
+
+        builder = new CopyBuilder();                                           
         Copy doomCopy2 = builder.game(doom)
                                 .console(pc)
                                 .availability(Availability.AVAILABLE)
                                 .warehouse("Ghent")
                                 .build();
-        
+
+        builder = new CopyBuilder();        
         Copy minecraftCopy3 = builder.game(minecraft)
                                     .console(xboxOne)
                                     .availability(Availability.AVAILABLE)
                                     .warehouse("Antwerp")
                                     .build();
-        
+
+        builder = new CopyBuilder();        
         Copy metalGearSolidCopy2 = builder.game(metalGearSolid)
                                             .console(playstation1)
                                             .availability(Availability.RENTED)
@@ -285,24 +307,29 @@ public class DbContentScript {
                                             .rentPrice(7)
                                             .dateOfReturn("2024-01-18")
                                             .build();
-        
+
+        builder = new CopyBuilder();        
         Copy finalFantasyVIICopy2 = builder.game(finalFantasyVII)
                                             .console(playstation1)
                                             .availability(Availability.BROKEN)
                                             .warehouse("Genk")
                                             .build();
-        
+
+        builder = new CopyBuilder();        
         Copy zeldaBreathOfTheWildCopy2 = builder.game(zeldaBreathOfTheWild)
                             .console(nintendoSwitch)
                             .availability(Availability.AVAILABLE)
                             .warehouse("Tokyo")
                             .build();
-        
+
+        builder = new CopyBuilder();        
         Copy darkSoulsCopy2 = builder.game(darkSouls)
                                     .console(xbox360)
                                     .availability(Availability.AVAILABLE)
                                     .warehouse("Hasselt")
                                     .build();
+
+        builder = new CopyBuilder();                                    
         Copy grandTheftAutoVCopy2 = builder.game(grandTheftAutoV)
                                             .console(playstation3)
                                             .availability(Availability.RENTED)
@@ -311,127 +338,148 @@ public class DbContentScript {
                                             .rentPrice(8)
                                             .dateOfReturn("2024-01-20")
                                             .build();
-        
+
+        builder = new CopyBuilder();        
         Copy theLastOfUsCopy2 = builder.game(theLastOfUs)
                                         .console(playstation3)
                                         .availability(Availability.AVAILABLE)
                                         .warehouse("Brussels")
                                         .build();
-        
+
+        builder = new CopyBuilder();        
         Copy worldOfWarcraftCopy2 = builder.game(worldOfWarcraft)
                                             .console(pc)
                                             .availability(Availability.AVAILABLE)
                                             .warehouse("Blizzard")
                                             .build();
-        
+
+        builder = new CopyBuilder();        
         Copy marioKart8DeluxeCopy2 = builder.game(marioKart8Deluxe)
                                             .console(nintendoSwitch)
                                             .availability(Availability.AVAILABLE)
                                             .warehouse("Kyoto")
                                             .build();
-        
+
+        builder = new CopyBuilder();        
         Copy finalFantasyIXCopy1 = builder.game(finalFantasyIX)
                                         .console(playstation1)
                                         .availability(Availability.AVAILABLE)
                                         .warehouse("Brussels")
                                         .build();
-        
+
+        builder = new CopyBuilder();        
         Copy pacmanCopy1 = builder.game(pacman)
                                 .console(arcade)
                                 .availability(Availability.AVAILABLE)
                                 .warehouse("Los Angeles")
                                 .build();
-        
+
+        builder = new CopyBuilder();        
         Copy superMarioBros3Copy1 = builder.game(superMarioBros3)
                                             .console(nes)
                                             .availability(Availability.AVAILABLE)
                                             .warehouse("Kyoto")
                                             .build();
-        
+
+        builder = new CopyBuilder();        
         Copy theLegendOfZeldaCopy1 = builder.game(theLegendOfZelda)
                                             .console(nes)
                                             .availability(Availability.AVAILABLE)
                                             .warehouse("Ghent")
                                             .build();
-        
+
+        builder = new CopyBuilder();        
         Copy spaceInvadersCopy1 = builder.game(spaceInvaders)
                                         .console(arcade)
                                         .availability(Availability.AVAILABLE)
                                         .warehouse("Tokyo")
                                         .build();
-        
+
+        builder = new CopyBuilder();        
         Copy donkeyKongCopy1 = builder.game(donkeyKong)
                                         .console(arcade)
                                         .availability(Availability.AVAILABLE)
                                         .warehouse("Paris")
                                         .build();
-        
+
+        builder = new CopyBuilder();        
         Copy pongCopy1 = builder.game(pong)
                                 .console(arcade)
                                 .availability(Availability.AVAILABLE)
                                 .warehouse("Antwerp")
                                 .build();
-        
+
+        builder = new CopyBuilder();        
         Copy galagaCopy1 = builder.game(galaga)
                                     .console(arcade)
                                     .availability(Availability.AVAILABLE)
                                     .warehouse("Genk")
                                     .build();
-        
+
+        builder = new CopyBuilder();        
         Copy metroidCopy1 = builder.game(metroid)
                                     .console(nes)
                                     .availability(Availability.AVAILABLE)
                                     .warehouse("Diepenbeek")
                                     .build();   
-                                    
+
+        builder = new CopyBuilder();                                    
         Copy assassinsCreedOriginsCopy1 = builder.game(assassinsCreedOrigins)
                                                 .console(xboxSeriesX)
                                                 .availability(Availability.AVAILABLE)
                                                 .warehouse("New York")
                                                 .build();
-        
+
+        builder = new CopyBuilder();        
         Copy redDeadRedemption2Copy1 = builder.game(redDeadRedemption2)
                                                 .console(playstation5)
                                                 .availability(Availability.AVAILABLE)
                                                 .warehouse("Los Angeles")
                                                 .build();
-                                        
+
+        builder = new CopyBuilder();                                        
         Copy uncharted4AThiefsEndCopy1 = builder.game(uncharted4AThiefsEnd)
                                                 .console(playstation4)
                                                 .availability(Availability.AVAILABLE)
                                                 .warehouse("Tokyo")
                                                 .build();
-        
+
+        builder = new CopyBuilder();        
         Copy overwatchCopy1 = builder.game(overwatch)
                                     .console(xboxOne)
                                     .availability(Availability.AVAILABLE)
                                     .warehouse("London")
                                     .build();
 
+        builder = new CopyBuilder();
         Copy theElderScrollsVSkyrimCopy1 = builder.game(theElderScrollsVSkyrim)
                                                     .console(nintendoSwitch)
                                                     .availability(Availability.AVAILABLE)
                                                     .warehouse("Berlin")
                                                     .build();
-                                            
+
+        builder = new CopyBuilder();                                            
         Copy halfLife2Copy1 = builder.game(halfLife2)
                                     .console(pc)
                                     .availability(Availability.AVAILABLE)
                                     .warehouse("Paris")
                                     .build();
-        
+
+        builder = new CopyBuilder();        
         Copy finalFantasyXCopy1 = builder.game(finalFantasyX)
                                         .console(playstation2)
                                         .availability(Availability.AVAILABLE)
                                         .warehouse("Madrid")
                                         .build();
-        
+
+        builder = new CopyBuilder();        
         Copy finalFantasyIXCopy2 = builder.game(finalFantasyIX)
                                         .console(pc)
                                         .availability(Availability.AVAILABLE)
                                         .warehouse("Rome")
                                         .build();
 
+        builder = new CopyBuilder();
         Copy donkeyKongCopy2 = builder.game(donkeyKong)
                                         .console(arcade)
                                         .availability(Availability.BROKEN)

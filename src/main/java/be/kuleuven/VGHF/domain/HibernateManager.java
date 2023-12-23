@@ -211,6 +211,9 @@ public class HibernateManager {
             entityManager.merge(object);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
+            if (entityManager.getTransaction() != null && entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
             e.printStackTrace();
         }
     }
