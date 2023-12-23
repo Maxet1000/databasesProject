@@ -65,7 +65,6 @@ public class ShopController extends Controller{
 
     public void initialize(){
         var listOfCopies = ProjectMain.getDatabase().getAllCopies();
-        System.out.println(listOfCopies);
         initTable(listOfCopies);
         initTableCart();
         initFilters();
@@ -94,69 +93,63 @@ public class ShopController extends Controller{
             txtUser.setText("Logged in as: " + data.getUser().getCustomerName());
         });
     }
-
-
-    //TODO voor RentGamesFromCart
-        //customerID toevoegen mbv het inloggen van de customer
-        //checken voor balance
-        //rollback
+    
     public void rentAndBuyGamesFromCart(TableView table){
-        var datalist = table.getItems();
-                int i = 0;
-        int j = 0;
-        boolean faultyGame = false;
-        while (j != datalist.size()){
-            List data = (List) datalist.get(j);
-            int copyId = (int) data.get(data.size()-1);
-            var copy = ProjectMain.getDatabase().getCopyById(copyId);
-            if(table == tblRentCart && copy.getAvailability() == Availability.AVAILABLE){
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("congratulations");
-                alert.setHeaderText(null);
-                alert.setContentText("Games are now rented");
-                alert.show();
-            }else if(table == tblRentCart){
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("congratulations");
-                alert.setHeaderText(null);
-                alert.setContentText("Games cannot be rented");
-                alert.show();
+        var balance = data.getUser().getBalance(); 
+        List listItems = table.getItems();
+
+        //vraag al de gehuurde en verkochte games van de user op
+        var copyFromUser = data.getUser().getCopies();
+            if (copyFromUser == null) {
+                    copyFromUser = new ArrayList<>();
             }
-            if(table == tblBuyCart && copy.getAvailability() == Availability.AVAILABLE && copy.getPurchasePrice() > 0){
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("congratulations");
-                alert.setHeaderText(null);
-                alert.setContentText("Games are now yours, hopefully worth the money <3");
-                alert.show();
-            }else if(table == tblBuyCart){
+
+        int itemCounter = 0;
+        while (itemCounter != listItems.size()) {
+            List copyData = (List) listItems.get(itemCounter);
+            int copyID = (int) copyData.get(copyData.size()-1);
+            var copy = ProjectMain.getDatabase().getCopyById(copyID);      
+
+            if(table == tblBuyCart && balance >= copy.getPurchasePrice() && copy.getAvailability() == Availability.AVAILABLE && copy.getPurchasePrice() != 0){
+                //game kan verkocht worden
+                //copy wordt aangepast en naar hibernate gestuurd
+                balance = balance - copy.getPurchasePrice();
+                copy.setAvailability(Availability.SOLD);
+                copy.setDateOfReturn(twoWeeksLonger());
+                ProjectMain.database.updateCopy(copy);
+                copyFromUser.add(copy);
+                data.getUser().setBalance(balance);
+
+            }else if(table == tblRentCart && balance >= copy.getRentPrice() && copy.getAvailability() == Availability.AVAILABLE && copy.getRentPrice() != 0){
+                //game kan verhuurd worden
+                //copy wordt aangepast en naar hibernate gestuurd
+                balance = balance - copy.getRentPrice(); 
+                copy.setAvailability(Availability.RENTED);
+                copy.setDateOfReturn(twoWeeksLonger());
+                ProjectMain.database.updateCopy(copy);
+                copyFromUser.add(copy);
+                data.getUser().setBalance(balance);
+
+            }else{
+                //show alert dat er iets misliep
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Error");
                 alert.setHeaderText(null);
-                alert.setContentText("Game not for sale!");
+                alert.setContentText("Game: " + copy.getGame().getTitle().toString() +" not available or not enough money!" );
                 alert.show();
-                faultyGame = true;
             }
-            j++;
+
+            itemCounter++;
         }
 
-        var copyListNow = data.getUser().getCopies();
-        if (copyListNow == null) {
-            copyListNow = new ArrayList<>();
-        }
-        while (i != datalist.size() && faultyGame != true){
-            List datacopy = (List) datalist.get(i);
-            int copyId = (int) datacopy.get(datacopy.size()-1);
-            var copy = ProjectMain.getDatabase().getCopyById(copyId);
-            copy.setAvailability(Availability.RENTED);
-            copy.setDateOfReturn(twoWeeksLonger());
-            ProjectMain.getDatabase().updateCopy(copy);
-            copyListNow.add(copy);
-            i++;
-        }
-        data.getUser().setCopies(copyListNow);
-        datalist.clear();
+        //refresh balance
+        txtBalance.setText("" + data.getUser().getBalance());
 
-        
+        //refresh de gehuurde en verkochte games van de user
+        data.getUser().setCopies(copyFromUser);
+        listItems.clear();
+
+        //refresh de tableview met copies
         var listOfCopies = ProjectMain.getDatabase().getAllCopies();
         initTable(listOfCopies);
         activateFilters();
@@ -170,7 +163,8 @@ public class ShopController extends Controller{
     }
 
     public void removeGameFromCart(TableView table){
-        //zit bug in die de grijze geselecteerde ook verwijderd wanneer een andere element geselecteerd is in een andere lijst
+        //zit bug/feature in die de grijze geselecteerde ook verwijderd wanneer een andere element geselecteerd is in een andere lijst
+        //mogelijke oplossing is selectionModel zetten op SINGLE
         var selectedItem = table.getSelectionModel().getSelectedItem();
         var data = table.getItems();
         data.remove(selectedItem);
