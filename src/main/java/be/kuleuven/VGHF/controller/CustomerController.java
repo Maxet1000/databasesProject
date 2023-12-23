@@ -71,7 +71,19 @@ public class CustomerController extends Controller{
         });
     }
     private void extendAllReturnDate(){
-        
+        var rentedCopies = data.getUser().getCopies();
+
+        for(int i = 0; i < rentedCopies.size(); i++){
+        int copyID = (int) rentedCopies.get(i).getCopyID();
+        var copy = ProjectMain.getDatabase().getCopyById(copyID);
+        String inputDate = copy.getDateOfReturn();
+        String newReturnDate = addTwoWeeks(inputDate);
+        System.out.println(newReturnDate);
+        System.out.println("Hello i am daddy and i like girls fatty");
+        copy.setDateOfReturn(newReturnDate);
+        initTable();
+        fillTable();
+        }
     }
     //TODO
     //  geld van balance afdoen
@@ -115,20 +127,20 @@ public class CustomerController extends Controller{
     }
 
     private void fillTable(){
-        var rented_copies = data.getUser().getCopies();
+        var rentedCopies = data.getUser().getCopies();
 
-        for(int i = 0; i < rented_copies.size(); i++){
-            String gameCopyName = rented_copies.get(i).getGame().getTitle();
+        for(int i = 0; i < rentedCopies.size(); i++){
+            String gameCopyName = rentedCopies.get(i).getGame().getTitle();
             String developers = "";
-                for (int j = 0; j < rented_copies.get(i).getGame().getDevelopers().size(); j++) {
-                    developers = developers+ rented_copies.get(i).getGame().getDevelopers().get(j).getDeveloperName();
-                    if (j+1 != rented_copies.get(i).getGame().getDevelopers().size()) {
+                for (int j = 0; j < rentedCopies.get(i).getGame().getDevelopers().size(); j++) {
+                    developers = developers+ rentedCopies.get(i).getGame().getDevelopers().get(j).getDeveloperName();
+                    if (j+1 != rentedCopies.get(i).getGame().getDevelopers().size()) {
                         developers = developers + ", ";
                     }
                 }
-            String console = rented_copies.get(i).getConsole().getConsoleName();
-            String returnDate = rented_copies.get(i).getDateOfReturn().toString();
-            var copyId = rented_copies.get(i).getCopyID();
+            String console = rentedCopies.get(i).getConsole().getConsoleName();
+            String returnDate = rentedCopies.get(i).getDateOfReturn().toString();
+            var copyId = rentedCopies.get(i).getCopyID();
 
             tblRentedGames.getItems().add(FXCollections.observableArrayList(gameCopyName, developers, console, returnDate, copyId));
         }
