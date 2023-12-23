@@ -268,6 +268,7 @@ public class DbContentScript {
         Copy theLastOfUsCopy1 = builder.game(theLastOfUs)
                                       .console(playstation4)
                                       .availability(Availability.AVAILABLE)
+                                      .rentPrice(20)
                                       .warehouse("Los Angeles")
                                       .build();
 

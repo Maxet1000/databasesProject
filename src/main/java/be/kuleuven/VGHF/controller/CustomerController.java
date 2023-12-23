@@ -3,6 +3,7 @@ package be.kuleuven.VGHF.controller;
 import be.kuleuven.VGHF.DataCommunicationModel;
 import be.kuleuven.VGHF.ProjectMain;
 import be.kuleuven.VGHF.domain.Customer;
+import be.kuleuven.VGHF.enums.Availability;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
@@ -160,19 +161,21 @@ public class CustomerController extends Controller{
         var rentedCopies = data.getUser().getCopies();
 
         for(int i = 0; i < rentedCopies.size(); i++){
-            String gameCopyName = rentedCopies.get(i).getGame().getTitle();
-            String developers = "";
-                for (int j = 0; j < rentedCopies.get(i).getGame().getDevelopers().size(); j++) {
-                    developers = developers+ rentedCopies.get(i).getGame().getDevelopers().get(j).getDeveloperName();
-                    if (j+1 != rentedCopies.get(i).getGame().getDevelopers().size()) {
-                        developers = developers + ", ";
+            if(rentedCopies.get(i).getAvailability() != Availability.SOLD){
+                String gameCopyName = rentedCopies.get(i).getGame().getTitle();
+                String developers = "";
+                    for (int j = 0; j < rentedCopies.get(i).getGame().getDevelopers().size(); j++) {
+                        developers = developers+ rentedCopies.get(i).getGame().getDevelopers().get(j).getDeveloperName();
+                        if (j+1 != rentedCopies.get(i).getGame().getDevelopers().size()) {
+                            developers = developers + ", ";
+                        }
                     }
-                }
-            String console = rentedCopies.get(i).getConsole().getConsoleName();
-            String returnDate = rentedCopies.get(i).getDateOfReturn().toString();
-            var copyId = rentedCopies.get(i).getCopyID();
+                String console = rentedCopies.get(i).getConsole().getConsoleName();
+                String returnDate = rentedCopies.get(i).getDateOfReturn().toString();
+                var copyId = rentedCopies.get(i).getCopyID();
 
-            tblRentedGames.getItems().add(FXCollections.observableArrayList(gameCopyName, developers, console, returnDate, copyId));
+                tblRentedGames.getItems().add(FXCollections.observableArrayList(gameCopyName, developers, console, returnDate, copyId));
+            }
         }
     }
 
