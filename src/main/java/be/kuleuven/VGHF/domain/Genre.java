@@ -36,6 +36,8 @@ public class Genre implements InterfaceForFilters {
         this.games = games;
     }
 
-    
+    public void addGame(Game game) {
+        this.games.add(game);
+    }
 
 }

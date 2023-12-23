@@ -2,7 +2,10 @@ package be.kuleuven.VGHF.controller;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import org.hibernate.Hibernate;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -11,7 +14,9 @@ import be.kuleuven.VGHF.ProjectMain;
 import be.kuleuven.VGHF.domain.Console;
 import be.kuleuven.VGHF.domain.Copy;
 import be.kuleuven.VGHF.domain.Developer;
+import be.kuleuven.VGHF.domain.Game;
 import be.kuleuven.VGHF.domain.Genre;
+import be.kuleuven.VGHF.domain.HibernateManager;
 import be.kuleuven.VGHF.enums.Availability;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -142,8 +147,27 @@ public class ShopController extends Controller{
             itemCounter++;
         }
 
+<<<<<<< HEAD
         //refresh balance
         txtBalance.setText("" + data.getUser().getBalance());
+=======
+        var copyListNow = data.getUser().getCopies();
+        if (copyListNow == null) {
+            copyListNow = new ArrayList<>();
+        }
+        while (i != datalist.size() && faultyGame != true){
+            List datacopy = (List) datalist.get(i);
+            int copyId = (int) datacopy.get(datacopy.size()-1);
+            var copy = ProjectMain.getDatabase().getCopyById(copyId);
+            copy.setAvailability(Availability.RENTED);
+            copy.setDateOfReturn(twoWeeksLonger());
+            ProjectMain.getDatabase().updateObject(copy);
+            copyListNow.add(copy);
+            i++;
+        }
+        data.getUser().setCopies(copyListNow);
+        datalist.clear();
+>>>>>>> 1433f232f5fb5e9b418ffaf88b348eea82a4a94b
 
         //refresh de gehuurde en verkochte games van de user
         data.getUser().setCopies(copyFromUser);
