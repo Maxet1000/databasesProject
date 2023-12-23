@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox fx:id="parentPane" maxHeight="2000.0" maxWidth="2000.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.VGHF.controller.NewUserPageController">
+    <Text fx:id="txtText" strokeType="OUTSIDE" strokeWidth="0.0" text="Create New Account" textAlignment="CENTER" wrappingWidth="312.03125">
+        <font>
+            <Font size="24.0" />
+        </font>
+    </Text>
+    <AnchorPane prefHeight="50.0" prefWidth="200.0" />
+   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" />
+   <TextField fx:id="txtUsername" maxWidth="300.0" minWidth="50.0" prefWidth="200.0" promptText="Enter username" />
+    <AnchorPane maxHeight="15.0" minHeight="15.0" prefHeight="15.0" prefWidth="200.0" />
+   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail:" />
+    <TextField fx:id="txtEmail" maxWidth="300.0" minWidth="50.0" prefWidth="200.0" promptText="Enter email address" />
+   <AnchorPane maxHeight="15.0" minHeight="15.0" prefHeight="15.0" prefWidth="200.0" />
+   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" />
+    <PasswordField fx:id="txtPassword1" maxWidth="300.0" minWidth="50.0" prefWidth="200.0" promptText="put your weak ass password here" />
+   <AnchorPane maxHeight="15.0" minHeight="15.0" prefHeight="15.0" prefWidth="200.0" />
+   <Text fx:id="txtConfirmPassword" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm Password:" />
+   <PasswordField fx:id="txtPassword2" maxWidth="300.0" minWidth="50.0" prefWidth="200.0" promptText="put your weak ass password here" />
+   <AnchorPane maxHeight="15.0" minHeight="15.0" prefHeight="15.0" prefWidth="200.0" />
+    <Button fx:id="btnCreateAccount" mnemonicParsing="false" prefWidth="100.0" stylesheets="@styles.css" text="Create Account" />
+</VBox>

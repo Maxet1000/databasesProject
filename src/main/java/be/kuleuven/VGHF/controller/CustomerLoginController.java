@@ -1,23 +1,17 @@
 package be.kuleuven.VGHF.controller;
 
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
 import java.io.IOException;
 
-import be.kuleuven.VGHF.DataCommunicationModel;
 import be.kuleuven.VGHF.ProjectMain;
-import be.kuleuven.VGHF.domain.Customer;
+import javafx.stage.Stage;
 
 
 public class CustomerLoginController extends Controller{
@@ -47,16 +41,13 @@ public class CustomerLoginController extends Controller{
         var user = ProjectMain.getDatabase().getUserByEmail(txtEmail.getText());
         if(txtEmail.getText().equals("UwU") || txtEmail.getText().equals("kak")){
             data.setUser(ProjectMain.getDatabase().getAllCustomers().get(6));
-            //zelfde als laatste else
-            /*var pane = new FXMLLoader(getClass().getClassLoader().getResource("customerpage.fxml"));
-            var rootLoader = (VBox) pane.load();
-
-            var controller = pane.<CustomerController>getController();
-            controller.setModel(data);
-
-            rootLoader.autosize();
-            parentPane.getChildren().setAll(rootLoader);
-            rootLoader.setAlignment(Pos.CENTER);*/
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Correct");
+            alert.setHeaderText(null);
+            alert.setContentText("You are now logged in");
+            alert.showAndWait();
+            Stage stage = (Stage) btnLogin.getScene().getWindow();
+            stage.close();
 
         }else if (txtEmail.getText().toString().trim().isEmpty() || txtPassword.getText().toString().trim().isEmpty()){
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -78,20 +69,16 @@ public class CustomerLoginController extends Controller{
             alert.setHeaderText(null);
             alert.setContentText("Password is incorrect");
             alert.showAndWait();
-        }else{
+        }else {
             data.setUser(user);
-            /*var pane = new FXMLLoader(getClass().getClassLoader().getResource("customerpage.fxml"));
-            var rootLoader = (VBox) pane.load();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Succes!");
+            alert.setHeaderText(null);
+            alert.setContentText("You are now logged in");
+            alert.showAndWait();
+            Stage stage = (Stage) btnLogin.getScene().getWindow();
+            stage.close();
 
-            var controller = pane.<Controller>getController();
-            controller.setModel(data);
-
-            rootLoader.autosize();
-            parentPane.getChildren().setAll(rootLoader);
-            rootLoader.setAlignment(Pos.CENTER);*/
-
-            // TODO Deze lijn veroorzaakt java.lang.IllegalArgumentException
-            //Platform.exit();
         }
     }
 }

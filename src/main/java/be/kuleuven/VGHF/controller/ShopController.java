@@ -28,7 +28,7 @@ import javafx.scene.control.cell.CheckBoxTreeCell;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class RentgamesController extends Controller{
+public class ShopController extends Controller{
     
     @FXML
     private TableView tblRent;
@@ -62,7 +62,7 @@ public class RentgamesController extends Controller{
     private ArrayList<Genre> toBeFilteredGenres;
 
 
-    public RentgamesController() {
+    public ShopController() {
         toBeFilteredDevelopers = new ArrayList<>();
         toBeFilteredConsoles = new ArrayList<>();
         toBeFilteredGenres = new ArrayList<>();
@@ -104,6 +104,7 @@ public class RentgamesController extends Controller{
     //TODO voor RentGamesFromCart
         //customerID toevoegen mbv het inloggen van de customer
         //checken voor balance
+        //rollback
     public void rentAndBuyGamesFromCart(TableView table){
         var datalist = table.getItems();
                 int i = 0;
@@ -111,7 +112,7 @@ public class RentgamesController extends Controller{
         boolean faultyGame = false;
         while (j != datalist.size()){
             List data = (List) datalist.get(j);
-                        int copyId = (int) data.get(data.size()-1);
+            int copyId = (int) data.get(data.size()-1);
             var copy = ProjectMain.getDatabase().getCopyById(copyId);
             if(table == tblRentCart && copy.getAvailability() == Availability.AVAILABLE){
                 Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -142,15 +143,22 @@ public class RentgamesController extends Controller{
             }
             j++;
         }
+
+        var copyListNow = data.getUser().getCopies();
+        if (copyListNow == null) {
+            copyListNow = new ArrayList<>();
+        }
         while (i != datalist.size() && faultyGame != true){
-            List data = (List) datalist.get(i);
-                        int copyId = (int) data.get(data.size()-1);
+            List datacopy = (List) datalist.get(i);
+            int copyId = (int) datacopy.get(datacopy.size()-1);
             var copy = ProjectMain.getDatabase().getCopyById(copyId);
             copy.setAvailability(Availability.RENTED);
-                        copy.setDateOfReturn(twoWeeksLonger());
+            copy.setDateOfReturn(twoWeeksLonger());
             ProjectMain.getDatabase().updateObject(copy);
+            copyListNow.add(copy);
             i++;
         }
+        data.getUser().setCopies(copyListNow);
         datalist.clear();
 
         
