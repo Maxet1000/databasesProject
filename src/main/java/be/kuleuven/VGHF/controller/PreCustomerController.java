@@ -29,7 +29,7 @@ public class PreCustomerController extends Controller {
     }
     private void login() throws IOException {
         showLoginScherm();
-        switchToId("customerpage");
+        switchScreen("customer");
     }
     private void switchToId(String id) throws IOException {
 

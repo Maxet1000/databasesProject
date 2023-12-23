@@ -8,11 +8,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-public class ProjectMainController {
+public class ProjectMainController extends Controller{
 
     @FXML
     public StackPane pane1;
@@ -26,7 +27,8 @@ public class ProjectMainController {
     private Button btnDeveloperPage;
     @FXML
     private Button btnInfo;
-    private DataCommunicationModel data;
+    @FXML
+    private StackPane parentPane;
     
 
     public ProjectMainController(){
@@ -55,9 +57,9 @@ public class ProjectMainController {
         btnCustomerPage.setOnAction(e -> {
             try {
                 if (data.loggedIn) {
-                    switchToId("customerpage");
+                    switchToId("customer");
                 } else {
-                    switchToId("precustomerpage");
+                    switchToId("prelogin");
                 }
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
@@ -65,8 +67,8 @@ public class ProjectMainController {
         });
         btnDeveloperPage.setOnAction(e -> {
             try {
-                switchToId("developerloginpage");
-                switchToId("developerloginpage");
+                switchToId("developerlogin");
+                switchToId("developerlogin");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
@@ -96,11 +98,11 @@ public class ProjectMainController {
             case "gamedb":
                 btnGameDb.setUnderline(true);
             break;
-            case "precustomerpage":
-            case "customerpage":
+            case "prelogin":
+            case "customer":
                 btnCustomerPage.setUnderline(true);
             break;
-            case "developerloginpage":
+            case "developerlogin":
                 btnDeveloperPage.setUnderline(true);
             break;
             case "info":
@@ -108,18 +110,18 @@ public class ProjectMainController {
             break;
 
         }    
+        switchScreen(id);
+                //switch to pane
+                /*var pane = new FXMLLoader(getClass().getClassLoader().getResource(id + ".fxml"));
+                var rootLoader = (VBox) pane.load();
 
-        //switch to pane
-        var pane = new FXMLLoader(getClass().getClassLoader().getResource(id + ".fxml"));
-        var rootLoader = (VBox) pane.load();
+                var controller = pane.<Controller>getController();
+                controller.setModel(data);
 
-        var controller = pane.<Controller>getController();
-        controller.setModel(data);
-
-        //System.out.println("Yah " + pane.<Controller>getController().getModel().getUser().getCustomerName());
-        rootLoader.autosize();
-        pane1.getChildren().setAll(rootLoader);
-        rootLoader.setAlignment(Pos.CENTER);
+                //System.out.println("Yah " + pane.<Controller>getController().getModel().getUser().getCustomerName());
+                rootLoader.autosize();
+                pane1.getChildren().setAll(rootLoader);
+                rootLoader.setAlignment(Pos.CENTER);*/
     }
 
 }

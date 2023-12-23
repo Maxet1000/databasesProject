@@ -21,14 +21,14 @@ public class HomeController extends Controller{
     @FXML
     public VBox pane1;
     @FXML
-    private Button btnRentOrBuy;
+    private Button btnShop;
     @FXML
     private Button btnLogin;
 
     public void initialize() throws IOException {
-        btnRentOrBuy.setOnAction(e -> {
+        btnShop.setOnAction(e -> {
             try {
-                switchToRentOrBuy("rent");
+                switchScreen("shop");
             } catch (IOException ex) {
                 throw new RuntimeException (ex);
             }

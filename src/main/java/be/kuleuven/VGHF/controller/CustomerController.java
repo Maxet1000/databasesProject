@@ -14,6 +14,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -23,15 +24,24 @@ public class CustomerController extends Controller{
     @FXML
     private Button btnAddBalance;
     @FXML
+    private Button btnLogOut;
+    @FXML
     private Text txtBalance;
     @FXML
     private Text txtUser;
-
 
     public void initialize() {
         btnAddBalance.setOnAction(e -> {
             runResource("qr-code.jpeg");
         });
+        btnLogOut.setOnAction((e -> {
+            data.logOut();
+            try {
+                switchScreen("prelogin");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }));
         Platform.runLater(() -> {
             initTable();
         });
