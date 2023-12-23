@@ -2,7 +2,10 @@ package be.kuleuven.VGHF.controller;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import org.hibernate.Hibernate;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -11,7 +14,9 @@ import be.kuleuven.VGHF.ProjectMain;
 import be.kuleuven.VGHF.domain.Console;
 import be.kuleuven.VGHF.domain.Copy;
 import be.kuleuven.VGHF.domain.Developer;
+import be.kuleuven.VGHF.domain.Game;
 import be.kuleuven.VGHF.domain.Genre;
+import be.kuleuven.VGHF.domain.HibernateManager;
 import be.kuleuven.VGHF.enums.Availability;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -150,7 +155,7 @@ public class ShopController extends Controller{
             var copy = ProjectMain.getDatabase().getCopyById(copyId);
             copy.setAvailability(Availability.RENTED);
             copy.setDateOfReturn(twoWeeksLonger());
-            ProjectMain.getDatabase().updateCopy(copy);
+            ProjectMain.getDatabase().updateObject(copy);
             copyListNow.add(copy);
             i++;
         }
