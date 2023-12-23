@@ -242,6 +242,7 @@ public class DbContentScript {
                                       .console(playstation3)
                                       .availability(Availability.AVAILABLE)
                                       .warehouse("Tokyo")
+                                      .purchasePrice(69)
                                       .build();
         
         Copy grandTheftAutoVCopy1 = builder.game(grandTheftAutoV)

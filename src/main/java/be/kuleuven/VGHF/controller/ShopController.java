@@ -31,7 +31,8 @@ public class ShopController extends Controller{
     private Button btnAddGameToCart;
     @FXML
     private Button btnAddFilter;
-    @FXML Button btnRemoveFilters;
+    @FXML
+    private Button btnRemoveFilters;
     @FXML
     public VBox pane1;
     @FXML
@@ -420,7 +421,8 @@ public class ShopController extends Controller{
                 tblRent.getItems().add(FXCollections.observableArrayList(gameCopyName, developers, console, genres, rentPrice, purchasePrice, copyId));
             }
         }
-        
+        System.out.println(""+ProjectMain.getDatabase().getCopyById(36).getPurchasePrice());
+
     }
 
     public void initFilters() {
