@@ -19,7 +19,7 @@ import be.kuleuven.VGHF.ProjectMain;
 public class HomeController extends Controller{
 
     @FXML
-    public VBox pane1;
+    public VBox parentPane;
     @FXML
     private Button btnShop;
     @FXML
@@ -50,7 +50,7 @@ public class HomeController extends Controller{
         controller.setModel(data);
 
         rootLoader.autosize();
-        pane1.getChildren().setAll(rootLoader);
+        parentPane.getChildren().setAll(rootLoader);
         StackPane.setAlignment(rootLoader, Pos.CENTER);
     }
 
