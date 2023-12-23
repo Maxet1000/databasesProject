@@ -34,6 +34,8 @@
                         <Text fx:id="txtUser" layoutX="2.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="100.0" />
                      </children>
                   </AnchorPane>
+                  <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" prefWidth="200.0" />
+                  <Button fx:id="btnSwith" mnemonicParsing="false" prefHeight="43.0" prefWidth="107.0" stylesheets="@styles.css" text="Switch to buy" />
                   <AnchorPane prefHeight="2000.0" prefWidth="200.0" />
                   <Button fx:id="btnLogOut" maxWidth="300.0" minWidth="100.0" mnemonicParsing="false" prefWidth="100.0" stylesheets="@styles.css" text="Log Out" />
                   <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" prefWidth="200.0" />

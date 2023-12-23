@@ -17,7 +17,9 @@ import be.kuleuven.VGHF.domain.Developer;
 import be.kuleuven.VGHF.domain.Game;
 import be.kuleuven.VGHF.domain.Genre;
 import be.kuleuven.VGHF.domain.HibernateManager;
+import be.kuleuven.VGHF.domain.MonetaryTransaction;
 import be.kuleuven.VGHF.enums.Availability;
+import be.kuleuven.VGHF.enums.TransactionType;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
@@ -126,6 +128,20 @@ public class ShopController extends Controller{
                 copyFromUser.add(copy);
                 data.getUser().setBalance(balance);
 
+                //transactie toevoegen aan user
+                var userTransaction = data.getUser().getTransactions();
+                if(userTransaction == null){
+                    ArrayList<MonetaryTransaction> userTransactions = new ArrayList<MonetaryTransaction>();
+                    var transaction = new MonetaryTransaction(TransactionType.SALE, balance, data.getUser(), copy, currentTime());
+                    userTransactions.add(transaction);
+                    data.getUser().setTransactions(userTransactions);
+
+                }else{
+                    var transaction = new MonetaryTransaction(TransactionType.SALE, balance, data.getUser(), copy, currentTime());
+                    userTransaction.add(transaction);
+                    data.getUser().setTransactions(userTransaction);
+                }
+
             }else if(table == tblRentCart && balance >= copy.getRentPrice() && copy.getAvailability() == Availability.AVAILABLE && copy.getRentPrice() != 0){
                 //game kan verhuurd worden
                 //copy wordt aangepast en naar hibernate gestuurd
@@ -135,6 +151,20 @@ public class ShopController extends Controller{
                 ProjectMain.database.updateObject(copy);
                 copyFromUser.add(copy);
                 data.getUser().setBalance(balance);
+
+                //transactie toevoegen aan user
+                var userTransaction = data.getUser().getTransactions();
+                if(userTransaction == null){
+                    ArrayList<MonetaryTransaction> userTransactions = new ArrayList<MonetaryTransaction>();
+                    var transaction = new MonetaryTransaction(TransactionType.RENTAL, balance, data.getUser(), copy, currentTime());
+                    userTransactions.add(transaction);
+                    data.getUser().setTransactions(userTransactions);
+
+                }else{
+                    var transaction = new MonetaryTransaction(TransactionType.RENTAL, balance, data.getUser(), copy, currentTime());
+                    userTransaction.add(transaction);
+                    data.getUser().setTransactions(userTransaction);
+                }
 
             }else{
                 //show alert dat er iets misliep
@@ -161,6 +191,13 @@ public class ShopController extends Controller{
         activateFilters();
     }
 
+    public String currentTime(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.now();
+        String formattedDate = date.format(formatter);
+        return formattedDate;
+    }
+
     public String twoWeeksLonger(){
         LocalDate currentDate = LocalDate.now();
         LocalDate futureDate = currentDate.plusWeeks(2);
@@ -178,9 +215,7 @@ public class ShopController extends Controller{
 
     public void addGameToRentCart(){
         try {
-                    List selectedItem =  (List) tblRent.getSelectionModel().getSelectedItem();
-
-        System.out.println(selectedItem);
+            List selectedItem =  (List) tblRent.getSelectionModel().getSelectedItem();
          
             int x = (int) selectedItem.get(selectedItem.size()-1);
             var copy = ProjectMain.getDatabase().getCopyById(x);
@@ -188,8 +223,6 @@ public class ShopController extends Controller{
             var copyId = copy.getCopyID();
 
             boolean doubleCopy = false;
-    
-
 
                 String developers = "";
                 for (int j = 0; j < copy.getGame().getDevelopers().size(); j++) {
