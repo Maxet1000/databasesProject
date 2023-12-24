@@ -68,4 +68,24 @@ public class Console implements InterfaceForFilters {
         this.games.add(game);
     }
 
+    public void removeGame(Game game) {
+        this.games.remove(game);
+    }
+
+    public void addCopy(Copy copy) {
+        this.copies.add(copy);
+    }
+
+    public void removeCopy(Copy copy) {
+        this.copies.remove(copy);
+    }
+
+    public void addCompatibleConsole(Console console) {
+        this.compatibleConsoles.add(console);
+    }
+
+    public void removeCompatibleconsole(Console compatibleConsole) {
+        this.compatibleConsoles.remove(compatibleConsole);
+    }
+
 }

@@ -89,5 +89,8 @@ public class Customer {
         this.transactions = transactions;
     }
 
+    public void removeCopy(Copy copy) {
+        this.copies.remove(copy);
+    }
 
 }

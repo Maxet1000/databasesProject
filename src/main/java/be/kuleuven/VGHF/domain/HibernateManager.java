@@ -103,10 +103,10 @@ public class HibernateManager {
         return entityManager.createQuery(query).getResultList();
     }    
 
-    public <T> void saveNewObject(T object) {
+    public <T> void saveNewEntity(T entity) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.persist(object);
+            entityManager.persist(entity);
             entityManager.getTransaction().commit();
         } catch (Exception exception) {
             if (entityManager.getTransaction().isActive()) {
@@ -205,16 +205,31 @@ public class HibernateManager {
     //     }
     // }
     
-    public <T> void updateObject(T object) {
+    public <T> void updateEntity(T entity) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.merge(object);
+            entityManager.merge(entity);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             if (entityManager.getTransaction() != null && entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
             }
             e.printStackTrace();
+        }
+    }
+
+    public <T> void deleteEntity(T entity) {
+        if (entity != null) {
+            try{
+                entityManager.getTransaction().begin();
+                entityManager.remove(entity);
+                entityManager.getTransaction().commit();
+            } catch (Exception e) {
+                if (entityManager.getTransaction() != null) {
+                    entityManager.getTransaction().rollback();
+                }
+                e.printStackTrace();
+            }
         }
     }
 

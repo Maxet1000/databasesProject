@@ -154,7 +154,7 @@ public class ShopController extends Controller{
             var copy = ProjectMain.getDatabase().getCopyById(copyId);
             copy.setAvailability(Availability.RENTED);
             copy.setDateOfReturn(twoWeeksLonger());
-            ProjectMain.getDatabase().updateObject(copy);
+            ProjectMain.getDatabase().updateEntity(copy);
             copyListNow.add(copy);
             i++;
         }

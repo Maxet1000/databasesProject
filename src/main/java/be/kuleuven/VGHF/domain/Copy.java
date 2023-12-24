@@ -189,8 +189,4 @@ public class Copy {
         this.transactions = transactions;
     }
 
-
-    
-    
-
 }

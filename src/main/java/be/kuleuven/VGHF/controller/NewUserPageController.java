@@ -47,7 +47,7 @@ public class NewUserPageController extends Controller{
             && Objects.equals(txtPassword1.getText(), txtPassword2.getText())) {
 
             Customer newCustomer = new Customer(txtUsername.getText(),txtEmail.getText(),txtPassword1.getText(),0);
-            ProjectMain.getDatabase().saveNewObject(newCustomer);
+            ProjectMain.getDatabase().saveNewEntity(newCustomer);
             data.setUser(newCustomer);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Correct");
