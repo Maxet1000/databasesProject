@@ -1,24 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.text.Font?>
-
-<VBox fx:id="pane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="be.kuleuven.VGHF.controller.InfoController">
+<VBox fx:id="pane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.VGHF.controller.InfoController">
     <children>
-        <Text fx:id="txtInfo" strokeType="OUTSIDE" strokeWidth="0.0" text="Very cool info" textAlignment="CENTER" wrappingWidth="312.03125">
-            <font>
-                <Font size="24.0" />
-            </font>
-        </Text>
+      <AnchorPane minHeight="50.0" prefHeight="200.0" prefWidth="200.0" />
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <AnchorPane minHeight="50.0" prefHeight="200.0" prefWidth="2000.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Project for course Databases">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <AnchorPane minHeight="50.0" prefHeight="200.0" prefWidth="2000.0" />
+         </children>
+      </HBox>
+      <AnchorPane prefHeight="2000.0" prefWidth="200.0" />
+      <HBox>
+         <children>
+            <AnchorPane maxHeight="1.7976931348623157E308" prefWidth="2000.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Made by: &#10;" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Spauwen Bjorn&#10;Meylaerts Max-émile&#10;Ruttens Dries&#10;" />
+            <AnchorPane minWidth="5.0" prefHeight="200.0" prefWidth="5.0" />
+         </children>
+      </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="2000.0" />
+            <ImageView fitHeight="48.0" fitWidth="132.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@KULEUVEN_CMYK_LOGO.png" />
+               </image>
+            </ImageView>
+            <AnchorPane minWidth="5.0" prefHeight="200.0" prefWidth="5.0" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@UHasselt-liggend.png" />
+               </image>
+            </ImageView>
+            <AnchorPane minWidth="5.0" prefHeight="200.0" prefWidth="5.0" />
+         </children>
+      </HBox>
+      <AnchorPane minHeight="5.0" prefHeight="5.0" />
     </children>
 </VBox>

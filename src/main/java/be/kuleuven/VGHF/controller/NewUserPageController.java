@@ -59,16 +59,16 @@ public class NewUserPageController extends Controller{
         }
 
         if (txtUsername.getText().isBlank()) {
-            txtUsername.setStyle("-fx-border-color: #ff8080;");
+            txtUsername.setStyle(txtUsername.getStyle() + "-fx-border-color: #ff8080;");
         }
         if (txtEmail.getText().isBlank()) {
-            txtEmail.setStyle("-fx-border-color: #ff8080;");
+            txtEmail.setStyle(txtEmail.getStyle() + "-fx-border-color: #ff8080;");
         }
         if (txtPassword1.getText().isBlank()) {
-            txtPassword1.setStyle("-fx-border-color: #ff8080;");
+            txtPassword1.setStyle(txtPassword1.getStyle() + "-fx-border-color: #ff8080;");
         }
         if (txtPassword2.getText().isBlank()) {
-            txtPassword2.setStyle("-fx-border-color: #ff8080;");
+            txtPassword2.setStyle(txtPassword2.getStyle() + "-fx-border-color: #ff8080;");
         } else if (!Objects.equals(txtPassword1.getText(), txtPassword2.getText())) {
             txtConfirmPassword.setText("Confirm Password: Password does not match");
         }

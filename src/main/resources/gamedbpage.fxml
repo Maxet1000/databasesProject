@@ -1,19 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" fx:controller="be.kuleuven.VGHF.controller.GameDbController">
+<?import javafx.scene.text.Text?>
+
+<VBox prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.VGHF.controller.GameDbController">
     <children>
-        <Text fx:id="txtAllGames" strokeType="OUTSIDE" strokeWidth="0.0" text="Dit is de pagina waar alle games komen te staan Hierin komt een knop met ALLGAMES, NEWGAMES en RETROGAMES" textAlignment="CENTER" wrappingWidth="312.03125">
-            <font>
-                <Font size="24.0" />
-            </font>
-        </Text>
+        <AnchorPane minHeight="5.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+        <HBox prefHeight="1000.0" prefWidth="500.0">
+            <children>
+                <AnchorPane minWidth="5.0" prefHeight="200.0" prefWidth="300.0" HBox.hgrow="ALWAYS" />
+                <VBox fx:id="filtersBox" minWidth="200.0" prefHeight="500.0" prefWidth="500.0">
+                    <children>
+                        <AnchorPane prefHeight="0.0" prefWidth="200.0" />
+                        <Button fx:id="btnAddFilter" minWidth="120.0" mnemonicParsing="false" prefWidth="500.0" stylesheets="@styles.css" text="Add Filter">
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                        </Button>
+                        <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" />
+                        <Button fx:id="btnRemoveFilters" minWidth="120.0" mnemonicParsing="false" prefWidth="200.0" stylesheets="@styles.css" text="Remove Filters">
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                        </Button>
+                        <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="From year " textAlignment="RIGHT" wrappingWidth="36.701171875" />
+                        <TextField fx:id="txtBottomYear" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" to year " />
+                        <TextField fx:id="txtTopYear" />
+                     </children>
+                  </HBox>
+                  <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" />
+                        <TreeView fx:id="filtersTreeView" minHeight="0.0" prefHeight="1000.0" prefWidth="200.0" />
+                    </children>
+                </VBox>
+                <AnchorPane maxWidth="5.0" minWidth="5.0" prefWidth="5.0" />
+                <VBox prefHeight="200.0" prefWidth="2000.0">
+                    <children>
+                        <HBox prefHeight="5.0" prefWidth="200.0">
+                            <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Search: ">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="txtSearch" prefHeight="25.0" prefWidth="300.0" promptText="Type here" />
+                        <Button fx:id="btnSearch" minWidth="80.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" stylesheets="@styles.css" text="Search" />
+                            </children>
+                        </HBox>
+                        <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" />
+                        <TableView fx:id="tblGameTable" minHeight="50.0" prefHeight="2000.0" prefWidth="200">
+                            <columns>
+                                <TableColumn prefWidth="75.0" text="C1" />
+                                <TableColumn prefWidth="75.0" text="C2" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </VBox>
+                <AnchorPane minWidth="5.0" prefHeight="200.0" HBox.hgrow="ALWAYS" />
+            </children>
+        </HBox>
     </children>
 </VBox>
