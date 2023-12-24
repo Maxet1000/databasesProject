@@ -57,7 +57,7 @@
             <AnchorPane maxWidth="5.0" minWidth="5.0" prefWidth="5.0" />
             <VBox maxHeight="1.7976931348623157E308" prefWidth="300.0">
                <children>
-                  <Button fx:id="btnRentGames" minWidth="200.0" mnemonicParsing="false" stylesheets="@styles.css" text="Rent Games" />
+                  <Button fx:id="btnRentGames" minWidth="200.0" mnemonicParsing="false" stylesheets="@styles.css" text="Confirm purchase" />
                   <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" />
                   <Button fx:id="btnRemoveFromCart" minWidth="200.0" mnemonicParsing="false" stylesheets="@styles.css" text="Remove from cart" />
                   <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" prefWidth="200.0" />

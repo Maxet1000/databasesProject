@@ -471,9 +471,9 @@ public class ShopController extends Controller{
         TreeItem<String> consolesTreeItem = new CheckBoxTreeItem<>("Consoles");
         TreeItem<String> genresTreeItem = new CheckBoxTreeItem<>("Genres");
 
-        developersTreeItem.setExpanded(true);
-        consolesTreeItem.setExpanded(true);
-        genresTreeItem.setExpanded(true);
+        developersTreeItem.setExpanded(false);
+        consolesTreeItem.setExpanded(false);
+        genresTreeItem.setExpanded(false);
         filtersTreeView.setCellFactory(CheckBoxTreeCell.forTreeView());
 
         for (int i=0; i<listOfDevelopers.size(); i++ ) {

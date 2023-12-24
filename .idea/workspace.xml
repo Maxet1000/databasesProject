@@ -8,12 +8,8 @@
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VGHF.db" beforeDir="false" afterPath="$PROJECT_DIR$/VGHF.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/customerpage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/customerpage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/controller/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/customerpage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/customerpage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/homepage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/homepage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/infopage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/infopage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/shoppage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shoppage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VGHF.db-journal" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/controller/ShopController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
