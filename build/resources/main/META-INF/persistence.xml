@@ -6,7 +6,7 @@
 
         <class>be.kuleuven.VGHF.domain.Console</class>
         <class>be.kuleuven.VGHF.domain.Copy</class>
-        <class>be.kuleuven.VGHF.domain.Customer</class>
+        <class>be.kuleuven.VGHF.domain.User</class>
         <class>be.kuleuven.VGHF.domain.Developer</class>
         <class>be.kuleuven.VGHF.domain.Game</class>
         <class>be.kuleuven.VGHF.domain.Genre</class>

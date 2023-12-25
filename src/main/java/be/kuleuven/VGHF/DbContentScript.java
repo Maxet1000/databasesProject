@@ -132,22 +132,22 @@ public class DbContentScript {
         Game galaga = new Game("Galaga", "1981-09-23", new ArrayList<> (Arrays.asList(arcade)), new ArrayList<> (Arrays.asList(namco)), new ArrayList<> (Arrays.asList(action)));
         Game metroid = new Game("Metroid", "1986-08-06", new ArrayList<> (Arrays.asList(nes)), new ArrayList<> (Arrays.asList(nintendo)), new ArrayList<> (Arrays.asList(action, adventure, platformer)));
 
-        Customer dries = new Customer("Dries Ruttens", "dries.ruttens@student.uhasselt.be", "wachtwoord", 10);
-        Customer bjorn = new Customer("Bjorn Spauwen", "bjorn.spauwen@student.uhasselt.be", "password", 20);
-        Customer max = new Customer("Max-émile Meylaerts", "max-emile.meylaerts@student.uhasselt.be", "12345", 30);
-        Customer mauro = new Customer("Mauro Vranckx", "mauro.vranckx@student.uhasselt.be", "isuckdick69420", 0);
-        Customer eddy = new Customer("Edmond Tsampanis", "edmond.tsampanis@student.uhasselt.be", "StrongPass123!", 40);
-        Customer jan = new Customer("Jan Alleman", "jan.alleman@fancycustomemail.com", "mijnverjaardag1999",-5);
-        Customer customer1 = new Customer("John Doe", "john.doe@email.com", "password123", 1000);
-        Customer customer2 = new Customer("Alice Smith", "alice.smith@email.com", "securePass", 1500);
-        Customer customer3 = new Customer("Bob Johnson", "bob.johnson@email.com", "strongPassword", 2000);
-        Customer customer4 = new Customer("Eva Brown", "eva.brown@email.com", "pass1234", 1200);
-        Customer customer5 = new Customer("Charlie Wilson", "charlie.wilson@email.com", "password", 800);
-        Customer customer6 = new Customer("Will E. Paymore", "will.paymore@email.com", "buymoreStuff", 5000);
-        Customer customer7 = new Customer("Ivana Spendalot", "ivana.spend@email.com", "splurgeQueen", 700);
-        Customer customer8 = new Customer("Cashew Nutt", "cashew.nutt@email.com", "nuttyRiches", 3000);
-        Customer customer9 = new Customer("Billie Moola", "billie.moola@email.com", "dollarSigns", 50);
-        Customer customer10 = new Customer("Richie McFortune", "richie.fortune@email.com", "wealthyRich", 10000);
+        User dries = new User("Dries Ruttens", "dries.ruttens@student.uhasselt.be", "wachtwoord", 10);
+        User bjorn = new User("Bjorn Spauwen", "bjorn.spauwen@student.uhasselt.be", "password", 20);
+        User max = new User("Max-émile Meylaerts", "max-emile.meylaerts@student.uhasselt.be", "12345", 30);
+        User mauro = new User("Mauro Vranckx", "mauro.vranckx@student.uhasselt.be", "isuckdick69420", 0);
+        User eddy = new User("Edmond Tsampanis", "edmond.tsampanis@student.uhasselt.be", "StrongPass123!", 40);
+        User jan = new User("Jan Alleman", "jan.alleman@fancycustomemail.com", "mijnverjaardag1999",-5);
+        User user1 = new User("John Doe", "john.doe@email.com", "password123", 1000);
+        User user2 = new User("Alice Smith", "alice.smith@email.com", "securePass", 1500);
+        User user3 = new User("Bob Johnson", "bob.johnson@email.com", "strongPassword", 2000);
+        User user4 = new User("Eva Brown", "eva.brown@email.com", "pass1234", 1200);
+        User user5 = new User("Charlie Wilson", "charlie.wilson@email.com", "password", 800);
+        User user6 = new User("Will E. Paymore", "will.paymore@email.com", "buymoreStuff", 5000);
+        User user7 = new User("Ivana Spendalot", "ivana.spend@email.com", "splurgeQueen", 700);
+        User user8 = new User("Cashew Nutt", "cashew.nutt@email.com", "nuttyRiches", 3000);
+        User user9 = new User("Billie Moola", "billie.moola@email.com", "dollarSigns", 50);
+        User user10 = new User("Richie McFortune", "richie.fortune@email.com", "wealthyRich", 10000);
 
         CopyBuilder builder = new CopyBuilder();
         Copy doomCopy1 = builder.game(doom)
@@ -181,7 +181,7 @@ public class DbContentScript {
                                      .console(pc)
                                      .availability(Availability.RENTED)
                                      .warehouse("Tokyo")
-                                     .customer(bjorn)
+                                     .user(bjorn)
                                      .purchasePrice(20)
                                      .rentPrice(3)
                                      .dateOfReturn("2024-01-12")
@@ -241,7 +241,7 @@ public class DbContentScript {
                                                   .console(nintendoSwitch)
                                                   .availability(Availability.RENTED)
                                                   .warehouse("Paris")
-                                                  .customer(customer5)
+                                                  .user(user5)
                                                   .rentPrice(5)
                                                   .dateOfReturn("2024-01-15")
                                                   .build();
@@ -259,7 +259,7 @@ public class DbContentScript {
                                         .console(xboxOne)
                                         .availability(Availability.RENTED)
                                         .warehouse("New York")
-                                        .customer(max)
+                                        .user(max)
                                         .rentPrice(8)
                                         .dateOfReturn("2024-01-20")
                                         .build();
@@ -305,7 +305,7 @@ public class DbContentScript {
                                             .console(playstation1)
                                             .availability(Availability.RENTED)
                                             .warehouse("Diepenbeek")
-                                            .customer(customer3)
+                                            .user(user3)
                                             .rentPrice(7)
                                             .dateOfReturn("2024-01-18")
                                             .build();
@@ -336,7 +336,7 @@ public class DbContentScript {
                                             .console(playstation3)
                                             .availability(Availability.RENTED)
                                             .warehouse("Genk")
-                                            .customer(max)
+                                            .user(max)
                                             .rentPrice(8)
                                             .dateOfReturn("2024-01-20")
                                             .build();
@@ -727,16 +727,16 @@ public class DbContentScript {
         database.saveNewEntity(mauro);
         database.saveNewEntity(eddy);
         database.saveNewEntity(jan);
-        database.saveNewEntity(customer1);
-        database.saveNewEntity(customer2);
-        database.saveNewEntity(customer3);
-        database.saveNewEntity(customer4);
-        database.saveNewEntity(customer5);
-        database.saveNewEntity(customer6);
-        database.saveNewEntity(customer7);
-        database.saveNewEntity(customer8);
-        database.saveNewEntity(customer9);
-        database.saveNewEntity(customer10);
+        database.saveNewEntity(user1);
+        database.saveNewEntity(user2);
+        database.saveNewEntity(user3);
+        database.saveNewEntity(user4);
+        database.saveNewEntity(user5);
+        database.saveNewEntity(user6);
+        database.saveNewEntity(user7);
+        database.saveNewEntity(user8);
+        database.saveNewEntity(user9);
+        database.saveNewEntity(user10);
 
         database.saveNewEntity(doomCopy1);
         database.saveNewEntity(witcherCopy1);
@@ -784,16 +784,6 @@ public class DbContentScript {
         
         database.saveNewEntity(transaction1);
         database.saveNewEntity(transaction2);
-
-        System.out.println("STARTSTARTSTART");
-        System.out.println(playstation4.getCopies());
-        database.deleteEntity(witcherCopy1);
-        database.getAllConsoles().get(5);
-        playstation4.removeCopy(witcherCopy1);
-        System.out.println(playstation4.getCopies());
-        System.out.println(witcherCopy1);
-        System.out.println("STOPSTOPSTOPSTOP");
-
     }
 
 }

@@ -109,7 +109,7 @@ public class DeveloperController extends Controller{
     }
 
     /*  Updates a copy and the Game and Console associated with it
-     *  Cannot update associated Transactions or Customer.
+     *  Cannot update associated Transactions or User.
      */
     public void updateCopyBidirectionalRelations(Copy copyNew, Copy copyOld) {
         HibernateManager db = ProjectMain.getDatabase();
@@ -173,21 +173,21 @@ public class DeveloperController extends Controller{
         HibernateManager db = ProjectMain.getDatabase();
         copy.getGame().removeCopy(copy);
         copy.getConsole().removeCopy(copy);
-        copy.getCustomer().removeCopy(copy);
+        copy.getUser().removeCopy(copy);
         db.deleteEntity(copy);
     }
 
-    public void deleteCustomerAndRelationships(Customer customer) {
+    public void deleteUserAndRelationships(User user) {
         HibernateManager db = ProjectMain.getDatabase();
-        List<Copy> copies = customer.getCopies();
-        List<MonetaryTransaction> usertansactions = customer.getTransactions();
+        List<Copy> copies = user.getCopies();
+        List<MonetaryTransaction> usertansactions = user.getTransactions();
         for (Copy copy : copies) {
-            copy.setCustomer(null);
+            copy.setUser(null);
         }
         for (MonetaryTransaction transaction : usertansactions) {
-            transaction.setCustomer(null);
+            transaction.setUser(null);
         }
-        db.deleteEntity(customer);
+        db.deleteEntity(user);
     }
     
 

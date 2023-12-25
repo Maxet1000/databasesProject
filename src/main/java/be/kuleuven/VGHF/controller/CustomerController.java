@@ -2,7 +2,7 @@ package be.kuleuven.VGHF.controller;
 
 import be.kuleuven.VGHF.DataCommunicationModel;
 import be.kuleuven.VGHF.ProjectMain;
-import be.kuleuven.VGHF.domain.Customer;
+import be.kuleuven.VGHF.domain.User;
 import be.kuleuven.VGHF.enums.Availability;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -70,7 +70,7 @@ public class CustomerController extends Controller{
             initTable();
             fillTable();
             txtBalance.setText("" + data.getUser().getBalance());
-            txtUser.setText("Logged in as: " + data.getUser().getCustomerName());
+            txtUser.setText("Logged in as: " + data.getUser().getuserName());
         });
     }
     private void extendAllReturnDate(){

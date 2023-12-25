@@ -53,10 +53,10 @@ public class HibernateManager {
         return entityManager.createQuery(query).getResultList();
     }
     
-    public List<Customer> getAllCustomers() {
+    public List<User> getAllUsers() {
         var criteriaBuilder = entityManager.getCriteriaBuilder();
-        var query = criteriaBuilder.createQuery(Customer.class);
-        var root = query.from(Customer.class);
+        var query = criteriaBuilder.createQuery(User.class);
+        var root = query.from(User.class);
     
         query.select(root);
     
@@ -142,10 +142,10 @@ public class HibernateManager {
     //     }
     // }
     
-    // public void saveNewCustomer(Customer customer) {
+    // public void saveNewUser(User user) {
     //     try {
     //         entityManager.getTransaction().begin();
-    //         entityManager.persist(customer);
+    //         entityManager.persist(user);
     //         entityManager.getTransaction().commit();
     //     } catch (Exception exception) {
     //         if (entityManager.getTransaction().isActive()) {
@@ -253,10 +253,10 @@ public class HibernateManager {
     //     }
     // }
     
-    // public void updateCustomer(Customer customer) {
+    // public void updateUser(User user) {
     //     try {
     //         entityManager.getTransaction().begin();
-    //         entityManager.merge(customer);
+    //         entityManager.merge(user);
     //         entityManager.getTransaction().commit();
     //     } catch (Exception exception) {
     //         exception.printStackTrace();
@@ -303,12 +303,12 @@ public class HibernateManager {
     //     }
     // }
 
-    public List<MonetaryTransaction> getMonetaryTransactionsByCustomerID(int customerID) {
+    public List<MonetaryTransaction> getMonetaryTransactionsByUserID(int userID) {
         try {
             var criteriaBuilder = entityManager.getCriteriaBuilder();
             var query = criteriaBuilder.createQuery(MonetaryTransaction.class);
             var root = query.from(MonetaryTransaction.class);
-            query.where(criteriaBuilder.equal(root.get("customer"), customerID));
+            query.where(criteriaBuilder.equal(root.get("user"), userID));
             return entityManager.createQuery(query).getResultList();
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -343,11 +343,11 @@ public class HibernateManager {
         }
     }  
 
-    public Customer getUserByEmail(String email) {
+    public User getUserByEmail(String email) {
          try {
             var criteriaBuilder = entityManager.getCriteriaBuilder();
-            var query = criteriaBuilder.createQuery(Customer.class);
-            var root = query.from(Customer.class);
+            var query = criteriaBuilder.createQuery(User.class);
+            var root = query.from(User.class);
             query.where(criteriaBuilder.equal(root.get("email"), email));
             return entityManager.createQuery(query).getSingleResult();
         } catch (Exception e) {

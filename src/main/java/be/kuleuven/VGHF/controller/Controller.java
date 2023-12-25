@@ -133,7 +133,7 @@ public class Controller{
             stage.initOwner(ProjectMain.getRootStage());
             stage.initModality(Modality.WINDOW_MODAL);
             stage.showAndWait();
-            System.out.println("Loggen in as:  " + data.getUser().getCustomerName());
+            System.out.println("Loggen in as:  " + data.getUser().getuserName());
 
         } catch (Exception e) {
             throw new RuntimeException("Kan scherm customerloginpage.fxml niet vinden", e);

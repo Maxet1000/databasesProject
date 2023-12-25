@@ -37,7 +37,7 @@ public class PreLoginController extends Controller {
 
     private void signUp() throws IOException {
         showSignUpScherm();
-        System.out.println("ayhah "+ data.getUser().getCustomerName());
+        System.out.println("ayhah "+ data.getUser().getuserName());
         if (data.loggedIn) {
             switchScreen("customer");
         }

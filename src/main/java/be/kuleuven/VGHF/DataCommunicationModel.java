@@ -1,29 +1,29 @@
 package be.kuleuven.VGHF;
 import java.util.Objects;
 
-import be.kuleuven.VGHF.domain.Customer;
+import be.kuleuven.VGHF.domain.User;
 
 
 public class DataCommunicationModel {
 
-    public Customer user;
+    public User user;
     public boolean loggedIn = false;
 
     public DataCommunicationModel() {
     }
 
-    public DataCommunicationModel(Customer user) {
+    public DataCommunicationModel(User user) {
         this.user = user;
     }
     
 
     //getters and setters
 
-    public Customer getUser() {
+    public User getUser() {
         return this.user;
     }
 
-    public void setUser(Customer user) {
+    public void setUser(User user) {
         this.user = user;
         loggedIn = true;
     }

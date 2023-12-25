@@ -98,7 +98,7 @@ public class ShopController extends Controller{
         });
         Platform.runLater(() -> {
             txtBalance.setText("" + data.getUser().getBalance());
-            txtUser.setText("Logged in as: " + data.getUser().getCustomerName());
+            txtUser.setText("Logged in as: " + data.getUser().getuserName());
         });
     }
     

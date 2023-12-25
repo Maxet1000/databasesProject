@@ -40,7 +40,7 @@ public class CustomerLoginController extends Controller{
     private void logIn() throws IOException {
         var user = ProjectMain.getDatabase().getUserByEmail(txtEmail.getText());
         if(txtEmail.getText().equals("UwU") || txtEmail.getText().equals("kak")){
-            data.setUser(ProjectMain.getDatabase().getAllCustomers().get(6));
+            data.setUser(ProjectMain.getDatabase().getAllUsers().get(6));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Correct");
             alert.setHeaderText(null);
