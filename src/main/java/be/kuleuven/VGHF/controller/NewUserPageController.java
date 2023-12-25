@@ -1,7 +1,7 @@
 package be.kuleuven.VGHF.controller;
 
 import be.kuleuven.VGHF.ProjectMain;
-import be.kuleuven.VGHF.domain.Customer;
+import be.kuleuven.VGHF.domain.User;
 import com.sun.prism.impl.paint.PaintUtil;
 import com.sun.prism.paint.Color;
 import javafx.fxml.FXML;
@@ -46,9 +46,9 @@ public class NewUserPageController extends Controller{
             && !txtPassword2.getText().isBlank()
             && Objects.equals(txtPassword1.getText(), txtPassword2.getText())) {
 
-            Customer newCustomer = new Customer(txtUsername.getText(),txtEmail.getText(),txtPassword1.getText(),0);
-            ProjectMain.getDatabase().saveNewObject(newCustomer);
-            data.setUser(newCustomer);
+            User newUser = new User(txtUsername.getText(),txtEmail.getText(),txtPassword1.getText(),0);
+            ProjectMain.getDatabase().saveNewEntity(newUser);
+            data.setUser(newUser);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Correct");
             alert.setHeaderText(null);

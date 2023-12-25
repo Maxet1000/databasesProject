@@ -103,8 +103,8 @@ public class ShopController extends Controller{
             }
         });
         Platform.runLater(() -> {
+            txtUser.setText(data.getUser().getUserName());
             txtBalance.setText("$" + data.getUser().getBalance());
-            txtUser.setText(data.getUser().getCustomerName());
         });
     }
     
@@ -130,7 +130,7 @@ public class ShopController extends Controller{
                 balance = balance - copy.getPurchasePrice();
                 copy.setAvailability(Availability.SOLD);
                 copy.setDateOfReturn(twoWeeksLonger());
-                ProjectMain.database.updateObject(copy);
+                ProjectMain.database.updateEntity(copy);
                 copyFromUser.add(copy);
                 data.getUser().setBalance(balance);
 
@@ -149,7 +149,7 @@ public class ShopController extends Controller{
                 balance = balance - copy.getRentPrice(); 
                 copy.setAvailability(Availability.RENTED);
                 copy.setDateOfReturn(twoWeeksLonger());
-                ProjectMain.database.updateObject(copy);
+                ProjectMain.database.updateEntity(copy);
                 copyFromUser.add(copy);
                 data.getUser().setBalance(balance);
 

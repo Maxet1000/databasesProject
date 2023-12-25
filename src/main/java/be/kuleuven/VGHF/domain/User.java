@@ -2,19 +2,25 @@ package be.kuleuven.VGHF.domain;
 
 import javax.persistence.*;
 
+import be.kuleuven.VGHF.enums.UserType;
+
 import java.util.*;
 
 
 @Entity
-public class Customer {
+public class User {
 
     @Column(nullable = false)
     @Id
     @GeneratedValue
-    private int customerID;
+    private int userID;
 
     @Column(nullable = false)
-    private String customerName;
+    @Enumerated(EnumType.STRING)
+    private UserType userType;
+
+    @Column(nullable = false)
+    private String userName;
 
     @Column(nullable = false)
     private String email;
@@ -26,31 +32,40 @@ public class Customer {
     @Column(nullable = false)
     private int balance;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "user")
     private List<Copy> copies;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "user")
     private List<MonetaryTransaction> transactions;
 
-    public Customer(){}
+    public User(){}
 
-    public Customer(String customerName, String email, String password, int balance) {
-        this.customerName = customerName;
+    public User(String userName, String email, String password, int balance) {
+        this.userType = UserType.CUSTOMER;
+        this.userName = userName;
         this.email = email;
         this.password = password;
         this.balance = balance;
     }
 
-    public int getCustomerID() {
-        return this.customerID;
+    public User(String userName, String email, String password) {
+        this.userType = UserType.DEVELOPER;
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.balance = 999999;
     }
 
-    public String getCustomerName() {
-        return this.customerName;
+    public int getuserID() {
+        return this.userID;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public String getUserName() {
+        return this.userName;
+    }
+
+    public void setuserName(String userName) {
+        this.userName = userName;
     }
 
     public String getEmail() {
@@ -89,5 +104,12 @@ public class Customer {
         this.transactions = transactions;
     }
 
+    public void removeCopy(Copy copy) {
+        this.copies.remove(copy);
+    }
+
+    public UserType getUserType() {
+        return this.userType;
+    }
 
 }

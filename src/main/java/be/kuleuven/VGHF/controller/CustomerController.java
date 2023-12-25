@@ -62,7 +62,7 @@ public class CustomerController extends Controller{
             initTable();
             fillTable();
             initTransactionHistory();
-            txtUser.setText("" + data.getUser().getCustomerName());
+            txtUser.setText("" + data.getUser().getUserName());
             txtBalance.setText("$" + data.getUser().getBalance());
         });
     }

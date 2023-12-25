@@ -62,7 +62,7 @@ public class HomeController extends Controller{
                 btnLogOut.setDisable(false);
                 btnSignup.setDisable(true);
                 btnLogin.setDisable(true);
-                txtUser.setText(data.getUser().getCustomerName());
+                txtUser.setText(data.getUser().getUserName());
                 txtBalance.setText("$" + data.getUser().getBalance());
             }
         });
@@ -73,7 +73,7 @@ public class HomeController extends Controller{
                 btnLogOut.setDisable(false);
                 btnSignup.setDisable(true);
                 btnLogin.setDisable(true);
-                txtUser.setText(data.getUser().getCustomerName());
+                txtUser.setText(data.getUser().getUserName());
                 txtBalance.setText("$" + data.getUser().getBalance());
             }
         }));
@@ -94,7 +94,7 @@ public class HomeController extends Controller{
         });
         Platform.runLater(() -> {
             if (data.loggedIn) {
-                txtUser.setText(data.getUser().getCustomerName());
+                txtUser.setText(data.getUser().getUserName());
                 txtBalance.setText("$" + data.getUser().getBalance());
                 btnLogOut.setDisable(false);
                 btnSignup.setDisable(true);

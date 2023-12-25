@@ -41,4 +41,8 @@ public class Developer implements InterfaceForFilters {
         this.games.add(game);
     }
 
+    public void removeGame(Game game) {
+        this.games.remove(game);
+    }
+
 }
