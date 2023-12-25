@@ -1,5 +1,6 @@
 package be.kuleuven.VGHF.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 

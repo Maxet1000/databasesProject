@@ -2,6 +2,8 @@ package be.kuleuven.VGHF.controller;
 
 import java.io.IOException;
 import java.security.cert.PolicyNode;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import be.kuleuven.VGHF.DataCommunicationModel;
@@ -138,7 +140,9 @@ public class Controller{
         } catch (Exception e) {
             throw new RuntimeException("Kan scherm customerloginpage.fxml niet vinden", e);
         }
-    }public void showSignUpScherm() {
+    }
+
+    public void showSignUpScherm() {
         try {
             var stage = new Stage();
             var pane = new FXMLLoader(getClass().getClassLoader().getResource("newuserpage.fxml"));
@@ -164,7 +168,6 @@ public class Controller{
         this.data = data;
     }
 
-
     public void switchScreen (String id) throws IOException {
 
         var pane = new FXMLLoader(getClass().getClassLoader().getResource(id + "page.fxml"));
@@ -177,7 +180,14 @@ public class Controller{
         parentPane.getChildren().setAll(rootLoader);
         StackPane.setAlignment(rootLoader, Pos.CENTER);
     }
+
     public DataCommunicationModel getModel(){
         return data;
+    }
+
+    public String getCurrentDate(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.now();
+        return date.format(formatter);
     }
 }

@@ -74,5 +74,8 @@ public class MonetaryTransaction {
         this.copy = copy;
     }
 
+    public String getTime() {
+        return time;
+    }
     
 }

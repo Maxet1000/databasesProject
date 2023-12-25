@@ -489,7 +489,7 @@ public class DbContentScript {
                                         .build();
                             
                                             
-        MonetaryTransaction transaction1 = new MonetaryTransaction(TransactionType.SALE, 60, jan, witcherCopy1, "2022-05-12");
+        MonetaryTransaction transaction1 = new MonetaryTransaction(TransactionType.PURCHASE, 60, jan, witcherCopy1, "2022-05-12");
         MonetaryTransaction transaction2 = new MonetaryTransaction(TransactionType.RENTAL, 9, bjorn, minecraftCopy2, "2023-12-12");
 
         doom.setCopies(new ArrayList<> (Arrays.asList(doomCopy1, doomCopy2)));

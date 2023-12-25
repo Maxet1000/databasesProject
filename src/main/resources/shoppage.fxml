@@ -5,13 +5,14 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TreeView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="1.7976931348623157E308" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.VGHF.controller.ShopController">
+<VBox fx:id="parentPane" maxHeight="1.7976931348623157E308" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.VGHF.controller.ShopController">
    <children>
       <AnchorPane minHeight="5.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
       <HBox maxHeight="1.7976931348623157E308" prefWidth="500.0">
@@ -40,7 +41,7 @@
                <children>
                   <HBox prefHeight="5.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="btnAddGameToCart" minHeight="55.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="1000.0" stylesheets="@styles.css" text="Rent selected game(s)" />
+                        <Button fx:id="btnAddGameToCart" minHeight="55.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="1000.0" stylesheets="@styles.css" text="Rent selected game(s) for two weeks" />
                         <AnchorPane maxWidth="5.0" minWidth="5.0" prefHeight="200.0" prefWidth="5.0" />
                         <Button fx:id="btnAddGameToBuy" mnemonicParsing="false" prefHeight="55.0" prefWidth="1000.0" stylesheets="@styles.css" text="Purchase selected game(s)" />
                      </children>
@@ -57,9 +58,19 @@
             <AnchorPane maxWidth="5.0" minWidth="5.0" prefWidth="5.0" />
             <VBox maxHeight="1.7976931348623157E308" prefWidth="300.0">
                <children>
-                  <Button fx:id="btnRentGames" minWidth="200.0" mnemonicParsing="false" stylesheets="@styles.css" text="Confirm purchase" />
-                  <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" />
-                  <Button fx:id="btnRemoveFromCart" minWidth="200.0" mnemonicParsing="false" stylesheets="@styles.css" text="Remove from cart" />
+                  <AnchorPane maxHeight="50.0" minHeight="55.0" prefHeight="55.0" prefWidth="200.0" style="-fx-border-color: #064420; -fx-border-width: 2; -fx-border-radius: 30; -fx-background-radius: 30; -fx-background-color: #609060;">
+                     <children>
+                        <Text fx:id="txtUser" fill="WHITE" layoutX="42.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="156.0" />
+                        <Text fx:id="txtBalance" fill="WHITE" layoutX="42.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="34.021278381347656" />
+                        <ImageView fitHeight="39.0" fitWidth="37.0" layoutX="8.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@User.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" prefWidth="200.0" />
+                  <Button fx:id="btnLogOut" mnemonicParsing="false" prefHeight="25.0" prefWidth="227.0" stylesheets="@styles.css" text="Log out" />
                   <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" prefWidth="200.0" />
                   <TableView fx:id="tblRentCart" prefHeight="100.0" prefWidth="200.0">
                     <columns>
@@ -74,21 +85,10 @@
                       <TableColumn prefWidth="75.0" text="C2" />
                     </columns>
                   </TableView>
-                  <StackPane maxHeight="25.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #064420;">
-                     <children>
-                        <Text fill="WHITE" layoutX="30.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Balance" />
-                     </children>
-                  </StackPane>
-                  <AnchorPane maxHeight="50.0" minHeight="50.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #064420; -fx-border-width: 2;">
-                     <children>
-                        <Text fx:id="txtBalance" layoutX="94.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane maxHeight="50.0" minHeight="50.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #064420; -fx-border-width: 2;">
-                     <children>
-                        <Text fx:id="txtUser" layoutX="2.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="200.0" />
-                     </children>
-                  </AnchorPane>
+                  <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" />
+                  <Button fx:id="btnRemoveFromCart" minWidth="200.0" mnemonicParsing="false" stylesheets="@styles.css" text="Remove item from cart" />
+                  <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" prefWidth="200.0" />
+                  <Button fx:id="btnPurchase" minWidth="200.0" mnemonicParsing="false" stylesheets="@styles.css" text="Confirm purchase" />
                </children>
             </VBox>
             <AnchorPane minWidth="5.0" prefHeight="200.0" HBox.hgrow="ALWAYS" />
