@@ -5,7 +5,8 @@ import be.kuleuven.VGHF.domain.Customer;
 import com.sun.prism.impl.paint.PaintUtil;
 import com.sun.prism.paint.Color;
 import javafx.fxml.FXML;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -40,8 +41,13 @@ public class NewUserPageController extends Controller{
     }
 
     private void createAccount() {
+         
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +"[a-zA-Z0-9_+&*-]+)*@" +"(?:[a-zA-Z0-9-]+\\.)+[a-z" +"A-Z]{2,7}$";         
+        Pattern pat = Pattern.compile(emailRegex);
+        var validEmail = pat.matcher(txtEmail.getText()).matches();
+
         if (!txtUsername.getText().isBlank()
-            && !txtEmail.getText().isBlank()
+            && validEmail == true
             && !txtPassword1.getText().isBlank()
             && !txtPassword2.getText().isBlank()
             && Objects.equals(txtPassword1.getText(), txtPassword2.getText())) {
@@ -61,7 +67,7 @@ public class NewUserPageController extends Controller{
         if (txtUsername.getText().isBlank()) {
             txtUsername.setStyle(txtUsername.getStyle() + "-fx-border-color: #ff8080;");
         }
-        if (txtEmail.getText().isBlank()) {
+        if (validEmail == false) {
             txtEmail.setStyle(txtEmail.getStyle() + "-fx-border-color: #ff8080;");
         }
         if (txtPassword1.getText().isBlank()) {
@@ -73,4 +79,5 @@ public class NewUserPageController extends Controller{
             txtConfirmPassword.setText("Confirm Password: Password does not match");
         }
     }
+
 }
