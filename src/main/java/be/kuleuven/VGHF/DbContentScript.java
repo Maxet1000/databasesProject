@@ -71,41 +71,41 @@ public class DbContentScript {
         Developer taito = new Developer("Taito");
         Developer atari = new Developer("Atari");
 
-        Console playstation5 = new Console("PlayStation 5");
-        Console playstation4 = new Console("PlayStation 4", new ArrayList<> (Arrays.asList(playstation5)));
-        Console playstation3 = new Console("PlayStation 3", new ArrayList<> (Arrays.asList(playstation4, playstation5)));
-        Console playstation2 = new Console("PlayStation 2", new ArrayList<> (Arrays.asList(playstation3)));
-        Console playstation1 = new Console("PlayStation 1");
-        Console xboxSeriesX = new Console("Xbox Series X");
-        Console xboxOne = new Console("Xbox One", new ArrayList<> (Arrays.asList(xboxSeriesX)));
-        Console xbox360 = new Console("Xbox 360");
-        Console xbox = new Console("Xbox", new ArrayList<> (Arrays.asList(xbox360)));
-        Console wii = new Console("Wii");
-        Console nintendoSwitch = new Console("Nintendo Switch");
-        Console nintendo3DS = new Console("Nintendo 3DS");
-        Console nintenoDS = new Console("Nintendo DS", new ArrayList<> (Arrays.asList(nintendo3DS)));
-        Console gameBoyAdvance = new Console("Game Boy Advance", new ArrayList<> (Arrays.asList(nintenoDS)));
-        Console gameBoyColor = new Console("Game Boy Color", new ArrayList<> (Arrays.asList(gameBoyAdvance)));
-        Console gameBoy = new Console("Game Boy", new ArrayList<> (Arrays.asList(gameBoyColor, gameBoyAdvance)));
-        Console atari2600 = new Console("Atari 2600");
-        Console pc = new Console("PC");
-        Console nes = new Console("Nintendo Entertainment System (NES)");
-        Console snes = new Console("Super Nintendo Entertainment System (SNES)");
-        Console segaGenesis = new Console("Sega Genesis");
-        Console segaDreamcast = new Console("Sega Dreamcast");
-        Console segaSaturn = new Console("Sega Saturn");
-        Console segaMasterSystem = new Console("Sega Master System");
-        Console nintendo64 = new Console("Nintendo 64");
-        Console gameCube = new Console("Nintendo GameCube");
-        Console sonyPSP = new Console("Sony PSP");
-        Console sonyPSVita = new Console("Sony PS Vita");
         Console arcade = new Console("Arcade");
+        Console sonyPSP = new Console("Sony PSP");
+        Console sonyPSVita = new Console("Sony PS Vita", new ArrayList<>(Arrays.asList(sonyPSP)));
+        Console gameCube = new Console("Nintendo GameCube");
+        Console nintendo64 = new Console("Nintendo 64");
+        Console segaMasterSystem = new Console("Sega Master System");
+        Console segaSaturn = new Console("Sega Saturn");
+        Console segaDreamcast = new Console("Sega Dreamcast");
+        Console segaGenesis = new Console("Sega Genesis");
+        Console snes = new Console("Super Nintendo Entertainment System (SNES)");
+        Console nes = new Console("Nintendo Entertainment System (NES)");
+        Console pc = new Console("PC");
+        Console atari2600 = new Console("Atari 2600");
+        Console gameBoy = new Console("Game Boy");
+        Console gameBoyColor = new Console("Game Boy Color", new ArrayList<>(Arrays.asList(gameBoy)));
+        Console gameBoyAdvance = new Console("Game Boy Advance", new ArrayList<>(Arrays.asList(gameBoy, gameBoyColor)));
+        Console nintenoDS = new Console("Nintendo DS", new ArrayList<>(Arrays.asList(gameBoyAdvance)));
+        Console nintendo3DS = new Console("Nintendo 3DS", new ArrayList<>(Arrays.asList(nintenoDS)));
+        Console nintendoSwitch = new Console("Nintendo Switch");
+        Console wii = new Console("Wii");
+        Console xbox = new Console("Xbox");
+        Console xbox360 = new Console("Xbox 360", new ArrayList<>(Arrays.asList(xbox)));
+        Console xboxOne = new Console("Xbox One", new ArrayList<>(Arrays.asList(xbox360)));
+        Console xboxSeriesX = new Console("Xbox Series X", new ArrayList<>(Arrays.asList(xboxOne)));
+        Console playstation1 = new Console("PlayStation 1");
+        Console playstation2 = new Console("PlayStation 2");
+        Console playstation3 = new Console("PlayStation 3", new ArrayList<>(Arrays.asList(playstation2)));
+        Console playstation4 = new Console("PlayStation 4", new ArrayList<>(Arrays.asList(playstation2, playstation3)));
+        Console playstation5 = new Console("PlayStation 5", new ArrayList<>(Arrays.asList(playstation4)));
 
         Game doom = new Game("DOOM", "1993-12-10", new ArrayList<> (Arrays.asList(pc)), new ArrayList<> (Arrays.asList(idSoftware)), new ArrayList<> (Arrays.asList(fps)));
         Game theWitcher3 = new Game("The Witcher 3: Wild Hunt", "2015-05-19", new ArrayList<> (Arrays.asList(playstation4, xboxOne, pc)), new ArrayList<> (Arrays.asList(cdProjekt)), new ArrayList<> (Arrays.asList(rpg, openWorld, adventure)));
         Game superMarioBros = new Game("Super Mario Bros.", "1985-09-13", new ArrayList<> (Arrays.asList(nes)), new ArrayList<> (Arrays.asList(nintendo)), new ArrayList<> (Arrays.asList(platformer)));
         Game minecraft = new Game("Minecraft",  "2011-11-18", new ArrayList<> (Arrays.asList(pc, xboxOne, playstation4, nintendoSwitch, xbox360, xboxSeriesX)), new ArrayList<> (Arrays.asList(microsoftStudios)), new ArrayList<> (Arrays.asList(sandbox, survival)));
-        Game pokemonPlatinum = new Game("Pokémon Platinum", "2008-09-13", new ArrayList<> (Arrays.asList(nintenoDS)), new ArrayList<> (Arrays.asList(nintendo, gameFreak)), new ArrayList<> (Arrays.asList(rpg)));
+        Game pokemonPlatinum = new Game("Pokemon Platinum", "2008-09-13", new ArrayList<> (Arrays.asList(nintenoDS)), new ArrayList<> (Arrays.asList(nintendo, gameFreak)), new ArrayList<> (Arrays.asList(rpg)));
         Game metalGearSolid = new Game("Metal Gear Solid", "1998-10-21", new ArrayList<> (Arrays.asList(playstation1, pc)), new ArrayList<> (Arrays.asList(konami)), new ArrayList<> (Arrays.asList(action, stealth)));
         Game finalFantasyVII = new Game("Final Fantasy VII", "1997-01-31", new ArrayList<> (Arrays.asList(playstation1, pc)), new ArrayList<> (Arrays.asList(squareEnix)), new ArrayList<> (Arrays.asList(rpg)));
         Game haloCombatEvolved = new Game("Halo: Combat Evolved",  "2001-11-15", new ArrayList<> (Arrays.asList(xbox)), new ArrayList<> (Arrays.asList(microsoftStudios)), new ArrayList<> (Arrays.asList(fps, action, sciFi)));
@@ -134,9 +134,9 @@ public class DbContentScript {
 
         User dries = new User("Dries Ruttens", "dries.ruttens@student.uhasselt.be", "wachtwoord");
         User bjorn = new User("Bjorn Spauwen", "bjorn.spauwen@student.uhasselt.be", "password");
-        User max = new User("Max-émile Meylaerts", "max-emile.meylaerts@student.uhasselt.be", "12345");
+        User max = new User("Max-Emile Meylaerts", "max-emile.meylaerts@student.uhasselt.be", "12345");
         User admin1 = new User("Admin", "admin@admin.com", "admin");
-        User mauro = new User("Mauro Vranckx", "mauro.vranckx@student.uhasselt.be", "isuckdick69420", 0);
+        User mauro = new User("Mauro Vranckx", "mauro.vranckx@student.uhasselt.be", "#sterkw8woord", 0);
         User eddy = new User("Edmond Tsampanis", "edmond.tsampanis@student.uhasselt.be", "StrongPass123!", 40);
         User jan = new User("Jan Alleman", "jan.alleman@fancycustomemail.com", "mijnverjaardag1999",-5);
         User user1 = new User("John Doe", "john.doe@email.com", "password123", 1000);
@@ -156,7 +156,7 @@ public class DbContentScript {
                                 .availability(Availability.AVAILABLE)
                                 .warehouse("Genk")
                                 .purchasePrice(30)
-                                .purchasePrice(6)
+                                .rentPrice(6)
                                 .build();
 
         builder = new CopyBuilder();
@@ -220,6 +220,8 @@ public class DbContentScript {
                                           .console(playstation1)
                                           .availability(Availability.AVAILABLE)
                                           .warehouse("Brussels")
+                                          .purchasePrice(50)
+                                          .rentPrice(4)
                                           .build();
         
         builder = new CopyBuilder();
@@ -235,6 +237,8 @@ public class DbContentScript {
                                                .console(xbox)
                                                .availability(Availability.BROKEN)
                                                .warehouse("Ghent")
+                                               .purchasePrice(55)
+                                               .rentPrice(6)
                                                .build();
         
         builder = new CopyBuilder();
@@ -261,15 +265,17 @@ public class DbContentScript {
                                         .availability(Availability.RENTED)
                                         .warehouse("New York")
                                         .user(max)
-                                        .rentPrice(8)
                                         .dateOfReturn("2024-01-20")
+                                        .purchasePrice(50)
+                                        .rentPrice(4)
                                         .build();
 
         builder = new CopyBuilder();        
         Copy theLastOfUsCopy1 = builder.game(theLastOfUs)
                                       .console(playstation4)
                                       .availability(Availability.AVAILABLE)
-                                      .rentPrice(20)
+                                      .purchasePrice(50)
+                                      .rentPrice(4)                                      
                                       .warehouse("Los Angeles")
                                       .build();
 
@@ -278,6 +284,8 @@ public class DbContentScript {
                                          .console(pc)
                                          .availability(Availability.AVAILABLE)
                                          .warehouse("Blizzard")
+                                         .purchasePrice(50)
+                                         .rentPrice(4)
                                          .build();
 
         builder = new CopyBuilder();        
@@ -285,6 +293,8 @@ public class DbContentScript {
                                            .console(nintendoSwitch)
                                            .availability(Availability.AVAILABLE)
                                            .warehouse("Kyoto")
+                                           .purchasePrice(50)
+                                           .rentPrice(4)
                                            .build();
 
         builder = new CopyBuilder();                                           
@@ -292,6 +302,8 @@ public class DbContentScript {
                                 .console(pc)
                                 .availability(Availability.AVAILABLE)
                                 .warehouse("Ghent")
+                                .purchasePrice(50)
+                                .rentPrice(4)
                                 .build();
 
         builder = new CopyBuilder();        
@@ -299,6 +311,8 @@ public class DbContentScript {
                                     .console(xboxOne)
                                     .availability(Availability.AVAILABLE)
                                     .warehouse("Antwerp")
+                                    .purchasePrice(50)
+                                    .rentPrice(4)
                                     .build();
 
         builder = new CopyBuilder();        
@@ -316,6 +330,8 @@ public class DbContentScript {
                                             .console(playstation1)
                                             .availability(Availability.BROKEN)
                                             .warehouse("Genk")
+                                            .purchasePrice(50)
+                                            .rentPrice(4)
                                             .build();
 
         builder = new CopyBuilder();        
@@ -323,6 +339,8 @@ public class DbContentScript {
                             .console(nintendoSwitch)
                             .availability(Availability.AVAILABLE)
                             .warehouse("Tokyo")
+                            .purchasePrice(50)
+                            .rentPrice(4)
                             .build();
 
         builder = new CopyBuilder();        
@@ -330,6 +348,8 @@ public class DbContentScript {
                                     .console(xbox360)
                                     .availability(Availability.AVAILABLE)
                                     .warehouse("Hasselt")
+                                    .purchasePrice(50)
+                                    .rentPrice(4)
                                     .build();
 
         builder = new CopyBuilder();                                    
@@ -347,6 +367,8 @@ public class DbContentScript {
                                         .console(playstation3)
                                         .availability(Availability.AVAILABLE)
                                         .warehouse("Brussels")
+                                        .purchasePrice(50)
+                                        .rentPrice(4)
                                         .build();
 
         builder = new CopyBuilder();        
@@ -354,6 +376,8 @@ public class DbContentScript {
                                             .console(pc)
                                             .availability(Availability.AVAILABLE)
                                             .warehouse("Blizzard")
+                                            .purchasePrice(50)
+                                            .rentPrice(4)
                                             .build();
 
         builder = new CopyBuilder();        
@@ -361,6 +385,8 @@ public class DbContentScript {
                                             .console(nintendoSwitch)
                                             .availability(Availability.AVAILABLE)
                                             .warehouse("Kyoto")
+                                            .purchasePrice(50)
+                                            .rentPrice(4)
                                             .build();
 
         builder = new CopyBuilder();        
@@ -368,6 +394,8 @@ public class DbContentScript {
                                         .console(playstation1)
                                         .availability(Availability.AVAILABLE)
                                         .warehouse("Brussels")
+                                        .purchasePrice(50)
+                                        .rentPrice(4)
                                         .build();
 
         builder = new CopyBuilder();        
@@ -375,6 +403,8 @@ public class DbContentScript {
                                 .console(arcade)
                                 .availability(Availability.AVAILABLE)
                                 .warehouse("Los Angeles")
+                                .purchasePrice(50)
+                                .rentPrice(4)
                                 .build();
 
         builder = new CopyBuilder();        
@@ -382,6 +412,8 @@ public class DbContentScript {
                                             .console(nes)
                                             .availability(Availability.AVAILABLE)
                                             .warehouse("Kyoto")
+                                            .purchasePrice(50)
+                                            .rentPrice(4)
                                             .build();
 
         builder = new CopyBuilder();        
@@ -389,6 +421,8 @@ public class DbContentScript {
                                             .console(nes)
                                             .availability(Availability.AVAILABLE)
                                             .warehouse("Ghent")
+                                            .purchasePrice(50)
+                                            .rentPrice(4)
                                             .build();
 
         builder = new CopyBuilder();        
@@ -396,6 +430,8 @@ public class DbContentScript {
                                         .console(arcade)
                                         .availability(Availability.AVAILABLE)
                                         .warehouse("Tokyo")
+                                        .purchasePrice(50)
+                                        .rentPrice(4)
                                         .build();
 
         builder = new CopyBuilder();        
@@ -403,6 +439,8 @@ public class DbContentScript {
                                         .console(arcade)
                                         .availability(Availability.AVAILABLE)
                                         .warehouse("Paris")
+                                        .purchasePrice(50)
+                                        .rentPrice(4)
                                         .build();
 
         builder = new CopyBuilder();        
@@ -410,6 +448,8 @@ public class DbContentScript {
                                 .console(arcade)
                                 .availability(Availability.AVAILABLE)
                                 .warehouse("Antwerp")
+                                .purchasePrice(50)
+                                .rentPrice(4)
                                 .build();
 
         builder = new CopyBuilder();        
@@ -417,6 +457,7 @@ public class DbContentScript {
                                     .console(arcade)
                                     .availability(Availability.AVAILABLE)
                                     .warehouse("Genk")
+                                    .rentPrice(4)
                                     .build();
 
         builder = new CopyBuilder();        
@@ -424,6 +465,7 @@ public class DbContentScript {
                                     .console(nes)
                                     .availability(Availability.AVAILABLE)
                                     .warehouse("Diepenbeek")
+                                    .rentPrice(4)
                                     .build();   
 
         builder = new CopyBuilder();                                    
@@ -431,6 +473,8 @@ public class DbContentScript {
                                                 .console(xboxSeriesX)
                                                 .availability(Availability.AVAILABLE)
                                                 .warehouse("New York")
+                                                .purchasePrice(50)
+                                                .rentPrice(4)
                                                 .build();
 
         builder = new CopyBuilder();        
@@ -438,12 +482,15 @@ public class DbContentScript {
                                                 .console(playstation5)
                                                 .availability(Availability.AVAILABLE)
                                                 .warehouse("Los Angeles")
+                                                .purchasePrice(50)
+                                                .rentPrice(4)
                                                 .build();
 
         builder = new CopyBuilder();                                        
         Copy uncharted4AThiefsEndCopy1 = builder.game(uncharted4AThiefsEnd)
                                                 .console(playstation4)
                                                 .availability(Availability.AVAILABLE)
+                                                .rentPrice(4)
                                                 .warehouse("Tokyo")
                                                 .build();
 
@@ -452,6 +499,8 @@ public class DbContentScript {
                                     .console(xboxOne)
                                     .availability(Availability.AVAILABLE)
                                     .warehouse("London")
+                                    .purchasePrice(50)
+                                    .rentPrice(4)
                                     .build();
 
         builder = new CopyBuilder();
@@ -466,6 +515,8 @@ public class DbContentScript {
                                     .console(pc)
                                     .availability(Availability.AVAILABLE)
                                     .warehouse("Paris")
+                                    .purchasePrice(50)
+                                    .rentPrice(4)
                                     .build();
 
         builder = new CopyBuilder();        
@@ -473,6 +524,8 @@ public class DbContentScript {
                                         .console(playstation2)
                                         .availability(Availability.AVAILABLE)
                                         .warehouse("Madrid")
+                                        .purchasePrice(50)
+                                        .rentPrice(4)
                                         .build();
 
         builder = new CopyBuilder();        
@@ -480,6 +533,8 @@ public class DbContentScript {
                                         .console(pc)
                                         .availability(Availability.AVAILABLE)
                                         .warehouse("Rome")
+                                        .purchasePrice(50)
+                                        .rentPrice(4)
                                         .build();
 
         builder = new CopyBuilder();
@@ -487,6 +542,8 @@ public class DbContentScript {
                                         .console(arcade)
                                         .availability(Availability.BROKEN)
                                         .warehouse("Genk")
+                                        .purchasePrice(50)
+                                        .rentPrice(4)
                                         .build();
                             
                                             

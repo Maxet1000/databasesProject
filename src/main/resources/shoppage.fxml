@@ -48,6 +48,14 @@
                      </children>
                   </HBox>
                   <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" />
+                  <HBox stylesheets="@styles.css">
+                     <children>
+                        <Button fx:id="btnPreviousPage" mnemonicParsing="false" prefWidth="100.0" text="Previous page" />
+                        <Text fx:id="txtCurrentPage" strokeType="OUTSIDE" strokeWidth="0.0" text="Page 1" />
+                        <Button fx:id="btnNextPage" mnemonicParsing="false" prefWidth="100.0" text="Next page" />
+                     </children>
+                  </HBox>
+                  <AnchorPane minHeight="5.0" prefHeight="5.0" />
                      <TableView fx:id="tblRent" maxHeight="1.7976931348623157E308" minHeight="50.0" prefHeight="2000.0" prefWidth="200">
                          <columns>
                              <TableColumn prefWidth="75.0" text="C1" />
