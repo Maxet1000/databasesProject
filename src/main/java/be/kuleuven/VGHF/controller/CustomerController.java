@@ -43,6 +43,7 @@ public class CustomerController extends Controller{
     public void initialize() {
         btnAddBalance.setOnAction(e -> {
             runResource("qr-code.jpeg");
+            addBalance();
         });
         btnExtendReturnDate.setOnAction(e -> {
             extendSelectedReturnDate();
@@ -65,6 +66,15 @@ public class CustomerController extends Controller{
             txtUser.setText("" + data.getUser().getUserName());
             txtBalance.setText("$" + data.getUser().getBalance());
         });
+    }
+
+    private void addBalance(){
+        int oldBalance = data.getUser().getBalance();
+        int newBalance = 50;
+        oldBalance = oldBalance + newBalance;
+        data.getUser().setBalance(oldBalance);
+        txtBalance.setText("$" + data.getUser().getBalance());
+
     }
 
     private void extendAllReturnDate(){
