@@ -22,10 +22,10 @@
                   <AnchorPane maxHeight="50.0" minHeight="55.0" prefHeight="55.0" style="-fx-border-color: #064420; -fx-border-width: 2; -fx-border-radius: 30; -fx-background-radius: 30; -fx-background-color: #609060;">
                      <children>
                         <Text fx:id="txtUser" fill="WHITE" layoutX="42.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="100.0" />
-                        <Text fx:id="txtBalance" fill="WHITE" layoutX="42.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="34.021278381347656" />
+                        <Text fx:id="txtBalance" fill="WHITE" layoutX="42.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="86.642578125" />
                         <ImageView fitHeight="39.0" fitWidth="37.0" layoutX="8.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@User.png" />
+                              <Image url="@user.png" />
                            </image>
                         </ImageView>
                      </children>

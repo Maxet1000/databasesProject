@@ -5,11 +5,14 @@ import java.util.*;
 import be.kuleuven.VGHF.ProjectMain;
 import be.kuleuven.VGHF.domain.*;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBoxTreeItem;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.control.cell.CheckBoxTreeCell;
+import javafx.scene.text.Text;
 
 public class DeveloperController extends Controller{
 
@@ -17,24 +20,54 @@ public class DeveloperController extends Controller{
     private Button btnAddNewGame;
     @FXML
     private TreeView<String> selectTreeView;
+    @FXML
+    private Button btnAddNew;
+    @FXML
+    private TextField txtGameTitle;
+    @FXML
+    private TextField txtReleasedate;
+    @FXML
+    private Text txtGameTitletxt;
+    @FXML
+    private Text txtReleaseDatetxt;
 
-    private ArrayList<String> developerList;
-    private ArrayList<String> genreList;
-    private ArrayList<String> consoleList;
+    private ArrayList<Developer> developerList;
+    private ArrayList<Genre> genreList;
+    private ArrayList<Console> consoleList;
 
-    DeveloperController(){
+    public DeveloperController(){
         developerList = new ArrayList<>();
         genreList = new ArrayList<>();
         consoleList = new ArrayList<>();
     }
 
     public void initialize() {
+        //set buttons invisable
+        txtGameTitle.setVisible(false);
+        txtReleasedate.setVisible(false);
+        selectTreeView.setVisible(false);
+        txtGameTitletxt.setVisible(false);
+        txtReleaseDatetxt.setVisible(false);
+        
         btnAddNewGame.setOnAction(e -> {
             addNewGame();
         });
     }
 
     private void addNewGame(){
+        //set the buttons and txtFields visible
+        txtGameTitle.setVisible(true);
+        txtReleasedate.setVisible(true);
+        selectTreeView.setVisible(true);
+        txtGameTitletxt.setVisible(true);
+        txtReleaseDatetxt.setVisible(true);
+
+
+        //lijst met alle ... tonen
+            //developers
+            //genres
+            //consoles 
+
         List<Developer> listOfDevelopers = getAllDevelopers();
         List<Console> listOfConsoles = getAllConsoles();
         List<Genre> listOfGenres = getAllGenres();
@@ -55,7 +88,7 @@ public class DeveloperController extends Controller{
             checkBoxTreeItem.selectedProperty().addListener((obs, oldVal, newVal) -> {
                 System.out.println(checkBoxTreeItem.getValue() + " selection state: " + newVal);
                 if (newVal) {
-                    developerList.add(developer.getDeveloperName());
+                    developerList.add(developer);
                 } else {
                     developerList.remove(developer);
                 }
@@ -69,7 +102,7 @@ public class DeveloperController extends Controller{
             checkBoxTreeItem.selectedProperty().addListener((obs, oldVal, newVal) -> {
                 System.out.println(checkBoxTreeItem.getValue() + " selection state: " + newVal);
                 if (newVal) {
-                    consoleList.add(console.getConsoleName());
+                    consoleList.add(console);
                 } else {
                     consoleList.remove(console);
                 }
@@ -83,7 +116,7 @@ public class DeveloperController extends Controller{
             checkBoxTreeItem.selectedProperty().addListener((obs, oldVal, newVal) -> {
                 System.out.println(checkBoxTreeItem.getValue() + " selection state: " + newVal);
                 if (newVal) {
-                    genreList.add(genre.getGenreName());
+                    genreList.add(genre);
                 } else {
                     genreList.remove(genre);
                 }
@@ -96,8 +129,31 @@ public class DeveloperController extends Controller{
         tree.getChildren().add(genresTreeItem);
         selectTreeView.setRoot(tree);
         selectTreeView.setShowRoot(false);
-    }
 
+        //when confirming the game gets made, all parameters gets assigned
+        btnAddNew.setOnAction(e -> {
+            if(developerList.isEmpty() || genreList.isEmpty() || consoleList.isEmpty() || txtGameTitle.getText().toString().isBlank() || txtReleasedate.getText().toString().isBlank()){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Please provide a developer, genre and console as well as a name and a releasedate!");
+                alert.show();
+            }else{
+                //make a new game
+                Game newGame = new Game();
+                newGame.setTitle(txtGameTitle.getText().toString());
+                newGame.setConsoles(consoleList);
+                newGame.setGenres(genreList);
+                newGame.setDevelopers(developerList);
+                newGame.setReleaseDate(txtReleasedate.getText().toString());
+                newGame.setCopies(null);
+                //add game relationships with other list in the database
+                addGameBidirectionally(newGame);
+            }
+
+        });
+    }
+ 
     //getters for the selectionTreeView
 
     public List<Developer> getAllDevelopers() {

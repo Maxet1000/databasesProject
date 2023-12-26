@@ -132,9 +132,10 @@ public class DbContentScript {
         Game galaga = new Game("Galaga", "1981-09-23", new ArrayList<> (Arrays.asList(arcade)), new ArrayList<> (Arrays.asList(namco)), new ArrayList<> (Arrays.asList(action)));
         Game metroid = new Game("Metroid", "1986-08-06", new ArrayList<> (Arrays.asList(nes)), new ArrayList<> (Arrays.asList(nintendo)), new ArrayList<> (Arrays.asList(action, adventure, platformer)));
 
-        User dries = new User("Dries Ruttens", "dries.ruttens@student.uhasselt.be", "wachtwoord", 10);
-        User bjorn = new User("Bjorn Spauwen", "bjorn.spauwen@student.uhasselt.be", "password", 20);
-        User max = new User("Max-émile Meylaerts", "max-emile.meylaerts@student.uhasselt.be", "12345", 30);
+        User dries = new User("Dries Ruttens", "dries.ruttens@student.uhasselt.be", "wachtwoord");
+        User bjorn = new User("Bjorn Spauwen", "bjorn.spauwen@student.uhasselt.be", "password");
+        User max = new User("Max-émile Meylaerts", "max-emile.meylaerts@student.uhasselt.be", "12345");
+        User admin1 = new User("Admin", "admin@admin.com", "admin");
         User mauro = new User("Mauro Vranckx", "mauro.vranckx@student.uhasselt.be", "isuckdick69420", 0);
         User eddy = new User("Edmond Tsampanis", "edmond.tsampanis@student.uhasselt.be", "StrongPass123!", 40);
         User jan = new User("Jan Alleman", "jan.alleman@fancycustomemail.com", "mijnverjaardag1999",-5);
@@ -724,6 +725,7 @@ public class DbContentScript {
         database.saveNewEntity(dries);
         database.saveNewEntity(bjorn);
         database.saveNewEntity(max);
+        database.saveNewEntity(admin1);
         database.saveNewEntity(mauro);
         database.saveNewEntity(eddy);
         database.saveNewEntity(jan);

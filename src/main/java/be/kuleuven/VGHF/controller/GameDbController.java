@@ -214,6 +214,10 @@ public class GameDbController extends Controller{
         toBeFilteredConsoles.clear();
         toBeFilteredDevelopers.clear();
         toBeFilteredGenres.clear();
+        txtBottomYear.clear();
+        txtTopYear.clear();
+        txtBottomYear.setStyle(txtSearch.getStyle());
+        txtTopYear.setStyle(txtSearch.getStyle());
         initFilters();
         var listOfGames = ProjectMain.getDatabase().getAllGames();
         initTable(listOfGames);

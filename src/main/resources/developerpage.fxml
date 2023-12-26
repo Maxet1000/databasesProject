@@ -32,18 +32,18 @@
             <AnchorPane maxWidth="5.0" minWidth="5.0" prefHeight="200.0" prefWidth="5.0" />
             <VBox maxWidth="4000.0" prefHeight="200.0" prefWidth="400.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="What is the title of the game:" wrappingWidth="274.13671875" />
-                  <TextField fx:id="txtGameTitle" />
+                  <Text fx:id="txtGameTitletxt" strokeType="OUTSIDE" strokeWidth="0.0" text="What is the title of the game:" wrappingWidth="274.13671875" />
+                  <TextField fx:id="txtGameTitle" promptText="title" />
                   <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" prefWidth="200.0" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="What is the releasedate of the game:" wrappingWidth="208.13671875" />
-                  <TextField />
+                  <Text fx:id="txtReleasedatetxt" strokeType="OUTSIDE" strokeWidth="0.0" text="What is the releasedate of the game:" wrappingWidth="208.13671875" />
+                  <TextField fx:id="txtReleasedate" promptText="releasedate" />
                   <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" prefWidth="200.0" />
                   <TreeView fx:id="selectTreeView" prefHeight="200.0" prefWidth="200.0" />
                </children></VBox>
             <AnchorPane maxWidth="5.0" minWidth="5.0" prefHeight="200.0" prefWidth="5.0" />
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="104.0" stylesheets="@styles.css" text="Button" />
+                  <Button fx:id="btnAddNew" mnemonicParsing="false" prefHeight="29.0" prefWidth="104.0" stylesheets="@styles.css" text="Confirm Changes" />
                </children>
             </VBox>
             <AnchorPane maxWidth="5.0" minWidth="5.0" prefHeight="200.0" prefWidth="5.0" />
