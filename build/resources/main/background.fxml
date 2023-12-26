@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane minHeight="200.0" minWidth="400.0" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.VGHF.controller.ProjectMainController">
    <top>
       <GridPane prefWidth="500.0" BorderPane.alignment="CENTER">
@@ -23,27 +22,27 @@
           <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnHome" mnemonicParsing="false" prefHeight="50.0" prefWidth="500.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="Home" textAlignment="CENTER" textFill="#fdfaf6" underline="true">
+            <Button fx:id="btnHome" mnemonicParsing="false" prefHeight="50.0" prefWidth="700.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="Home" textAlignment="CENTER" textFill="#fdfaf6">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="btnGameDb" mnemonicParsing="false" prefHeight="50.0" prefWidth="500.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="Game Database" textAlignment="CENTER" textFill="#fdfaf6" GridPane.columnIndex="1">
+            <Button fx:id="btnGameDb" mnemonicParsing="false" prefHeight="50.0" prefWidth="700.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="Game Database" textAlignment="CENTER" textFill="#fdfaf6" GridPane.columnIndex="1">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="btnCustomerPage" mnemonicParsing="false" prefHeight="50.0" prefWidth="500.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="Account" textAlignment="CENTER" textFill="#fdfaf6" GridPane.columnIndex="2">
+            <Button fx:id="btnCustomerPage" mnemonicParsing="false" prefHeight="50.0" prefWidth="700.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="Account" textAlignment="CENTER" textFill="#fdfaf6" GridPane.columnIndex="2">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="btnDeveloperPage" mnemonicParsing="false" prefHeight="50.0" prefWidth="500.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="Moderator" textAlignment="CENTER" textFill="#fdfaf6" GridPane.columnIndex="3">
+            <Button fx:id="btnDeveloperPage" mnemonicParsing="false" prefHeight="50.0" prefWidth="700.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="Moderator" textAlignment="CENTER" textFill="#fdfaf6" GridPane.columnIndex="3">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="btnInfo" mnemonicParsing="false" prefHeight="50.0" prefWidth="500.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="Info" textAlignment="CENTER" textFill="#fdfaf6" GridPane.columnIndex="4">
+            <Button fx:id="btnInfo" mnemonicParsing="false" prefHeight="50.0" prefWidth="700.0" style="-fx-background-color: #064420; -fx-background-radius: 0;" text="Info" textAlignment="CENTER" textFill="#fdfaf6" GridPane.columnIndex="4">
                <font>
                   <Font name="Arial" size="18.0" />
                </font>

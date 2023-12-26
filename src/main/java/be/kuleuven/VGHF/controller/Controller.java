@@ -170,6 +170,7 @@ public class Controller{
 
             if (id == "gameinfo") {
                 GameInfoController controller = pane.getController();
+                stage.setResizable(false);
                 controller.setModel(data);
                 controller.setGameTitle(gameTitle);
             } else {

@@ -16,20 +16,41 @@
       <HBox>
          <children>
             <AnchorPane minWidth="5.0" prefWidth="5.0" />
-            <AnchorPane maxHeight="50.0" minHeight="55.0" prefHeight="55.0" prefWidth="200.0" style="-fx-border-color: #064420; -fx-border-width: 2; -fx-border-radius: 30; -fx-background-radius: 30; -fx-background-color: #609060;">
+            <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Text fx:id="txtUser" fill="WHITE" layoutX="42.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="100.0" />
-                  <Text fx:id="txtBalance" fill="WHITE" layoutX="42.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="34.021278381347656" />
-                  <ImageView fitHeight="39.0" fitWidth="37.0" layoutX="8.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@User.png" />
-                     </image>
-                  </ImageView>
+                  <AnchorPane maxHeight="50.0" minHeight="55.0" prefHeight="55.0" prefWidth="200.0" style="-fx-border-color: #064420; -fx-border-width: 2; -fx-border-radius: 30; -fx-background-radius: 30; -fx-background-color: #609060;">
+                     <children>
+                        <Text fx:id="txtUser" fill="WHITE" layoutX="42.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="100.0" />
+                        <Text fx:id="txtBalance" fill="WHITE" layoutX="42.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="100.0" />
+                        <ImageView fitHeight="39.0" fitWidth="37.0" layoutX="8.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@user.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" />
+                  <Button fx:id="btnLogOut" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" stylesheets="@styles.css" text="Log out">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <AnchorPane minHeight="30.0" />
+                  <Button fx:id="btnVisitWebsite" alignment="CENTER" minHeight="30.0" minWidth="139.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" stylesheets="@styles.css" text="Visit our website" textAlignment="CENTER" textFill="#fdfaf6">
+                     <graphic>
+                        <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@website.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
-            </AnchorPane>
+            </VBox>
+            <AnchorPane prefWidth="2000.0" />
               <Text fx:id="txtVGHF" strokeType="OUTSIDE" strokeWidth="0.0" text="Video Game History Foundation" textAlignment="CENTER" wrappingWidth="400.0">
                   <font>
-                      <Font size="24.0" />
+                      <Font name="ArtifaktElement-Medium" size="24.0" />
                   </font>
               </Text>
             <AnchorPane prefWidth="2000.0" />
@@ -38,51 +59,47 @@
       <Pane prefHeight="2000.0" prefWidth="200.0" />
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <AnchorPane minWidth="5.0" />
+            <AnchorPane prefWidth="2000.0" />
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Text fx:id="txtPleaseLogin" strokeType="OUTSIDE" strokeWidth="0.0" text="Please log in first" />
-                  <Button fx:id="btnShop" alignment="CENTER" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="139.0" stylesheets="@styles.css" text="Visit Shop" textAlignment="CENTER" textFill="#fdfaf6">
+                  <Button fx:id="btnShop" alignment="CENTER" minHeight="50.0" minWidth="310.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" stylesheets="@styles.css" text="Visit Shop" textAlignment="CENTER" textFill="#fdfaf6">
                      <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="38.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@263142.png" />
+                              <Image url="@shoppingcart.png" />
                            </image>
                         </ImageView>
                      </graphic>
+                     <font>
+                        <Font size="25.0" />
+                     </font>
                   </Button>
                   <AnchorPane minHeight="30.0" />
-                  <Button fx:id="btnVisitWebsite" alignment="CENTER" minHeight="30.0" minWidth="139.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="139.0" stylesheets="@styles.css" text="Visit our website" textAlignment="CENTER" textFill="#fdfaf6">
-                     <graphic>
-                        <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@website-icon-8.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
+                  <HBox>
+                     <children>
+                        <Button fx:id="btnLogin" alignment="CENTER" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" stylesheets="@styles.css" text="Log in" textAlignment="CENTER" textFill="#fdfaf6">
+                           <graphic>
+                              <ImageView fitHeight="18.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@login.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <AnchorPane minWidth="30.0" />
+                        <Button fx:id="btnSignup" alignment="CENTER" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" stylesheets="@styles.css" text="Sign up" textAlignment="CENTER" textFill="#fdfaf6">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@signup.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
                   <AnchorPane minHeight="30.0" />
-                  <Button fx:id="btnLogin" alignment="CENTER" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="139.0" stylesheets="@styles.css" text="Log in" textAlignment="CENTER" textFill="#fdfaf6">
-                     <graphic>
-                        <ImageView fitHeight="18.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@152533.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <AnchorPane minHeight="30.0" />
-                  <Button fx:id="btnSignup" alignment="CENTER" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="139.0" stylesheets="@styles.css" text="Sign up" textAlignment="CENTER" textFill="#fdfaf6">
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@6478-200.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <AnchorPane minHeight="30.0" />
-                  <Button fx:id="btnLogOut" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="139.0" stylesheets="@styles.css" text="Log out" />
                </children>
             </VBox>
             <AnchorPane prefWidth="2000.0" />

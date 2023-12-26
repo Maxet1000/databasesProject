@@ -60,38 +60,36 @@ public class GameInfoController extends Controller{
         Copy currentCopy;
         for(int i = 0; i < listOfCopies.size(); i++) {
             currentCopy = listOfCopies.get(i);
-            if(currentCopy.getAvailability() == Availability.AVAILABLE && (currentCopy.getPurchasePrice() != 0 || currentCopy.getRentPrice() != 0)){
-                var gameCopyName = currentCopy.getGame().getTitle();
-                var copyId = currentCopy.getCopyID();
+            var gameCopyName = currentCopy.getGame().getTitle();
+            var copyId = currentCopy.getCopyID();
 
-                String developers = "";
-                for (int j = 0; j < currentCopy.getGame().getDevelopers().size(); j++) {
-                    developers = developers + currentCopy.getGame().getDevelopers().get(j).getDeveloperName();
-                    if (j+1 != currentCopy.getGame().getDevelopers().size()) {
-                        developers = developers + ", ";
-                    }
+            String developers = "";
+            for (int j = 0; j < currentCopy.getGame().getDevelopers().size(); j++) {
+                developers = developers + currentCopy.getGame().getDevelopers().get(j).getDeveloperName();
+                if (j+1 != currentCopy.getGame().getDevelopers().size()) {
+                    developers = developers + ", ";
                 }
-                String console = currentCopy.getConsole().getConsoleName();
-
-                String genres = "";
-                for (int j = 0; j < currentCopy.getGame().getGenres().size(); j++) {
-                    genres = genres + currentCopy.getGame().getGenres().get(j).getGenreName();
-                    if (j+1 != currentCopy.getGame().getGenres().size()) {
-                        genres = genres + ", ";
-                    }
-                }
-
-                String warehouse = currentCopy.getWarehouse();
-                String rentPrice = "" + currentCopy.getRentPrice();
-                String purchasePrice = "" + currentCopy.getPurchasePrice();
-                if(rentPrice.equals("0")){
-                    rentPrice = "Not available";
-                }
-                if(purchasePrice.equals("0")){
-                    purchasePrice = "Not for sale";
-                }
-                tblCopiesTable.getItems().add(FXCollections.observableArrayList(gameCopyName, developers, console, genres, warehouse, rentPrice, purchasePrice, copyId));
             }
+            String console = currentCopy.getConsole().getConsoleName();
+
+            String genres = "";
+            for (int j = 0; j < currentCopy.getGame().getGenres().size(); j++) {
+                genres = genres + currentCopy.getGame().getGenres().get(j).getGenreName();
+                if (j+1 != currentCopy.getGame().getGenres().size()) {
+                    genres = genres + ", ";
+                }
+            }
+
+            String warehouse = currentCopy.getWarehouse();
+            String rentPrice = "" + currentCopy.getRentPrice();
+            String purchasePrice = "" + currentCopy.getPurchasePrice();
+            if(rentPrice.equals("0")){
+                rentPrice = "Not available";
+            }
+            if(purchasePrice.equals("0")){
+                purchasePrice = "Not for sale";
+            }
+            tblCopiesTable.getItems().add(FXCollections.observableArrayList(gameCopyName, developers, console, genres, warehouse, rentPrice, purchasePrice, copyId));
         }
         System.out.println(""+ProjectMain.getDatabase().getCopyById(36).getPurchasePrice());
 
