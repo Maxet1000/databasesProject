@@ -56,7 +56,7 @@ public class HomeController extends Controller{
             }
         });
         btnLogin.setOnAction(e -> {
-            showLoginScherm();
+            showNewWindow("customerlogin","");
             if (data.loggedIn) {
                 txtPleaseLogin.setVisible(false);
                 btnLogOut.setDisable(false);
@@ -67,7 +67,7 @@ public class HomeController extends Controller{
             }
         });
         btnSignup.setOnAction((e -> {
-            showSignUpScherm();
+            showNewWindow("newuser","");
             if (data.loggedIn) {
                 txtPleaseLogin.setVisible(false);
                 btnLogOut.setDisable(false);

@@ -60,7 +60,7 @@
                             </children>
                         </HBox>
                         <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" />
-                        <TableView fx:id="tblGameTable" minHeight="50.0" prefHeight="2000.0" prefWidth="200">
+                        <TableView fx:id="tblGameTable" minHeight="50.0" onMouseClicked="#handleRowSelect" prefHeight="2000.0" prefWidth="200">
                             <columns>
                                 <TableColumn prefWidth="75.0" text="C1" />
                                 <TableColumn prefWidth="75.0" text="C2" />

@@ -403,7 +403,7 @@ public class ShopController extends Controller{
         tblRent.getColumns().clear();
 
         int colIndex = 0;
-        for(var colName : new String[]{"Game", "Developer", "Console", "Genre", "Rent Price", "Purchaseprice", "Id"}) {
+        for(var colName : new String[]{"Game", "Developer", "Console", "Genre", "Warehouse", "Rent Price", "Purchaseprice", "Id"}) {
             TableColumn<ObservableList<String>, String> col = new TableColumn<>(colName);
             final int finalColIndex = colIndex;
             col.setCellValueFactory(f -> new ReadOnlyObjectWrapper<>(f.getValue().get(finalColIndex)));
@@ -416,37 +416,40 @@ public class ShopController extends Controller{
 
         System.out.println(listOfCopies);
 
+        Copy currentCopy;
         for(int i = 0; i < listOfCopies.size(); i++) {
-            if(listOfCopies.get(i).getAvailability() == Availability.AVAILABLE && (listOfCopies.get(i).getPurchasePrice() != 0 || listOfCopies.get(i).getRentPrice() != 0)){
-                var gameCopyName = listOfCopies.get(i).getGame().getTitle();
-                var copyId = listOfCopies.get(i).getCopyID();
+            currentCopy = listOfCopies.get(i);
+            if(currentCopy.getAvailability() == Availability.AVAILABLE && (currentCopy.getPurchasePrice() != 0 || currentCopy.getRentPrice() != 0)){
+                var gameCopyName = currentCopy.getGame().getTitle();
+                var copyId = currentCopy.getCopyID();
 
                 String developers = "";
-                for (int j = 0; j < listOfCopies.get(i).getGame().getDevelopers().size(); j++) {
-                    developers = developers+ listOfCopies.get(i).getGame().getDevelopers().get(j).getDeveloperName();
-                    if (j+1 != listOfCopies.get(i).getGame().getDevelopers().size()) {
+                for (int j = 0; j < currentCopy.getGame().getDevelopers().size(); j++) {
+                    developers = developers + currentCopy.getGame().getDevelopers().get(j).getDeveloperName();
+                    if (j+1 != currentCopy.getGame().getDevelopers().size()) {
                         developers = developers + ", ";
                     }
                 }
-                String console = listOfCopies.get(i).getConsole().getConsoleName();
+                String console = currentCopy.getConsole().getConsoleName();
 
                 String genres = "";
-                for (int j = 0; j < listOfCopies.get(i).getGame().getGenres().size(); j++) {
-                    genres = genres+ listOfCopies.get(i).getGame().getGenres().get(j).getGenreName();
-                    if (j+1 != listOfCopies.get(i).getGame().getGenres().size()) {
+                for (int j = 0; j < currentCopy.getGame().getGenres().size(); j++) {
+                    genres = genres + currentCopy.getGame().getGenres().get(j).getGenreName();
+                    if (j+1 != currentCopy.getGame().getGenres().size()) {
                         genres = genres + ", ";
                     }
                 }
 
-                String rentPrice = "" + listOfCopies.get(i).getRentPrice();
-                String purchasePrice = "" + listOfCopies.get(i).getPurchasePrice();
+                String warehouse = currentCopy.getWarehouse();
+                String rentPrice = "" + currentCopy.getRentPrice();
+                String purchasePrice = "" + currentCopy.getPurchasePrice();
                 if(rentPrice.equals("0")){
                     rentPrice = "Not available";
                 }
                 if(purchasePrice.equals("0")){
                     purchasePrice = "Not for sale";
                 }
-                tblRent.getItems().add(FXCollections.observableArrayList(gameCopyName, developers, console, genres, rentPrice, purchasePrice, copyId));
+                tblRent.getItems().add(FXCollections.observableArrayList(gameCopyName, developers, console, genres, warehouse, rentPrice, purchasePrice, copyId));
             }
         }
         System.out.println(""+ProjectMain.getDatabase().getCopyById(36).getPurchasePrice());

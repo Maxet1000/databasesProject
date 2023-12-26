@@ -6,15 +6,27 @@ import be.kuleuven.VGHF.ProjectMain;
 import be.kuleuven.VGHF.domain.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.CheckBoxTreeItem;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
+import javafx.scene.control.cell.CheckBoxTreeCell;
 
 public class DeveloperController extends Controller{
 
     @FXML
     private Button btnAddNewGame;
     @FXML
-    private ComboBox cobo1; //Genre box
+    private TreeView<String> selectTreeView;
 
+    private ArrayList<String> developerList;
+    private ArrayList<String> genreList;
+    private ArrayList<String> consoleList;
+
+    DeveloperController(){
+        developerList = new ArrayList<>();
+        genreList = new ArrayList<>();
+        consoleList = new ArrayList<>();
+    }
 
     public void initialize() {
         btnAddNewGame.setOnAction(e -> {
@@ -23,9 +35,83 @@ public class DeveloperController extends Controller{
     }
 
     private void addNewGame(){
+        List<Developer> listOfDevelopers = getAllDevelopers();
+        List<Console> listOfConsoles = getAllConsoles();
+        List<Genre> listOfGenres = getAllGenres();
+        TreeItem<String> developersTreeItem = new CheckBoxTreeItem<>("Developers");
+        TreeItem<String> consolesTreeItem = new CheckBoxTreeItem<>("Consoles");
+        TreeItem<String> genresTreeItem = new CheckBoxTreeItem<>("Genres");
 
-        cobo1.getItems().setAll(ProjectMain.getDatabase().getAllGenres().get(0).toString(), ProjectMain.getDatabase().getAllGenres().get(1).toString());
+        developersTreeItem.setExpanded(false);
+        consolesTreeItem.setExpanded(false);
+        genresTreeItem.setExpanded(false);
+        genresTreeItem.setExpanded(false);
+        selectTreeView.setCellFactory(CheckBoxTreeCell.forTreeView());
+
+        for (int i=0; i<listOfDevelopers.size(); i++ ) {
+            Developer developer = listOfDevelopers.get(i);
+            CheckBoxTreeItem<String> checkBoxTreeItem = new CheckBoxTreeItem<>(developer.getDeveloperName());
+            developersTreeItem.getChildren().add(checkBoxTreeItem);
+            checkBoxTreeItem.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                System.out.println(checkBoxTreeItem.getValue() + " selection state: " + newVal);
+                if (newVal) {
+                    developerList.add(developer.getDeveloperName());
+                } else {
+                    developerList.remove(developer);
+                }
+            });
+        }
+
+        for (int i=0; i<listOfConsoles.size(); i++ ) {
+            Console console = listOfConsoles.get(i);
+            CheckBoxTreeItem<String> checkBoxTreeItem = new CheckBoxTreeItem<>(console.getConsoleName());
+            consolesTreeItem.getChildren().add(checkBoxTreeItem);
+            checkBoxTreeItem.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                System.out.println(checkBoxTreeItem.getValue() + " selection state: " + newVal);
+                if (newVal) {
+                    consoleList.add(console.getConsoleName());
+                } else {
+                    consoleList.remove(console);
+                }
+            });
+        }
+
+        for (int i=0; i<listOfGenres.size(); i++ ) {
+            Genre genre = listOfGenres.get(i);
+            CheckBoxTreeItem<String> checkBoxTreeItem = new CheckBoxTreeItem<>(genre.getGenreName());
+            genresTreeItem.getChildren().add(checkBoxTreeItem);
+            checkBoxTreeItem.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                System.out.println(checkBoxTreeItem.getValue() + " selection state: " + newVal);
+                if (newVal) {
+                    genreList.add(genre.getGenreName());
+                } else {
+                    genreList.remove(genre);
+                }
+            });
+        }
+
+        TreeItem<String> tree = new TreeItem<>();
+        tree.getChildren().add(developersTreeItem);
+        tree.getChildren().add(consolesTreeItem);
+        tree.getChildren().add(genresTreeItem);
+        selectTreeView.setRoot(tree);
+        selectTreeView.setShowRoot(false);
     }
+
+    //getters for the selectionTreeView
+
+    public List<Developer> getAllDevelopers() {
+        return ProjectMain.getDatabase().getAllDevelopers();
+    }
+
+    private List<Console> getAllConsoles() {
+        return ProjectMain.getDatabase().getAllConsoles();
+    }
+
+    private List<Genre> getAllGenres() {
+        return ProjectMain.getDatabase().getAllGenres();
+    }
+
 
     /*  Adds a new Game and updates its relationships.
      * 

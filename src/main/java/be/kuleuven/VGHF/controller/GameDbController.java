@@ -6,13 +6,17 @@ import be.kuleuven.VGHF.enums.Availability;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTreeCell;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
 import org.controlsfx.control.RangeSlider;
 
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class GameDbController extends Controller{
@@ -31,6 +35,8 @@ public class GameDbController extends Controller{
     private TextField txtTopYear;
     @FXML
     private TextField txtSearch;
+    Game temp;
+    Date lastClickTime;
 
     private ArrayList<Developer> toBeFilteredDevelopers;
     private ArrayList<Console> toBeFilteredConsoles;
@@ -223,5 +229,27 @@ public class GameDbController extends Controller{
 
     private List<Genre> getAllGenres() {
         return ProjectMain.getDatabase().getAllGenres();
+    }
+
+    public void handleRowSelect(javafx.scene.input.MouseEvent mouseEvent) {
+
+        List selectedItem =  (List) tblGameTable.getSelectionModel().getSelectedItem();
+        String x = (String) selectedItem.get(0);
+        Game row = ProjectMain.getDatabase().getGameByTitle(x);
+
+        if (row == null) return;
+        if(row != temp){
+            temp = row;
+            lastClickTime = new Date();
+        } else {
+            Date now = new Date();
+            long diff = now.getTime() - lastClickTime.getTime();
+            if (diff < 300){ //another click registered in 300 millis
+                System.out.println(row.getTitle());
+                showNewWindow("gameinfo",row.getTitle());
+            } else {
+                lastClickTime = new Date();
+            }
+        }
     }
 }

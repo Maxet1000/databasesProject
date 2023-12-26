@@ -34,7 +34,7 @@ public class PreLoginController extends Controller {
     }
 
     private void signUp() throws IOException {
-        showSignUpScherm();
+        showNewWindow("newuser","");
         System.out.println("ayhah "+ data.getUser().getUserName());
         if (data.loggedIn) {
             switchScreen("customer");
@@ -42,7 +42,7 @@ public class PreLoginController extends Controller {
     }
 
     private void login() throws IOException {
-        showLoginScherm();
+        showNewWindow("customerlogin","");
         if (data.loggedIn) {
             switchScreen("customer");
         }

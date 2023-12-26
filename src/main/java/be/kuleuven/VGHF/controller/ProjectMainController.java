@@ -88,23 +88,34 @@ public class ProjectMainController extends Controller{
         btnCustomerPage.setUnderline(false);
         btnDeveloperPage.setUnderline(false);
         btnInfo.setUnderline(false);
+
+        btnHome.setDisable(false);
+        btnGameDb.setDisable(false);
+        btnCustomerPage.setDisable(false);
+        btnDeveloperPage.setDisable(false);
+        btnInfo.setDisable(false);
         
         switch(id){
             case "home":
                 btnHome.setUnderline(true);
+                btnHome.setDisable(true);
             break;
             case "gamedb":
                 btnGameDb.setUnderline(true);
+                btnGameDb.setDisable(true);
             break;
             case "prelogin":
             case "customer":
                 btnCustomerPage.setUnderline(true);
+                btnCustomerPage.setDisable(true);
             break;
             case "developerlogin":
                 btnDeveloperPage.setUnderline(true);
+                btnDeveloperPage.setDisable(true);
             break;
             case "info":
                 btnInfo.setUnderline(true);
+                btnInfo.setDisable(true);
             break;
 
         }    
