@@ -9,6 +9,7 @@ import javax.persistence.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import be.kuleuven.VGHF.enums.Availability;
 import javafx.print.Collation;
 
 public class HibernateManager {
@@ -394,6 +395,22 @@ public class HibernateManager {
             e.printStackTrace();
             return null;
         } 
+    }
+
+    public List<Copy> getPageOfCopies(int firstCopyIndex, int pageLength) {
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(Copy.class);
+            var root = query.from(Copy.class);
+            query.where(criteriaBuilder.greaterThanOrEqualTo(root.get("copyID"), firstCopyIndex),
+                        criteriaBuilder.equal(root.get("availability"), Availability.AVAILABLE),
+                        criteriaBuilder.or(criteriaBuilder.notEqual(root.get("purchasePrice"), 0),
+                                            criteriaBuilder.notEqual(root.get("rentPrice"), 0)));
+            return entityManager.createQuery(query).setMaxResults(pageLength).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

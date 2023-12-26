@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Hibernate;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -13,6 +15,7 @@ import be.kuleuven.VGHF.domain.Console;
 import be.kuleuven.VGHF.domain.Copy;
 import be.kuleuven.VGHF.domain.Developer;
 import be.kuleuven.VGHF.domain.Genre;
+import be.kuleuven.VGHF.domain.HibernateManager;
 import be.kuleuven.VGHF.domain.MonetaryTransaction;
 import be.kuleuven.VGHF.enums.Availability;
 import be.kuleuven.VGHF.enums.TransactionType;
@@ -70,10 +73,28 @@ public class ShopController extends Controller{
     }
 
     public void initialize(){
-        var listOfCopies = ProjectMain.getDatabase().getAllCopies();
+        HibernateManager db = ProjectMain.getDatabase();
+        var listOfCopies = db.getPageOfCopies(0, 20);
+        int pageNumber = 1;
+        List<Integer> idsOfLastCopyPreviousPages = new ArrayList<>();
         initTable(listOfCopies);
         initTableCart();
         initFilters();
+        btnNextPage.setOnAction(e -> {
+            if (idsOfLastCopyPreviousPages.get(idsOfLastCopyPreviousPages.size()) != idsOfLastCopyPreviousPages.get(idsOfLastCopyPreviousPages.size())) {
+                idsOfLastCopyPreviousPages.add(listOfCopies.get(listOfCopies.size() - 1).getCopyID());
+                listOfCopies = db.getPageOfCopies(idsOfLastCopyPreviousPages + 1, 20);
+                initTable(listOfCopies);
+                pageNumber++;
+            }
+        });
+        btnPreviousPage.setOnAction(e -> {
+            if (pageNumber > 1) {
+                listOfCopies = db.getPageOfCopies(idsOfLastCopyPreviousPages+ 1, 20);
+                initTable(listOfCopies);
+                pageNumber--;
+            }
+        });
         btnAddGameToCart.setOnAction(e -> {
             addGameToRentCart();
         });
@@ -437,38 +458,37 @@ public class ShopController extends Controller{
         Copy currentCopy;
         for(int i = 0; i < listOfCopies.size(); i++) {
             currentCopy = listOfCopies.get(i);
-            if(currentCopy.getAvailability() == Availability.AVAILABLE && (currentCopy.getPurchasePrice() != 0 || currentCopy.getRentPrice() != 0)){
-                var gameCopyName = currentCopy.getGame().getTitle();
-                var copyId = currentCopy.getCopyID();
+            var gameCopyName = currentCopy.getGame().getTitle();
+            var copyId = currentCopy.getCopyID();
 
-                String developers = "";
-                for (int j = 0; j < currentCopy.getGame().getDevelopers().size(); j++) {
-                    developers = developers + currentCopy.getGame().getDevelopers().get(j).getDeveloperName();
-                    if (j+1 != currentCopy.getGame().getDevelopers().size()) {
-                        developers = developers + ", ";
-                    }
+            String developers = "";
+            for (int j = 0; j < currentCopy.getGame().getDevelopers().size(); j++) {
+                developers = developers + currentCopy.getGame().getDevelopers().get(j).getDeveloperName();
+                if (j+1 != currentCopy.getGame().getDevelopers().size()) {
+                    developers = developers + ", ";
                 }
-                String console = currentCopy.getConsole().getConsoleName();
-
-                String genres = "";
-                for (int j = 0; j < currentCopy.getGame().getGenres().size(); j++) {
-                    genres = genres + currentCopy.getGame().getGenres().get(j).getGenreName();
-                    if (j+1 != currentCopy.getGame().getGenres().size()) {
-                        genres = genres + ", ";
-                    }
-                }
-
-                String warehouse = currentCopy.getWarehouse();
-                String rentPrice = "" + currentCopy.getRentPrice();
-                String purchasePrice = "" + currentCopy.getPurchasePrice();
-                if(rentPrice.equals("0")){
-                    rentPrice = "Not available";
-                }
-                if(purchasePrice.equals("0")){
-                    purchasePrice = "Not for sale";
-                }
-                tblRent.getItems().add(FXCollections.observableArrayList(gameCopyName, developers, console, genres, warehouse, rentPrice, purchasePrice, copyId));
             }
+            String console = currentCopy.getConsole().getConsoleName();
+
+            String genres = "";
+            for (int j = 0; j < currentCopy.getGame().getGenres().size(); j++) {
+                genres = genres + currentCopy.getGame().getGenres().get(j).getGenreName();
+                if (j+1 != currentCopy.getGame().getGenres().size()) {
+                    genres = genres + ", ";
+                }
+            }
+
+            String warehouse = currentCopy.getWarehouse();
+            String rentPrice = "" + currentCopy.getRentPrice();
+            String purchasePrice = "" + currentCopy.getPurchasePrice();
+            if(rentPrice.equals("0")){
+                rentPrice = "Not available";
+            }
+            if(purchasePrice.equals("0")){
+                purchasePrice = "Not for sale";
+            }
+            tblRent.getItems().add(FXCollections.observableArrayList(gameCopyName, developers, console, genres, warehouse, rentPrice, purchasePrice, copyId));
+            
         }
         System.out.println(""+ProjectMain.getDatabase().getCopyById(36).getPurchasePrice());
 
