@@ -114,10 +114,11 @@ public class ShopController extends Controller{
 
         //vraag al de gehuurde en verkochte games van de user op
         var copyFromUser = data.getUser().getCopies();
-            if (copyFromUser == null) {
-                    copyFromUser = new ArrayList<>();
-            }
-
+        if (copyFromUser == null) {
+                copyFromUser = new ArrayList<>();
+        }
+        
+        int wrongItem = 0;;
         int itemCounter = 0;
         while (itemCounter != listItems.size()) {
             List copyData = (List) listItems.get(itemCounter);
@@ -169,9 +170,26 @@ public class ShopController extends Controller{
                 alert.setHeaderText(null);
                 alert.setContentText("Game: " + copy.getGame().getTitle().toString() +" not available or not enough money!" );
                 alert.show();
+                wrongItem++;
             }
 
             itemCounter++;
+        }
+
+
+        //confirmation popup 
+        String rentOrBuy;
+        if(table.equals(tblRentCart)){
+            rentOrBuy = "rent";
+        }else{
+            rentOrBuy = "buy";
+        }
+        if( wrongItem == 0 || (itemCounter > wrongItem) ){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText(rentOrBuy + " complete!" );
+            alert.show();
         }
 
         //refresh balance

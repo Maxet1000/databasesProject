@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -30,16 +29,7 @@
                </children>
             </VBox>
             <AnchorPane maxWidth="5.0" minWidth="5.0" prefHeight="200.0" prefWidth="5.0" />
-            <VBox maxWidth="4000.0" prefHeight="200.0" prefWidth="400.0">
-               <children>
-                  <Text fx:id="txtGameTitletxt" strokeType="OUTSIDE" strokeWidth="0.0" text="What is the title of the game:" wrappingWidth="274.13671875" />
-                  <TextField fx:id="txtGameTitle" promptText="title" />
-                  <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" prefWidth="200.0" />
-                  <Text fx:id="txtReleaseDatetxt" strokeType="OUTSIDE" strokeWidth="0.0" text="What is the releasedate of the game:" wrappingWidth="208.13671875" />
-                  <TextField fx:id="txtReleasedate" promptText="YYYY-MM-DD" />
-                  <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" prefWidth="200.0" />
-                  <TreeView fx:id="selectTreeView" prefHeight="200.0" prefWidth="200.0" />
-               </children></VBox>
+            <VBox fx:id="vbox1" maxWidth="4000.0" prefHeight="200.0" prefWidth="400.0" />
             <AnchorPane maxWidth="5.0" minWidth="5.0" prefHeight="200.0" prefWidth="5.0" />
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
@@ -49,5 +39,15 @@
             <AnchorPane maxWidth="5.0" minWidth="5.0" prefHeight="200.0" prefWidth="5.0" />
          </children>
       </HBox>
+      <AnchorPane fx:id="paneAddGenre" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <VBox prefHeight="213.0" prefWidth="393.0">
+               <children>
+                  <Text fx:id="txtNewGenretxt" strokeType="OUTSIDE" strokeWidth="0.0" text="What is the name of the new genre:" wrappingWidth="274.13671875" />
+                  <TextField fx:id="txtNewGenre" prefHeight="25.0" prefWidth="283.0" promptText="genre name" />
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
    </children>
 </VBox>

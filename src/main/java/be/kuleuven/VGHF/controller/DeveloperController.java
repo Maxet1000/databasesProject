@@ -14,12 +14,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.control.cell.CheckBoxTreeCell;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class DeveloperController extends Controller{
 
     @FXML
     private Button btnAddNewGame;
+    @FXML
+    private VBox VBox1;
     @FXML
     private TreeView<String> selectTreeView;
     @FXML
@@ -32,6 +36,14 @@ public class DeveloperController extends Controller{
     private Text txtGameTitletxt;
     @FXML
     private Text txtReleaseDatetxt;
+    @FXML
+    private Button btnAddGenre;
+    @FXML
+    private AnchorPane paneAddGenre;
+    @FXML
+    private TextField txtNewGenre;
+    @FXML
+    private Text txtNewGenretxt;
 
     private ArrayList<Developer> developerList;
     private ArrayList<Genre> genreList;
@@ -44,26 +56,39 @@ public class DeveloperController extends Controller{
     }
 
     public void initialize() {
-        //set buttons invisable
+        //Invisible AddGame
+        /*
         txtGameTitle.setVisible(false);
         txtReleasedate.setVisible(false);
         selectTreeView.setVisible(false);
         txtGameTitletxt.setVisible(false);
         txtReleaseDatetxt.setVisible(false);
-        
+        */
+
+        //Invisible AddGenre
+        paneAddGenre.setVisible(false);
+
         btnAddNewGame.setOnAction(e -> {
+            showNewWindow("addNewGame", "");
             addNewGame();
         });
+        btnAddGenre.setOnAction(e ->{
+            addNewGenre();
+        });
+    }
+
+    private void addNewGenre(){
+        paneAddGenre.setVisible(true);
+
+        String newGenreName = txtNewGenre.getText().toString();
+        Genre newGenre = new Genre();
+        newGenre.setGenreName(newGenreName);
+        ProjectMain.getDatabase().saveNewEntity(newGenre);
+
     }
 
     private void addNewGame(){
         //set the buttons and txtFields visible
-        txtGameTitle.setVisible(true);
-        txtReleasedate.setVisible(true);
-        selectTreeView.setVisible(true);
-        txtGameTitletxt.setVisible(true);
-        txtReleaseDatetxt.setVisible(true);
-
 
         //lijst met alle ... tonen
             //developers
@@ -164,8 +189,14 @@ public class DeveloperController extends Controller{
                 newGame.setCopies(null);
                 //add game relationships with other list in the database
                 addGameBidirectionally(newGame);
-            }
 
+                //popup confirmation
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Game successfully addad");
+                alert.show();
+            }
         });
     }
  
