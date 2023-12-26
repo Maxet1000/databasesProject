@@ -1,5 +1,5 @@
 package be.kuleuven.VGHF.enums;
 
 public enum TransactionType {
-    RENTAL, PURCHASE, EXTENSION
+    RENTAL, PURCHASE, EXTENSION, RETURN
 }
