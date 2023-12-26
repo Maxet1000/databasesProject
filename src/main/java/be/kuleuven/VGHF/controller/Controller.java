@@ -118,7 +118,7 @@ public class Controller{
     //     return filteredList;
     // }
 
-    public void showLoginScherm() {
+    /*public void showLoginScherm() {
         try {
             var stage = new Stage();
             var pane = new FXMLLoader(getClass().getClassLoader().getResource("customerloginpage.fxml"));
@@ -160,6 +160,33 @@ public class Controller{
 
         } catch (Exception e) {
             throw new RuntimeException("Kan scherm newuserpage.fxml niet vinden", e);
+        }
+    }*/
+    public void showNewWindow(String id, String gameTitle) {
+        try {
+            var stage = new Stage();
+            var pane = new FXMLLoader(getClass().getClassLoader().getResource(id + "page.fxml"));
+            var root = (VBox) pane.load();
+
+            if (id == "gameinfo") {
+                GameInfoController controller = pane.getController();
+                controller.setModel(data);
+                controller.setGameTitle(gameTitle);
+            } else {
+                Controller controller = pane.getController();
+                controller.setModel(data);
+            }
+
+            var scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle(id + "page");
+            root.setAlignment(Pos.CENTER);
+            stage.initOwner(ProjectMain.getRootStage());
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.showAndWait();
+
+        } catch (Exception e) {
+            throw new RuntimeException("Kan scherm " + id + "page.fxml niet vinden", e);
         }
     }
 

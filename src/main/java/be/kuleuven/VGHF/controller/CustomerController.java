@@ -38,7 +38,7 @@ public class CustomerController extends Controller{
     private Button btnExtendAllReturnDate;
     @FXML
     private VBox purchaseHistoryPane;
-    private int extendPrice = 15;
+    private final int extendPrice = 15;
 
     public void initialize() {
         btnAddBalance.setOnAction(e -> {

@@ -39,7 +39,7 @@ public class CustomerLoginController extends Controller{
 
     private void logIn() throws IOException {
         var user = ProjectMain.getDatabase().getUserByEmail(txtEmail.getText());
-        if(txtEmail.getText().equals("UwU") || txtEmail.getText().equals("kak")){
+        if(txtEmail.getText().equals("debug")){
             data.setUser(ProjectMain.getDatabase().getAllUsers().get(6));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Correct");
@@ -78,7 +78,6 @@ public class CustomerLoginController extends Controller{
             alert.showAndWait();
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.close();
-
         }
     }
 }
