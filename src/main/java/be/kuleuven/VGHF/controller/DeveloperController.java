@@ -48,6 +48,10 @@ public class DeveloperController extends Controller{
     private TextField txtNewDeveloper;
     @FXML 
     private TextField txtNewConsole;
+    @FXML
+    private Button btnAddNewDeveloper;
+    @FXML
+    private Button btnAddNewConsole;
 
     private ArrayList<Developer> developerList;
     private ArrayList<Genre> genreList;
@@ -78,7 +82,12 @@ public class DeveloperController extends Controller{
         btnAddGenre.setOnAction(e ->{
             addNewGenre();
         });
-        
+        btnAddNewDeveloper.setOnAction(e ->{
+            addNewGenre();
+        });
+        btnAddNewConsole.setOnAction(e ->{
+            addNewGenre();
+        });
     }
 
     private void addNewGenre(){
@@ -101,26 +110,33 @@ public class DeveloperController extends Controller{
          *      Then the compatible consoles are selected
          *          Console gets updated with a list of compatible consoles
          */
-        List<Console> listOfConsoles = getAllConsoles();
-        TreeItem<String> consolesTreeItem = new CheckBoxTreeItem<>("Consoles");
-        consolesTreeItem.setExpanded(false);
-        selectTreeView.setCellFactory(CheckBoxTreeCell.forTreeView());
-        for (int i=0; i<listOfConsoles.size(); i++ ) {
-            Console console = listOfConsoles.get(i);
-            CheckBoxTreeItem<String> checkBoxTreeItem = new CheckBoxTreeItem<>(console.getConsoleName());
-            consolesTreeItem.getChildren().add(checkBoxTreeItem);
-            checkBoxTreeItem.selectedProperty().addListener((obs, oldVal, newVal) -> {
-            System.out.println(checkBoxTreeItem.getValue() + " selection state: " + newVal);
-            if (newVal) {
-                consoleList.add(console);
-            } else {
-                consoleList.remove(console);
-                }
-            });
-        }
+        btnAddNew.setOnAction(e -> {
+            List<Console> listOfConsoles = getAllConsoles();
+            TreeItem<String> consolesTreeItem = new CheckBoxTreeItem<>("Consoles");
+            consolesTreeItem.setExpanded(false);
+            selectTreeView.setCellFactory(CheckBoxTreeCell.forTreeView());
+            int numberOfConsoles = 0;
+            while (numberOfConsoles<listOfConsoles.size()) {
+                Console console = listOfConsoles.get(numberOfConsoles);
+                CheckBoxTreeItem<String> checkBoxTreeItem = new CheckBoxTreeItem<>(console.getConsoleName());
+                consolesTreeItem.getChildren().add(checkBoxTreeItem);
+                checkBoxTreeItem.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                System.out.println(checkBoxTreeItem.getValue() + " selection state: " + newVal);
+                if (newVal) {
+                    consoleList.add(console);
+                } else {
+                    consoleList.remove(console);
+                    }
+                });
+                numberOfConsoles++;
+            }
+            Console newConsole = new Console(newConsoleName);
+            for(int i = 0; i < numberOfConsoles; i++){
+                newConsole.addCompatibleConsole(consoleList.get(i));
+            }
 
-        Console newConsole = new Console(newConsoleName);
-        addConsoleBidirectionally(newConsole);
+            addConsoleBidirectionally(newConsole);
+        });
     }
 
     private void addNewGame(){
