@@ -23,10 +23,6 @@ public class Genre implements InterfaceForFilters {
         return this.genreName;
     }
 
-    public void setGenreName(String genreName) {
-        this.genreName = genreName;
-    }
-
     @Override
     public List<Game> getGames() {
         return this.games;
