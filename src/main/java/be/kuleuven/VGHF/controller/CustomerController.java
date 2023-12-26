@@ -1,27 +1,17 @@
 package be.kuleuven.VGHF.controller;
 
-import be.kuleuven.VGHF.DataCommunicationModel;
 import be.kuleuven.VGHF.ProjectMain;
-import be.kuleuven.VGHF.domain.Customer;
+import be.kuleuven.VGHF.domain.MonetaryTransaction;
 import be.kuleuven.VGHF.enums.Availability;
+import be.kuleuven.VGHF.enums.TransactionType;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -46,6 +36,8 @@ public class CustomerController extends Controller{
     private Button btnExtendReturnDate;
     @FXML
     private Button btnExtendAllReturnDate;
+    @FXML
+    private VBox purchaseHistoryPane;
     private int extendPrice = 15;
 
     public void initialize() {
@@ -69,16 +61,18 @@ public class CustomerController extends Controller{
         Platform.runLater(() -> {
             initTable();
             fillTable();
-            txtBalance.setText("" + data.getUser().getBalance());
-            txtUser.setText("Logged in as: " + data.getUser().getCustomerName());
+            initTransactionHistory();
+            txtUser.setText("" + data.getUser().getUserName());
+            txtBalance.setText("$" + data.getUser().getBalance());
         });
     }
+
     private void extendAllReturnDate(){
         var rentedCopies = data.getUser().getCopies();
         int aantalRentedCopies = rentedCopies.size();
         int balance = data.getUser().getBalance();
-        int newExtendPrice = extendPrice * aantalRentedCopies;
-        int newBalance = balance - newExtendPrice;
+        int totalPrice = extendPrice * aantalRentedCopies;
+        int newBalance = balance - totalPrice;
         if(newBalance >= 0){
             for(int i = 0; i < aantalRentedCopies; i++){
                 int copyID = (int) rentedCopies.get(i).getCopyID();
@@ -90,8 +84,13 @@ public class CustomerController extends Controller{
                 fillTable();
                 data.getUser().setBalance(newBalance);
                 copy.setDateOfReturn(newReturnDate);
-                txtBalance.setText(newBalance + "");
+                txtBalance.setText("$" + newBalance);
+                List<MonetaryTransaction> transactionList = data.getUser().getTransactions();
+                var newTransaction = new MonetaryTransaction(TransactionType.EXTENSION, extendPrice, data.getUser(), copy, getCurrentDate());
+                transactionList.add(newTransaction);
+                data.getUser().setTransactions(transactionList);
             }
+            initTransactionHistory();
         }else{
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Error");
@@ -111,11 +110,18 @@ public class CustomerController extends Controller{
             //eerst checken of de customer nog genoeg geld heeft om te kunnen verlengen
             //15 euro om game te verlengen
             int balance = data.getUser().getBalance();
+
+            List<MonetaryTransaction> transactionList = data.getUser().getTransactions();
+            var newTransaction = new MonetaryTransaction(TransactionType.EXTENSION, extendPrice, data.getUser(), copy, getCurrentDate());
+            transactionList.add(newTransaction);
+            data.getUser().setTransactions(transactionList);
+            initTransactionHistory();
+
             if(balance > extendPrice){
                 int newBalance = balance - extendPrice;
                 data.getUser().setBalance(newBalance);
                 copy.setDateOfReturn(newReturnDate);
-                txtBalance.setText(newBalance + "");
+                txtBalance.setText("$" + newBalance );
             }else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Error");
@@ -178,6 +184,25 @@ public class CustomerController extends Controller{
 
                     tblRentedGames.getItems().add(FXCollections.observableArrayList(gameCopyName, developers, console, returnDate, copyId));
                 }
+            }
+        }
+    }
+
+    private void initTransactionHistory() {
+        purchaseHistoryPane.getChildren().clear();
+        List<MonetaryTransaction> transactions = data.getUser().getTransactions();
+        if (transactions == null) {
+            String text = "No transactions done yet";
+            Text textField = new Text();
+            textField.setText(text);
+            purchaseHistoryPane.getChildren().add(0, textField);
+        } else {
+            for (int i = 0; i < transactions.size(); i++) {
+                MonetaryTransaction transaction = transactions.get(i);
+                String text = transaction.getMonetaryTransactionType().toString() + " of " + transaction.getCopy().getGame().getTitle() + "\nDate: " + transaction.getTime() + "\nPrice: " + transaction.getRevenue() + "\n-----------------------------------------------";
+                Text textField = new Text();
+                textField.setText(text);
+                purchaseHistoryPane.getChildren().add(0, textField);
             }
         }
     }

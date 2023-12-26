@@ -49,7 +49,7 @@ public class ProjectMain extends Application {
         database = new HibernateManager(entityManager, sessionFactory);
 
         DbContentScript.scriptMain();
-        List<MonetaryTransaction> testlist = database.getMonetaryTransactionsByCustomerID(5);
+        List<MonetaryTransaction> testlist = database.getMonetaryTransactionsByUserID(5);
         System.out.println(testlist);
         launch();
     }

@@ -1,11 +1,9 @@
 package be.kuleuven.VGHF.controller;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import org.hibernate.Hibernate;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,9 +12,7 @@ import be.kuleuven.VGHF.ProjectMain;
 import be.kuleuven.VGHF.domain.Console;
 import be.kuleuven.VGHF.domain.Copy;
 import be.kuleuven.VGHF.domain.Developer;
-import be.kuleuven.VGHF.domain.Game;
 import be.kuleuven.VGHF.domain.Genre;
-import be.kuleuven.VGHF.domain.HibernateManager;
 import be.kuleuven.VGHF.domain.MonetaryTransaction;
 import be.kuleuven.VGHF.enums.Availability;
 import be.kuleuven.VGHF.enums.TransactionType;
@@ -51,7 +47,9 @@ public class ShopController extends Controller{
     @FXML
     private Button btnRemoveFromCart;
     @FXML
-    private Button btnRentGames;
+    private Button btnLogOut;
+    @FXML
+    private Button btnPurchase;
     @FXML
     private Button btnAddGameToBuy;
     @FXML
@@ -89,16 +87,24 @@ public class ShopController extends Controller{
             removeGameFromCart(tblRentCart);
             removeGameFromCart(tblBuyCart);
         });
-        btnRentGames.setOnAction(e -> {
+        btnPurchase.setOnAction(e -> {
             rentAndBuyGamesFromCart(tblRentCart);
             rentAndBuyGamesFromCart(tblBuyCart);
         });
         btnAddGameToBuy.setOnAction(e -> {
             addGameToBuyCart();
         });
+        btnLogOut.setOnAction(e -> {
+            data.logOut();
+            try {
+                switchScreen("home");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         Platform.runLater(() -> {
-            txtBalance.setText("" + data.getUser().getBalance());
-            txtUser.setText("Logged in as: " + data.getUser().getCustomerName());
+            txtUser.setText(data.getUser().getUserName());
+            txtBalance.setText("$" + data.getUser().getBalance());
         });
     }
     
@@ -124,47 +130,37 @@ public class ShopController extends Controller{
                 balance = balance - copy.getPurchasePrice();
                 copy.setAvailability(Availability.SOLD);
                 copy.setDateOfReturn(twoWeeksLonger());
-                ProjectMain.database.updateObject(copy);
+                ProjectMain.database.updateEntity(copy);
                 copyFromUser.add(copy);
                 data.getUser().setBalance(balance);
 
                 //transactie toevoegen aan user
-                var userTransaction = data.getUser().getTransactions();
-                if(userTransaction == null){
-                    ArrayList<MonetaryTransaction> userTransactions = new ArrayList<MonetaryTransaction>();
-                    var transaction = new MonetaryTransaction(TransactionType.SALE, balance, data.getUser(), copy, currentTime());
-                    userTransactions.add(transaction);
-                    data.getUser().setTransactions(userTransactions);
-
-                }else{
-                    var transaction = new MonetaryTransaction(TransactionType.SALE, balance, data.getUser(), copy, currentTime());
-                    userTransaction.add(transaction);
-                    data.getUser().setTransactions(userTransaction);
+                List<MonetaryTransaction> transactionList = data.getUser().getTransactions();
+                if(transactionList == null){
+                    transactionList = new ArrayList<>();
                 }
+                var newTransaction = new MonetaryTransaction(TransactionType.PURCHASE, copy.getPurchasePrice(), data.getUser(), copy, getCurrentDate());
+                transactionList.add(newTransaction);
+                data.getUser().setTransactions(transactionList);
 
-            }else if(table == tblRentCart && balance >= copy.getRentPrice() && copy.getAvailability() == Availability.AVAILABLE && copy.getRentPrice() != 0){
+            } else if(table == tblRentCart && balance >= copy.getRentPrice() && copy.getAvailability() == Availability.AVAILABLE && copy.getRentPrice() != 0){
                 //game kan verhuurd worden
                 //copy wordt aangepast en naar hibernate gestuurd
                 balance = balance - copy.getRentPrice(); 
                 copy.setAvailability(Availability.RENTED);
                 copy.setDateOfReturn(twoWeeksLonger());
-                ProjectMain.database.updateObject(copy);
+                ProjectMain.database.updateEntity(copy);
                 copyFromUser.add(copy);
                 data.getUser().setBalance(balance);
 
                 //transactie toevoegen aan user
-                var userTransaction = data.getUser().getTransactions();
-                if(userTransaction == null){
-                    ArrayList<MonetaryTransaction> userTransactions = new ArrayList<MonetaryTransaction>();
-                    var transaction = new MonetaryTransaction(TransactionType.RENTAL, balance, data.getUser(), copy, currentTime());
-                    userTransactions.add(transaction);
-                    data.getUser().setTransactions(userTransactions);
-
-                }else{
-                    var transaction = new MonetaryTransaction(TransactionType.RENTAL, balance, data.getUser(), copy, currentTime());
-                    userTransaction.add(transaction);
-                    data.getUser().setTransactions(userTransaction);
+                List<MonetaryTransaction> transactionList = data.getUser().getTransactions();
+                if(transactionList == null){
+                    transactionList = new ArrayList<>();
                 }
+                var newTransaction = new MonetaryTransaction(TransactionType.RENTAL, copy.getRentPrice(), data.getUser(), copy, getCurrentDate());
+                transactionList.add(newTransaction);
+                data.getUser().setTransactions(transactionList);
 
             }else{
                 //show alert dat er iets misliep
@@ -191,12 +187,6 @@ public class ShopController extends Controller{
         activateFilters();
     }
 
-    public String currentTime(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate date = LocalDate.now();
-        String formattedDate = date.format(formatter);
-        return formattedDate;
-    }
 
     public String twoWeeksLonger(){
         LocalDate currentDate = LocalDate.now();
@@ -471,9 +461,9 @@ public class ShopController extends Controller{
         TreeItem<String> consolesTreeItem = new CheckBoxTreeItem<>("Consoles");
         TreeItem<String> genresTreeItem = new CheckBoxTreeItem<>("Genres");
 
-        developersTreeItem.setExpanded(true);
-        consolesTreeItem.setExpanded(true);
-        genresTreeItem.setExpanded(true);
+        developersTreeItem.setExpanded(false);
+        consolesTreeItem.setExpanded(false);
+        genresTreeItem.setExpanded(false);
         filtersTreeView.setCellFactory(CheckBoxTreeCell.forTreeView());
 
         for (int i=0; i<listOfDevelopers.size(); i++ ) {

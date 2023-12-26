@@ -23,17 +23,17 @@ public class MonetaryTransaction {
     private TransactionType monetaryTransactionType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customerID")
-    private Customer customer;
+    @JoinColumn(name = "userID")
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "copyID")
     private Copy copy;
 
-    public MonetaryTransaction(TransactionType monetaryTransactionType, int revenue, Customer customer, Copy copy, String time) {
+    public MonetaryTransaction(TransactionType monetaryTransactionType, int revenue, User user, Copy copy, String time) {
         this.monetaryTransactionType = monetaryTransactionType;
         this.revenue = revenue;
-        this.customer = customer;
+        this.user = user;
         this.copy = copy;
         this.time = time;
     }
@@ -58,12 +58,12 @@ public class MonetaryTransaction {
         this.monetaryTransactionType = monetaryTransactionType;
     }
 
-    public Customer getCustomer() {
-        return this.customer;
+    public User getUser() {
+        return this.user;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Copy getCopy() {
@@ -74,5 +74,8 @@ public class MonetaryTransaction {
         this.copy = copy;
     }
 
+    public String getTime() {
+        return time;
+    }
     
 }

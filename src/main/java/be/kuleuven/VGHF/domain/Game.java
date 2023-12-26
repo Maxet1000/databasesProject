@@ -106,4 +106,8 @@ public class Game {
         this.copies.add(copy);
     }
 
+    public void removeCopy(Copy copy) {
+        this.copies.remove(copy);
+    }
+
 }

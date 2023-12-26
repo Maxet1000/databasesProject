@@ -23,8 +23,8 @@ public class Copy {
     private Console console;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customerID")
-    private Customer customer;
+    @JoinColumn(name = "userID")
+    private User user;
     
     @OneToMany(mappedBy = "copy")
     private List<MonetaryTransaction> transactions;
@@ -52,7 +52,7 @@ public class Copy {
         this.console = builder.console;
         this.availability = builder.availability;
         this.warehouse = builder.warehouse;
-        this.customer = builder.customer;
+        this.user = builder.user;
         this.purchasePrice = builder.purchasePrice;
         this.rentPrice = builder.rentPrice;
         this.dateOfReturn = builder.dateOfReturn;
@@ -63,7 +63,7 @@ public class Copy {
         private Console console;
         private Availability availability;
         private String warehouse;
-        private Customer customer;
+        private User user;
         private int purchasePrice;
         private int rentPrice;
         private String dateOfReturn;
@@ -88,8 +88,8 @@ public class Copy {
             return this;
         }
 
-        public CopyBuilder customer(Customer customer) {
-            this.customer = customer;
+        public CopyBuilder user(User user) {
+            this.user = user;
             return this;
         }
 
@@ -133,12 +133,12 @@ public class Copy {
         this.console = console;
     }
 
-    public Customer getCustomer() {
-        return this.customer;
+    public User getUser() {
+        return this.user;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public int getPurchasePrice() {
@@ -188,9 +188,5 @@ public class Copy {
     public void setTransactions(List<MonetaryTransaction> transactions) {
         this.transactions = transactions;
     }
-
-
-    
-    
 
 }

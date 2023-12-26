@@ -32,9 +32,15 @@ public class HomeController extends Controller{
     @FXML
     private Button btnSignup;
     @FXML
+    private Button btnLogOut;
+    @FXML
     private Button btnVisitWebsite;
     @FXML
     private Text txtPleaseLogin;
+    @FXML
+    private Text txtUser;
+    @FXML
+    private Text txtBalance;
 
     public void initialize() throws IOException {
         txtPleaseLogin.setVisible(false);
@@ -53,12 +59,22 @@ public class HomeController extends Controller{
             showLoginScherm();
             if (data.loggedIn) {
                 txtPleaseLogin.setVisible(false);
+                btnLogOut.setDisable(false);
+                btnSignup.setDisable(true);
+                btnLogin.setDisable(true);
+                txtUser.setText(data.getUser().getUserName());
+                txtBalance.setText("$" + data.getUser().getBalance());
             }
         });
         btnSignup.setOnAction((e -> {
             showSignUpScherm();
             if (data.loggedIn) {
                 txtPleaseLogin.setVisible(false);
+                btnLogOut.setDisable(false);
+                btnSignup.setDisable(true);
+                btnLogin.setDisable(true);
+                txtUser.setText(data.getUser().getUserName());
+                txtBalance.setText("$" + data.getUser().getBalance());
             }
         }));
         btnVisitWebsite.setOnAction(e -> {
@@ -66,6 +82,28 @@ public class HomeController extends Controller{
                 Desktop.getDesktop().browse(new URI("https://gamehistory.org/"));
             } catch (IOException | URISyntaxException ex) {
                 throw new RuntimeException(ex);
+            }
+        });
+        btnLogOut.setOnAction(e -> {
+            data.logOut();
+            btnLogOut.setDisable(true);
+            btnSignup.setDisable(false);
+            btnLogin.setDisable(false);
+            txtUser.setText("Not logged in yet");
+            txtBalance.setText("");
+        });
+        Platform.runLater(() -> {
+            if (data.loggedIn) {
+                txtUser.setText(data.getUser().getUserName());
+                txtBalance.setText("$" + data.getUser().getBalance());
+                btnLogOut.setDisable(false);
+                btnSignup.setDisable(true);
+                btnLogin.setDisable(true);
+            } else {
+                txtUser.setText("Not logged in yet");
+                btnLogOut.setDisable(true);
+                btnSignup.setDisable(false);
+                btnLogin.setDisable(false);
             }
         });
     }
