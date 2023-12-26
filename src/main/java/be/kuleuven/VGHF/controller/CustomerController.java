@@ -221,7 +221,7 @@ public class CustomerController extends Controller{
     
     private void initTable(){
         tblRentedGames.getItems().clear();
-        tblRentedGames.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        tblRentedGames.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         tblRentedGames.getColumns().clear();
         int colIndex = 0;
         for(var colName : new String[]{"Game", "Developer", "Console", "Return date", "Id"}){
