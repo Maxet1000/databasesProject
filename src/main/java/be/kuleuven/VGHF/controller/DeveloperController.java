@@ -1,5 +1,7 @@
 package be.kuleuven.VGHF.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import be.kuleuven.VGHF.ProjectMain;
@@ -78,7 +80,7 @@ public class DeveloperController extends Controller{
         developersTreeItem.setExpanded(false);
         consolesTreeItem.setExpanded(false);
         genresTreeItem.setExpanded(false);
-        genresTreeItem.setExpanded(false);
+        //genresTreeItem.setExpanded(false);
         selectTreeView.setCellFactory(CheckBoxTreeCell.forTreeView());
 
         for (int i=0; i<listOfDevelopers.size(); i++ ) {
@@ -132,7 +134,20 @@ public class DeveloperController extends Controller{
 
         //when confirming the game gets made, all parameters gets assigned
         btnAddNew.setOnAction(e -> {
-            if(developerList.isEmpty() || genreList.isEmpty() || consoleList.isEmpty() || txtGameTitle.getText().toString().isBlank() || txtReleasedate.getText().toString().isBlank()){
+            //check if releaseDate is valid
+            boolean validReleasedate = false;
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                java.util.Date ret = sdf.parse(txtReleasedate.getText().toString().trim());
+                if (sdf.format(ret).equals(txtReleasedate.getText().toString().trim())) {
+                    validReleasedate = true;
+                }
+            } catch (ParseException exxe) {
+                validReleasedate = false;
+                exxe.printStackTrace();
+                }
+            //show error message
+            if(developerList.isEmpty() || genreList.isEmpty() || consoleList.isEmpty() || txtGameTitle.getText().toString().isBlank() || txtReleasedate.getText().toString().isBlank() || !validReleasedate){
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Error");
                 alert.setHeaderText(null);
@@ -184,10 +199,8 @@ public class DeveloperController extends Controller{
             List <Console> consoles = game.getConsoles();
             List <Developer> developers = game.getDevelopers();
             List <Genre> genres = game.getGenres();
-
             for (Console console : consoles) {
                 console.addGame(game);
-                
             }     
             for (Developer dev : developers) {
                 dev.addGame(game);
@@ -207,11 +220,35 @@ public class DeveloperController extends Controller{
 
     public void addConsoleBidirectionally(Console console) {
         HibernateManager db = ProjectMain.getDatabase();
+        Console consoleInDb = db.getConsoleByName(console.getConsoleName());
+        if (consoleInDb != null) {
+            updateConsoleBidirectionalRelations(console, consoleInDb);
+        }
         List<Console> compatibleConsoles = console.getCompatibleConsoles();
-        for (Console compatibleConsole : compatibleConsoles) {
-            compatibleConsole.addCompatibleConsole(console);
+        if (compatibleConsoles != null) {
+            for (Console compatibleConsole : compatibleConsoles) {
+                compatibleConsole.addCompatibleConsole(console);
+            }
         }
         db.saveNewEntity(console);
+    }
+
+    public void addGenreToDb(Genre genre) {
+        HibernateManager db = ProjectMain.getDatabase();
+        Genre genreInDb = db.getgenreByName(genre.getGenreName());
+        if (genreInDb != null) {
+            updateGenreInDb(genre, genreInDb);
+        }
+        db.saveNewEntity(genre);
+    }
+
+    public void addDeveloperToDb(Developer developer) {
+        HibernateManager db = ProjectMain.getDatabase();
+        Developer developerInDb = db.getdeveloperByName(developer.getDeveloperName());
+        if (developerInDb != null) {
+            updateDeveloperInDb(developer, developerInDb);
+        }
+        db.saveNewEntity(developer);
     }
 
     /*  Updates a Game and the Copies, Developers, Consoles and Genres
@@ -223,9 +260,11 @@ public class DeveloperController extends Controller{
         if (gameNew.getTitle() != gameOld.getTitle()) {
             nameChanged = true;
             List<Copy> copies = gameOld.getCopies();
-            for ( Copy copy : copies) {
-                copy.setGame(gameNew);
-            } 
+            if (copies != null) {
+                for ( Copy copy : copies) {
+                    copy.setGame(gameNew);
+                } 
+            }
         }
         if (gameNew.getConsoles() != gameOld.getConsoles() || nameChanged) {
             List<Console> consolesOld = gameOld.getConsoles();
@@ -291,14 +330,30 @@ public class DeveloperController extends Controller{
         HibernateManager db = ProjectMain.getDatabase();
         List<Console> oldCompatibleConsoles = consoleOld.getCompatibleConsoles();
         List<Console> newCompatibleConsoles = consoleNew.getCompatibleConsoles();
-        for (Console console : oldCompatibleConsoles) {
-            console.removeCompatibleconsole(consoleOld);
+        if (oldCompatibleConsoles != null) {
+            for (Console console : oldCompatibleConsoles) {
+                console.removeCompatibleconsole(consoleOld);
+            }
         }
-        for (Console console : newCompatibleConsoles) {
-            console.addCompatibleConsole(consoleNew);
+        if (newCompatibleConsoles != null) {
+            for (Console console : newCompatibleConsoles) {
+                console.addCompatibleConsole(consoleNew);
+            }
         }
         consoleOld = consoleNew;
         db.updateEntity(consoleOld);
+    }
+
+    public void updateGenreInDb(Genre genreNew, Genre genreOld) {
+        HibernateManager db = ProjectMain.getDatabase();
+        db.deleteEntity(genreOld);
+        db.saveNewEntity(genreNew);
+    }
+
+    public void updateDeveloperInDb(Developer developerNew, Developer developerOld) {
+        HibernateManager db = ProjectMain.getDatabase();
+        db.deleteEntity(developerOld);
+        db.saveNewEntity(developerNew);
     }
 
     /* Deletes a Game and its associated Copies.
@@ -307,8 +362,10 @@ public class DeveloperController extends Controller{
     public void deleteGameAndRelationships(Game game) {
         HibernateManager db = ProjectMain.getDatabase();
         List<Copy> copies = game.getCopies();
-        for (Copy copy : copies) {
-            deleteCopyAndRelationships(copy);
+        if (copies != null) {
+            for (Copy copy : copies) {
+                deleteCopyAndRelationships(copy);
+            }
         }
         List <Console> consoles = game.getConsoles();
         List <Developer> developers = game.getDevelopers();
@@ -331,7 +388,10 @@ public class DeveloperController extends Controller{
         HibernateManager db = ProjectMain.getDatabase();
         copy.getGame().removeCopy(copy);
         copy.getConsole().removeCopy(copy);
-        copy.getUser().removeCopy(copy);
+        User user = copy.getUser();
+        if (user != null) {
+            copy.getUser().removeCopy(copy);
+        }    
         db.deleteEntity(copy);
     }
 
@@ -339,14 +399,17 @@ public class DeveloperController extends Controller{
         HibernateManager db = ProjectMain.getDatabase();
         List<Copy> copies = user.getCopies();
         List<MonetaryTransaction> usertansactions = user.getTransactions();
-        for (Copy copy : copies) {
-            copy.setUser(null);
+        if (copies != null) {
+            for (Copy copy : copies) {
+                copy.setUser(null);
+            }
         }
-        for (MonetaryTransaction transaction : usertansactions) {
-            transaction.setUser(null);
+        if (usertansactions != null) {
+            for (MonetaryTransaction transaction : usertansactions) {
+                transaction.setUser(null);
+            }
         }
         db.deleteEntity(user);
     }
     
-
 }
