@@ -23,7 +23,7 @@ public class DeveloperController extends Controller{
     @FXML
     private Button btnAddNewGame;
     @FXML
-    private VBox VBox1;
+    private AnchorPane pane1;
     @FXML
     private TreeView<String> selectTreeView;
     @FXML
@@ -44,6 +44,10 @@ public class DeveloperController extends Controller{
     private TextField txtNewGenre;
     @FXML
     private Text txtNewGenretxt;
+    @FXML
+    private TextField txtNewDeveloper;
+    @FXML 
+    private TextField txtNewConsole;
 
     private ArrayList<Developer> developerList;
     private ArrayList<Genre> genreList;
@@ -64,32 +68,64 @@ public class DeveloperController extends Controller{
         txtGameTitletxt.setVisible(false);
         txtReleaseDatetxt.setVisible(false);
         */
-
+        pane1.setVisible(false);
         //Invisible AddGenre
         paneAddGenre.setVisible(false);
 
         btnAddNewGame.setOnAction(e -> {
-            showNewWindow("addNewGame", "");
             addNewGame();
         });
         btnAddGenre.setOnAction(e ->{
             addNewGenre();
         });
+        
     }
 
     private void addNewGenre(){
-        paneAddGenre.setVisible(true);
-
         String newGenreName = txtNewGenre.getText().toString();
-        Genre newGenre = new Genre();
-        newGenre.setGenreName(newGenreName);
-        ProjectMain.getDatabase().saveNewEntity(newGenre);
+        Genre newGenre = new Genre(newGenreName);
+        addGenreToDb(newGenre);
+    }
 
+    private void addNewDeveloper(){
+        String newDeveloperName = txtNewDeveloper.getText().toString();
+        Developer newDeveloper = new Developer(newDeveloperName);
+        addDeveloperToDb(newDeveloper);
+    }
+
+    private void addNewConsole(){
+        String newConsoleName = txtNewConsole.getText().toString();
+        /*
+         * Console has a list of compatible consoles
+         *      First the TreeView and all consoles are shown
+         *      Then the compatible consoles are selected
+         *          Console gets updated with a list of compatible consoles
+         */
+        List<Console> listOfConsoles = getAllConsoles();
+        TreeItem<String> consolesTreeItem = new CheckBoxTreeItem<>("Consoles");
+        consolesTreeItem.setExpanded(false);
+        selectTreeView.setCellFactory(CheckBoxTreeCell.forTreeView());
+        for (int i=0; i<listOfConsoles.size(); i++ ) {
+            Console console = listOfConsoles.get(i);
+            CheckBoxTreeItem<String> checkBoxTreeItem = new CheckBoxTreeItem<>(console.getConsoleName());
+            consolesTreeItem.getChildren().add(checkBoxTreeItem);
+            checkBoxTreeItem.selectedProperty().addListener((obs, oldVal, newVal) -> {
+            System.out.println(checkBoxTreeItem.getValue() + " selection state: " + newVal);
+            if (newVal) {
+                consoleList.add(console);
+            } else {
+                consoleList.remove(console);
+                }
+            });
+        }
+
+        Console newConsole = new Console(newConsoleName);
+        addConsoleBidirectionally(newConsole);
     }
 
     private void addNewGame(){
         //set the buttons and txtFields visible
-
+        pane1.setVisible(true);
         //lijst met alle ... tonen
             //developers
             //genres
@@ -104,7 +140,6 @@ public class DeveloperController extends Controller{
 
         developersTreeItem.setExpanded(false);
         consolesTreeItem.setExpanded(false);
-        genresTreeItem.setExpanded(false);
         genresTreeItem.setExpanded(false);
         selectTreeView.setCellFactory(CheckBoxTreeCell.forTreeView());
 
@@ -198,6 +233,9 @@ public class DeveloperController extends Controller{
                 alert.show();
             }
         });
+        consoleList.clear();
+        genreList.clear();
+        developerList.clear();
     }
  
     //getters for the selectionTreeView
@@ -230,10 +268,8 @@ public class DeveloperController extends Controller{
             List <Console> consoles = game.getConsoles();
             List <Developer> developers = game.getDevelopers();
             List <Genre> genres = game.getGenres();
-
             for (Console console : consoles) {
                 console.addGame(game);
-                
             }     
             for (Developer dev : developers) {
                 dev.addGame(game);
@@ -253,11 +289,35 @@ public class DeveloperController extends Controller{
 
     public void addConsoleBidirectionally(Console console) {
         HibernateManager db = ProjectMain.getDatabase();
+        Console consoleInDb = db.getConsoleByName(console.getConsoleName());
+        if (consoleInDb != null) {
+            updateConsoleBidirectionalRelations(console, consoleInDb);
+        }
         List<Console> compatibleConsoles = console.getCompatibleConsoles();
-        for (Console compatibleConsole : compatibleConsoles) {
-            compatibleConsole.addCompatibleConsole(console);
+        if (compatibleConsoles != null) {
+            for (Console compatibleConsole : compatibleConsoles) {
+                compatibleConsole.addCompatibleConsole(console);
+            }
         }
         db.saveNewEntity(console);
+    }
+
+    public void addGenreToDb(Genre genre) {
+        HibernateManager db = ProjectMain.getDatabase();
+        Genre genreInDb = db.getgenreByName(genre.getGenreName());
+        if (genreInDb != null) {
+            updateGenreInDb(genre, genreInDb);
+        }
+        db.saveNewEntity(genre);
+    }
+
+    public void addDeveloperToDb(Developer developer) {
+        HibernateManager db = ProjectMain.getDatabase();
+        Developer developerInDb = db.getdeveloperByName(developer.getDeveloperName());
+        if (developerInDb != null) {
+            updateDeveloperInDb(developer, developerInDb);
+        }
+        db.saveNewEntity(developer);
     }
 
     /*  Updates a Game and the Copies, Developers, Consoles and Genres
@@ -269,9 +329,11 @@ public class DeveloperController extends Controller{
         if (gameNew.getTitle() != gameOld.getTitle()) {
             nameChanged = true;
             List<Copy> copies = gameOld.getCopies();
-            for ( Copy copy : copies) {
-                copy.setGame(gameNew);
-            } 
+            if (copies != null) {
+                for ( Copy copy : copies) {
+                    copy.setGame(gameNew);
+                } 
+            }
         }
         if (gameNew.getConsoles() != gameOld.getConsoles() || nameChanged) {
             List<Console> consolesOld = gameOld.getConsoles();
@@ -337,14 +399,30 @@ public class DeveloperController extends Controller{
         HibernateManager db = ProjectMain.getDatabase();
         List<Console> oldCompatibleConsoles = consoleOld.getCompatibleConsoles();
         List<Console> newCompatibleConsoles = consoleNew.getCompatibleConsoles();
-        for (Console console : oldCompatibleConsoles) {
-            console.removeCompatibleconsole(consoleOld);
+        if (oldCompatibleConsoles != null) {
+            for (Console console : oldCompatibleConsoles) {
+                console.removeCompatibleconsole(consoleOld);
+            }
         }
-        for (Console console : newCompatibleConsoles) {
-            console.addCompatibleConsole(consoleNew);
+        if (newCompatibleConsoles != null) {
+            for (Console console : newCompatibleConsoles) {
+                console.addCompatibleConsole(consoleNew);
+            }
         }
         consoleOld = consoleNew;
         db.updateEntity(consoleOld);
+    }
+
+    public void updateGenreInDb(Genre genreNew, Genre genreOld) {
+        HibernateManager db = ProjectMain.getDatabase();
+        db.deleteEntity(genreOld);
+        db.saveNewEntity(genreNew);
+    }
+
+    public void updateDeveloperInDb(Developer developerNew, Developer developerOld) {
+        HibernateManager db = ProjectMain.getDatabase();
+        db.deleteEntity(developerOld);
+        db.saveNewEntity(developerNew);
     }
 
     /* Deletes a Game and its associated Copies.
@@ -353,8 +431,10 @@ public class DeveloperController extends Controller{
     public void deleteGameAndRelationships(Game game) {
         HibernateManager db = ProjectMain.getDatabase();
         List<Copy> copies = game.getCopies();
-        for (Copy copy : copies) {
-            deleteCopyAndRelationships(copy);
+        if (copies != null) {
+            for (Copy copy : copies) {
+                deleteCopyAndRelationships(copy);
+            }
         }
         List <Console> consoles = game.getConsoles();
         List <Developer> developers = game.getDevelopers();
@@ -377,7 +457,10 @@ public class DeveloperController extends Controller{
         HibernateManager db = ProjectMain.getDatabase();
         copy.getGame().removeCopy(copy);
         copy.getConsole().removeCopy(copy);
-        copy.getUser().removeCopy(copy);
+        User user = copy.getUser();
+        if (user != null) {
+            copy.getUser().removeCopy(copy);
+        }    
         db.deleteEntity(copy);
     }
 
@@ -385,14 +468,17 @@ public class DeveloperController extends Controller{
         HibernateManager db = ProjectMain.getDatabase();
         List<Copy> copies = user.getCopies();
         List<MonetaryTransaction> usertansactions = user.getTransactions();
-        for (Copy copy : copies) {
-            copy.setUser(null);
+        if (copies != null) {
+            for (Copy copy : copies) {
+                copy.setUser(null);
+            }
         }
-        for (MonetaryTransaction transaction : usertansactions) {
-            transaction.setUser(null);
+        if (usertansactions != null) {
+            for (MonetaryTransaction transaction : usertansactions) {
+                transaction.setUser(null);
+            }
         }
         db.deleteEntity(user);
     }
     
-
 }

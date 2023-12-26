@@ -345,7 +345,7 @@ public class HibernateManager {
     }  
 
     public User getUserByEmail(String email) {
-         try {
+        try {
             var criteriaBuilder = entityManager.getCriteriaBuilder();
             var query = criteriaBuilder.createQuery(User.class);
             var root = query.from(User.class);
@@ -357,12 +357,38 @@ public class HibernateManager {
         } 
     }
 
-        public Developer getdeveloperByName(String developerName) {
-         try {
+    public Developer getdeveloperByName(String developerName) {
+        try {
             var criteriaBuilder = entityManager.getCriteriaBuilder();
             var query = criteriaBuilder.createQuery(Developer.class);
             var root = query.from(Developer.class);
             query.where(criteriaBuilder.equal(root.get("developerName"), developerName));
+            return entityManager.createQuery(query).getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } 
+    }
+
+    public Console getConsoleByName(String consoleName) {
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(Console.class);
+            var root = query.from(Console.class);
+            query.where(criteriaBuilder.equal(root.get("consoleName"), consoleName));
+            return entityManager.createQuery(query).getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } 
+    }
+
+    public Genre getgenreByName(String genreName) {
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(Genre.class);
+            var root = query.from(Genre.class);
+            query.where(criteriaBuilder.equal(root.get("genreName"), genreName));
             return entityManager.createQuery(query).getSingleResult();
         } catch (Exception e) {
             e.printStackTrace();
