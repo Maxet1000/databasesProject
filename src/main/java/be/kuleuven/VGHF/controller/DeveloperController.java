@@ -151,7 +151,8 @@ public class DeveloperController extends Controller{
             gameGenresPane.add(checkBox,i,j);
             checkBox.selectedProperty().addListener((obs, oldVal, newVal) -> {
                 if (newVal) {
-                    //TODO voeg toe aan een lijst, net zoals hoe de filters werken in ShopController
+                    //TODO voeg toe aan een lijst, net zoals hoe de filters werken in ShopController (lijst moet ook nog gedefinieerd worden)
+                    // zie het stukje code vanaf lijn 494 in ShopController
                 } else {
 
                 }
@@ -174,7 +175,8 @@ public class DeveloperController extends Controller{
             gameDevelopersPane.add(checkBox,i,j);
             checkBox.selectedProperty().addListener((obs, oldVal, newVal) -> {
                 if (newVal) {
-                    //TODO voeg toe aan een lijst, net zoals hoe de filters werken in ShopController
+                    //TODO voeg toe aan een lijst, net zoals hoe de filters werken in ShopController (lijst moet ook nog gedefinieerd worden)
+                    // zie het stukje code vanaf lijn 494 in ShopController
                 } else {
 
                 }
