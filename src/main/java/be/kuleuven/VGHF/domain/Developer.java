@@ -24,10 +24,6 @@ public class Developer implements InterfaceForFilters {
         return this.developerName;
     }
 
-    public void setDeveloperName(String developerNameString) {
-        this.developerName = developerNameString;
-    }
-
     @Override
     public List<Game> getGames() {
         return this.games;

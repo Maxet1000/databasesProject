@@ -268,7 +268,6 @@ public class DeveloperController extends Controller{
         return ProjectMain.getDatabase().getAllGenres();
     }
 
-
     /*  Adds a new Game and updates its relationships.
      * 
      */
