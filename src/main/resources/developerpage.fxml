@@ -1,11 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.text.Text?>
-<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="be.kuleuven.VGHF.controller.DeveloperController" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FAF1E6;">
-    <children>
-        <Text fx:id="txtAllGames" strokeType="OUTSIDE" strokeWidth="0.0" text="Hier heeft een developer dan de ability om games of consoles toe te voegen aan de database" textAlignment="CENTER" wrappingWidth="312.03125">
-        </Text>
-    </children>
+<VBox prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.VGHF.controller.DeveloperController">
+   <children>
+      <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" prefWidth="200.0" />
+      <HBox prefHeight="402.0" prefWidth="600.0">
+         <children>
+            <AnchorPane maxWidth="5.0" minWidth="5.0" prefHeight="200.0" prefWidth="5.0" />
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Button fx:id="btnAddGenre" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" stylesheets="@styles.css" text="Add Genre" />
+                  <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" prefWidth="200.0" />
+                  <Button fx:id="btnAddDeveloper" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" stylesheets="@styles.css" text="Add Developer" />
+                  <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" prefWidth="200.0" />
+                  <Button fx:id="btnAddConsole" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" stylesheets="@styles.css" text="Add Console" />
+                  <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" prefWidth="200.0" />
+                  <Button fx:id="btnAddNewGame" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" stylesheets="@styles.css" text="Add Game" />
+                  <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" prefWidth="200.0" />
+                  <Button fx:id="btnAddCopy" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" stylesheets="@styles.css" text="Add Copy" />
+                  <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" prefWidth="200.0" />
+                  <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" stylesheets="@styles.css" text="test" />
+               </children>
+            </VBox>
+            <AnchorPane maxWidth="5.0" minWidth="5.0" prefHeight="200.0" prefWidth="5.0" />
+            <VBox maxWidth="4000.0" prefHeight="200.0" prefWidth="400.0">
+               <children>
+                  <ComboBox fx:id="cobo1" prefHeight="25.0" prefWidth="539.0" />
+                  <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" prefWidth="200.0" />
+                  <ComboBox prefHeight="25.0" prefWidth="539.0" />
+                  <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" prefWidth="200.0" />
+                  <ComboBox prefHeight="25.0" prefWidth="539.0" />
+                  <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" prefWidth="200.0" />
+                  <ComboBox prefHeight="25.0" prefWidth="539.0" />
+               </children></VBox>
+            <AnchorPane maxWidth="5.0" minWidth="5.0" prefHeight="200.0" prefWidth="5.0" />
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="104.0" stylesheets="@styles.css" text="Button" />
+               </children>
+            </VBox>
+            <AnchorPane maxWidth="5.0" minWidth="5.0" prefHeight="200.0" prefWidth="5.0" />
+         </children>
+      </HBox>
+   </children>
 </VBox>

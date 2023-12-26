@@ -4,11 +4,27 @@ import java.util.*;
 
 import be.kuleuven.VGHF.ProjectMain;
 import be.kuleuven.VGHF.domain.*;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 
 public class DeveloperController extends Controller{
 
-    public void initialize() {
+    @FXML
+    private Button btnAddNewGame;
+    @FXML
+    private ComboBox cobo1; //Genre box
 
+
+    public void initialize() {
+        btnAddNewGame.setOnAction(e -> {
+            addNewGame();
+        });
+    }
+
+    private void addNewGame(){
+
+        cobo1.getItems().setAll(ProjectMain.getDatabase().getAllGenres().get(0).toString(), ProjectMain.getDatabase().getAllGenres().get(1).toString());
     }
 
     /*  Adds a new Game and updates its relationships.

@@ -17,7 +17,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerController extends Controller{
@@ -37,18 +39,24 @@ public class CustomerController extends Controller{
     @FXML
     private Button btnExtendAllReturnDate;
     @FXML
+    private Button btnReturnItem;
+    @FXML
     private VBox purchaseHistoryPane;
     private final int extendPrice = 15;
 
     public void initialize() {
         btnAddBalance.setOnAction(e -> {
             runResource("qr-code.jpeg");
+            addBalance();
         });
         btnExtendReturnDate.setOnAction(e -> {
             extendSelectedReturnDate();
         });
         btnExtendAllReturnDate.setOnAction(e -> {
             extendAllReturnDate();
+        });
+        btnReturnItem.setOnAction(e -> {
+            returnSelectedItem();
         });
         btnLogOut.setOnAction((e -> {
             data.logOut();
@@ -65,6 +73,71 @@ public class CustomerController extends Controller{
             txtUser.setText("" + data.getUser().getUserName());
             txtBalance.setText("$" + data.getUser().getBalance());
         });
+    }
+
+    private void returnSelectedItem(){
+        //get the id of the selected Copy 
+        List selectedItem = (List) tblRentedGames.getSelectionModel().getSelectedItem();
+        int copyID = (int) selectedItem.get(selectedItem.size()-1);
+        var copy = ProjectMain.getDatabase().getCopyById(copyID);
+        var gameName = copy.getGame().getTitle();
+
+        //check returndate and currentdate
+        var returndate = copy.getDateOfReturn();
+        LocalDate date = LocalDate.parse(returndate);
+        LocalDate dateNow = LocalDate.parse(getCurrentDate());
+        boolean afterDate = false;
+        int fine = 50;
+        if(dateNow.isAfter(date)){
+            afterDate = true;
+            int oldBalance = data.getUser().getBalance();
+            oldBalance = oldBalance - fine;
+            txtBalance.setText("$" + data.getUser().getBalance());
+            //alert 
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("You kept the game too long, you got a " + fine  + " fine.");
+            alert.show();
+        }
+
+        //find the copy set it to available for rent again
+        var copyList = data.getUser().getCopies();
+        int i = 0;
+        while(copyList.get(i).getCopyID() != copyID){
+            i++;
+        }
+        copyList.remove(i);
+        copy.setAvailability(Availability.AVAILABLE);
+        copy.setDateOfReturn(null);
+
+        //make the return Transaction
+        List<MonetaryTransaction> transactionList = data.getUser().getTransactions();
+        if(transactionList == null){
+            transactionList = new ArrayList<>();
+        }
+        var returner = data.getUser();
+        var newTransaction = new MonetaryTransaction(null, 0, null, null, getCurrentDate());
+        if(afterDate == true){
+            newTransaction = new MonetaryTransaction(TransactionType.RETURN, fine, returner, copy, getCurrentDate());
+        }else{
+            newTransaction = new MonetaryTransaction(TransactionType.RETURN, 0, returner, copy, getCurrentDate());
+        }
+        transactionList.add(newTransaction);
+        data.getUser().setTransactions(transactionList);
+       
+        //refresh the tableview
+        initTable();
+        fillTable();
+        initTransactionHistory();
+    }
+
+    private void addBalance(){
+        int oldBalance = data.getUser().getBalance();
+        int newBalance = 50;
+        oldBalance = oldBalance + newBalance;
+        data.getUser().setBalance(oldBalance);
+        txtBalance.setText("$" + data.getUser().getBalance());
     }
 
     private void extendAllReturnDate(){
@@ -148,7 +221,7 @@ public class CustomerController extends Controller{
     
     private void initTable(){
         tblRentedGames.getItems().clear();
-        tblRentedGames.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        tblRentedGames.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         tblRentedGames.getColumns().clear();
         int colIndex = 0;
         for(var colName : new String[]{"Game", "Developer", "Console", "Return date", "Id"}){

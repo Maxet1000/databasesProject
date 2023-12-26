@@ -366,7 +366,7 @@ public class ShopController extends Controller{
     }
 
     public void initTableCart(){
-        tblRentCart.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        tblRentCart.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         tblRentCart.getColumns().clear();
 
         int colIndex = 0;
@@ -381,7 +381,7 @@ public class ShopController extends Controller{
             colIndex++;
         }
 
-        tblBuyCart.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        tblBuyCart.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         tblBuyCart.getColumns().clear();
 
         int colIndex1 = 0;
@@ -399,7 +399,7 @@ public class ShopController extends Controller{
 
     public void initTable(List<Copy> listOfCopies){
         tblRent.getItems().clear();
-        tblRent.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        tblRent.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         tblRent.getColumns().clear();
 
         int colIndex = 0;
