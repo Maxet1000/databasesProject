@@ -1,5 +1,7 @@
 package be.kuleuven.VGHF.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import be.kuleuven.VGHF.ProjectMain;
@@ -132,7 +134,20 @@ public class DeveloperController extends Controller{
 
         //when confirming the game gets made, all parameters gets assigned
         btnAddNew.setOnAction(e -> {
-            if(developerList.isEmpty() || genreList.isEmpty() || consoleList.isEmpty() || txtGameTitle.getText().toString().isBlank() || txtReleasedate.getText().toString().isBlank()){
+            //check if releaseDate is valid
+            boolean validReleasedate = false;
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                java.util.Date ret = sdf.parse(txtReleasedate.getText().toString().trim());
+                if (sdf.format(ret).equals(txtReleasedate.getText().toString().trim())) {
+                    validReleasedate = true;
+                }
+            } catch (ParseException exxe) {
+                validReleasedate = false;
+                exxe.printStackTrace();
+                }
+            //show error message
+            if(developerList.isEmpty() || genreList.isEmpty() || consoleList.isEmpty() || txtGameTitle.getText().toString().isBlank() || txtReleasedate.getText().toString().isBlank() || !validReleasedate){
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Error");
                 alert.setHeaderText(null);
