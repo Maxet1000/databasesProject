@@ -4,15 +4,15 @@ import java.util.Objects;
 import be.kuleuven.VGHF.domain.User;
 
 
-public class DataCommunicationModel {
+public class Model {
 
     public User user;
     public boolean loggedIn = false;
 
-    public DataCommunicationModel() {
+    public Model() {
     }
 
-    public DataCommunicationModel(User user) {
+    public Model(User user) {
         this.user = user;
     }
     
