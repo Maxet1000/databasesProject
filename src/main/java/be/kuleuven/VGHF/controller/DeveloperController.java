@@ -270,11 +270,10 @@ public class DeveloperController extends Controller{
     }
 
     private void addNewConsole(){
-        System.out.println(compConsoleList.toString());
         String newConsoleName = txtNewConsoleName.getText().toString();
-        Console newConsole = new Console(newConsoleName, compConsoleList);
+        List<Console> compConsoles = new ArrayList<>(compConsoleList);
+        Console newConsole = new Console(newConsoleName, compConsoles);
         addConsoleBidirectionally(newConsole);
-        System.out.println("HELLLLLLLLLLLLLLLOOO xDxDxD");
         compConsoleList.clear();;
     }
 
@@ -284,11 +283,11 @@ public class DeveloperController extends Controller{
         String releaseMonth = txtReleaseMonth.getText().toString();
         String releaseYear = txtReleaseYear.getText().toString();
         String releaseDate = releaseYear +"-"+ releaseMonth +"-"+ releaseDay;
-        Game newGame = new Game(newGameTitle, releaseDate,consoleList,developerList,genreList);
+        List<Console> consolesForGame = new ArrayList<>(consoleList);
+        List <Developer> developersForGame = new ArrayList<>(developerList);
+        List <Genre> genresForGame = new ArrayList<>(genreList);
+        Game newGame = new Game(newGameTitle, releaseDate,consolesForGame,developersForGame,genresForGame);
         addGameBidirectionally(newGame);
-        consoleList.clear();
-        developerList.clear();
-        genreList.clear();
     }   
 
 
