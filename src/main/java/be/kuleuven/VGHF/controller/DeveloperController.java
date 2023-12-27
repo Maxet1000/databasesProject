@@ -259,14 +259,22 @@ public class DeveloperController extends Controller{
         String newGenreName = txtNewGenreName.getText().toString();
         Genre newGenre = new Genre(newGenreName);
         addGenreToDb(newGenre);
-        System.out.println("Dit werkt???");
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("New genre saved: " + txtNewGenreName.getText().toString());
+        alert.show();
     }
 
     private void addNewDeveloper(){
         String newDeveloperName = txtNewDeveloperName.getText().toString();
         Developer newDeveloper = new Developer(newDeveloperName);
         addDeveloperToDb(newDeveloper);
-        System.out.println("Dit werkt???");
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("New developer saved: " + txtNewDeveloperName.getText().toString());
+        alert.show();
     }
 
     private void addNewConsole(){
@@ -274,7 +282,11 @@ public class DeveloperController extends Controller{
         String newConsoleName = txtNewConsoleName.getText().toString();
         Console newConsole = new Console(newConsoleName, compConsoleList);
         addConsoleBidirectionally(newConsole);
-        System.out.println("HELLLLLLLLLLLLLLLOOO xDxDxD");
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("New console saved: " + txtNewConsoleName.getText().toString());
+        alert.show();
     }
 
     private void addNewGame(){
@@ -285,6 +297,11 @@ public class DeveloperController extends Controller{
         String releaseDate = releaseYear +"-"+ releaseMonth +"-"+ releaseDay;
         Game newGame = new Game(newGameTitle, releaseDate, consoleList, developerList, genreList);
         addGameBidirectionally(newGame);
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("New game saved: " + txtNewGameTitle.getText().toString());
+        alert.show();
     }   
 
 
@@ -301,6 +318,12 @@ public class DeveloperController extends Controller{
                                 .build();
         
         addCopyBidirectionally(newCopy);
+
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("New copy saved: " + cbNewCopyGameTitle.getValue().toString());
+        alert.show();
     }
  
     //getters for the selectionTreeView
