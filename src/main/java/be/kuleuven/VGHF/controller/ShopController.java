@@ -39,6 +39,10 @@ import javafx.scene.text.Text;
 public class ShopController extends Controller{
     
     @FXML
+    private TextField txtSearch;
+    @FXML
+    private Button btnSearch;
+    @FXML
     private TableView tblRent;
     @FXML
     private Button btnAddGameToCart;
@@ -136,6 +140,9 @@ public class ShopController extends Controller{
         });
         btnAddGameToBuy.setOnAction(e -> {
             addGameToBuyCart();
+        });
+        btnSearch.setOnAction(e -> {
+            //de code voor de search
         });
         btnLogOut.setOnAction(e -> {
             data.logOut();
