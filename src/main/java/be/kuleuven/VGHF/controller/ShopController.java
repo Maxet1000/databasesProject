@@ -193,6 +193,7 @@ public class ShopController extends Controller{
                 var newTransaction = new MonetaryTransaction(TransactionType.PURCHASE, copy.getPurchasePrice(), data.getUser(), copy, getCurrentDate());
                 transactionList.add(newTransaction);
                 data.getUser().setTransactions(transactionList);
+                ProjectMain.getDatabase().updateEntity(data.getUser());
 
             } else if(table == tblRentCart && balance >= copy.getRentPrice() && copy.getAvailability() == Availability.AVAILABLE && copy.getRentPrice() != 0){
                 //game kan verhuurd worden
@@ -212,6 +213,7 @@ public class ShopController extends Controller{
                 var newTransaction = new MonetaryTransaction(TransactionType.RENTAL, copy.getRentPrice(), data.getUser(), copy, getCurrentDate());
                 transactionList.add(newTransaction);
                 data.getUser().setTransactions(transactionList);
+                ProjectMain.getDatabase().updateEntity(data.getUser());
 
             }else{
                 //show alert dat er iets misliep
@@ -247,6 +249,7 @@ public class ShopController extends Controller{
 
         //refresh de gehuurde en verkochte games van de user
         data.getUser().setCopies(copyFromUser);
+        ProjectMain.getDatabase().updateEntity(data.getUser());
         listItems.clear();
 
         //refresh de tableview met copies
