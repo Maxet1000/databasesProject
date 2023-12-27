@@ -6,7 +6,10 @@ import java.util.*;
 
 import be.kuleuven.VGHF.ProjectMain;
 import be.kuleuven.VGHF.domain.*;
+import be.kuleuven.VGHF.enums.Availability;
 import javafx.fxml.FXML;
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTreeCell;
 import javafx.scene.layout.AnchorPane;
@@ -24,6 +27,8 @@ public class DeveloperController extends Controller{
     private TextField txtNewGenreName;
     @FXML
     private Button btnAddNewGenre;
+    @FXML
+    public GridPane compatibleConsolesPane;
 
     // New developer
     @FXML
@@ -73,31 +78,34 @@ public class DeveloperController extends Controller{
     @FXML
     private ChoiceBox<String> cbNewCopyConsole;
     @FXML
-    private ChoiceBox<String> cbNewCopyWarehouse;
+    private TextField txtWarehouse;
 
 
     private ArrayList<Developer> developerList;
     private ArrayList<Genre> genreList;
     private ArrayList<Console> consoleList;
-/*
+    private ArrayList<Console> compConsoleList; 
+
     public DeveloperController(){
         developerList = new ArrayList<>();
         genreList = new ArrayList<>();
         consoleList = new ArrayList<>();
+        compConsoleList = new ArrayList<>();
     }
 
     public void initialize() {
-
+        GridPane.setHalignment(gameDevelopersPane, HPos.CENTER); // To align horizontally in the cell
+        GridPane.setValignment(gameDevelopersPane, VPos.CENTER); // To align vertically in the cell
         initChoiceBoxes();
-
+        initCheckBoxes();
         btnAddNewGenre.setOnAction(e ->{
             addNewGenre();
         });
         btnAddNewDeveloper.setOnAction(e ->{
-            addNewGenre();
+            addNewDeveloper();
         });
         btnAddNewConsole.setOnAction(e ->{
-            addNewGenre();
+            addNewConsole();
         });
         btnAddNewGame.setOnAction(e -> {
             addNewGame();
@@ -108,178 +116,182 @@ public class DeveloperController extends Controller{
     }
 
     private void initChoiceBoxes() {
-        List<String> listOfConsoles = new ArrayList<>();
         for (int i=0 ; i<ProjectMain.getDatabase().getAllConsoles().size() ; i++) {
-            listOfConsoles.add(ProjectMain.getDatabase().getAllConsoles().get(i).getConsoleName());
+            cbNewCopyConsole.getItems().add(ProjectMain.getDatabase().getAllConsoles().get(i).getConsoleName());
+        }
+        for (int i=0 ; i<ProjectMain.getDatabase().getAllGames().size() ; i++) {
+            cbNewCopyGameTitle.getItems().add(ProjectMain.getDatabase().getAllGames().get(i).getTitle());
+        }
+    }
+
+    private void initCheckBoxes() {
+        // select compatible consoles
+        int index = 0, j = 0, i = 0;
+        while(index<ProjectMain.getDatabase().getAllConsoles().size()) {
+            CheckBox checkBox = new CheckBox(ProjectMain.getDatabase().getAllConsoles().get(index).getConsoleName());
+            compatibleConsolesPane.add(checkBox,i,j);
+            int dikkeMa = index;
+            checkBox.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                    if (newVal) {
+                        if(compConsoleList == null){
+                            compConsoleList = new ArrayList<>();
+                            compConsoleList.add(ProjectMain.getDatabase().getAllConsoles().get(dikkeMa));
+                        }else{
+                            compConsoleList.add(ProjectMain.getDatabase().getAllConsoles().get(dikkeMa));
+                        }
+                        
+                    } else {
+                        compConsoleList.remove(ProjectMain.getDatabase().getAllConsoles().get(dikkeMa));
+                    }
+            });
+            if(j==4) {
+                j=0;
+                i++;
+            } else {
+                j++;
+            }
+            index++;
+        }
+        // select genres
+        index = 0;
+        i = 0;
+        j = 0;
+        while(index<ProjectMain.getDatabase().getAllGenres().size()) {
+            CheckBox checkBox = new CheckBox(ProjectMain.getDatabase().getAllGenres().get(index).getGenreName());
+            gameGenresPane.add(checkBox,i,j);
+            int dikkaMa = index;
+            checkBox.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                if (newVal) {
+                    if(genreList == null){
+                        genreList = new ArrayList<>();
+                        genreList.add(ProjectMain.getDatabase().getAllGenres().get(dikkaMa));
+                    }else{
+                        genreList.add(ProjectMain.getDatabase().getAllGenres().get(dikkaMa));
+                    }
+                    
+                } else {
+                    genreList.remove(ProjectMain.getDatabase().getAllGenres().get(dikkaMa));
+                }
+            });
+            if(j==4) {
+                j=0;
+                i++;
+            } else {
+                j++;
+            }
+            index++;
+        }
+
+        // select developers
+        index = 0;
+        i = 0;
+        j = 0;
+        while(index<ProjectMain.getDatabase().getAllDevelopers().size()) {
+            CheckBox checkBox = new CheckBox(ProjectMain.getDatabase().getAllDevelopers().get(index).getDeveloperName());
+            gameDevelopersPane.add(checkBox,i,j);
+            int dikkeMa = index;
+            checkBox.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                if (newVal) {
+                    if(developerList == null){
+                        developerList = new ArrayList<>();
+                        developerList.add(ProjectMain.getDatabase().getAllDevelopers().get(dikkeMa));
+                    }
+                    developerList.add(ProjectMain.getDatabase().getAllDevelopers().get(dikkeMa));
+                } else {
+                    developerList.remove(ProjectMain.getDatabase().getAllDevelopers().get(dikkeMa));
+                }
+            });
+            if(j==4) {
+                j=0;
+                i++;
+            } else {
+                j++;
+            }
+            index++;
+        }
+
+        // select consoles
+        index = 0;
+        i = 0;
+        j = 0;
+        while(index<ProjectMain.getDatabase().getAllConsoles().size()) {
+            CheckBox checkBox = new CheckBox(ProjectMain.getDatabase().getAllConsoles().get(index).getConsoleName());
+            gameConsolesPane.add(checkBox,i,j);
+            int dikkaMa = index;
+            checkBox.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                if (newVal) {
+                    if(consoleList == null){
+                        consoleList = new ArrayList<>();
+                        consoleList.add(ProjectMain.getDatabase().getAllConsoles().get(dikkaMa));
+                    }
+                    consoleList.add(ProjectMain.getDatabase().getAllConsoles().get(dikkaMa));
+                } else {
+                    consoleList.remove(ProjectMain.getDatabase().getAllConsoles().get(dikkaMa));
+                }
+            });
+            if(j==4) {
+                j=0;
+                i++;
+            } else {
+                j++;
+            }
+            index++;
         }
     }
 
     private void addNewGenre(){
-        String newGenreName = txtNewGenre.getText().toString();
+        String newGenreName = txtNewGenreName.getText().toString();
         Genre newGenre = new Genre(newGenreName);
         addGenreToDb(newGenre);
+        System.out.println("Dit werkt???");
     }
 
     private void addNewDeveloper(){
-        String newDeveloperName = txtNewDeveloper.getText().toString();
+        String newDeveloperName = txtNewDeveloperName.getText().toString();
         Developer newDeveloper = new Developer(newDeveloperName);
         addDeveloperToDb(newDeveloper);
+        System.out.println("Dit werkt???");
     }
 
     private void addNewConsole(){
-        String newConsoleName = txtNewConsole.getText().toString();
-        /*
-         * Console has a list of compatible consoles
-         *      First the TreeView and all consoles are shown
-         *      Then the compatible consoles are selected
-         *          Console gets updated with a list of compatible consoles
-
-        btnAddNew.setOnAction(e -> {
-            List<Console> listOfConsoles = getAllConsoles();
-            TreeItem<String> consolesTreeItem = new CheckBoxTreeItem<>("Consoles");
-            consolesTreeItem.setExpanded(false);
-            selectTreeView.setCellFactory(CheckBoxTreeCell.forTreeView());
-            int numberOfConsoles = 0;
-            while (numberOfConsoles<listOfConsoles.size()) {
-                Console console = listOfConsoles.get(numberOfConsoles);
-                CheckBoxTreeItem<String> checkBoxTreeItem = new CheckBoxTreeItem<>(console.getConsoleName());
-                consolesTreeItem.getChildren().add(checkBoxTreeItem);
-                checkBoxTreeItem.selectedProperty().addListener((obs, oldVal, newVal) -> {
-                System.out.println(checkBoxTreeItem.getValue() + " selection state: " + newVal);
-                if (newVal) {
-                    consoleList.add(console);
-                } else {
-                    consoleList.remove(console);
-                    }
-                });
-                numberOfConsoles++;
-            }
-            Console newConsole = new Console(newConsoleName);
-            for(int i = 0; i < numberOfConsoles; i++){
-                newConsole.addCompatibleConsole(consoleList.get(i));
-            }
-
-            addConsoleBidirectionally(newConsole);
-        });
+        System.out.println(compConsoleList.toString());
+        String newConsoleName = txtNewConsoleName.getText().toString();
+        Console newConsole = new Console(newConsoleName, compConsoleList);
+        addConsoleBidirectionally(newConsole);
+        System.out.println("HELLLLLLLLLLLLLLLOOO xDxDxD");
+        compConsoleList.clear();;
     }
 
     private void addNewGame(){
-        //set the buttons and txtFields visible
-        pane1.setVisible(true);
-        //lijst met alle ... tonen
-            //developers
-            //genres
-            //consoles 
-
-        List<Developer> listOfDevelopers = getAllDevelopers();
-        List<Console> listOfConsoles = getAllConsoles();
-        List<Genre> listOfGenres = getAllGenres();
-        TreeItem<String> developersTreeItem = new CheckBoxTreeItem<>("Developers");
-        TreeItem<String> consolesTreeItem = new CheckBoxTreeItem<>("Consoles");
-        TreeItem<String> genresTreeItem = new CheckBoxTreeItem<>("Genres");
-
-        developersTreeItem.setExpanded(false);
-        consolesTreeItem.setExpanded(false);
-        genresTreeItem.setExpanded(false);
-        selectTreeView.setCellFactory(CheckBoxTreeCell.forTreeView());
-
-        for (int i=0; i<listOfDevelopers.size(); i++ ) {
-            Developer developer = listOfDevelopers.get(i);
-            CheckBoxTreeItem<String> checkBoxTreeItem = new CheckBoxTreeItem<>(developer.getDeveloperName());
-            developersTreeItem.getChildren().add(checkBoxTreeItem);
-            checkBoxTreeItem.selectedProperty().addListener((obs, oldVal, newVal) -> {
-                System.out.println(checkBoxTreeItem.getValue() + " selection state: " + newVal);
-                if (newVal) {
-                    developerList.add(developer);
-                } else {
-                    developerList.remove(developer);
-                }
-            });
-        }
-
-        for (int i=0; i<listOfConsoles.size(); i++ ) {
-            Console console = listOfConsoles.get(i);
-            CheckBoxTreeItem<String> checkBoxTreeItem = new CheckBoxTreeItem<>(console.getConsoleName());
-            consolesTreeItem.getChildren().add(checkBoxTreeItem);
-            checkBoxTreeItem.selectedProperty().addListener((obs, oldVal, newVal) -> {
-                System.out.println(checkBoxTreeItem.getValue() + " selection state: " + newVal);
-                if (newVal) {
-                    consoleList.add(console);
-                } else {
-                    consoleList.remove(console);
-                }
-            });
-        }
-
-        for (int i=0; i<listOfGenres.size(); i++ ) {
-            Genre genre = listOfGenres.get(i);
-            CheckBoxTreeItem<String> checkBoxTreeItem = new CheckBoxTreeItem<>(genre.getGenreName());
-            genresTreeItem.getChildren().add(checkBoxTreeItem);
-            checkBoxTreeItem.selectedProperty().addListener((obs, oldVal, newVal) -> {
-                System.out.println(checkBoxTreeItem.getValue() + " selection state: " + newVal);
-                if (newVal) {
-                    genreList.add(genre);
-                } else {
-                    genreList.remove(genre);
-                }
-            });
-        }
-
-        TreeItem<String> tree = new TreeItem<>();
-        tree.getChildren().add(developersTreeItem);
-        tree.getChildren().add(consolesTreeItem);
-        tree.getChildren().add(genresTreeItem);
-        selectTreeView.setRoot(tree);
-        selectTreeView.setShowRoot(false);
-
-        //when confirming the game gets made, all parameters gets assigned
-        btnAddNew.setOnAction(e -> {
-            //check if releaseDate is valid
-            boolean validReleasedate = false;
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                java.util.Date ret = sdf.parse(txtReleasedate.getText().toString().trim());
-                if (sdf.format(ret).equals(txtReleasedate.getText().toString().trim())) {
-                    validReleasedate = true;
-                }
-            } catch (ParseException exxe) {
-                validReleasedate = false;
-                exxe.printStackTrace();
-                }
-            //show error message
-            if(developerList.isEmpty() || genreList.isEmpty() || consoleList.isEmpty() || txtGameTitle.getText().toString().isBlank() || txtReleasedate.getText().toString().isBlank() || !validReleasedate){
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("Please provide a developer, genre and console as well as a name and a releasedate!");
-                alert.show();
-            }else{
-                //make a new game
-                Game newGame = new Game();
-                newGame.setTitle(txtGameTitle.getText().toString());
-                newGame.setConsoles(consoleList);
-                newGame.setGenres(genreList);
-                newGame.setDevelopers(developerList);
-                newGame.setReleaseDate(txtReleasedate.getText().toString());
-                newGame.setCopies(null);
-                //add game relationships with other list in the database
-                addGameBidirectionally(newGame);
-
-                //popup confirmation
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("Game successfully addad");
-                alert.show();
-            }
-        });
+        String newGameTitle = txtNewGameTitle.getText().toString();
+        String releaseDay = txtReleaseDay.getText().toString();
+        String releaseMonth = txtReleaseMonth.getText().toString();
+        String releaseYear = txtReleaseYear.getText().toString();
+        String releaseDate = releaseYear +"-"+ releaseMonth +"-"+ releaseDay;
+        Game newGame = new Game(newGameTitle, releaseDate,consoleList,developerList,genreList);
+        addGameBidirectionally(newGame);
         consoleList.clear();
-        genreList.clear();
         developerList.clear();
-    }
+        genreList.clear();
+    }   
 
 
     private void addNewCopy() {
+        // TODO de choiseboxes met game titel en console worden uitgelezen, textfields voor de prijs en warehouse.
+        String newCopyName = cbNewCopyGameTitle.getValue().toString();
+        String consoleName = cbNewCopyConsole.getValue().toString();
+        Copy newCopy = new Copy();
+        newCopy.setConsole(ProjectMain.getDatabase().getConsoleByName(consoleName));
+        newCopy.setDateOfReturn(null);
+        newCopy.setPurchasePrice(Integer.parseInt(txtPurchasePrice.getText().toString()));
+        newCopy.setRentPrice(Integer.parseInt(txtRentPrice.getText().toString()));
+        System.out.println("______________________________________");
+        System.out.println(cbNewCopyGameTitle.getValue().toString());
+        newCopy.setGame(ProjectMain.getDatabase().getGameByTitle(cbNewCopyGameTitle.getValue().toString()));
+        //moet nog een FXML komen om de availabiliy te zetten
+        newCopy.setAvailability(Availability.AVAILABLE);
+        System.out.println(newCopy.getConsole());
+        addCopyBidirectionally(newCopy);
     }
  
     //getters for the selectionTreeView
@@ -298,7 +310,7 @@ public class DeveloperController extends Controller{
 
     /*  Adds a new Game and updates its relationships.
      * 
-
+     */
     public void addGameBidirectionally(Game game) {        
         HibernateManager db = ProjectMain.getDatabase();
 
@@ -419,7 +431,7 @@ public class DeveloperController extends Controller{
 
     /*  Updates a copy and the Game and Console associated with it
      *  Cannot update associated Transactions or User.
-
+     */
     public void updateCopyBidirectionalRelations(Copy copyNew, Copy copyOld) {
         HibernateManager db = ProjectMain.getDatabase();
         
@@ -437,7 +449,7 @@ public class DeveloperController extends Controller{
 
     /*  Updates a Console and the Consoles associated with it.
      *  Cannot update Games or Copies associated with it. 
-
+     */
     public void updateConsoleBidirectionalRelations(Console consoleNew, Console consoleOld) {
         HibernateManager db = ProjectMain.getDatabase();
         List<Console> oldCompatibleConsoles = consoleOld.getCompatibleConsoles();
@@ -470,7 +482,7 @@ public class DeveloperController extends Controller{
 
     /* Deletes a Game and its associated Copies.
      * Also deletes the Game and Copies from all relationships.
-
+     */
     public void deleteGameAndRelationships(Game game) {
         HibernateManager db = ProjectMain.getDatabase();
         List<Copy> copies = game.getCopies();
@@ -523,5 +535,5 @@ public class DeveloperController extends Controller{
         }
         db.deleteEntity(user);
     }
-    */
+
 }
