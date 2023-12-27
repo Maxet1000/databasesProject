@@ -82,8 +82,9 @@ public class ShopController extends Controller{
     private ArrayList<Console> toBeFilteredConsoles;
     private ArrayList<Genre> toBeFilteredGenres;
     private int pageNumber = 1;
-    private List<Copy> listOfCopies;
+    private List<Copy> listOfCopies = new ArrayList<>();
     private List<List<Object>> listOfFilters = new ArrayList<>();
+    private int testDoeWeg = 0;
 
     public ShopController() {
         toBeFilteredDevelopers = new ArrayList<>();
@@ -92,6 +93,7 @@ public class ShopController extends Controller{
     }
 
     public void initialize() {
+        System.out.println("###############   WHY ARE WE STILL HERE    "+listOfCopies+  "   ################");
         HibernateManager db = ProjectMain.getDatabase();
         listOfCopies = db.getPageOfCopies(0, 20, listOfFilters);
         List<Integer> idsOfLastCopyPreviousPages = new ArrayList<>();
@@ -99,6 +101,10 @@ public class ShopController extends Controller{
         initTableCart();
         initFilters();
         btnNextPage.setOnAction(e -> {
+            System.out.println("///////////   "+testDoeWeg+"   ///////////");
+            System.out.println("Size of listOfCopies is " + listOfCopies.size());
+            System.out.println(listOfCopies);
+                        System.out.println("//////////////////////");
             if (listOfCopies.size() == 20) {
                 idsOfLastCopyPreviousPages.add(listOfCopies.get(listOfCopies.size() - 1).getCopyID());
                 listOfCopies = db.getPageOfCopies(idsOfLastCopyPreviousPages.get(idsOfLastCopyPreviousPages.size() - 1) + 1, 20, listOfFilters);
@@ -253,7 +259,8 @@ public class ShopController extends Controller{
         listItems.clear();
 
         //refresh de tableview met copies
-        var listOfCopies = ProjectMain.getDatabase().getAllCopies();
+        listOfCopies = ProjectMain.getDatabase().getPageOfCopies(0, 20, listOfFilters);
+        pageNumber = 1;
         initTable(listOfCopies);
         activateFilters();
     }
@@ -418,8 +425,8 @@ public class ShopController extends Controller{
         if (!toBeFilteredGenres.isEmpty()) {
             listOfFilters.add(new ArrayList<>(toBeFilteredGenres));
         }
-        List<Copy> listOfFilteredCopies = ProjectMain.getDatabase().getPageOfCopies(0, 20, listOfFilters);
-        initTable(listOfFilteredCopies);
+        listOfCopies = ProjectMain.getDatabase().getPageOfCopies(0, 20, listOfFilters);
+        initTable(listOfCopies);
     }
 
     public void removeFilters() {
@@ -429,7 +436,7 @@ public class ShopController extends Controller{
         toBeFilteredGenres.clear();
         listOfFilters.clear();
         initFilters();
-        var listOfCopies = ProjectMain.getDatabase().getPageOfCopies(pageNumber, 20, listOfFilters);
+        listOfCopies = ProjectMain.getDatabase().getPageOfCopies(0, 20, listOfFilters);
         initTable(listOfCopies);
     }
 
@@ -481,8 +488,9 @@ public class ShopController extends Controller{
             }
             colIndex++;
         }
-
+        System.out.println("-------------------------\n");
         System.out.println(listOfCopies);
+        System.out.println("-------------------------\n");
 
         Copy currentCopy;
         for(int i = 0; i < listOfCopies.size(); i++) {
@@ -519,7 +527,6 @@ public class ShopController extends Controller{
             tblRent.getItems().add(FXCollections.observableArrayList(gameCopyName, developers, console, genres, warehouse, rentPrice, purchasePrice, copyId));
             
         }
-        System.out.println(""+ProjectMain.getDatabase().getCopyById(36).getPurchasePrice());
 
     }
 
@@ -541,7 +548,6 @@ public class ShopController extends Controller{
             CheckBoxTreeItem<String> checkBoxTreeItem = new CheckBoxTreeItem<>(developer.getDeveloperName());
             developersTreeItem.getChildren().add(checkBoxTreeItem);
             checkBoxTreeItem.selectedProperty().addListener((obs, oldVal, newVal) -> {
-                System.out.println(checkBoxTreeItem.getValue() + " selection state: " + newVal);
                 if (newVal) {
                     toBeFilteredDevelopers.add(developer);
                 } else {
@@ -555,7 +561,6 @@ public class ShopController extends Controller{
             CheckBoxTreeItem<String> checkBoxTreeItem = new CheckBoxTreeItem<>(console.getConsoleName());
             consolesTreeItem.getChildren().add(checkBoxTreeItem);
             checkBoxTreeItem.selectedProperty().addListener((obs, oldVal, newVal) -> {
-                System.out.println(checkBoxTreeItem.getValue() + " selection state: " + newVal);
                 if (newVal) {
                     toBeFilteredConsoles.add(console);
                 } else {
@@ -569,7 +574,6 @@ public class ShopController extends Controller{
             CheckBoxTreeItem<String> checkBoxTreeItem = new CheckBoxTreeItem<>(genre.getGenreName());
             genresTreeItem.getChildren().add(checkBoxTreeItem);
             checkBoxTreeItem.selectedProperty().addListener((obs, oldVal, newVal) -> {
-                System.out.println(checkBoxTreeItem.getValue() + " selection state: " + newVal);
                 if (newVal) {
                     toBeFilteredGenres.add(genre);
                 } else {
