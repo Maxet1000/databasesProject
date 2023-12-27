@@ -101,10 +101,10 @@ public class DeveloperController extends Controller{
     public void initialize() {
         GridPane.setHalignment(gameDevelopersPane, HPos.CENTER); // To align horizontally in the cell
         GridPane.setValignment(gameDevelopersPane, VPos.CENTER); // To align vertically in the cell
-        initChoiceBoxConsole();
         initChoiceBoxForGame();
         initChoiceBoxForAvailability();
         initCheckBoxes();
+        initChoiceBoxConsole();
         btnAddNewGenre.setOnAction(e ->{
             addNewGenre();
         });
@@ -123,7 +123,7 @@ public class DeveloperController extends Controller{
     }
 
     private void initChoiceBoxConsole() {
-        for (int i=0 ; i<ProjectMain.getDatabase().getAllConsoles().size() ; i++) {
+        for (int i=0 ; i<ProjectMain.getDatabase().getAllConsoles().size(); i++) {
             cbNewCopyConsole.getItems().add(ProjectMain.getDatabase().getAllConsoles().get(i).getConsoleName());
         }
     }
@@ -146,18 +146,18 @@ public class DeveloperController extends Controller{
         while(index<ProjectMain.getDatabase().getAllConsoles().size()) {
             CheckBox checkBox = new CheckBox(ProjectMain.getDatabase().getAllConsoles().get(index).getConsoleName());
             compatibleConsolesPane.add(checkBox,i,j);
-            int dikkeMa = index;
+            int index1 = index;
             checkBox.selectedProperty().addListener((obs, oldVal, newVal) -> {
                     if (newVal) {
                         if(compConsoleList == null){
                             compConsoleList = new ArrayList<>();
-                            compConsoleList.add(ProjectMain.getDatabase().getAllConsoles().get(dikkeMa));
+                            compConsoleList.add(ProjectMain.getDatabase().getAllConsoles().get(index1));
                         }else{
-                            compConsoleList.add(ProjectMain.getDatabase().getAllConsoles().get(dikkeMa));
+                            compConsoleList.add(ProjectMain.getDatabase().getAllConsoles().get(index1));
                         }
                         
                     } else {
-                        compConsoleList.remove(ProjectMain.getDatabase().getAllConsoles().get(dikkeMa));
+                        compConsoleList.remove(ProjectMain.getDatabase().getAllConsoles().get(index1));
                     }
             });
             if(j==4) {
@@ -175,18 +175,18 @@ public class DeveloperController extends Controller{
         while(index<ProjectMain.getDatabase().getAllGenres().size()) {
             CheckBox checkBox = new CheckBox(ProjectMain.getDatabase().getAllGenres().get(index).getGenreName());
             gameGenresPane.add(checkBox,i,j);
-            int dikkaMa = index;
+            int index1 = index;
             checkBox.selectedProperty().addListener((obs, oldVal, newVal) -> {
                 if (newVal) {
                     if(genreList == null){
                         genreList = new ArrayList<>();
-                        genreList.add(ProjectMain.getDatabase().getAllGenres().get(dikkaMa));
+                        genreList.add(ProjectMain.getDatabase().getAllGenres().get(index1));
                     }else{
-                        genreList.add(ProjectMain.getDatabase().getAllGenres().get(dikkaMa));
+                        genreList.add(ProjectMain.getDatabase().getAllGenres().get(index1));
                     }
                     
                 } else {
-                    genreList.remove(ProjectMain.getDatabase().getAllGenres().get(dikkaMa));
+                    genreList.remove(ProjectMain.getDatabase().getAllGenres().get(index1));
                 }
             });
             if(j==4) {
@@ -205,16 +205,16 @@ public class DeveloperController extends Controller{
         while(index<ProjectMain.getDatabase().getAllDevelopers().size()) {
             CheckBox checkBox = new CheckBox(ProjectMain.getDatabase().getAllDevelopers().get(index).getDeveloperName());
             gameDevelopersPane.add(checkBox,i,j);
-            int dikkeMa = index;
+            int index1 = index;
             checkBox.selectedProperty().addListener((obs, oldVal, newVal) -> {
                 if (newVal) {
                     if(developerList == null){
                         developerList = new ArrayList<>();
-                        developerList.add(ProjectMain.getDatabase().getAllDevelopers().get(dikkeMa));
+                        developerList.add(ProjectMain.getDatabase().getAllDevelopers().get(index1));
                     }
-                    developerList.add(ProjectMain.getDatabase().getAllDevelopers().get(dikkeMa));
+                    developerList.add(ProjectMain.getDatabase().getAllDevelopers().get(index1));
                 } else {
-                    developerList.remove(ProjectMain.getDatabase().getAllDevelopers().get(dikkeMa));
+                    developerList.remove(ProjectMain.getDatabase().getAllDevelopers().get(index1));
                 }
             });
             if(j==4) {
@@ -233,16 +233,16 @@ public class DeveloperController extends Controller{
         while(index<ProjectMain.getDatabase().getAllConsoles().size()) {
             CheckBox checkBox = new CheckBox(ProjectMain.getDatabase().getAllConsoles().get(index).getConsoleName());
             gameConsolesPane.add(checkBox,i,j);
-            int dikkaMa = index;
+            int index1 = index;
             checkBox.selectedProperty().addListener((obs, oldVal, newVal) -> {
                 if (newVal) {
                     if(consoleList == null){
                         consoleList = new ArrayList<>();
-                        consoleList.add(ProjectMain.getDatabase().getAllConsoles().get(dikkaMa));
+                        consoleList.add(ProjectMain.getDatabase().getAllConsoles().get(index1));
                     }
-                    consoleList.add(ProjectMain.getDatabase().getAllConsoles().get(dikkaMa));
+                    consoleList.add(ProjectMain.getDatabase().getAllConsoles().get(index1));
                 } else {
-                    consoleList.remove(ProjectMain.getDatabase().getAllConsoles().get(dikkaMa));
+                    consoleList.remove(ProjectMain.getDatabase().getAllConsoles().get(index1));
                 }
             });
             if(j==4) {
