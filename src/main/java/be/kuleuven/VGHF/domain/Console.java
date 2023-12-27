@@ -19,7 +19,7 @@ public class Console implements InterfaceForFilters {
         joinColumns = @JoinColumn(name = "consoleName"),
         inverseJoinColumns = @JoinColumn(name = "compatibleConsoleName")
     )
-    private List<Console> compatibleConsoles;
+    private List<Console> compatibleConsoles = new ArrayList<>();
 
     @ManyToMany(mappedBy = "consoles", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Game> games = new ArrayList<>();

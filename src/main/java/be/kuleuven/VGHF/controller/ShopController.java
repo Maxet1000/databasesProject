@@ -5,6 +5,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import javax.print.attribute.standard.Copies;
+
 import org.hibernate.Hibernate;
 
 import java.time.LocalDate;
@@ -23,6 +28,8 @@ import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTreeCell;
@@ -39,6 +46,12 @@ public class ShopController extends Controller{
     private Button btnAddFilter;
     @FXML
     private Button btnRemoveFilters;
+    @FXML
+    private Button btnPreviousPage;
+    @FXML
+    private Button btnNextPage;
+    @FXML
+    private Text txtCurrentPage;
     @FXML
     public VBox pane1;
     @FXML
@@ -64,7 +77,9 @@ public class ShopController extends Controller{
     private ArrayList<Developer> toBeFilteredDevelopers;
     private ArrayList<Console> toBeFilteredConsoles;
     private ArrayList<Genre> toBeFilteredGenres;
-
+    private int pageNumber = 1;
+    private List<Copy> listOfCopies;
+    private List<List<Object>> listOfFilters = new ArrayList<>();
 
     public ShopController() {
         toBeFilteredDevelopers = new ArrayList<>();
@@ -72,28 +87,35 @@ public class ShopController extends Controller{
         toBeFilteredGenres = new ArrayList<>();
     }
 
-    public void initialize(){
+    public void initialize() {
         HibernateManager db = ProjectMain.getDatabase();
-        var listOfCopies = db.getPageOfCopies(0, 20);
-        int pageNumber = 1;
+        listOfCopies = db.getPageOfCopies(0, 20, listOfFilters);
         List<Integer> idsOfLastCopyPreviousPages = new ArrayList<>();
         initTable(listOfCopies);
         initTableCart();
         initFilters();
         btnNextPage.setOnAction(e -> {
-            if (idsOfLastCopyPreviousPages.get(idsOfLastCopyPreviousPages.size()) != idsOfLastCopyPreviousPages.get(idsOfLastCopyPreviousPages.size())) {
+            if (listOfCopies.size() == 20) {
                 idsOfLastCopyPreviousPages.add(listOfCopies.get(listOfCopies.size() - 1).getCopyID());
-                listOfCopies = db.getPageOfCopies(idsOfLastCopyPreviousPages + 1, 20);
+                listOfCopies = db.getPageOfCopies(idsOfLastCopyPreviousPages.get(idsOfLastCopyPreviousPages.size() - 1) + 1, 20, listOfFilters);
                 initTable(listOfCopies);
                 pageNumber++;
+                txtCurrentPage.setText(" Page" + pageNumber + " ");
             }
         });
         btnPreviousPage.setOnAction(e -> {
-            if (pageNumber > 1) {
-                listOfCopies = db.getPageOfCopies(idsOfLastCopyPreviousPages+ 1, 20);
+            if (pageNumber > 2) {
+                idsOfLastCopyPreviousPages.remove(idsOfLastCopyPreviousPages.size() - 1);
+                listOfCopies = db.getPageOfCopies(idsOfLastCopyPreviousPages.get(idsOfLastCopyPreviousPages.size() - 1) + 1, 20, listOfFilters);
+                initTable(listOfCopies);
+                pageNumber--;
+            } else if (pageNumber == 2) {
+                idsOfLastCopyPreviousPages.remove(idsOfLastCopyPreviousPages.size() - 1);
+                listOfCopies = db.getPageOfCopies(0, 20, listOfFilters);
                 initTable(listOfCopies);
                 pageNumber--;
             }
+            txtCurrentPage.setText(" Page " + pageNumber + " ");
         });
         btnAddGameToCart.setOnAction(e -> {
             addGameToRentCart();
@@ -376,21 +398,17 @@ public class ShopController extends Controller{
     }
 
     private void activateFilters() {
-        var listOfFilteredCopies = ProjectMain.getDatabase().getAllCopies();
-        if(toBeFilteredDevelopers.isEmpty()){
-            initTable(listOfFilteredCopies);
-        } else {
-            listOfFilteredCopies = filter(listOfFilteredCopies, toBeFilteredDevelopers);
+        listOfFilters.clear();
+        if(!toBeFilteredConsoles.isEmpty()){
+            listOfFilters.add(new ArrayList<>(toBeFilteredConsoles));
+        } 
+        if(!toBeFilteredDevelopers.isEmpty()){
+            listOfFilters.add(new ArrayList<>(toBeFilteredDevelopers));
+        } 
+        if (!toBeFilteredGenres.isEmpty()) {
+            listOfFilters.add(new ArrayList<>(toBeFilteredGenres));
         }
-        if(toBeFilteredConsoles.isEmpty()) {
-            initTable(listOfFilteredCopies);
-        } else {
-            listOfFilteredCopies = filter(listOfFilteredCopies, toBeFilteredConsoles);
-        }
-        if (toBeFilteredGenres.isEmpty()) {
-        } else {
-            listOfFilteredCopies = filter(listOfFilteredCopies, toBeFilteredGenres);
-        }
+        List<Copy> listOfFilteredCopies = ProjectMain.getDatabase().getPageOfCopies(0, 20, listOfFilters);
         initTable(listOfFilteredCopies);
     }
 
@@ -399,8 +417,9 @@ public class ShopController extends Controller{
         toBeFilteredConsoles.clear();
         toBeFilteredDevelopers.clear();
         toBeFilteredGenres.clear();
+        listOfFilters.clear();
         initFilters();
-        var listOfCopies = ProjectMain.getDatabase().getAllCopies();
+        var listOfCopies = ProjectMain.getDatabase().getPageOfCopies(pageNumber, 20, listOfFilters);
         initTable(listOfCopies);
     }
 

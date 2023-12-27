@@ -7,56 +7,79 @@ import java.util.*;
 import be.kuleuven.VGHF.ProjectMain;
 import be.kuleuven.VGHF.domain.*;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBoxTreeItem;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTreeCell;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class DeveloperController extends Controller{
 
     @FXML
-    private Button btnAddNewGame;
+    private VBox parentPane;
+
+    // New genre
     @FXML
-    private AnchorPane pane1;
+    private TextField txtNewGenreName;
     @FXML
-    private TreeView<String> selectTreeView;
+    private Button btnAddNewGenre;
+
+    // New developer
     @FXML
-    private Button btnAddNew;
-    @FXML
-    private TextField txtGameTitle;
-    @FXML
-    private TextField txtReleasedate;
-    @FXML
-    private Text txtGameTitletxt;
-    @FXML
-    private Text txtReleaseDatetxt;
-    @FXML
-    private Button btnAddGenre;
-    @FXML
-    private AnchorPane paneAddGenre;
-    @FXML
-    private TextField txtNewGenre;
-    @FXML
-    private Text txtNewGenretxt;
-    @FXML
-    private TextField txtNewDeveloper;
-    @FXML 
-    private TextField txtNewConsole;
+    private TextField txtNewDeveloperName;
     @FXML
     private Button btnAddNewDeveloper;
+
+    // New console
+    @FXML
+    private TextField txtNewConsoleName;
     @FXML
     private Button btnAddNewConsole;
+
+    // New game
+    @FXML
+    private TextField txtNewGameTitle;
+    @FXML
+    private Button btnAddNewGame;
+    @FXML
+    private TextField txtReleaseYear;
+    @FXML
+    private TextField txtReleaseMonth;
+    @FXML
+    private TextField txtReleaseDay;
+
+    // Game genres
+    @FXML
+    private GridPane gameGenresPane;
+
+    // Game developers
+    @FXML
+    private GridPane gameDevelopersPane;
+
+    // Game consoles
+    @FXML
+    private GridPane gameConsolesPane;
+
+    // New copy
+    @FXML
+    private ChoiceBox<String> cbNewCopyGameTitle;
+    @FXML
+    private Button btnAddNewCopy;
+    @FXML
+    private TextField txtRentPrice;
+    @FXML
+    private TextField txtPurchasePrice;
+    @FXML
+    private ChoiceBox<String> cbNewCopyConsole;
+    @FXML
+    private ChoiceBox<String> cbNewCopyWarehouse;
+
 
     private ArrayList<Developer> developerList;
     private ArrayList<Genre> genreList;
     private ArrayList<Console> consoleList;
-
+/*
     public DeveloperController(){
         developerList = new ArrayList<>();
         genreList = new ArrayList<>();
@@ -64,22 +87,10 @@ public class DeveloperController extends Controller{
     }
 
     public void initialize() {
-        //Invisible AddGame
-        /*
-        txtGameTitle.setVisible(false);
-        txtReleasedate.setVisible(false);
-        selectTreeView.setVisible(false);
-        txtGameTitletxt.setVisible(false);
-        txtReleaseDatetxt.setVisible(false);
-        */
-        pane1.setVisible(false);
-        //Invisible AddGenre
-        paneAddGenre.setVisible(false);
 
-        btnAddNewGame.setOnAction(e -> {
-            addNewGame();
-        });
-        btnAddGenre.setOnAction(e ->{
+        initChoiceBoxes();
+
+        btnAddNewGenre.setOnAction(e ->{
             addNewGenre();
         });
         btnAddNewDeveloper.setOnAction(e ->{
@@ -88,6 +99,19 @@ public class DeveloperController extends Controller{
         btnAddNewConsole.setOnAction(e ->{
             addNewGenre();
         });
+        btnAddNewGame.setOnAction(e -> {
+            addNewGame();
+        });
+        btnAddNewCopy.setOnAction((e -> {
+            addNewCopy();
+        }));
+    }
+
+    private void initChoiceBoxes() {
+        List<String> listOfConsoles = new ArrayList<>();
+        for (int i=0 ; i<ProjectMain.getDatabase().getAllConsoles().size() ; i++) {
+            listOfConsoles.add(ProjectMain.getDatabase().getAllConsoles().get(i).getConsoleName());
+        }
     }
 
     private void addNewGenre(){
@@ -109,7 +133,7 @@ public class DeveloperController extends Controller{
          *      First the TreeView and all consoles are shown
          *      Then the compatible consoles are selected
          *          Console gets updated with a list of compatible consoles
-         */
+
         btnAddNew.setOnAction(e -> {
             List<Console> listOfConsoles = getAllConsoles();
             TreeItem<String> consolesTreeItem = new CheckBoxTreeItem<>("Consoles");
@@ -253,6 +277,10 @@ public class DeveloperController extends Controller{
         genreList.clear();
         developerList.clear();
     }
+
+
+    private void addNewCopy() {
+    }
  
     //getters for the selectionTreeView
 
@@ -270,7 +298,7 @@ public class DeveloperController extends Controller{
 
     /*  Adds a new Game and updates its relationships.
      * 
-     */
+
     public void addGameBidirectionally(Game game) {        
         HibernateManager db = ProjectMain.getDatabase();
 
@@ -391,7 +419,7 @@ public class DeveloperController extends Controller{
 
     /*  Updates a copy and the Game and Console associated with it
      *  Cannot update associated Transactions or User.
-     */
+
     public void updateCopyBidirectionalRelations(Copy copyNew, Copy copyOld) {
         HibernateManager db = ProjectMain.getDatabase();
         
@@ -409,7 +437,7 @@ public class DeveloperController extends Controller{
 
     /*  Updates a Console and the Consoles associated with it.
      *  Cannot update Games or Copies associated with it. 
-     */
+
     public void updateConsoleBidirectionalRelations(Console consoleNew, Console consoleOld) {
         HibernateManager db = ProjectMain.getDatabase();
         List<Console> oldCompatibleConsoles = consoleOld.getCompatibleConsoles();
@@ -442,7 +470,7 @@ public class DeveloperController extends Controller{
 
     /* Deletes a Game and its associated Copies.
      * Also deletes the Game and Copies from all relationships.
-     */
+
     public void deleteGameAndRelationships(Game game) {
         HibernateManager db = ProjectMain.getDatabase();
         List<Copy> copies = game.getCopies();
@@ -495,5 +523,5 @@ public class DeveloperController extends Controller{
         }
         db.deleteEntity(user);
     }
-    
+    */
 }
