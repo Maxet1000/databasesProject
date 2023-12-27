@@ -125,7 +125,7 @@ public class CustomerController extends Controller{
         }
         transactionList.add(newTransaction);
         data.getUser().setTransactions(transactionList);
-       
+        ProjectMain.getDatabase().updateEntity(data.getUser());
         //refresh the tableview
         initTable();
         fillTable();
@@ -138,6 +138,7 @@ public class CustomerController extends Controller{
         oldBalance = oldBalance + newBalance;
         data.getUser().setBalance(oldBalance);
         txtBalance.setText("$" + data.getUser().getBalance());
+        ProjectMain.getDatabase().updateEntity(data.getUser());
     }
 
     private void extendAllReturnDate(){
@@ -162,6 +163,7 @@ public class CustomerController extends Controller{
                 var newTransaction = new MonetaryTransaction(TransactionType.EXTENSION, extendPrice, data.getUser(), copy, getCurrentDate());
                 transactionList.add(newTransaction);
                 data.getUser().setTransactions(transactionList);
+                ProjectMain.getDatabase().updateEntity(data.getUser());
             }
             initTransactionHistory();
         }else{
@@ -202,9 +204,9 @@ public class CustomerController extends Controller{
                 alert.setContentText("Not enough balance plz load more money before extending the return date!");
                 alert.show();
             }
-
-        initTable();
-        fillTable();
+            ProjectMain.getDatabase().updateEntity(data.getUser());
+            initTable();
+            fillTable();
         } catch (Exception e) {
             System.err.println("no game selected");
         }
