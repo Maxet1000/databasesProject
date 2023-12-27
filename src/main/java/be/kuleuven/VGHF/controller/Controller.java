@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-import be.kuleuven.VGHF.DataCommunicationModel;
+import be.kuleuven.VGHF.Model;
 import be.kuleuven.VGHF.ProjectMain;
 import be.kuleuven.VGHF.domain.*;
 import javafx.fxml.FXML;
@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 
 public class Controller{
 
-    public DataCommunicationModel data;
+    public Model data;
     @FXML
     private Pane parentPane;
 
@@ -191,7 +191,7 @@ public class Controller{
         }
     }
 
-    public void setModel(DataCommunicationModel data) {
+    public void setModel(Model data) {
         this.data = data;
     }
 
@@ -208,7 +208,7 @@ public class Controller{
         StackPane.setAlignment(rootLoader, Pos.CENTER);
     }
 
-    public DataCommunicationModel getModel(){
+    public Model getModel(){
         return data;
     }
 

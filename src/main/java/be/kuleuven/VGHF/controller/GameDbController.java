@@ -43,6 +43,7 @@ public class GameDbController extends Controller{
     private TextField txtSearch;
     Game temp;
     Date lastClickTime;
+    List<Game> listOfGames;
 
     private ArrayList<Developer> toBeFilteredDevelopers;
     private ArrayList<Console> toBeFilteredConsoles;
@@ -55,8 +56,8 @@ public class GameDbController extends Controller{
     }
 
     public void initialize() {
-        var listOfGames = ProjectMain.getDatabase().getAllGames();
-        initTable(listOfGames);
+        List<Game>listOfGames1 = new ArrayList<>(listOfGames);
+        initTable(listOfGames1);
         initFilters();
 
 
@@ -186,7 +187,7 @@ public class GameDbController extends Controller{
     }
 
     private void activateFilters() {
-        var listOfFilteredGames = ProjectMain.getDatabase().getAllGames();
+        List<Game> listOfFilteredGames = new ArrayList<>(listOfGames);
         if(toBeFilteredDevelopers.isEmpty()){
             initTable(listOfFilteredGames);
         } else {
@@ -231,8 +232,8 @@ public class GameDbController extends Controller{
         txtBottomYear.setStyle(txtSearch.getStyle());
         txtTopYear.setStyle(txtSearch.getStyle());
         initFilters();
-        var listOfGames = ProjectMain.getDatabase().getAllGames();
-        initTable(listOfGames);
+        var listOfGames1 = new ArrayList<>(listOfGames);
+        initTable(listOfGames1);
     }
 
     public void startSearch() {
