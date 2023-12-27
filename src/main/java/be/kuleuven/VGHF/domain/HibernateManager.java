@@ -437,6 +437,44 @@ public class HibernateManager {
         }
     }
 
+    public List<String> getAllGameNames() {
+        var criteriaBuilder = entityManager.getCriteriaBuilder();
+        var query = criteriaBuilder.createQuery(String.class);
+        var root = query.from(Game.class);
     
+        query.select(root.get("title"));
+    
+        return entityManager.createQuery(query).getResultList();
+    }
+
+    public List<String> getAllConsoleNames() {
+        var criteriaBuilder = entityManager.getCriteriaBuilder();
+        var query = criteriaBuilder.createQuery(String.class);
+        var root = query.from(Console.class);
+    
+        query.select(root.get("consoleName"));
+    
+        return entityManager.createQuery(query).getResultList();
+    }
+
+    public List<String> getAllDeveloperNames() {
+        var criteriaBuilder = entityManager.getCriteriaBuilder();
+        var query = criteriaBuilder.createQuery(String.class);
+        var root = query.from(Developer.class);
+    
+        query.select(root.get("developerName"));
+    
+        return entityManager.createQuery(query).getResultList();
+    }
+
+    public List<String> getAllGenreNames() {
+        var criteriaBuilder = entityManager.getCriteriaBuilder();
+        var query = criteriaBuilder.createQuery(String.class);
+        var root = query.from(Genre.class);
+    
+        query.select(root.get("genreName"));
+    
+        return entityManager.createQuery(query).getResultList();
+    }    
 
 }

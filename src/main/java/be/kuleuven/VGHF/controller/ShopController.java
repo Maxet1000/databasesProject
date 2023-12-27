@@ -584,7 +584,6 @@ public class ShopController extends Controller{
         tree.getChildren().add(genresTreeItem);
         filtersTreeView.setRoot(tree);
         filtersTreeView.setShowRoot(false);
-
     }
 
     public List<Developer> getAllDevelopers() {

@@ -274,7 +274,6 @@ public class DeveloperController extends Controller{
         List<Console> compConsoles = new ArrayList<>(compConsoleList);
         Console newConsole = new Console(newConsoleName, compConsoles);
         addConsoleBidirectionally(newConsole);
-        compConsoleList.clear();;
     }
 
     private void addNewGame(){
@@ -328,6 +327,9 @@ public class DeveloperController extends Controller{
 
         Game gameInDb = db.getGameByTitle(game.getTitle());
         if (gameInDb != null) {
+            System.out.println(gameInDb.getTitle());
+            System.out.println(game.getTitle());
+
             updateGameBidirectionalRelations(game, gameInDb);
         }
         else {
@@ -360,12 +362,6 @@ public class DeveloperController extends Controller{
         if (consoleInDb != null) {
             updateConsoleBidirectionalRelations(console, consoleInDb);
         }
-        List<Console> compatibleConsoles = console.getCompatibleConsoles();
-        if (compatibleConsoles != null) {
-            for (Console compatibleConsole : compatibleConsoles) {
-                compatibleConsole.addCompatibleConsole(console);
-            }
-        }
         db.saveNewEntity(console);
     }
 
@@ -393,11 +389,12 @@ public class DeveloperController extends Controller{
     public void updateGameBidirectionalRelations(Game gameNew, Game gameOld) {
         HibernateManager db = ProjectMain.getDatabase();
         boolean nameChanged = false;
-        if (gameNew.getTitle() != gameOld.getTitle()) {
+        if (!gameNew.getTitle().toString().equals(gameOld.getTitle().toString())) {
             nameChanged = true;
+            gameOld = db.getGameByTitle(gameOld.getTitle());
             List<Copy> copies = gameOld.getCopies();
             if (copies != null) {
-                for ( Copy copy : copies) {
+                for (Copy copy : copies) {
                     copy.setGame(gameNew);
                 } 
             }
@@ -432,9 +429,18 @@ public class DeveloperController extends Controller{
                 genre.addGame(gameNew);
             }
         }
+                    System.out.println("namechanged" + nameChanged + "namechanged");
+
         if (!nameChanged) {
-            gameOld = gameNew;
-            db.updateEntity(gameOld);
+            gameOld.setReleaseDate(gameNew.getReleaseDate());
+            gameOld.setConsoles(gameNew.getConsoles());
+            gameOld.setCopies(gameNew.getCopies());
+            gameOld.setDevelopers(gameNew.getDevelopers());
+            gameOld.setGenres(gameNew.getGenres());
+
+            db.getEntityManager().getTransaction().begin();
+            db.getEntityManager().merge(gameOld);
+            db.getEntityManager().getTransaction().commit();
         } else {
             db.deleteEntity(gameOld);
             db.saveNewEntity(gameNew);
@@ -464,18 +470,7 @@ public class DeveloperController extends Controller{
      */
     public void updateConsoleBidirectionalRelations(Console consoleNew, Console consoleOld) {
         HibernateManager db = ProjectMain.getDatabase();
-        List<Console> oldCompatibleConsoles = consoleOld.getCompatibleConsoles();
-        List<Console> newCompatibleConsoles = consoleNew.getCompatibleConsoles();
-        if (oldCompatibleConsoles != null) {
-            for (Console console : oldCompatibleConsoles) {
-                console.removeCompatibleconsole(consoleOld);
-            }
-        }
-        if (newCompatibleConsoles != null) {
-            for (Console console : newCompatibleConsoles) {
-                console.addCompatibleConsole(consoleNew);
-            }
-        }
+
         consoleOld = consoleNew;
         db.updateEntity(consoleOld);
     }
