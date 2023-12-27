@@ -145,8 +145,9 @@ public class DeveloperController extends Controller{
     private void initCheckBoxes() {
         // select compatible consoles
         int index = 0, j = 0, i = 0;
-        while(index<ProjectMain.getDatabase().getAllConsoles().size()) {
-            Console console = ProjectMain.getDatabase().getAllConsoles().get(index);
+        List<Console> listOfConsole = ProjectMain.getDatabase().getAllConsoles();
+        while(index < listOfConsole.size()) {
+            Console console = listOfConsole.get(index);
             CheckBox checkBox = new CheckBox(console.getConsoleName());
             compatibleConsolesPane.add(checkBox,i,j);
             checkBox.selectedProperty().addListener((obs, oldVal, newVal) -> {
@@ -174,8 +175,9 @@ public class DeveloperController extends Controller{
         index = 0;
         i = 0;
         j = 0;
-        while(index<ProjectMain.getDatabase().getAllGenres().size()) {
-            Genre genre = ProjectMain.getDatabase().getAllGenres().get(index);
+        List<Genre> listOfGenre = ProjectMain.getDatabase().getAllGenres();
+        while(index < listOfGenre.size()) {
+            Genre genre = listOfGenre.get(index);
             CheckBox checkBox = new CheckBox(genre.getGenreName());
             gameGenresPane.add(checkBox,i,j);
             checkBox.selectedProperty().addListener((obs, oldVal, newVal) -> {
@@ -204,8 +206,9 @@ public class DeveloperController extends Controller{
         index = 0;
         i = 0;
         j = 0;
-        while(index<ProjectMain.getDatabase().getAllDevelopers().size()) {
-            Developer developer = ProjectMain.getDatabase().getAllDevelopers().get(index);
+        List<Developer> listOfDeveloper = ProjectMain.getDatabase().getAllDevelopers();
+        while(index < listOfDeveloper.size()) {
+            Developer developer = listOfDeveloper.get(index);
             CheckBox checkBox = new CheckBox(developer.getDeveloperName());
             gameDevelopersPane.add(checkBox,i,j);
             checkBox.selectedProperty().addListener((obs, oldVal, newVal) -> {
@@ -232,8 +235,9 @@ public class DeveloperController extends Controller{
         index = 0;
         i = 0;
         j = 0;
-        while(index<ProjectMain.getDatabase().getAllConsoles().size()) {
-            Console console = ProjectMain.getDatabase().getAllConsoles().get(index);
+        List<Console> listConsole = ProjectMain.getDatabase().getAllConsoles();
+        while(index<listConsole.size()) {
+            Console console = listConsole.get(index);
             CheckBox checkBox = new CheckBox(console.getConsoleName());
             gameConsolesPane.add(checkBox,i,j);
             checkBox.selectedProperty().addListener((obs, oldVal, newVal) -> {
@@ -299,7 +303,7 @@ public class DeveloperController extends Controller{
         String releaseYear = txtReleaseYear.getText().toString();
         String releaseDate = releaseYear +"-"+ releaseMonth +"-"+ releaseDay;
         List<Console> consolesForGame = new ArrayList<>(consoleList);
-        List <Developer> developersForGame = new ArrayList<>(developerList);
+        List<Developer> developersForGame = new ArrayList<>(developerList);
         List <Genre> genresForGame = new ArrayList<>(genreList);
         Game newGame = new Game(newGameTitle, releaseDate,consolesForGame,developersForGame,genresForGame);
         addGameBidirectionally(newGame);

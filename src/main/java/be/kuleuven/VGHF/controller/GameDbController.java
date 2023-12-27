@@ -56,8 +56,8 @@ public class GameDbController extends Controller{
     }
 
     public void initialize() {
-        List<Game>listOfGames1 = new ArrayList<>(listOfGames);
-        initTable(listOfGames1);
+        List<Game>listOfGames = ProjectMain.getDatabase().getAllGames();
+        initTable(listOfGames);
         initFilters();
 
 
