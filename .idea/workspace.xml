@@ -5,35 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0423dc92-1095-410d-9cb3-fa62df87abe6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/DbContentScript.class.uniqueId1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ProjectMain.class.uniqueId0" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.1.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.1.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.1.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.1.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VGHF.db" beforeDir="false" afterPath="$PROJECT_DIR$/VGHF.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/DbContentScript.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/DbContentScript.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/controller/CustomerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/controller/CustomerController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/controller/DeveloperController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/controller/DeveloperController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/controller/ShopController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/controller/ShopController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/domain/Console.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/domain/Console.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/domain/Copy.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/domain/Copy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/domain/HibernateManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/domain/HibernateManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/distributions/project-template-1.0-SNAPSHOT.tar" beforeDir="false" afterPath="$PROJECT_DIR$/build/distributions/project-template-1.0-SNAPSHOT.tar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/distributions/project-template-1.0-SNAPSHOT.zip" beforeDir="false" afterPath="$PROJECT_DIR$/build/distributions/project-template-1.0-SNAPSHOT.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/project-template-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/project-template-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/domain/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/be/kuleuven/VGHF/domain/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/developerpage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/developerpage.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/shoppage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/shoppage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/DeveloperController.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/DbContentScript.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ProjectMain.class.uniqueId0" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/DbContentScript.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/DbContentScript.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/controller/CustomerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/controller/DeveloperController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/controller/DeveloperController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/controller/GameDbController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/controller/GameDbController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/controller/ShopController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/domain/Console.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/domain/Console.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/domain/Copy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/domain/Copy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/domain/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/domain/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/domain/HibernateManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/be/kuleuven/VGHF/domain/HibernateManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/developerpage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/developerpage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/preloginpage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/preloginpage.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/shoppage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shoppage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

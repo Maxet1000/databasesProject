@@ -13,7 +13,7 @@ public class Game {
     @Column(nullable = false)
     private String releaseDate;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
         name = "GameConsoleLink",
         joinColumns = @JoinColumn(name = "title"),
@@ -21,7 +21,7 @@ public class Game {
     )
     private List<Console> consoles;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
         name = "GameDeveloperLink",
         joinColumns = @JoinColumn(name = "title"),
@@ -29,7 +29,7 @@ public class Game {
     )
     private List<Developer> developers = new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
         name = "GameGenreLink",
         joinColumns = @JoinColumn(name = "title"),

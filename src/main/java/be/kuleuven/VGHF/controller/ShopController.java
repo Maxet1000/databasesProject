@@ -39,6 +39,10 @@ import javafx.scene.text.Text;
 public class ShopController extends Controller{
     
     @FXML
+    private TextField txtSearch;
+    @FXML
+    private Button btnSearch;
+    @FXML
     private TableView tblRent;
     @FXML
     private Button btnAddGameToCart;
@@ -100,7 +104,7 @@ public class ShopController extends Controller{
                 listOfCopies = db.getPageOfCopies(idsOfLastCopyPreviousPages.get(idsOfLastCopyPreviousPages.size() - 1) + 1, 20, listOfFilters);
                 initTable(listOfCopies);
                 pageNumber++;
-                txtCurrentPage.setText(" Page" + pageNumber + " ");
+                txtCurrentPage.setText(" " + pageNumber + " ");
             }
         });
         btnPreviousPage.setOnAction(e -> {
@@ -115,7 +119,7 @@ public class ShopController extends Controller{
                 initTable(listOfCopies);
                 pageNumber--;
             }
-            txtCurrentPage.setText(" Page " + pageNumber + " ");
+            txtCurrentPage.setText(" " + pageNumber + " ");
         });
         btnAddGameToCart.setOnAction(e -> {
             addGameToRentCart();
@@ -136,6 +140,9 @@ public class ShopController extends Controller{
         });
         btnAddGameToBuy.setOnAction(e -> {
             addGameToBuyCart();
+        });
+        btnSearch.setOnAction(e -> {
+            //de code voor de search
         });
         btnLogOut.setOnAction(e -> {
             data.logOut();
@@ -186,6 +193,7 @@ public class ShopController extends Controller{
                 var newTransaction = new MonetaryTransaction(TransactionType.PURCHASE, copy.getPurchasePrice(), data.getUser(), copy, getCurrentDate());
                 transactionList.add(newTransaction);
                 data.getUser().setTransactions(transactionList);
+                ProjectMain.getDatabase().updateEntity(data.getUser());
 
             } else if(table == tblRentCart && balance >= copy.getRentPrice() && copy.getAvailability() == Availability.AVAILABLE && copy.getRentPrice() != 0){
                 //game kan verhuurd worden
@@ -205,6 +213,7 @@ public class ShopController extends Controller{
                 var newTransaction = new MonetaryTransaction(TransactionType.RENTAL, copy.getRentPrice(), data.getUser(), copy, getCurrentDate());
                 transactionList.add(newTransaction);
                 data.getUser().setTransactions(transactionList);
+                ProjectMain.getDatabase().updateEntity(data.getUser());
 
             }else{
                 //show alert dat er iets misliep
@@ -228,7 +237,7 @@ public class ShopController extends Controller{
             rentOrBuy = "buy";
         }
         if( wrongItem == 0 || (itemCounter > wrongItem) ){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Error");
             alert.setHeaderText(null);
             alert.setContentText(rentOrBuy + " complete!" );
@@ -240,6 +249,7 @@ public class ShopController extends Controller{
 
         //refresh de gehuurde en verkochte games van de user
         data.getUser().setCopies(copyFromUser);
+        ProjectMain.getDatabase().updateEntity(data.getUser());
         listItems.clear();
 
         //refresh de tableview met copies

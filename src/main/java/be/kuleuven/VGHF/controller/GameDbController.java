@@ -59,6 +59,7 @@ public class GameDbController extends Controller{
         initTable(listOfGames);
         initFilters();
 
+        TextFields.bindAutoCompletion(txtSearch, ProjectMain.getDatabase().getAllGameNames());
 
 
         btnAddFilter.setOnAction(e -> {

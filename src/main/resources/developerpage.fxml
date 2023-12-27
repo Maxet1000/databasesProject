@@ -230,7 +230,12 @@
                               <ChoiceBox fx:id="cbNewCopyConsole" prefWidth="150.0" />
                            </children>
                         </HBox>
-                        <AnchorPane prefHeight="30.0" prefWidth="200.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Availibility:" wrappingWidth="70.13671875" />
+                        <AnchorPane prefHeight="30.0" prefWidth="200.0">
+                           <children>
+                              <ChoiceBox fx:id="cbNewAvailability" layoutX="56.0" prefWidth="150.0" />
+                           </children></AnchorPane>
+                        <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" prefWidth="200.0" />
                         <HBox>
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Warehouse: " />
