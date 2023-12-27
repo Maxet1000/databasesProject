@@ -40,7 +40,10 @@ public class CustomerLoginController extends Controller{
     private void logIn() throws IOException {
         var user = ProjectMain.getDatabase().getUserByEmail(txtEmail.getText());
         if(txtEmail.getText().equals("debug")){
-            data.setUser(ProjectMain.getDatabase().getAllUsers().get(3));
+            //-------------------------------------------------------------------------------------------------//
+            //zorgt voor error in terminal doordat dit geen echte user is maar een shortcut om te kunnen debuggen
+            //-------------------------------------------------------------------------------------------------//
+            data.setUser(ProjectMain.getDatabase().getAllUsers().get(3));      
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Correct");
             alert.setHeaderText(null);

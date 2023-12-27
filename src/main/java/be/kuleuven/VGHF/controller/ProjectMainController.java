@@ -1,6 +1,6 @@
 package be.kuleuven.VGHF.controller;
 
-import be.kuleuven.VGHF.DataCommunicationModel;
+import be.kuleuven.VGHF.Model;
 import be.kuleuven.VGHF.enums.UserType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -25,7 +25,7 @@ public class ProjectMainController extends Controller{
     }
 
     public void initialize() throws IOException {
-        data = new DataCommunicationModel();
+        data = new Model();
 
         switchToId("home");
         btnHome.setOnAction(e -> {
