@@ -279,8 +279,9 @@ public class DeveloperController extends Controller{
     private void addNewCopy() {
         // TODO de choiseboxes met game titel en console worden uitgelezen, textfields voor de prijs en warehouse.
         String newCopyName = cbNewCopyGameTitle.getValue().toString();
+        String consoleName = cbNewCopyConsole.getValue().toString();
         Copy newCopy = new Copy();
-        newCopy.setConsole(ProjectMain.getDatabase().getConsoleByName(newCopyName));
+        newCopy.setConsole(ProjectMain.getDatabase().getConsoleByName(consoleName));
         newCopy.setDateOfReturn(null);
         newCopy.setPurchasePrice(Integer.parseInt(txtPurchasePrice.getText().toString()));
         newCopy.setRentPrice(Integer.parseInt(txtRentPrice.getText().toString()));
@@ -289,6 +290,7 @@ public class DeveloperController extends Controller{
         newCopy.setGame(ProjectMain.getDatabase().getGameByTitle(cbNewCopyGameTitle.getValue().toString()));
         //moet nog een FXML komen om de availabiliy te zetten
         newCopy.setAvailability(Availability.AVAILABLE);
+        System.out.println(newCopy.getConsole());
         addCopyBidirectionally(newCopy);
     }
  

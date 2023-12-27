@@ -27,7 +27,7 @@ public class Copy {
     private User user;
     
     @OneToMany(mappedBy = "copy")
-    private List<MonetaryTransaction> transactions;
+    private List<MonetaryTransaction> transactions = new ArrayList<>();
 
     @Column
     private int purchasePrice;

@@ -51,7 +51,7 @@
                   <HBox stylesheets="@styles.css">
                      <children>
                         <Button fx:id="btnPreviousPage" mnemonicParsing="false" prefWidth="100.0" text="Previous page" />
-                        <Text fx:id="txtCurrentPage" strokeType="OUTSIDE" strokeWidth="0.0" text="Page 1" />
+                        <Text fx:id="txtCurrentPage" strokeType="OUTSIDE" strokeWidth="0.0" text=" Page 1 " />
                         <Button fx:id="btnNextPage" mnemonicParsing="false" prefWidth="100.0" text="Next page" />
                      </children>
                   </HBox>
