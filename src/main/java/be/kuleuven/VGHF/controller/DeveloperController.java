@@ -4,8 +4,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import javax.transaction.SystemException;
+
 import be.kuleuven.VGHF.ProjectMain;
 import be.kuleuven.VGHF.domain.*;
+import be.kuleuven.VGHF.domain.Copy.CopyBuilder;
 import be.kuleuven.VGHF.enums.Availability;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
@@ -79,6 +82,8 @@ public class DeveloperController extends Controller{
     private ChoiceBox<String> cbNewCopyConsole;
     @FXML
     private TextField txtWarehouse;
+    @FXML
+    private ChoiceBox<String> cbNewAvailability;
 
 
     private ArrayList<Developer> developerList;
@@ -96,7 +101,9 @@ public class DeveloperController extends Controller{
     public void initialize() {
         GridPane.setHalignment(gameDevelopersPane, HPos.CENTER); // To align horizontally in the cell
         GridPane.setValignment(gameDevelopersPane, VPos.CENTER); // To align vertically in the cell
-        initChoiceBoxes();
+        initChoiceBoxConsole();
+        initChoiceBoxForGame();
+        initChoiceBoxForAvailability();
         initCheckBoxes();
         btnAddNewGenre.setOnAction(e ->{
             addNewGenre();
@@ -115,13 +122,22 @@ public class DeveloperController extends Controller{
         }));
     }
 
-    private void initChoiceBoxes() {
+    private void initChoiceBoxConsole() {
         for (int i=0 ; i<ProjectMain.getDatabase().getAllConsoles().size() ; i++) {
             cbNewCopyConsole.getItems().add(ProjectMain.getDatabase().getAllConsoles().get(i).getConsoleName());
         }
+    }
+    private void initChoiceBoxForGame(){
         for (int i=0 ; i<ProjectMain.getDatabase().getAllGames().size() ; i++) {
             cbNewCopyGameTitle.getItems().add(ProjectMain.getDatabase().getAllGames().get(i).getTitle());
         }
+    }
+    private void initChoiceBoxForAvailability(){
+            cbNewAvailability.getItems().add(Availability.BROKEN.toString());
+            cbNewAvailability.getItems().add(Availability.AVAILABLE.toString());
+            cbNewAvailability.getItems().add(Availability.EXTENDED.toString());
+            cbNewAvailability.getItems().add(Availability.RENTED.toString());
+            cbNewAvailability.getItems().add(Availability.SOLD.toString());
     }
 
     private void initCheckBoxes() {
@@ -277,18 +293,17 @@ public class DeveloperController extends Controller{
 
 
     private void addNewCopy() {
-        // TODO de choiseboxes met game titel en console worden uitgelezen, textfields voor de prijs en warehouse.
-        String newCopyName = cbNewCopyGameTitle.getValue().toString();
-        Copy newCopy = new Copy();
-        newCopy.setConsole(ProjectMain.getDatabase().getConsoleByName(newCopyName));
-        newCopy.setDateOfReturn(null);
-        newCopy.setPurchasePrice(Integer.parseInt(txtPurchasePrice.getText().toString()));
-        newCopy.setRentPrice(Integer.parseInt(txtRentPrice.getText().toString()));
-        System.out.println("______________________________________");
-        System.out.println(cbNewCopyGameTitle.getValue().toString());
-        newCopy.setGame(ProjectMain.getDatabase().getGameByTitle(cbNewCopyGameTitle.getValue().toString()));
-        //moet nog een FXML komen om de availabiliy te zetten
-        newCopy.setAvailability(Availability.AVAILABLE);
+
+        CopyBuilder builder = new CopyBuilder();
+        Copy newCopy = builder.game(ProjectMain.getDatabase().getGameByTitle(cbNewCopyGameTitle.getValue().toString()))
+                                .console(ProjectMain.getDatabase().getConsoleByName(cbNewCopyConsole.getValue().toString()))
+                                .availability(Availability.valueOf(cbNewAvailability.getValue().toString()))
+                                .warehouse(txtWarehouse.getText().toString())
+                                .purchasePrice(Integer.parseInt(txtPurchasePrice.getText().toString()))
+                                .rentPrice(Integer.parseInt(txtRentPrice.getText().toString()))
+                                .dateOfReturn(null)
+                                .build();
+        
         addCopyBidirectionally(newCopy);
     }
  
