@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -11,6 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <VBox fx:id="parentPane" maxHeight="1.7976931348623157E308" prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.VGHF.controller.ShopController">
@@ -51,8 +53,19 @@
                   <HBox stylesheets="@styles.css">
                      <children>
                         <Button fx:id="btnPreviousPage" mnemonicParsing="false" prefWidth="100.0" text="Previous page" />
-                        <Text fx:id="txtCurrentPage" strokeType="OUTSIDE" strokeWidth="0.0" text="Page 1" />
+                        <Text fx:id="txtCurrentPage" strokeType="OUTSIDE" strokeWidth="0.0" text=" Page 1 " />
                         <Button fx:id="btnNextPage" mnemonicParsing="false" prefWidth="100.0" text="Next page" />
+                        <HBox prefHeight="5.0" prefWidth="200.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Search: ">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Text>
+                              <TextField fx:id="txtSearch" prefHeight="25.0" prefWidth="300.0" promptText="Type here" />
+                              <Button fx:id="btnSearch" minWidth="80.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" stylesheets="@styles.css" text="Search" />
+                           </children>
+                        </HBox>
                      </children>
                   </HBox>
                   <AnchorPane minHeight="5.0" prefHeight="5.0" />

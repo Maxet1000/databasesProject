@@ -104,10 +104,10 @@ public class DbContentScript {
         Game doom = new Game("DOOM", "1993-12-10", new ArrayList<> (Arrays.asList(pc)), new ArrayList<> (Arrays.asList(idSoftware)), new ArrayList<> (Arrays.asList(fps)));
         Game theWitcher3 = new Game("The Witcher 3: Wild Hunt", "2015-05-19", new ArrayList<> (Arrays.asList(playstation4, xboxOne, pc)), new ArrayList<> (Arrays.asList(cdProjekt)), new ArrayList<> (Arrays.asList(rpg, openWorld, adventure)));
         Game superMarioBros = new Game("Super Mario Bros.", "1985-09-13", new ArrayList<> (Arrays.asList(nes)), new ArrayList<> (Arrays.asList(nintendo)), new ArrayList<> (Arrays.asList(platformer)));
-        Game minecraft = new Game("Minecraft",  "2011-11-18", new ArrayList<> (Arrays.asList(pc, xboxOne, playstation4, nintendoSwitch, xbox360, xboxSeriesX)), new ArrayList<> (Arrays.asList(microsoftStudios)), new ArrayList<> (Arrays.asList(sandbox, survival)));
+        Game minecraft = new Game("Minecraft",  "2011-11-18", new ArrayList<> (Arrays.asList(pc, xboxOne, playstation4, nintendoSwitch, xbox360, xboxSeriesX, playstation5)), new ArrayList<> (Arrays.asList(microsoftStudios)), new ArrayList<> (Arrays.asList(sandbox, survival)));
         Game pokemonPlatinum = new Game("Pokemon Platinum", "2008-09-13", new ArrayList<> (Arrays.asList(nintenoDS)), new ArrayList<> (Arrays.asList(nintendo, gameFreak)), new ArrayList<> (Arrays.asList(rpg)));
         Game metalGearSolid = new Game("Metal Gear Solid", "1998-10-21", new ArrayList<> (Arrays.asList(playstation1, pc)), new ArrayList<> (Arrays.asList(konami)), new ArrayList<> (Arrays.asList(action, stealth)));
-        Game finalFantasyVII = new Game("Final Fantasy VII", "1997-01-31", new ArrayList<> (Arrays.asList(playstation1, pc)), new ArrayList<> (Arrays.asList(squareEnix)), new ArrayList<> (Arrays.asList(rpg)));
+        Game finalFantasyVII = new Game("Final Fantasy VII", "1997-01-31", new ArrayList<> (Arrays.asList(playstation1, pc, playstation4, xboxOne)), new ArrayList<> (Arrays.asList(squareEnix)), new ArrayList<> (Arrays.asList(rpg)));
         Game haloCombatEvolved = new Game("Halo: Combat Evolved",  "2001-11-15", new ArrayList<> (Arrays.asList(xbox)), new ArrayList<> (Arrays.asList(microsoftStudios)), new ArrayList<> (Arrays.asList(fps, action, sciFi)));
         Game zeldaBreathOfTheWild = new Game("The Legend of Zelda: Breath of the Wild", "2017-03-03", new ArrayList<> (Arrays.asList(nintendoSwitch)), new ArrayList<> (Arrays.asList(nintendo)), new ArrayList<> (Arrays.asList(openWorld, action, adventure)));
         Game darkSouls = new Game("Dark Souls", "2011-09-22", new ArrayList<> (Arrays.asList(playstation3, xbox360, pc)), new ArrayList<> (Arrays.asList(fromSoftware)), new ArrayList<> (Arrays.asList(action, rpg)));
@@ -581,7 +581,7 @@ public class DbContentScript {
         finalFantasyX.setCopies(new ArrayList<> (Arrays.asList(finalFantasyXCopy1)));
         donkeyKong.setCopies(new ArrayList<> (Arrays.asList(donkeyKongCopy1, donkeyKongCopy2)));
 
-        action.setGames(new ArrayList<> (Arrays.asList(metalGearSolid, haloCombatEvolved, pacman, spaceInvaders, donkeyKong, pong, galaga, zeldaBreathOfTheWild, darkSouls, grandTheftAutoV, theLastOfUs, assassinsCreedOrigins, uncharted4AThiefsEnd, pacman, theLegendOfZelda, metroid)));
+        action.setGames(new ArrayList<> (Arrays.asList(metalGearSolid, haloCombatEvolved, pacman, spaceInvaders, pong, galaga, zeldaBreathOfTheWild, darkSouls, grandTheftAutoV, theLastOfUs, assassinsCreedOrigins, uncharted4AThiefsEnd, pacman, theLegendOfZelda, metroid)));
         adventure.setGames(new ArrayList<> (Arrays.asList(theWitcher3, zeldaBreathOfTheWild, theLastOfUs, uncharted4AThiefsEnd, metroid, theLegendOfZelda)));
         battleRoyale.setGames(new ArrayList<> (Arrays.asList(/* Add your co-op games instances here */)));
         coOp.setGames(new ArrayList<> (Arrays.asList(/* Add your co-op games instances here */)));
@@ -610,8 +610,8 @@ public class DbContentScript {
         nes.setGames(new ArrayList<> (Arrays.asList(superMarioBros, pacman, superMarioBros3, theLegendOfZelda, donkeyKong, metroid)));
         playstation4.setGames(new ArrayList<> (Arrays.asList(theWitcher3, minecraft, finalFantasyVII, theLastOfUs, assassinsCreedOrigins, redDeadRedemption2, uncharted4AThiefsEnd, overwatch, grandTheftAutoV)));
         xboxOne.setGames(new ArrayList<> (Arrays.asList(theWitcher3, minecraft, finalFantasyVII, assassinsCreedOrigins, theElderScrollsVSkyrim, redDeadRedemption2, overwatch, grandTheftAutoV)));
-        pc.setGames(new ArrayList<> (Arrays.asList(doom, minecraft, metalGearSolid, finalFantasyVII, theElderScrollsVSkyrim, halfLife2, darkSouls, grandTheftAutoV, worldOfWarcraft, finalFantasyX, uncharted4AThiefsEnd, overwatch, theElderScrollsVSkyrim, finalFantasyIX, theWitcher3, finalFantasyVII, assassinsCreedOrigins)));
-        nintendoSwitch.setGames(new ArrayList<> (Arrays.asList(minecraft, zeldaBreathOfTheWild, marioKart8Deluxe, redDeadRedemption2, theElderScrollsVSkyrim)));
+        pc.setGames(new ArrayList<> (Arrays.asList(doom, minecraft, metalGearSolid, finalFantasyVII, theElderScrollsVSkyrim, halfLife2, darkSouls, grandTheftAutoV, worldOfWarcraft, overwatch, theElderScrollsVSkyrim, theWitcher3, finalFantasyVII, assassinsCreedOrigins)));
+        nintendoSwitch.setGames(new ArrayList<> (Arrays.asList(minecraft, zeldaBreathOfTheWild, marioKart8Deluxe, theElderScrollsVSkyrim)));
         nintenoDS.setGames(new ArrayList<> (Arrays.asList(pokemonPlatinum)));
         playstation1.setGames(new ArrayList<> (Arrays.asList(metalGearSolid, finalFantasyVII, finalFantasyIX)));
         xbox.setGames(new ArrayList<> (Arrays.asList(haloCombatEvolved)));

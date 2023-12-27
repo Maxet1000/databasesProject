@@ -5,10 +5,14 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Predicate;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import be.kuleuven.VGHF.enums.Availability;
 import javafx.print.Collation;
 
 public class HibernateManager {
@@ -394,6 +398,43 @@ public class HibernateManager {
             e.printStackTrace();
             return null;
         } 
+    }
+
+    public <T> List<Copy> getPageOfCopies(int firstCopyIndex, int pageLength, List<List<T>> filterLists) {
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(Copy.class);
+            var root = query.from(Copy.class);
+            List<Predicate> filterPredicates = new ArrayList<>();
+            Predicate allFiltersPredicate = criteriaBuilder.conjunction();
+            Join <Copy, Game> gameJoin = root.join("game", JoinType.INNER);
+            if (filterLists != null) {
+                for (List<T> list : filterLists) {
+
+                    Predicate filter = criteriaBuilder.conjunction();
+                    if (list.get(0) instanceof Console) {
+                        filter = root.get("console").in(list);
+                    }
+                    if (list.get(0) instanceof Developer) {
+                        filter = gameJoin.join("developers").in(list);
+                    }
+                    if (list.get(0) instanceof Genre) {
+                        filter = gameJoin.join("genres").in(list);
+                    }
+                    filterPredicates.add(filter);
+                }
+            allFiltersPredicate = criteriaBuilder.and(filterPredicates.toArray(new Predicate[0]));
+            } 
+            query.where(criteriaBuilder.greaterThanOrEqualTo(root.get("copyID"), firstCopyIndex),
+                        criteriaBuilder.equal(root.get("availability"), Availability.AVAILABLE),
+                        criteriaBuilder.or(criteriaBuilder.notEqual(root.get("purchasePrice"), 0),
+                                            criteriaBuilder.notEqual(root.get("rentPrice"), 0)),
+                                            allFiltersPredicate);
+            return entityManager.createQuery(query).setMaxResults(pageLength).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }
