@@ -19,6 +19,7 @@ import be.kuleuven.VGHF.ProjectMain;
 import be.kuleuven.VGHF.domain.Console;
 import be.kuleuven.VGHF.domain.Copy;
 import be.kuleuven.VGHF.domain.Developer;
+import be.kuleuven.VGHF.domain.Game;
 import be.kuleuven.VGHF.domain.Genre;
 import be.kuleuven.VGHF.domain.HibernateManager;
 import be.kuleuven.VGHF.domain.MonetaryTransaction;
@@ -40,8 +41,6 @@ public class ShopController extends Controller{
     
     @FXML
     private TextField txtSearch;
-    @FXML
-    private Button btnSearch;
     @FXML
     private TableView tblRent;
     @FXML
@@ -82,6 +81,7 @@ public class ShopController extends Controller{
     private ArrayList<Console> toBeFilteredConsoles;
     private ArrayList<Genre> toBeFilteredGenres;
     private int pageNumber = 1;
+    private int pageNumberBeforeSearch = 1;
     private List<Copy> listOfCopies = new ArrayList<>();
     private List<List<Object>> listOfFilters = new ArrayList<>();
     private int testDoeWeg = 0;
@@ -93,7 +93,6 @@ public class ShopController extends Controller{
     }
 
     public void initialize() {
-        System.out.println("###############   WHY ARE WE STILL HERE    "+listOfCopies+  "   ################");
         HibernateManager db = ProjectMain.getDatabase();
         listOfCopies = db.getPageOfCopies(0, 20, listOfFilters);
         List<Integer> idsOfLastCopyPreviousPages = new ArrayList<>();
@@ -101,11 +100,7 @@ public class ShopController extends Controller{
         initTableCart();
         initFilters();
         btnNextPage.setOnAction(e -> {
-            System.out.println("///////////   "+testDoeWeg+"   ///////////");
-            System.out.println("Size of listOfCopies is " + listOfCopies.size());
-            System.out.println(listOfCopies);
-                        System.out.println("//////////////////////");
-            if (listOfCopies.size() == 20) {
+            if (listOfCopies.size() == 20 && txtSearch.getText().isEmpty()) {
                 if (!listOfFilters.isEmpty()) {
                     listOfFilters.add(new ArrayList<>(listOfCopies));
                 }
@@ -117,7 +112,7 @@ public class ShopController extends Controller{
             }
         });
         btnPreviousPage.setOnAction(e -> {
-            if (pageNumber > 2) {
+            if (pageNumber > 2 && txtSearch.getText().isEmpty()) {
                 if (!listOfFilters.isEmpty()) {
                     listOfFilters.remove(listOfFilters.size() - 1);
                 }
@@ -125,7 +120,7 @@ public class ShopController extends Controller{
                 listOfCopies = db.getPageOfCopies(idsOfLastCopyPreviousPages.get(idsOfLastCopyPreviousPages.size() - 1) + 1, 20, listOfFilters);
                 initTable(listOfCopies);
                 pageNumber--;
-            } else if (pageNumber == 2) {
+            } else if (pageNumber == 2 && txtSearch.getText().isEmpty()) {
                 if (!listOfFilters.isEmpty()) {
                     listOfFilters.remove(listOfFilters.size() - 1);
                 }
@@ -156,9 +151,6 @@ public class ShopController extends Controller{
         btnAddGameToBuy.setOnAction(e -> {
             addGameToBuyCart();
         });
-        btnSearch.setOnAction(e -> {
-            //de code voor de search
-        });
         btnLogOut.setOnAction(e -> {
             data.logOut();
             try {
@@ -166,6 +158,9 @@ public class ShopController extends Controller{
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
+        });
+        txtSearch.textProperty().addListener((obs, oldVal, newVal) -> {
+            startSearch();
         });
         Platform.runLater(() -> {
             txtUser.setText(data.getUser().getUserName());
@@ -269,7 +264,7 @@ public class ShopController extends Controller{
 
         //refresh de tableview met copies
         listOfCopies = ProjectMain.getDatabase().getPageOfCopies(0, 20, listOfFilters);
-        resetPage();
+        setPage(1);
         initTable(listOfCopies);
         activateFilters();
     }
@@ -436,7 +431,7 @@ public class ShopController extends Controller{
         }
         listOfCopies = ProjectMain.getDatabase().getPageOfCopies(0, 20, listOfFilters);
         initTable(listOfCopies);
-        resetPage();
+        setPage(1);
     }
 
     public void removeFilters() {
@@ -448,7 +443,27 @@ public class ShopController extends Controller{
         initFilters();
         listOfCopies = ProjectMain.getDatabase().getPageOfCopies(0, 20, listOfFilters);
         initTable(listOfCopies);
-        resetPage();
+        setPage(1);
+    }
+
+    public void startSearch() {
+        if (!txtSearch.getText().isEmpty()) {
+            //gepakt van hier boven, misch een apparte functie vr maken om herhaling te vermijden...
+            filtersTreeView.getRoot().getChildren().clear();
+            toBeFilteredConsoles.clear();
+            toBeFilteredDevelopers.clear();
+            toBeFilteredGenres.clear();
+            listOfFilters.clear();
+            initFilters();
+            pageNumberBeforeSearch = pageNumber;
+            setPage(1);
+            List<Copy> listOfSearchResults = ProjectMain.getDatabase().searchCopies(txtSearch.getText());
+            initTable(listOfSearchResults);
+        } else {
+            List<Copy> listOfAllCopies = new ArrayList<>(listOfCopies);
+            initTable(listOfAllCopies);
+            setPage(pageNumberBeforeSearch);
+        }
 
     }
 
@@ -500,10 +515,6 @@ public class ShopController extends Controller{
             }
             colIndex++;
         }
-        System.out.println("-------------------------\n");
-        System.out.println(listOfCopies);
-        System.out.println("-------------------------\n");
-
         Copy currentCopy;
         for(int i = 0; i < listOfCopies.size(); i++) {
             currentCopy = listOfCopies.get(i);
@@ -602,8 +613,8 @@ public class ShopController extends Controller{
         filtersTreeView.setShowRoot(false);
     }
 
-    public void resetPage() {
-        pageNumber = 1;
+    public void setPage(int newPageNumber) {
+        pageNumber = newPageNumber;
         txtCurrentPage.setText(" Page " + pageNumber + " ");
     }
 
