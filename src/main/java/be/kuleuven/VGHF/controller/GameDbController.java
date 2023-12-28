@@ -231,8 +231,8 @@ public class GameDbController extends Controller{
         txtBottomYear.setStyle(txtSearch.getStyle());
         txtTopYear.setStyle(txtSearch.getStyle());
         initFilters();
-        var listOfGames1 = new ArrayList<>(listOfGames);
-        initTable(listOfGames1);
+        var listOfAllGames = new ArrayList<>(listOfGames);
+        initTable(listOfAllGames);
     }
 
     public void startSearch() {
@@ -248,12 +248,11 @@ public class GameDbController extends Controller{
             txtTopYear.setStyle(txtSearch.getStyle());
             initFilters();
 
-            List<Game> listOfSearchResults = ProjectMain.getDatabase().searchGames(txtSearch.getText(), 50);
+            List<Game> listOfSearchResults = ProjectMain.getDatabase().searchGames(txtSearch.getText());
             initTable(listOfSearchResults);
         } else {
-            System.out.println("///////////////EEEEEEEEEMMMMMMMMMMMPPPPPPPPPPPTTTTTTTTTTTTTTTTYYYYYYYYYYYYYYYYYY////////////////////////");
-            List<Game> listOfGames1 = new ArrayList<>(listOfGames);
-            initTable(listOfGames1);
+            List<Game> listOfAllGames = new ArrayList<>(listOfGames);
+            initTable(listOfAllGames);
         }
 
     }

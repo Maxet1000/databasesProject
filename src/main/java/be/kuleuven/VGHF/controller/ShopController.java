@@ -5,12 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import javax.print.attribute.standard.Copies;
-
-import org.hibernate.Hibernate;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -28,12 +22,9 @@ import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTreeCell;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class ShopController extends Controller{
@@ -54,10 +45,6 @@ public class ShopController extends Controller{
     private Button btnNextPage;
     @FXML
     private Text txtCurrentPage;
-    @FXML
-    public VBox pane1;
-    @FXML
-    private VBox filtersBox;
     @FXML
     private TreeView<String> filtersTreeView;
     @FXML
@@ -80,9 +67,12 @@ public class ShopController extends Controller{
     private ArrayList<Console> toBeFilteredConsoles;
     private ArrayList<Genre> toBeFilteredGenres;
     private int pageNumber = 1;
+    private int pageNumberBeforeSearch = 1;
     private List<Copy> listOfCopies = new ArrayList<>();
     private List<List<Object>> listOfFilters = new ArrayList<>();
-    private int testDoeWeg = 0;
+    private HibernateManager database;
+    private List<Integer> idsOfLastCopyPreviousPages;
+
 
     public ShopController() {
         toBeFilteredDevelopers = new ArrayList<>();
@@ -91,48 +81,17 @@ public class ShopController extends Controller{
     }
 
     public void initialize() {
-        System.out.println("###############   WHY ARE WE STILL HERE    "+listOfCopies+  "   ################");
-        HibernateManager db = ProjectMain.getDatabase();
-        listOfCopies = db.getPageOfCopies(0, 20, listOfFilters);
-        List<Integer> idsOfLastCopyPreviousPages = new ArrayList<>();
+        database = ProjectMain.getDatabase();
+        listOfCopies = database.getPageOfCopies(0, 20, listOfFilters);
+        idsOfLastCopyPreviousPages = new ArrayList<>();
         initTable(listOfCopies);
         initTableCart();
         initFilters();
         btnNextPage.setOnAction(e -> {
-            System.out.println("///////////   "+testDoeWeg+"   ///////////");
-            System.out.println("Size of listOfCopies is " + listOfCopies.size());
-            System.out.println(listOfCopies);
-                        System.out.println("//////////////////////");
-            if (listOfCopies.size() == 20) {
-                if (!listOfFilters.isEmpty()) {
-                    listOfFilters.add(new ArrayList<>(listOfCopies));
-                }
-                idsOfLastCopyPreviousPages.add(listOfCopies.get(listOfCopies.size() - 1).getCopyID());
-                listOfCopies = db.getPageOfCopies(idsOfLastCopyPreviousPages.get(idsOfLastCopyPreviousPages.size() - 1) + 1, 20, listOfFilters);
-                initTable(listOfCopies);
-                pageNumber++;
-                txtCurrentPage.setText(" Page" + pageNumber + " ");
-            }
+            nextPage();
         });
         btnPreviousPage.setOnAction(e -> {
-            if (pageNumber > 2) {
-                if (!listOfFilters.isEmpty()) {
-                    listOfFilters.remove(listOfFilters.size() - 1);
-                }
-                idsOfLastCopyPreviousPages.remove(idsOfLastCopyPreviousPages.size() - 1);
-                listOfCopies = db.getPageOfCopies(idsOfLastCopyPreviousPages.get(idsOfLastCopyPreviousPages.size() - 1) + 1, 20, listOfFilters);
-                initTable(listOfCopies);
-                pageNumber--;
-            } else if (pageNumber == 2) {
-                if (!listOfFilters.isEmpty()) {
-                    listOfFilters.remove(listOfFilters.size() - 1);
-                }
-                idsOfLastCopyPreviousPages.remove(idsOfLastCopyPreviousPages.size() - 1);
-                listOfCopies = db.getPageOfCopies(0, 20, listOfFilters);
-                initTable(listOfCopies);
-                pageNumber--;
-            }
-            txtCurrentPage.setText(" Page " + pageNumber + " ");
+            previousPage();
         });
         btnAddGameToCart.setOnAction(e -> {
             addGameToRentCart();
@@ -162,12 +121,53 @@ public class ShopController extends Controller{
                 throw new RuntimeException(ex);
             }
         });
+        txtSearch.textProperty().addListener((obs, oldVal, newVal) -> {
+            startSearch();
+        });
         Platform.runLater(() -> {
             txtUser.setText(data.getUser().getUserName());
             txtBalance.setText("$" + data.getUser().getBalance());
         });
     }
-    
+
+    private void previousPage() {
+        if (pageNumber > 2 && txtSearch.getText().isEmpty()) {
+            idsOfLastCopyPreviousPages.remove(idsOfLastCopyPreviousPages.size() - 1);
+            if (!listOfFilters.isEmpty()) {
+                listOfFilters.remove(listOfFilters.size() - 1);
+                listOfCopies = database.getPageOfCopies(0, 20, listOfFilters);
+            } else {
+                listOfCopies = database.getPageOfCopies(idsOfLastCopyPreviousPages.get(idsOfLastCopyPreviousPages.size() - 1) + 1, 20, listOfFilters);
+            }
+            initTable(listOfCopies);
+            pageNumber--;
+        } else if (pageNumber == 2 && txtSearch.getText().isEmpty()) {
+            if (!listOfFilters.isEmpty()) {
+                listOfFilters.remove(listOfFilters.size() - 1);
+            }
+            idsOfLastCopyPreviousPages.remove(idsOfLastCopyPreviousPages.size() - 1);
+            listOfCopies = database.getPageOfCopies(0, 20, listOfFilters);
+            initTable(listOfCopies);
+            pageNumber--;
+        }
+        txtCurrentPage.setText(" Page " + pageNumber + " ");
+    }
+
+    private void nextPage() {
+        if (listOfCopies.size() == 20 && txtSearch.getText().isEmpty()) {
+            idsOfLastCopyPreviousPages.add(listOfCopies.get(listOfCopies.size() - 1).getCopyID());
+            if (!listOfFilters.isEmpty()) {
+                listOfFilters.add(new ArrayList<>(listOfCopies));
+                listOfCopies = database.getPageOfCopies(0, 20, listOfFilters);
+            } else {
+                listOfCopies = database.getPageOfCopies(idsOfLastCopyPreviousPages.get(idsOfLastCopyPreviousPages.size() - 1) + 1, 20, listOfFilters);
+            }
+            initTable(listOfCopies);
+            pageNumber++;
+            txtCurrentPage.setText(" Page " + pageNumber + " ");
+        }
+    }
+
     public void rentAndBuyGamesFromCart(TableView table){
         var balance = data.getUser().getBalance(); 
         List listItems = table.getItems();
@@ -234,12 +234,11 @@ public class ShopController extends Controller{
                 alert.show();
                 wrongItem++;
             }
-
             itemCounter++;
         }
 
 
-        //confirmation popup 
+        //confirmation popup
         String rentOrBuy;
         if(table.equals(tblRentCart)){
             rentOrBuy = "rent";
@@ -264,11 +263,10 @@ public class ShopController extends Controller{
 
         //refresh de tableview met copies
         listOfCopies = ProjectMain.getDatabase().getPageOfCopies(0, 20, listOfFilters);
-        pageNumber = 1;
+        setPage(1);
         initTable(listOfCopies);
         activateFilters();
     }
-
 
     public String twoWeeksLonger(){
         LocalDate currentDate = LocalDate.now();
@@ -370,14 +368,14 @@ public class ShopController extends Controller{
             }
             String consoles = "";
             for (int j = 0; j < copy.getGame().getConsoles().size(); j++) {
-                consoles = consoles+ copy.getGame().getConsoles().get(j).getConsoleName();
+                consoles = consoles + copy.getGame().getConsoles().get(j).getConsoleName();
                 if (j+1 != copy.getGame().getConsoles().size()) {
                     consoles = consoles + ", ";
                 }
             }
             String genres = "";
             for (int j = 0; j < copy.getGame().getGenres().size(); j++) {
-                genres = genres+ copy.getGame().getGenres().get(j).getGenreName();
+                genres = genres + copy.getGame().getGenres().get(j).getGenreName();
                 if (j+1 != copy.getGame().getGenres().size()) {
                     genres = genres + ", ";
                 }
@@ -431,7 +429,7 @@ public class ShopController extends Controller{
         }
         listOfCopies = ProjectMain.getDatabase().getPageOfCopies(0, 20, listOfFilters);
         initTable(listOfCopies);
-        System.out.println(listOfFilters);
+        setPage(1);
     }
 
     public void removeFilters() {
@@ -443,6 +441,28 @@ public class ShopController extends Controller{
         initFilters();
         listOfCopies = ProjectMain.getDatabase().getPageOfCopies(0, 20, listOfFilters);
         initTable(listOfCopies);
+        setPage(1);
+    }
+
+    public void startSearch() {
+        if (!txtSearch.getText().isEmpty()) {
+            //gepakt van hier boven, misch een apparte functie vr maken om herhaling te vermijden...
+            filtersTreeView.getRoot().getChildren().clear();
+            toBeFilteredConsoles.clear();
+            toBeFilteredDevelopers.clear();
+            toBeFilteredGenres.clear();
+            listOfFilters.clear();
+            initFilters();
+            pageNumberBeforeSearch = pageNumber;
+            setPage(1);
+            List<Copy> listOfSearchResults = ProjectMain.getDatabase().searchCopies(txtSearch.getText());
+            initTable(listOfSearchResults);
+        } else {
+            List<Copy> listOfAllCopies = new ArrayList<>(listOfCopies);
+            initTable(listOfAllCopies);
+            setPage(pageNumberBeforeSearch);
+        }
+
     }
 
     public void initTableCart(){
@@ -493,10 +513,6 @@ public class ShopController extends Controller{
             }
             colIndex++;
         }
-        System.out.println("-------------------------\n");
-        System.out.println(listOfCopies);
-        System.out.println("-------------------------\n");
-
         Copy currentCopy;
         for(int i = 0; i < listOfCopies.size(); i++) {
             currentCopy = listOfCopies.get(i);
@@ -593,6 +609,11 @@ public class ShopController extends Controller{
         tree.getChildren().add(genresTreeItem);
         filtersTreeView.setRoot(tree);
         filtersTreeView.setShowRoot(false);
+    }
+
+    public void setPage(int newPageNumber) {
+        pageNumber = newPageNumber;
+        txtCurrentPage.setText(" Page " + pageNumber + " ");
     }
 
     public List<Developer> getAllDevelopers() {

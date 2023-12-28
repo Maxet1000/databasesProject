@@ -376,15 +376,38 @@ public class HibernateManager {
         }
     }    
 
-    public List<Game> searchGames(String searchInput, int pageLength) {
+    public List<Game> searchGames(String searchInput) {
         try {
             var criteriaBuilder = entityManager.getCriteriaBuilder();
             var query = criteriaBuilder.createQuery(Game.class);
             var root = query.from(Game.class);
 
-            query.where(criteriaBuilder.like(root.get("title"), "%" + searchInput + "%"));
+            query.where(criteriaBuilder.or(criteriaBuilder.like(root.get("title"), "%" + searchInput + "%"),
+                        criteriaBuilder.like(root.join("consoles").get("consoleName"),  "%" + searchInput + "%"), 
+                        criteriaBuilder.like(root.join("developers").get("developerName"),  "%" + searchInput + "%"),
+                        criteriaBuilder.like(root.join("genres").get("genreName"),  "%" + searchInput + "%"))).distinct(true);
+            return entityManager.createQuery(query).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
-            return entityManager.createQuery(query).setMaxResults(pageLength).getResultList();
+    public List<Copy> searchCopies(String searchInput) {
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(Copy.class);
+            var root = query.from(Copy.class);
+            Join <Copy, Game> gameJoin = root.join("game", JoinType.INNER);
+            
+            query.where(criteriaBuilder.or(criteriaBuilder.like(gameJoin.get("title"), "%" + searchInput + "%"),
+                        criteriaBuilder.like(root.join("console").get("consoleName"),  "%" + searchInput + "%"), 
+                        criteriaBuilder.like(gameJoin.join("developers").get("developerName"),  "%" + searchInput + "%"),
+                        criteriaBuilder.like(gameJoin.join("genres").get("genreName"),  "%" + searchInput + "%")), 
+                        criteriaBuilder.equal(root.get("availability"), Availability.AVAILABLE),
+                        criteriaBuilder.or(criteriaBuilder.notEqual(root.get("purchasePrice"), 0),
+                                            criteriaBuilder.notEqual(root.get("rentPrice"), 0))).distinct(true);
+            return entityManager.createQuery(query).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
             return null;

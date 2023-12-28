@@ -15,7 +15,7 @@
 <VBox prefWidth="600.0" style="-fx-background-color: #FAF1E6;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.VGHF.controller.GameDbController">
     <children>
         <AnchorPane minHeight="5.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-        <HBox prefHeight="1000.0" prefWidth="500.0">
+        <HBox prefHeight="2000.0" prefWidth="500.0">
             <children>
                 <AnchorPane minWidth="5.0" prefHeight="200.0" prefWidth="300.0" HBox.hgrow="ALWAYS" />
                 <VBox fx:id="filtersBox" minWidth="200.0" prefHeight="500.0" prefWidth="500.0">
@@ -33,7 +33,7 @@
                             </VBox.margin>
                         </Button>
                         <AnchorPane maxHeight="5.0" minHeight="5.0" prefHeight="5.0" />
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox prefWidth="200.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="From year " textAlignment="RIGHT" wrappingWidth="36.701171875" />
                         <TextField fx:id="txtBottomYear" />

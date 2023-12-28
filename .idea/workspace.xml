@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
+    <list default="true" id="0423dc92-1095-410d-9cb3-fa62df87abe6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VGHF.db" beforeDir="false" afterPath="$PROJECT_DIR$/VGHF.db" afterDir="false" />
+    </list>
+=======
     <list default="true" id="0423dc92-1095-410d-9cb3-fa62df87abe6" name="Changes" comment="" />
+>>>>>>> 65f56519cbd0402ae09c32991ab39b629e876552
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
