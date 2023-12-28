@@ -610,7 +610,7 @@ public class DbContentScript {
         nes.setGames(new ArrayList<> (Arrays.asList(superMarioBros, pacman, superMarioBros3, theLegendOfZelda, donkeyKong, metroid)));
         playstation4.setGames(new ArrayList<> (Arrays.asList(theWitcher3, minecraft, finalFantasyVII, theLastOfUs, assassinsCreedOrigins, redDeadRedemption2, uncharted4AThiefsEnd, overwatch, grandTheftAutoV)));
         xboxOne.setGames(new ArrayList<> (Arrays.asList(theWitcher3, minecraft, finalFantasyVII, assassinsCreedOrigins, theElderScrollsVSkyrim, redDeadRedemption2, overwatch, grandTheftAutoV)));
-        pc.setGames(new ArrayList<> (Arrays.asList(doom, minecraft, metalGearSolid, finalFantasyVII, theElderScrollsVSkyrim, halfLife2, darkSouls, grandTheftAutoV, worldOfWarcraft, overwatch, theElderScrollsVSkyrim, theWitcher3, finalFantasyVII, assassinsCreedOrigins)));
+        pc.setGames(new ArrayList<> (Arrays.asList(doom, minecraft, metalGearSolid, finalFantasyVII, theElderScrollsVSkyrim, halfLife2, darkSouls, grandTheftAutoV, worldOfWarcraft, overwatch, theElderScrollsVSkyrim, theWitcher3, finalFantasyVII, assassinsCreedOrigins, redDeadRedemption2)));
         nintendoSwitch.setGames(new ArrayList<> (Arrays.asList(minecraft, zeldaBreathOfTheWild, marioKart8Deluxe, theElderScrollsVSkyrim)));
         nintenoDS.setGames(new ArrayList<> (Arrays.asList(pokemonPlatinum)));
         playstation1.setGames(new ArrayList<> (Arrays.asList(metalGearSolid, finalFantasyVII, finalFantasyIX)));
@@ -626,7 +626,7 @@ public class DbContentScript {
         atari.setGames(new ArrayList<> (Arrays.asList(pong)));
         idSoftware.setGames(new ArrayList<> (Arrays.asList(doom)));
         cdProjekt.setGames(new ArrayList<> (Arrays.asList(theWitcher3)));
-        nintendo.setGames(new ArrayList<> (Arrays.asList(superMarioBros, pokemonPlatinum, marioKart8Deluxe, superMarioBros3, theLegendOfZelda, donkeyKong, metroid)));
+        nintendo.setGames(new ArrayList<> (Arrays.asList(superMarioBros, pokemonPlatinum, marioKart8Deluxe, superMarioBros3, theLegendOfZelda, donkeyKong, metroid, zeldaBreathOfTheWild)));
         microsoftStudios.setGames(new ArrayList<> (Arrays.asList(haloCombatEvolved, minecraft)));
         gameFreak.setGames(new ArrayList<> (Arrays.asList(pokemonPlatinum)));
         konami.setGames(new ArrayList<> (Arrays.asList(metalGearSolid)));

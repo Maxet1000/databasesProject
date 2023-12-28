@@ -104,7 +104,7 @@ public class DeveloperController extends Controller{
         initChoiceBoxForGame();
         initChoiceBoxForAvailability();
         initCheckBoxes();
-        cbNewCopyConsole.setDisable(true);
+        initChoiceBoxConsole();
         btnAddNewGenre.setOnAction(e ->{
             addNewGenre();
         });
@@ -122,22 +122,17 @@ public class DeveloperController extends Controller{
         }));
     }
 
-
     private void initChoiceBoxConsole() {
-        cbNewCopyConsole.setDisable(false);
         var allConsoles = ProjectMain.getDatabase().getAllConsoles();
-        for (int i=0 ; i < allConsoles.size(); i++) {
+        for (int i=0 ; i < ProjectMain.getDatabase().getAllConsoles().size(); i++) {
             cbNewCopyConsole.getItems().add(allConsoles.get(i).getConsoleName());
         }
     }
     private void initChoiceBoxForGame(){
         var allGames = ProjectMain.getDatabase().getAllGames();
-        for (int i=0 ; i < allGames.size() ; i++) {
+        for (int i=0 ; i < ProjectMain.getDatabase().getAllGames().size() ; i++) {
             cbNewCopyGameTitle.getItems().add(allGames.get(i).getTitle());
         }
-        cbNewCopyGameTitle.setOnAction(e -> {
-            initChoiceBoxConsole();
-        });
     }
     private void initChoiceBoxForAvailability(){
             cbNewAvailability.getItems().add(Availability.BROKEN.toString());
@@ -270,18 +265,18 @@ public class DeveloperController extends Controller{
         String newGenreName = txtNewGenreName.getText().toString();
         Genre newGenre = new Genre(newGenreName);
         addGenreToDb(newGenre);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.setContentText("New genre saved: " + txtNewGenreName.getText().toString());
-        alert.showAndWait();
+        alert.show();
     }
 
     private void addNewDeveloper(){
         String newDeveloperName = txtNewDeveloperName.getText().toString();
         Developer newDeveloper = new Developer(newDeveloperName);
         addDeveloperToDb(newDeveloper);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.setContentText("New developer saved: " + txtNewDeveloperName.getText().toString());
@@ -293,7 +288,7 @@ public class DeveloperController extends Controller{
         List<Console> compConsoles = new ArrayList<>(compConsoleList);
         Console newConsole = new Console(newConsoleName, compConsoles);
         addConsoleBidirectionally(newConsole);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.setContentText("New console saved: " + txtNewConsoleName.getText().toString());
@@ -312,7 +307,7 @@ public class DeveloperController extends Controller{
         List <Genre> genresForGame = new ArrayList<>(genreList);
         Game newGame = new Game(newGameTitle, releaseDate,consolesForGame,developersForGame,genresForGame);
         addGameBidirectionally(newGame);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.setContentText("New game saved: " + txtNewGameTitle.getText().toString());
@@ -334,7 +329,7 @@ public class DeveloperController extends Controller{
         
         addCopyBidirectionally(newCopy);
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.setContentText("New copy saved: " + cbNewCopyGameTitle.getValue().toString());

@@ -34,8 +34,6 @@ public class GameDbController extends Controller{
     @FXML
     private Button btnRemoveFilters;
     @FXML
-    private Button btnSearch;
-    @FXML
     private TextField txtBottomYear;
     @FXML
     private TextField txtTopYear;
@@ -43,7 +41,7 @@ public class GameDbController extends Controller{
     private TextField txtSearch;
     Game temp;
     Date lastClickTime;
-    List<Game> listOfGames;
+    List<Game> listOfGames = new ArrayList<>();
 
     private ArrayList<Developer> toBeFilteredDevelopers;
     private ArrayList<Console> toBeFilteredConsoles;
@@ -56,11 +54,11 @@ public class GameDbController extends Controller{
     }
 
     public void initialize() {
-        List<Game>listOfGames = ProjectMain.getDatabase().getAllGames();
+        listOfGames = ProjectMain.getDatabase().getAllGames();
         initTable(listOfGames);
         initFilters();
 
-        //TextFields.bindAutoCompletion(txtSearch, ProjectMain.getDatabase().getAllGameNames());
+
 
         btnAddFilter.setOnAction(e -> {
             activateFilters();
@@ -68,9 +66,10 @@ public class GameDbController extends Controller{
         btnRemoveFilters.setOnAction(e -> {
             removeFilters();
         });
-        btnSearch.setOnAction(e -> {
+        txtSearch.textProperty().addListener((obs, oldVal, newVal) -> {
             startSearch();
         });
+        
     }
 
     public void initTable(List<Game> listOfGames){
@@ -232,12 +231,30 @@ public class GameDbController extends Controller{
         txtBottomYear.setStyle(txtSearch.getStyle());
         txtTopYear.setStyle(txtSearch.getStyle());
         initFilters();
-        var listOfGames1 = new ArrayList<>(listOfGames);
-        initTable(listOfGames1);
+        var listOfAllGames = new ArrayList<>(listOfGames);
+        initTable(listOfAllGames);
     }
 
     public void startSearch() {
-        // TODO opvraging aan hibernate naar alle games die de string input matchen
+        if (!txtSearch.getText().isEmpty()) {
+            //gepakt van hier boven, misch een apparte functie vr maken om herhaling te vermijden...
+            filtersTreeView.getRoot().getChildren().clear();
+            toBeFilteredConsoles.clear();
+            toBeFilteredDevelopers.clear();
+            toBeFilteredGenres.clear();
+            txtBottomYear.clear();
+            txtTopYear.clear();
+            txtBottomYear.setStyle(txtSearch.getStyle());
+            txtTopYear.setStyle(txtSearch.getStyle());
+            initFilters();
+
+            List<Game> listOfSearchResults = ProjectMain.getDatabase().searchGames(txtSearch.getText());
+            initTable(listOfSearchResults);
+        } else {
+            List<Game> listOfAllGames = new ArrayList<>(listOfGames);
+            initTable(listOfAllGames);
+        }
+
     }
 
     public List<Developer> getAllDevelopers() {

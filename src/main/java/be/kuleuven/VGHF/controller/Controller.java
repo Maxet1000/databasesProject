@@ -24,7 +24,6 @@ public class Controller{
     public Model data;
     @FXML
     private Pane parentPane;
-
     
     public <S,T> List<S> filter(List<S> listToFilter, List<T> filter) {
         List<S> listAfterFilter = new ArrayList<>();

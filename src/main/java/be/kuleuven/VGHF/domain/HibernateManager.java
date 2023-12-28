@@ -39,73 +39,108 @@ public class HibernateManager {
     }
 
     public List<Console> getAllConsoles() {
-        var criteriaBuilder = entityManager.getCriteriaBuilder();
-        var query = criteriaBuilder.createQuery(Console.class);
-        var root = query.from(Console.class);
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(Console.class);
+            var root = query.from(Console.class);
 
-        query.select(root);
+            query.select(root);
 
-        return entityManager.createQuery(query).getResultList();
+            return entityManager.createQuery(query).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public List<Copy> getAllCopies() {
-        var criteriaBuilder = entityManager.getCriteriaBuilder();
-        var query = criteriaBuilder.createQuery(Copy.class);
-        var root = query.from(Copy.class);
-    
-        query.select(root);
-    
-        return entityManager.createQuery(query).getResultList();
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(Copy.class);
+            var root = query.from(Copy.class);
+        
+            query.select(root);
+        
+            return entityManager.createQuery(query).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
     
     public List<User> getAllUsers() {
-        var criteriaBuilder = entityManager.getCriteriaBuilder();
-        var query = criteriaBuilder.createQuery(User.class);
-        var root = query.from(User.class);
-    
-        query.select(root);
-    
-        return entityManager.createQuery(query).getResultList();
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(User.class);
+            var root = query.from(User.class);
+        
+            query.select(root);
+        
+            return entityManager.createQuery(query).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
     
     public List<Developer> getAllDevelopers() {
-        var criteriaBuilder = entityManager.getCriteriaBuilder();
-        var query = criteriaBuilder.createQuery(Developer.class);
-        var root = query.from(Developer.class);
-    
-        query.select(root);
-    
-        return entityManager.createQuery(query).getResultList();
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(Developer.class);
+            var root = query.from(Developer.class);
+        
+            query.select(root);
+        
+            return entityManager.createQuery(query).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
     
     public List<Game> getAllGames() {
-        var criteriaBuilder = entityManager.getCriteriaBuilder();
-        var query = criteriaBuilder.createQuery(Game.class);
-        var root = query.from(Game.class);
-    
-        query.select(root);
-    
-        return entityManager.createQuery(query).getResultList();
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(Game.class);
+            var root = query.from(Game.class);
+        
+            query.select(root);
+        
+            return entityManager.createQuery(query).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
     
     public List<Genre> getAllGenres() {
-        var criteriaBuilder = entityManager.getCriteriaBuilder();
-        var query = criteriaBuilder.createQuery(Genre.class);
-        var root = query.from(Genre.class);
-    
-        query.select(root);
-    
-        return entityManager.createQuery(query).getResultList();
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(Genre.class);
+            var root = query.from(Genre.class);
+        
+            query.select(root);
+        
+            return entityManager.createQuery(query).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
     
     public List<MonetaryTransaction> getAllMonetaryTransactions() {
-        var criteriaBuilder = entityManager.getCriteriaBuilder();
-        var query = criteriaBuilder.createQuery(MonetaryTransaction.class);
-        var root = query.from(MonetaryTransaction.class);
-    
-        query.select(root);
-    
-        return entityManager.createQuery(query).getResultList();
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(MonetaryTransaction.class);
+            var root = query.from(MonetaryTransaction.class);
+        
+            query.select(root);
+        
+            return entityManager.createQuery(query).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }    
 
     public <T> void saveNewEntity(T entity) {
@@ -120,95 +155,6 @@ public class HibernateManager {
             exception.printStackTrace();
         }
     }
-
-    // public void saveNewConsole(Console console) {
-    //     try {
-    //         entityManager.getTransaction().begin();
-    //         entityManager.persist(console);
-    //         entityManager.getTransaction().commit();
-    //     } catch (Exception exception) {
-    //         if (entityManager.getTransaction().isActive()) {
-    //             entityManager.getTransaction().rollback();
-    //         }
-    //         exception.printStackTrace();
-    //     }
-    // }
-    
-    // public void saveNewCopy(Copy copy) {
-    //     try {
-    //         entityManager.getTransaction().begin();
-    //         entityManager.persist(copy);
-    //         entityManager.getTransaction().commit();
-    //     } catch (Exception exception) {
-    //         if (entityManager.getTransaction().isActive()) {
-    //             entityManager.getTransaction().rollback();
-    //         }
-    //         exception.printStackTrace();
-    //     }
-    // }
-    
-    // public void saveNewUser(User user) {
-    //     try {
-    //         entityManager.getTransaction().begin();
-    //         entityManager.persist(user);
-    //         entityManager.getTransaction().commit();
-    //     } catch (Exception exception) {
-    //         if (entityManager.getTransaction().isActive()) {
-    //             entityManager.getTransaction().rollback();
-    //         }
-    //         exception.printStackTrace();
-    //     }
-    // }
-    
-    // public void saveNewDeveloper(Developer developer) {
-    //     try {
-    //         entityManager.persist(developer);
-    //     } catch (Exception exception) {
-    //         if (entityManager.getTransaction().isActive()) {
-    //             entityManager.getTransaction().rollback();
-    //         }
-    //         exception.printStackTrace();
-    //     }
-    // }
-    
-    // public void saveNewGame(Game game) {
-    //     try {
-    //         entityManager.getTransaction().begin();
-    //         entityManager.persist(game);
-    //         entityManager.getTransaction().commit();
-    //     } catch (Exception exception) {
-    //         if (entityManager.getTransaction().isActive()) {
-    //             entityManager.getTransaction().rollback();
-    //         }
-    //         exception.printStackTrace();
-    //     }
-    // }
-    
-    // public void saveNewGenre(Genre genre) {
-    //     try {
-    //         entityManager.getTransaction().begin();
-    //         entityManager.persist(genre);
-    //         entityManager.getTransaction().commit();
-    //     } catch (Exception exception) {
-    //         if (entityManager.getTransaction().isActive()) {
-    //             entityManager.getTransaction().rollback();
-    //         }
-    //         exception.printStackTrace();
-    //     }
-    // }
-    
-    // public void saveNewMonetaryTransaction(MonetaryTransaction monetaryTransaction) {
-    //     try {
-    //         entityManager.getTransaction().begin();
-    //         entityManager.persist(monetaryTransaction);
-    //         entityManager.getTransaction().commit();
-    //     } catch (Exception exception) {
-    //         if (entityManager.getTransaction().isActive()) {
-    //             entityManager.getTransaction().rollback();
-    //         }
-    //         exception.printStackTrace();
-    //     }
-    // }
     
     public <T> void updateEntity(T entity) {
         try {
@@ -237,76 +183,6 @@ public class HibernateManager {
             }
         }
     }
-
-    // public void updateConsole(Console console) {
-    //     try {
-    //         entityManager.getTransaction().begin();
-    //         entityManager.merge(console);
-    //         entityManager.getTransaction().commit();
-    //     } catch (Exception exception) {
-    //         exception.printStackTrace();
-    //     }
-    // }
-    
-    // public void updateCopy(Copy copy) {
-    //     try {
-    //         entityManager.getTransaction().begin();
-    //         entityManager.merge(copy);
-    //         entityManager.getTransaction().commit();
-    //     } catch (Exception exception) {
-    //         exception.printStackTrace();
-    //     }
-    // }
-    
-    // public void updateUser(User user) {
-    //     try {
-    //         entityManager.getTransaction().begin();
-    //         entityManager.merge(user);
-    //         entityManager.getTransaction().commit();
-    //     } catch (Exception exception) {
-    //         exception.printStackTrace();
-    //     }
-    // }
-    
-    // public void updateDeveloper(Developer developer) {
-    //     try {
-    //         entityManager.getTransaction().begin();
-    //         entityManager.merge(developer);
-    //         entityManager.getTransaction().commit();
-    //     } catch (Exception exception) {
-    //         exception.printStackTrace();
-    //     }
-    // }
-    
-    // public void updateGame(Game game) {
-    //     try {
-    //         entityManager.getTransaction().begin();
-    //         entityManager.merge(game);
-    //         entityManager.getTransaction().commit();
-    //     } catch (Exception exception) {
-    //         exception.printStackTrace();
-    //     }
-    // }
-    
-    // public void updateGenre(Genre genre) {
-    //     try {
-    //         entityManager.getTransaction().begin();
-    //         entityManager.merge(genre);
-    //         entityManager.getTransaction().commit();
-    //     } catch (Exception exception) {
-    //         exception.printStackTrace();
-    //     }
-    // }
-    
-    // public void updateMonetaryTransaction(MonetaryTransaction monetaryTransaction) {
-    //     try {
-    //         entityManager.getTransaction().begin();
-    //         entityManager.merge(monetaryTransaction);
-    //         entityManager.getTransaction().commit();
-    //     } catch (Exception exception) {
-    //         exception.printStackTrace();
-    //     }
-    // }
 
     public List<MonetaryTransaction> getMonetaryTransactionsByUserID(int userID) {
         try {
@@ -421,6 +297,9 @@ public class HibernateManager {
                     if (list.get(0) instanceof Genre) {
                         filter = gameJoin.join("genres").in(list);
                     }
+                    if (list.get(0) instanceof Copy) {
+                        filter = criteriaBuilder.not(root.in(list));
+                    }
                     filterPredicates.add(filter);
                 }
             allFiltersPredicate = criteriaBuilder.and(filterPredicates.toArray(new Predicate[0]));
@@ -429,7 +308,7 @@ public class HibernateManager {
                         criteriaBuilder.equal(root.get("availability"), Availability.AVAILABLE),
                         criteriaBuilder.or(criteriaBuilder.notEqual(root.get("purchasePrice"), 0),
                                             criteriaBuilder.notEqual(root.get("rentPrice"), 0)),
-                                            allFiltersPredicate);
+                                            allFiltersPredicate).distinct(true);
             return entityManager.createQuery(query).setMaxResults(pageLength).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
@@ -438,43 +317,101 @@ public class HibernateManager {
     }
 
     public List<String> getAllGameNames() {
-        var criteriaBuilder = entityManager.getCriteriaBuilder();
-        var query = criteriaBuilder.createQuery(String.class);
-        var root = query.from(Game.class);
-    
-        query.select(root.get("title"));
-    
-        return entityManager.createQuery(query).getResultList();
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(String.class);
+            var root = query.from(Game.class);
+        
+            query.select(root.get("title"));
+        
+            return entityManager.createQuery(query).getResultList(); 
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public List<String> getAllConsoleNames() {
-        var criteriaBuilder = entityManager.getCriteriaBuilder();
-        var query = criteriaBuilder.createQuery(String.class);
-        var root = query.from(Console.class);
-    
-        query.select(root.get("consoleName"));
-    
-        return entityManager.createQuery(query).getResultList();
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(String.class);
+            var root = query.from(Console.class);
+        
+            query.select(root.get("consoleName"));
+        
+            return entityManager.createQuery(query).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public List<String> getAllDeveloperNames() {
-        var criteriaBuilder = entityManager.getCriteriaBuilder();
-        var query = criteriaBuilder.createQuery(String.class);
-        var root = query.from(Developer.class);
-    
-        query.select(root.get("developerName"));
-    
-        return entityManager.createQuery(query).getResultList();
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(String.class);
+            var root = query.from(Developer.class);
+        
+            query.select(root.get("developerName"));
+        
+            return entityManager.createQuery(query).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public List<String> getAllGenreNames() {
-        var criteriaBuilder = entityManager.getCriteriaBuilder();
-        var query = criteriaBuilder.createQuery(String.class);
-        var root = query.from(Genre.class);
-    
-        query.select(root.get("genreName"));
-    
-        return entityManager.createQuery(query).getResultList();
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(String.class);
+            var root = query.from(Genre.class);
+        
+            query.select(root.get("genreName"));
+        
+            return entityManager.createQuery(query).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }    
+
+    public List<Game> searchGames(String searchInput) {
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(Game.class);
+            var root = query.from(Game.class);
+
+            query.where(criteriaBuilder.or(criteriaBuilder.like(root.get("title"), "%" + searchInput + "%"),
+                        criteriaBuilder.like(root.join("consoles").get("consoleName"),  "%" + searchInput + "%"), 
+                        criteriaBuilder.like(root.join("developers").get("developerName"),  "%" + searchInput + "%"),
+                        criteriaBuilder.like(root.join("genres").get("genreName"),  "%" + searchInput + "%"))).distinct(true);
+            return entityManager.createQuery(query).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<Copy> searchCopies(String searchInput) {
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(Copy.class);
+            var root = query.from(Copy.class);
+            Join <Copy, Game> gameJoin = root.join("game", JoinType.INNER);
+            
+            query.where(criteriaBuilder.or(criteriaBuilder.like(gameJoin.get("title"), "%" + searchInput + "%"),
+                        criteriaBuilder.like(root.join("console").get("consoleName"),  "%" + searchInput + "%"), 
+                        criteriaBuilder.like(gameJoin.join("developers").get("developerName"),  "%" + searchInput + "%"),
+                        criteriaBuilder.like(gameJoin.join("genres").get("genreName"),  "%" + searchInput + "%")), 
+                        criteriaBuilder.equal(root.get("availability"), Availability.AVAILABLE),
+                        criteriaBuilder.or(criteriaBuilder.notEqual(root.get("purchasePrice"), 0),
+                                            criteriaBuilder.notEqual(root.get("rentPrice"), 0))).distinct(true);
+            return entityManager.createQuery(query).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }
