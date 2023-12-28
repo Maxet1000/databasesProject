@@ -391,4 +391,19 @@ public class HibernateManager {
         }
     }
 
+    public List<Copy> searchCopies(String searchInput, int pageLength) {
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(Copy.class);
+            var root = query.from(Copy.class);
+
+            query.where(criteriaBuilder.like(root.get("title"), "%" + searchInput + "%"));
+
+            return entityManager.createQuery(query).setMaxResults(pageLength).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

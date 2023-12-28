@@ -269,7 +269,7 @@ public class ShopController extends Controller{
 
         //refresh de tableview met copies
         listOfCopies = ProjectMain.getDatabase().getPageOfCopies(0, 20, listOfFilters);
-        pageNumber = 1;
+        resetPage();
         initTable(listOfCopies);
         activateFilters();
     }
@@ -436,7 +436,7 @@ public class ShopController extends Controller{
         }
         listOfCopies = ProjectMain.getDatabase().getPageOfCopies(0, 20, listOfFilters);
         initTable(listOfCopies);
-        System.out.println(listOfFilters);
+        resetPage();
     }
 
     public void removeFilters() {
@@ -448,6 +448,8 @@ public class ShopController extends Controller{
         initFilters();
         listOfCopies = ProjectMain.getDatabase().getPageOfCopies(0, 20, listOfFilters);
         initTable(listOfCopies);
+        resetPage();
+
     }
 
     public void initTableCart(){
@@ -598,6 +600,11 @@ public class ShopController extends Controller{
         tree.getChildren().add(genresTreeItem);
         filtersTreeView.setRoot(tree);
         filtersTreeView.setShowRoot(false);
+    }
+
+    public void resetPage() {
+        pageNumber = 1;
+        txtCurrentPage.setText(" Page " + pageNumber + " ");
     }
 
     public List<Developer> getAllDevelopers() {
