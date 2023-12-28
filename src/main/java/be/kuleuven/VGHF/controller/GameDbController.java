@@ -34,8 +34,6 @@ public class GameDbController extends Controller{
     @FXML
     private Button btnRemoveFilters;
     @FXML
-    private Button btnSearch;
-    @FXML
     private TextField txtBottomYear;
     @FXML
     private TextField txtTopYear;
@@ -67,9 +65,6 @@ public class GameDbController extends Controller{
         });
         btnRemoveFilters.setOnAction(e -> {
             removeFilters();
-        });
-        btnSearch.setOnAction(e -> {
-            startSearch();
         });
         txtSearch.textProperty().addListener((obs, oldVal, newVal) -> {
             startSearch();

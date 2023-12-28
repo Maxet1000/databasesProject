@@ -63,7 +63,6 @@
                                  </font>
                               </Text>
                               <TextField fx:id="txtSearch" prefHeight="25.0" prefWidth="300.0" promptText="Type here" />
-                              <Button fx:id="btnSearch" minWidth="80.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" stylesheets="@styles.css" text="Search" />
                            </children>
                         </HBox>
                      </children>
