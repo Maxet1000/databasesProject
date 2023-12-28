@@ -626,7 +626,7 @@ public class DbContentScript {
         atari.setGames(new ArrayList<> (Arrays.asList(pong)));
         idSoftware.setGames(new ArrayList<> (Arrays.asList(doom)));
         cdProjekt.setGames(new ArrayList<> (Arrays.asList(theWitcher3)));
-        nintendo.setGames(new ArrayList<> (Arrays.asList(superMarioBros, pokemonPlatinum, marioKart8Deluxe, superMarioBros3, theLegendOfZelda, donkeyKong, metroid)));
+        nintendo.setGames(new ArrayList<> (Arrays.asList(superMarioBros, pokemonPlatinum, marioKart8Deluxe, superMarioBros3, theLegendOfZelda, donkeyKong, metroid, zeldaBreathOfTheWild)));
         microsoftStudios.setGames(new ArrayList<> (Arrays.asList(haloCombatEvolved, minecraft)));
         gameFreak.setGames(new ArrayList<> (Arrays.asList(pokemonPlatinum)));
         konami.setGames(new ArrayList<> (Arrays.asList(metalGearSolid)));

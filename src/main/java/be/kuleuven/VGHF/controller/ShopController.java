@@ -106,6 +106,9 @@ public class ShopController extends Controller{
             System.out.println(listOfCopies);
                         System.out.println("//////////////////////");
             if (listOfCopies.size() == 20) {
+                if (!listOfFilters.isEmpty()) {
+                    listOfFilters.add(new ArrayList<>(listOfCopies));
+                }
                 idsOfLastCopyPreviousPages.add(listOfCopies.get(listOfCopies.size() - 1).getCopyID());
                 listOfCopies = db.getPageOfCopies(idsOfLastCopyPreviousPages.get(idsOfLastCopyPreviousPages.size() - 1) + 1, 20, listOfFilters);
                 initTable(listOfCopies);
@@ -115,11 +118,17 @@ public class ShopController extends Controller{
         });
         btnPreviousPage.setOnAction(e -> {
             if (pageNumber > 2) {
+                if (!listOfFilters.isEmpty()) {
+                    listOfFilters.remove(listOfFilters.size() - 1);
+                }
                 idsOfLastCopyPreviousPages.remove(idsOfLastCopyPreviousPages.size() - 1);
                 listOfCopies = db.getPageOfCopies(idsOfLastCopyPreviousPages.get(idsOfLastCopyPreviousPages.size() - 1) + 1, 20, listOfFilters);
                 initTable(listOfCopies);
                 pageNumber--;
             } else if (pageNumber == 2) {
+                if (!listOfFilters.isEmpty()) {
+                    listOfFilters.remove(listOfFilters.size() - 1);
+                }
                 idsOfLastCopyPreviousPages.remove(idsOfLastCopyPreviousPages.size() - 1);
                 listOfCopies = db.getPageOfCopies(0, 20, listOfFilters);
                 initTable(listOfCopies);
@@ -427,6 +436,7 @@ public class ShopController extends Controller{
         }
         listOfCopies = ProjectMain.getDatabase().getPageOfCopies(0, 20, listOfFilters);
         initTable(listOfCopies);
+        System.out.println(listOfFilters);
     }
 
     public void removeFilters() {

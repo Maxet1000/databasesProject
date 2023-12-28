@@ -43,7 +43,7 @@ public class GameDbController extends Controller{
     private TextField txtSearch;
     Game temp;
     Date lastClickTime;
-    List<Game> listOfGames;
+    List<Game> listOfGames = new ArrayList<>();
 
     private ArrayList<Developer> toBeFilteredDevelopers;
     private ArrayList<Console> toBeFilteredConsoles;
@@ -56,7 +56,7 @@ public class GameDbController extends Controller{
     }
 
     public void initialize() {
-        List<Game>listOfGames = ProjectMain.getDatabase().getAllGames();
+        listOfGames = ProjectMain.getDatabase().getAllGames();
         initTable(listOfGames);
         initFilters();
 
@@ -71,6 +71,10 @@ public class GameDbController extends Controller{
         btnSearch.setOnAction(e -> {
             startSearch();
         });
+        txtSearch.textProperty().addListener((obs, oldVal, newVal) -> {
+            startSearch();
+        });
+        
     }
 
     public void initTable(List<Game> listOfGames){
@@ -237,6 +241,25 @@ public class GameDbController extends Controller{
     }
 
     public void startSearch() {
+        if (!txtSearch.getText().isEmpty()) {
+            //gepakt van hier boven, misch een apparte functie vr maken om herhaling te vermijden...
+            filtersTreeView.getRoot().getChildren().clear();
+            toBeFilteredConsoles.clear();
+            toBeFilteredDevelopers.clear();
+            toBeFilteredGenres.clear();
+            txtBottomYear.clear();
+            txtTopYear.clear();
+            txtBottomYear.setStyle(txtSearch.getStyle());
+            txtTopYear.setStyle(txtSearch.getStyle());
+            initFilters();
+
+            List<Game> listOfSearchResults = ProjectMain.getDatabase().searchGames(txtSearch.getText(), 50);
+            initTable(listOfSearchResults);
+        } else {
+            System.out.println("///////////////EEEEEEEEEMMMMMMMMMMMPPPPPPPPPPPTTTTTTTTTTTTTTTTYYYYYYYYYYYYYYYYYY////////////////////////");
+            List<Game> listOfGames1 = new ArrayList<>(listOfGames);
+            initTable(listOfGames1);
+        }
 
     }
 

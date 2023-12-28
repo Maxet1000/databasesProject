@@ -297,6 +297,9 @@ public class HibernateManager {
                     if (list.get(0) instanceof Genre) {
                         filter = gameJoin.join("genres").in(list);
                     }
+                    if (list.get(0) instanceof Copy) {
+                        filter = criteriaBuilder.not(root.in(list));
+                    }
                     filterPredicates.add(filter);
                 }
             allFiltersPredicate = criteriaBuilder.and(filterPredicates.toArray(new Predicate[0]));
@@ -305,7 +308,7 @@ public class HibernateManager {
                         criteriaBuilder.equal(root.get("availability"), Availability.AVAILABLE),
                         criteriaBuilder.or(criteriaBuilder.notEqual(root.get("purchasePrice"), 0),
                                             criteriaBuilder.notEqual(root.get("rentPrice"), 0)),
-                                            allFiltersPredicate);
+                                            allFiltersPredicate).distinct(true);
             return entityManager.createQuery(query).setMaxResults(pageLength).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
@@ -373,17 +376,19 @@ public class HibernateManager {
         }
     }    
 
-    // public List<Game> search(String searchInput) {
-    //     try {
-    //         var criteriaBuilder = entityManager.getCriteriaBuilder();
-    //         var query = criteriaBuilder.createQuery(Game.class);
-    //         var root = query.from(Game.class);
+    public List<Game> searchGames(String searchInput, int pageLength) {
+        try {
+            var criteriaBuilder = entityManager.getCriteriaBuilder();
+            var query = criteriaBuilder.createQuery(Game.class);
+            var root = query.from(Game.class);
 
-    //         query.where(null)
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //         return null;
-    //     }
-    // }
+            query.where(criteriaBuilder.like(root.get("title"), "%" + searchInput + "%"));
+
+            return entityManager.createQuery(query).setMaxResults(pageLength).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }
