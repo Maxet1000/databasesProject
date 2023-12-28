@@ -101,11 +101,13 @@ public class ShopController extends Controller{
         initFilters();
         btnNextPage.setOnAction(e -> {
             if (listOfCopies.size() == 20 && txtSearch.getText().isEmpty()) {
+                idsOfLastCopyPreviousPages.add(listOfCopies.get(listOfCopies.size() - 1).getCopyID());
                 if (!listOfFilters.isEmpty()) {
                     listOfFilters.add(new ArrayList<>(listOfCopies));
+                    listOfCopies = db.getPageOfCopies(0, 20, listOfFilters);
+                } else {
+                    listOfCopies = db.getPageOfCopies(idsOfLastCopyPreviousPages.get(idsOfLastCopyPreviousPages.size() - 1) + 1, 20, listOfFilters);
                 }
-                idsOfLastCopyPreviousPages.add(listOfCopies.get(listOfCopies.size() - 1).getCopyID());
-                listOfCopies = db.getPageOfCopies(idsOfLastCopyPreviousPages.get(idsOfLastCopyPreviousPages.size() - 1) + 1, 20, listOfFilters);
                 initTable(listOfCopies);
                 pageNumber++;
                 txtCurrentPage.setText(" Page" + pageNumber + " ");
@@ -113,11 +115,13 @@ public class ShopController extends Controller{
         });
         btnPreviousPage.setOnAction(e -> {
             if (pageNumber > 2 && txtSearch.getText().isEmpty()) {
+                idsOfLastCopyPreviousPages.remove(idsOfLastCopyPreviousPages.size() - 1);
                 if (!listOfFilters.isEmpty()) {
                     listOfFilters.remove(listOfFilters.size() - 1);
+                    listOfCopies = db.getPageOfCopies(0, 20, listOfFilters);
+                } else {
+                    listOfCopies = db.getPageOfCopies(idsOfLastCopyPreviousPages.get(idsOfLastCopyPreviousPages.size() - 1) + 1, 20, listOfFilters);
                 }
-                idsOfLastCopyPreviousPages.remove(idsOfLastCopyPreviousPages.size() - 1);
-                listOfCopies = db.getPageOfCopies(idsOfLastCopyPreviousPages.get(idsOfLastCopyPreviousPages.size() - 1) + 1, 20, listOfFilters);
                 initTable(listOfCopies);
                 pageNumber--;
             } else if (pageNumber == 2 && txtSearch.getText().isEmpty()) {
