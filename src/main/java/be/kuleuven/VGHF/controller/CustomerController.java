@@ -170,7 +170,7 @@ public class CustomerController extends Controller{
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Error");
                 alert.setHeaderText(null);
-                alert.setContentText("Not enough balance plz load more money before extending the return date!");
+                alert.setContentText("Not enough balance please load more money before extending the return date!");
                 alert.show();
         }
     }
@@ -182,8 +182,7 @@ public class CustomerController extends Controller{
             var copy = ProjectMain.getDatabase().getCopyById(copyID);
             String inputDate = copy.getDateOfReturn();
             String newReturnDate = addTwoWeeks(inputDate);
-            //eerst checken of de customer nog genoeg geld heeft om te kunnen verlengen
-            //15 euro om game te verlengen
+
             int balance = data.getUser().getBalance();
 
             List<MonetaryTransaction> transactionList = data.getUser().getTransactions();
@@ -201,7 +200,7 @@ public class CustomerController extends Controller{
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Error");
                 alert.setHeaderText(null);
-                alert.setContentText("Not enough balance plz load more money before extending the return date!");
+                alert.setContentText("Not enough balance please load more money before extending the return date!");
                 alert.show();
             }
             ProjectMain.getDatabase().updateEntity(data.getUser());
@@ -295,7 +294,7 @@ public class CustomerController extends Controller{
             } else if(isMac()) {
                  process.command("open", path.toRealPath().toString());
             } else {
-                 throw new RuntimeException("Ik ken uw OS niet jong");
+                 throw new RuntimeException("OS kan niet gevonden worden");
             }
 
             process.start();

@@ -266,7 +266,7 @@ public class DeveloperController extends Controller{
         Genre newGenre = new Genre(newGenreName);
         addGenreToDb(newGenre);
         Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Error");
+        alert.setTitle("Succes");
         alert.setHeaderText(null);
         alert.setContentText("New genre saved: " + txtNewGenreName.getText().toString());
         alert.show();
@@ -277,7 +277,7 @@ public class DeveloperController extends Controller{
         Developer newDeveloper = new Developer(newDeveloperName);
         addDeveloperToDb(newDeveloper);
         Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Error");
+        alert.setTitle("Succes");
         alert.setHeaderText(null);
         alert.setContentText("New developer saved: " + txtNewDeveloperName.getText().toString());
         alert.show();
@@ -289,7 +289,7 @@ public class DeveloperController extends Controller{
         Console newConsole = new Console(newConsoleName, compConsoles);
         addConsoleBidirectionally(newConsole);
         Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Error");
+        alert.setTitle("Succes");
         alert.setHeaderText(null);
         alert.setContentText("New console saved: " + txtNewConsoleName.getText().toString());
         alert.show();
@@ -308,7 +308,7 @@ public class DeveloperController extends Controller{
         Game newGame = new Game(newGameTitle, releaseDate,consolesForGame,developersForGame,genresForGame);
         addGameBidirectionally(newGame);
         Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Error");
+        alert.setTitle("Succes");
         alert.setHeaderText(null);
         alert.setContentText("New game saved: " + txtNewGameTitle.getText().toString());
         alert.show();
@@ -330,17 +330,13 @@ public class DeveloperController extends Controller{
         addCopyBidirectionally(newCopy);
 
         Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Error");
+        alert.setTitle("Succes");
         alert.setHeaderText(null);
         alert.setContentText("New copy saved: " + cbNewCopyGameTitle.getValue().toString());
         alert.show();
     }
  
-    //getters for the selectionTreeView     
-
-    //------------------------------------------------------------------------//
-    //deze kan weg wanneer hier een hibernate query voor geschreven zijn denk ik
-    //------------------------------------------------------------------------//
+    //getters for the selectionTreeView
 
     public List<Developer> getAllDevelopers() {
         return ProjectMain.getDatabase().getAllDevelopers();

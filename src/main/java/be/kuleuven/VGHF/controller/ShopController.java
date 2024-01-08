@@ -247,7 +247,7 @@ public class ShopController extends Controller{
         }
         if( wrongItem == 0 || (itemCounter > wrongItem) ){
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Error");
+            alert.setTitle("Succes");
             alert.setHeaderText(null);
             alert.setContentText(rentOrBuy + " complete!" );
             alert.show();

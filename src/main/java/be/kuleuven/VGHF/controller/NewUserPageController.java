@@ -67,7 +67,7 @@ public class NewUserPageController extends Controller{
             ProjectMain.getDatabase().saveNewEntity(newUser);
             data.setUser(newUser);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Correct");
+            alert.setTitle("Succes");
             alert.setHeaderText(null);
             alert.setContentText("New account created succesfully");
             alert.showAndWait();

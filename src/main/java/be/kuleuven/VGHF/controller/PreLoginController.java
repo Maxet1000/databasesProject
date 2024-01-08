@@ -35,7 +35,6 @@ public class PreLoginController extends Controller {
 
     private void signUp() throws IOException {
         showNewWindow("newuser","");
-        System.out.println("ayhah "+ data.getUser().getUserName());
         if (data.loggedIn) {
             switchScreen("customer");
         }
