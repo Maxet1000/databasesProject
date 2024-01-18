@@ -180,7 +180,7 @@ public class ShopController extends Controller{
         
         int wrongItem = 0;;
         int itemCounter = 0;
-        while (itemCounter != listItems.size()) {
+        while (itemCounter != listItems.size() && !listItems.isEmpty()) {
             List copyData = (List) listItems.get(itemCounter);
             int copyID = (int) copyData.get(copyData.size()-1);
             var copy = ProjectMain.getDatabase().getCopyById(copyID);      
@@ -247,7 +247,7 @@ public class ShopController extends Controller{
         }else{
             rentOrBuy = "buy";
         }
-        if( wrongItem == 0 || (itemCounter > wrongItem) ){
+        if( (wrongItem == 0 || (itemCounter > wrongItem)) && !listItems.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Succes");
             alert.setHeaderText(null);
