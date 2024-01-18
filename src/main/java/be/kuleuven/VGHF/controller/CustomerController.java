@@ -161,6 +161,7 @@ public class CustomerController extends Controller{
                 var newTransaction = new MonetaryTransaction(TransactionType.EXTENSION, extendPrice, data.getUser(), copy, getCurrentDate());
                 transactionList.add(newTransaction);
                 data.getUser().setTransactions(transactionList);
+                ProjectMain.getDatabase().saveNewEntity(newTransaction);
                 ProjectMain.getDatabase().updateEntity(data.getUser());
             }
             initTransactionHistory();
@@ -187,6 +188,8 @@ public class CustomerController extends Controller{
             var newTransaction = new MonetaryTransaction(TransactionType.EXTENSION, extendPrice, data.getUser(), copy, getCurrentDate());
             transactionList.add(newTransaction);
             data.getUser().setTransactions(transactionList);
+            ProjectMain.getDatabase().saveNewEntity(newTransaction);
+            ProjectMain.getDatabase().updateEntity(data.getUser());
             initTransactionHistory();
 
             if(balance > extendPrice){
@@ -262,9 +265,6 @@ public class CustomerController extends Controller{
     private void initTransactionHistory() {
         purchaseHistoryPane.getChildren().clear();
         List<MonetaryTransaction> transactions = data.getUser().getTransactions();
-        System.out.println("-------------------------");
-        System.out.println(transactions);
-                System.out.println("-------------------------");
 
         if (transactions == null) {
             String text = "No transactions done yet";

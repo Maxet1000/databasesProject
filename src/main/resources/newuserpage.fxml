@@ -22,10 +22,10 @@
     <TextField fx:id="txtEmail" maxWidth="300.0" minWidth="50.0" prefWidth="200.0" promptText="Enter email address" />
    <AnchorPane maxHeight="15.0" minHeight="15.0" prefHeight="15.0" prefWidth="200.0" />
    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" />
-    <PasswordField fx:id="txtPassword1" maxWidth="300.0" minWidth="50.0" prefWidth="200.0" promptText="put your weak ass password here" />
+    <PasswordField fx:id="txtPassword1" maxWidth="300.0" minWidth="50.0" prefWidth="200.0" promptText="Enter password" />
    <AnchorPane maxHeight="15.0" minHeight="15.0" prefHeight="15.0" prefWidth="200.0" />
    <Text fx:id="txtConfirmPassword" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm Password:" />
-   <PasswordField fx:id="txtPassword2" maxWidth="300.0" minWidth="50.0" prefWidth="200.0" promptText="put your weak ass password here" />
+   <PasswordField fx:id="txtPassword2" maxWidth="300.0" minWidth="50.0" prefWidth="200.0" promptText="Confirm password" />
    <AnchorPane maxHeight="15.0" minHeight="15.0" prefHeight="15.0" prefWidth="200.0" />
     <Button fx:id="btnCreateAccount" mnemonicParsing="false" prefWidth="100.0" stylesheets="@styles.css" text="Create Account" />
 </VBox>
