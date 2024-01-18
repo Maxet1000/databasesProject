@@ -48,7 +48,7 @@
                   <TableView fx:id="tblRentedGames" prefHeight="2000.0" prefWidth="251.0" />
                   <StackPane maxHeight="25.0" prefHeight="25.0" prefWidth="2000.0" style="-fx-background-color: #064420;">
                      <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Purchase history" />
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Transaction history" />
                      </children>
                   </StackPane>
                   <ScrollPane prefHeight="2000.0" prefWidth="2000.0">
