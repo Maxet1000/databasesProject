@@ -262,6 +262,10 @@ public class CustomerController extends Controller{
     private void initTransactionHistory() {
         purchaseHistoryPane.getChildren().clear();
         List<MonetaryTransaction> transactions = data.getUser().getTransactions();
+        System.out.println("-------------------------");
+        System.out.println(transactions);
+                System.out.println("-------------------------");
+
         if (transactions == null) {
             String text = "No transactions done yet";
             Text textField = new Text();
