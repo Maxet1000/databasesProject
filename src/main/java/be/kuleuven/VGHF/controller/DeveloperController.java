@@ -1,5 +1,6 @@
 package be.kuleuven.VGHF.controller;
 
+import java.io.IOException;
 import java.util.*;
 import be.kuleuven.VGHF.ProjectMain;
 import be.kuleuven.VGHF.domain.*;
@@ -99,18 +100,43 @@ public class DeveloperController extends Controller{
         initChoiceBoxConsole();
         btnAddNewGenre.setOnAction(e ->{
             addNewGenre();
+            try {
+                switchScreen("developer");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         });
         btnAddNewDeveloper.setOnAction(e ->{
             addNewDeveloper();
+            try {
+                switchScreen("developer");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         });
         btnAddNewConsole.setOnAction(e ->{
             addNewConsole();
+            try {
+                switchScreen("developer");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         });
         btnAddNewGame.setOnAction(e -> {
             addNewGame();
+            try {
+                switchScreen("developer");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         });
         btnAddNewCopy.setOnAction((e -> {
             addNewCopy();
+            try {
+                switchScreen("developer");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }));
     }
 
@@ -452,7 +478,6 @@ public class DeveloperController extends Controller{
                 genre.addGame(gameNew);
             }
         }
-                    System.out.println("namechanged" + nameChanged + "namechanged");
 
         if (!nameChanged) {
             gameOld.setReleaseDate(gameNew.getReleaseDate());
