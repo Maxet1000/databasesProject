@@ -180,7 +180,7 @@ public class DbContentScript {
         builder = new CopyBuilder();
         Copy minecraftCopy1 = builder.game(minecraft)
                                      .console(pc)
-                                     .availability(Availability.RENTED)
+                                     .availability(Availability.AVAILABLE)
                                      .warehouse("Tokyo")
                                      .user(bjorn)
                                      .purchasePrice(20)
@@ -657,6 +657,9 @@ public class DbContentScript {
         xboxSeriesX.setCopies(new ArrayList<> (Arrays.asList(assassinsCreedOriginsCopy1)));
         playstation5.setCopies(new ArrayList<> (Arrays.asList(minecraftCopy2, redDeadRedemption2Copy1)));
         playstation2.setCopies(new ArrayList<> (Arrays.asList(finalFantasyXCopy1)));
+
+        bjorn.setTransactions(new ArrayList<> (Arrays.asList(transaction2)));
+        jan.setTransactions(new ArrayList<> (Arrays.asList(transaction1)));
 
         database.saveNewEntity(action);
         database.saveNewEntity(adventure);
