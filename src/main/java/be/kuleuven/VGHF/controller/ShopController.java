@@ -204,6 +204,7 @@ public class ShopController extends Controller{
                 transactionList.add(newTransaction);
                 data.getUser().setTransactions(transactionList);
                 ProjectMain.getDatabase().updateEntity(data.getUser());
+                ProjectMain.getDatabase().saveNewEntity(newTransaction);
 
             } else if(table == tblRentCart && balance >= copy.getRentPrice() && copy.getAvailability() == Availability.AVAILABLE && copy.getRentPrice() != 0){
                 //game kan verhuurd worden
@@ -224,19 +225,19 @@ public class ShopController extends Controller{
                 transactionList.add(newTransaction);
                 data.getUser().setTransactions(transactionList);
                 ProjectMain.getDatabase().updateEntity(data.getUser());
+                ProjectMain.getDatabase().saveNewEntity(newTransaction);
 
             }else{
                 //show alert dat er iets misliep
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Error");
                 alert.setHeaderText(null);
-                alert.setContentText("Game: " + copy.getGame().getTitle().toString() +" not available or not enough money!" );
+                alert.setContentText("Game: " + copy.getGame().getTitle().toString() +" not available or your balance is insufficient" );
                 alert.show();
                 wrongItem++;
             }
             itemCounter++;
         }
-
 
         //confirmation popup
         String rentOrBuy;

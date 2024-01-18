@@ -29,6 +29,8 @@ public class MonetaryTransaction {
     @JoinColumn(name = "copyID")
     private Copy copy;
 
+    public MonetaryTransaction(){};
+
     public MonetaryTransaction(TransactionType monetaryTransactionType, int revenue, User user, Copy copy, String time) {
         this.monetaryTransactionType = monetaryTransactionType;
         this.revenue = revenue;
