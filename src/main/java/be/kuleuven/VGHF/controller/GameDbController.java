@@ -2,25 +2,14 @@ package be.kuleuven.VGHF.controller;
 
 import be.kuleuven.VGHF.ProjectMain;
 import be.kuleuven.VGHF.domain.*;
-import be.kuleuven.VGHF.enums.Availability;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTreeCell;
-import javafx.scene.input.MouseButton;
-import javafx.scene.layout.VBox;
-import org.controlsfx.control.RangeSlider;
-import org.controlsfx.control.textfield.TextFields;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 public class GameDbController extends Controller{
@@ -58,8 +47,6 @@ public class GameDbController extends Controller{
         initTable(listOfGames);
         initFilters();
 
-
-
         btnAddFilter.setOnAction(e -> {
             activateFilters();
         });
@@ -69,7 +56,6 @@ public class GameDbController extends Controller{
         txtSearch.textProperty().addListener((obs, oldVal, newVal) -> {
             startSearch();
         });
-        
     }
 
     public void initTable(List<Game> listOfGames){

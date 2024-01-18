@@ -2,7 +2,6 @@ package be.kuleuven.VGHF.controller;
 
 import be.kuleuven.VGHF.ProjectMain;
 import be.kuleuven.VGHF.domain.Copy;
-import be.kuleuven.VGHF.enums.Availability;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;

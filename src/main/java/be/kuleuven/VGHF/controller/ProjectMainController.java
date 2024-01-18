@@ -19,7 +19,6 @@ public class ProjectMainController extends Controller{
     @FXML
     private Button btnInfo;
 
-    
 
     public ProjectMainController(){
     }

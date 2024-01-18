@@ -3,17 +3,11 @@ package be.kuleuven.VGHF.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import javax.persistence.*;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
-
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
 import be.kuleuven.VGHF.enums.Availability;
-import javafx.print.Collation;
 
 public class HibernateManager {
     
@@ -25,12 +19,12 @@ public class HibernateManager {
         this.sessionFactory = sessionFactory;
     }
 
-    //for testing
+    // For testing
     public EntityManager getEntityManager() {
         return this.entityManager;
     }
 
-    // In geval van nood
+    // For testing
     public void clearCloseAndResetEntityManager() {
         entityManager.clear();
         entityManager.close();

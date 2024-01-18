@@ -2,8 +2,6 @@ package be.kuleuven.VGHF.domain;
 
 import java.util.*;
 
-import be.kuleuven.VGHF.ProjectMain;
-
 public interface InterfaceForFilters {    
 
     List<Game> getGames();

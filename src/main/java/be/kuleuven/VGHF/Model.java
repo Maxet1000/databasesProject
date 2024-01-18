@@ -1,5 +1,4 @@
 package be.kuleuven.VGHF;
-import java.util.Objects;
 
 import be.kuleuven.VGHF.domain.User;
 
@@ -15,9 +14,6 @@ public class Model {
     public Model(User user) {
         this.user = user;
     }
-    
-
-    //getters and setters
 
     public User getUser() {
         return this.user;

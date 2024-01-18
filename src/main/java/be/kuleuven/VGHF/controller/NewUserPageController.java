@@ -2,16 +2,12 @@ package be.kuleuven.VGHF.controller;
 
 import be.kuleuven.VGHF.ProjectMain;
 import be.kuleuven.VGHF.domain.User;
-import com.sun.prism.impl.paint.PaintUtil;
-import com.sun.prism.paint.Color;
 import javafx.fxml.FXML;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -31,8 +27,6 @@ public class NewUserPageController extends Controller{
     private PasswordField txtPassword2;
     @FXML
     private  Text txtConfirmPassword;
-
-
 
     public void initialize() {
         btnCreateAccount.setOnAction(e -> {

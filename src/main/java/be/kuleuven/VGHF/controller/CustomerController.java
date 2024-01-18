@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +79,6 @@ public class CustomerController extends Controller{
         List selectedItem = (List) tblRentedGames.getSelectionModel().getSelectedItem();
         int copyID = (int) selectedItem.get(selectedItem.size()-1);
         var copy = ProjectMain.getDatabase().getCopyById(copyID);
-        var gameName = copy.getGame().getTitle();
 
         //check returndate and currentdate
         var returndate = copy.getDateOfReturn();
@@ -218,7 +216,6 @@ public class CustomerController extends Controller{
        LocalDate newDate = date.plusWeeks(2);
        return newDate.format(formatter);
     }
-    
     
     private void initTable(){
         tblRentedGames.getItems().clear();

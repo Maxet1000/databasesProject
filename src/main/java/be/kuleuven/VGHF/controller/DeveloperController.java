@@ -1,11 +1,6 @@
 package be.kuleuven.VGHF.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
-
-import javax.transaction.SystemException;
-
 import be.kuleuven.VGHF.ProjectMain;
 import be.kuleuven.VGHF.domain.*;
 import be.kuleuven.VGHF.domain.Copy.CopyBuilder;
@@ -14,11 +9,8 @@ import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.CheckBoxTreeCell;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
 public class DeveloperController extends Controller{
 

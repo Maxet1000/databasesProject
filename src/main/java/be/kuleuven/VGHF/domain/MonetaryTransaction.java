@@ -1,7 +1,6 @@
 package be.kuleuven.VGHF.domain;
 
 import javax.persistence.*;
-import java.util.*;
 import be.kuleuven.VGHF.enums.*;
 
 @Entity
